@@ -9,6 +9,9 @@ public class Account {
     private Contact contact;
     private String description;
     private String url;
+    private String email;
+    private String username;
+    private String password;
 
 
 
