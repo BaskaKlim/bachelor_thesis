@@ -9,8 +9,7 @@ public class Contact {
    private String lastName;
    private String phone;
    private String email;
-
-   private String jobPossition;
+   private String jobPosition;
    private UUID accountUuid;
 
 }
