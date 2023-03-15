@@ -1,4 +1,7 @@
-package cz.utb.bachelor.thesis.klimekova.biotech.model;
+package cz.utb.bachelor.thesis.klimekova.biotech.model.Users;
+
+import cz.utb.bachelor.thesis.klimekova.biotech.model.Categories.BiotechCategory;
+import cz.utb.bachelor.thesis.klimekova.biotech.model.Content.ContentType;
 
 import java.util.HashSet;
 import java.util.Set;

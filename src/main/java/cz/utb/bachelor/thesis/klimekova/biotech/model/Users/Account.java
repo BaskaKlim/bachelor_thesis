@@ -1,4 +1,4 @@
-package cz.utb.bachelor.thesis.klimekova.biotech.model;
+package cz.utb.bachelor.thesis.klimekova.biotech.model.Users;
 
 import java.util.HashSet;
 import java.util.Set;

@@ -1,4 +1,4 @@
-package cz.utb.bachelor.thesis.klimekova.biotech.model;
+package cz.utb.bachelor.thesis.klimekova.biotech.model.Content;
 
 import cz.utb.bachelor.thesis.klimekova.biotech.utils.enums.EContentType;
 
