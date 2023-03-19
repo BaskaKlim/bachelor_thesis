@@ -42,5 +42,5 @@ public class InnovationService {
 
         return innovations;
     }
-    
+
 }

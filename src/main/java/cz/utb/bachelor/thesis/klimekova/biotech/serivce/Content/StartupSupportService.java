@@ -11,12 +11,12 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Service
-public class StartupOptService {
+public class StartupSupportService {
     StartupOptRepository startupOptRepository;
 
 
     @Autowired
-    public StartupOptService(StartupOptRepository skillOptRepository) {
+    public StartupSupportService(StartupOptRepository skillOptRepository) {
         this.startupOptRepository = skillOptRepository;
     }
 
