@@ -22,15 +22,15 @@ public class ExpertCategoryService {
         return expertCategoryRepository.findById(id);
     }
 
-    public ExpertCategory addExpertCategory(ExpertCategory biotechCategory) {
-        return  expertCategoryRepository.save(biotechCategory);
+    public ExpertCategory addExpertCategory(ExpertCategory expertCategory) {
+        return  expertCategoryRepository.save(expertCategory);
     }
     public void deleteExpertCategoryById(Integer id) {
         expertCategoryRepository.deleteById(id);
     }
 
-    public ExpertCategory updateExpertCategory(ExpertCategory biotechCategory) {
-        return expertCategoryRepository.save(biotechCategory);
+    public ExpertCategory updateExpertCategory(ExpertCategory expertCategory) {
+        return expertCategoryRepository.save(expertCategory);
     }
     public List<ExpertCategory> getAllExpertCategories() {
         List<ExpertCategory> expertCategories = new ArrayList<>();
