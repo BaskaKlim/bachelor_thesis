@@ -34,4 +34,16 @@ public class AccountController {
         }
     }
 
+
+    @GetMapping("/{id}")
+    public ResponseEntity<Account> getAccountById(@PathVariable("id") UUID id) {
+        Optional<Account> accountData = accountService.getAccountById(id);
+
+        if (accountData.isPresent()) {
+            return new ResponseEntity<>(accountData.get(), HttpStatus.OK);
+        } else {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+    }
+
 }
