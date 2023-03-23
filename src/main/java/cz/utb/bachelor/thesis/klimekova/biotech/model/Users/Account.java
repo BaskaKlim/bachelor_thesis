@@ -47,7 +47,7 @@ public class Account {
     private String username;
 
     @NotBlank(message = "Password is mandatory")
-    @Size(min = 10, max = 30)
+    @Size(min = 10, max = 30, message = "Password should be between 10 to 30 characters or numbers")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
