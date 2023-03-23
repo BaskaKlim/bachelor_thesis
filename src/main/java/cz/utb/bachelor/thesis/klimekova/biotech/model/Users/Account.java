@@ -1,7 +1,9 @@
 package cz.utb.bachelor.thesis.klimekova.biotech.model.Users;
 
-
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -14,7 +16,7 @@ import java.util.UUID;
 @Table(name = "Account",
         uniqueConstraints = {
                 @UniqueConstraint(columnNames = "username"),
-                @UniqueConstraint(columnNames = "email")
+                @UniqueConstraint(columnNames = "password")
         })
 @Entity
 @NoArgsConstructor
@@ -26,11 +28,26 @@ public class Account {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
+
+    @NotBlank(message = "Name of account is mandatory")
+    @Size(min = 3, max = 14)
     private String name;
+
+    @NotBlank(message = "Description of organization is mandatory")
+    @Size(max = 400)
     private String description;
     private String url;
+
+    @NotBlank(message = "Email is mandatory")
+    @Email(message = "Email is need to be in correct format")
     private String email;
+
+    @NotBlank(message = "Username is mandatory")
+    @Size(min = 3, max = 14)
     private String username;
+
+    @NotBlank(message = "Password is mandatory")
+    @Size(min = 10, max = 30)
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
