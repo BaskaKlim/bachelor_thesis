@@ -49,7 +49,7 @@ public class BiotechExpert {
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "expert_categories",
             joinColumns = @JoinColumn(name = "expert_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+            inverseJoinColumns = @JoinColumn(name = "expertCategory_id"))
     private Set<ExpertCategory> expertise = new HashSet<>();
 
     public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Set<ExpertCategory> expertise) {
