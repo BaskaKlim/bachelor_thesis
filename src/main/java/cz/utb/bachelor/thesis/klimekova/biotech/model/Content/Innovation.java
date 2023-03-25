@@ -39,5 +39,10 @@ public class Innovation {
             inverseJoinColumns = @JoinColumn(name = "biotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
 
-
+    public Innovation(String title, String description, String website, Set<BiotechCategory> categories) {
+        this.title = title;
+        this.description = description;
+        this.website = website;
+        this.categories = categories;
+    }
 }

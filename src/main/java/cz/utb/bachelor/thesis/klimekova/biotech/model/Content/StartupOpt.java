@@ -51,4 +51,15 @@ public class StartupOpt {
             joinColumns = @JoinColumn(name = "startupOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<StartupSupportCategory> supportCategories = new HashSet<>();
+
+    public StartupOpt( String title, String provider, String description,  Date startDate, Date endDate,  String website, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
+        this.title = title;
+        this.provider = provider;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.website = website;
+        this.categories = categories;
+        this.supportCategories = supportCategories;
+    }
 }

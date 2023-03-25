@@ -51,4 +51,11 @@ public class NewsletterLead {
             inverseJoinColumns = @JoinColumn(name = "contentType_id"))
     private Set<ContentType> contentTypes = new HashSet<>();
 
+    public NewsletterLead(String firstName, String lastName, String email, Set<BiotechCategory> categories, Set<ContentType> contentTypes) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.categories = categories;
+        this.contentTypes = contentTypes;
+    }
 }

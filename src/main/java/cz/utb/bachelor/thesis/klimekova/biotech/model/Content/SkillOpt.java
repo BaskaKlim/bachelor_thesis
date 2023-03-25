@@ -56,4 +56,14 @@ public class SkillOpt {
             inverseJoinColumns = @JoinColumn(name = "skillCategory_id"))
     private Set<SkillCategory> skillCategories = new HashSet<>();
 
+    public SkillOpt(String title, String organizer, String description,  Date startDate,  Date endDate, String website, Set<BiotechCategory> categories, Set<SkillCategory> skillCategories) {
+        this.title = title;
+        this.organizer = organizer;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.website = website;
+        this.categories = categories;
+        this.skillCategories = skillCategories;
+    }
 }
