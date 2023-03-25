@@ -23,6 +23,7 @@ public class ContactService  {
         return contactRepository.findById(id);
     }
 
+    //TODO: add logic linking Accoount to Contact
     public Contact addContact(Contact account) {
         return  contactRepository.save(account);
 
