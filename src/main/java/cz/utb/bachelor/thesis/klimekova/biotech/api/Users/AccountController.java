@@ -19,7 +19,7 @@ public class AccountController {
 
 
     @GetMapping()
-    public ResponseEntity<List<Account>> getAllAccount() {
+    public ResponseEntity<List<Account>> getAllAccounts() {
         try {
             List<Account> users = new ArrayList<>();
 

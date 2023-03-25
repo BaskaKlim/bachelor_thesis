@@ -2,6 +2,7 @@ package cz.utb.bachelor.thesis.klimekova.biotech.serivce.Content;
 
 import cz.utb.bachelor.thesis.klimekova.biotech.model.Content.BiotechExpert;
 import cz.utb.bachelor.thesis.klimekova.biotech.repository.Content.BiotechExpertRepository;
+import cz.utb.bachelor.thesis.klimekova.biotech.utils.enums.EExpertCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 public class BiotechExpertService {
@@ -40,4 +42,14 @@ public class BiotechExpertService {
 
         return biotechExperts;
     }
+
+    //TODO: add logic to get all experts with specific expertise
+
+    public List<BiotechExpert> getExpertsByExpertise(EExpertCategory expertise) {
+        List<BiotechExpert> biotechExperts = biotechExpertRepository.findAll();
+
+        return biotechExperts.stream().filter(expert -> expert.getExpertise().equals(expertise))
+                .collect(Collectors.toList());
+    }
+
 }
