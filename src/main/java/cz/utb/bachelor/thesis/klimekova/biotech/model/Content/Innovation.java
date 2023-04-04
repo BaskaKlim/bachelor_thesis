@@ -22,7 +22,7 @@ public class Innovation {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Integer id;
 
     @NotBlank(message = "Name of product or service is mandatory")
     private String title;
@@ -33,16 +33,19 @@ public class Innovation {
     @NotBlank(message = "Website is mandatory")
     private String website;
 
+
+    //TODO: fix the manyTomany relation
+    /*
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "innovation_biotechCategories",
-            joinColumns = @JoinColumn(name = "innovation_id"),
+            joinColumns = @JoinColumn(name = "_id"),
             inverseJoinColumns = @JoinColumn(name = "biotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
-
-    public Innovation(String title, String description, String website, Set<BiotechCategory> categories) {
+*/
+    public Innovation(String title, String description, String website) {
         this.title = title;
         this.description = description;
         this.website = website;
-        this.categories = categories;
+     //   this.categories = categories;
     }
 }

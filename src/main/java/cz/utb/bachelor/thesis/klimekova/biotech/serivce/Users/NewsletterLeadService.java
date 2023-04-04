@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
+
 
 @Service
 public class NewsletterLeadService  {
@@ -20,7 +20,7 @@ public class NewsletterLeadService  {
         this.newsletterLeadRepository = newsletterLeadRepository;
     }
 
-    public Optional<NewsletterLead> getNewsletterLeadById(UUID id) {
+    public Optional<NewsletterLead> getNewsletterLeadById(Integer id) {
         return newsletterLeadRepository.findById(id);
     }
 
@@ -29,7 +29,7 @@ public class NewsletterLeadService  {
 
     }
 
-    public void deleteNewsletterLeadById(UUID id) {
+    public void deleteNewsletterLeadById(Integer id) {
         newsletterLeadRepository.deleteById(id);
     }
 

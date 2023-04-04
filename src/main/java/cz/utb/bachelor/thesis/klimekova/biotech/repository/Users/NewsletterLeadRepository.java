@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface NewsletterLeadRepository extends JpaRepository<NewsletterLead, UUID> {
+public interface NewsletterLeadRepository extends JpaRepository<NewsletterLead, Integer> {
 
 }

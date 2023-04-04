@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
@@ -22,14 +21,14 @@ public class BiotechExpertService {
         this.biotechExpertRepository = biotechExpertRepository;
     }
 
-    public Optional<BiotechExpert> getBiotechExpertById(UUID id) {
+    public Optional<BiotechExpert> getBiotechExpertById(Integer id) {
         return biotechExpertRepository.findById(id);
     }
 
     public BiotechExpert addBiotechExpert(BiotechExpert biotechExpert) {
         return  biotechExpertRepository.save(biotechExpert);
     }
-    public void deleteBiotechExpertById(UUID id) {
+    public void deleteBiotechExpertById(Integer id) {
         biotechExpertRepository.deleteById(id);
     }
 
@@ -44,12 +43,12 @@ public class BiotechExpertService {
     }
 
     //TODO: add logic to get all experts with specific expertise
-
+/*
     public List<BiotechExpert> getExpertsByExpertise(EExpertCategory expertise) {
         List<BiotechExpert> biotechExperts = biotechExpertRepository.findAll();
 
         return biotechExperts.stream().filter(expert -> expert.getExpertise().equals(expertise))
                 .collect(Collectors.toList());
     }
-
+*/
 }

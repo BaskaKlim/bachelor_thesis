@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class SkillOptService {
@@ -20,7 +19,7 @@ public class SkillOptService {
         this.skillOptRepository = skillOptRepository;
     }
 
-    public Optional<SkillOpt> getInnovationById(UUID id) {
+    public Optional<SkillOpt> getInnovationById(Integer id) {
         return skillOptRepository.findById(id);
     }
 
@@ -28,7 +27,7 @@ public class SkillOptService {
         return skillOptRepository.save(skillOpt);
     }
 
-    public void deleteInnovationById(UUID id) {
+    public void deleteInnovationById(Integer id) {
         skillOptRepository.deleteById(id);
     }
 

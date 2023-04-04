@@ -36,7 +36,9 @@ public class BiotechExpertController {
     }
 
 
+    /*
     @GetMapping("/{expertise}")
+
     public ResponseEntity<List<BiotechExpert>> getExpertsByExpertise(@PathVariable("expertise") EExpertCategory expertise) {
         try {
             List<BiotechExpert> experts = new ArrayList<>();
@@ -51,4 +53,5 @@ public class BiotechExpertController {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    */
 }

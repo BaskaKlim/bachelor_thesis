@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("api/contacts")
@@ -40,7 +39,7 @@ public class ContactController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Contact> getContactById(@PathVariable("id") UUID id) {
+    public ResponseEntity<Contact> getContactById(@PathVariable("id") Integer id) {
         Optional<Contact> contactData = contactService.getContactById(id);
 
         if (contactData.isPresent()) {
@@ -55,7 +54,7 @@ public class ContactController {
     public ResponseEntity<Contact> createContact(@RequestBody Contact contact) {
         try {
             Contact _contact = contactService
-                    .addContact(new Contact(contact.getFirstName(), contact.getLastName(), contact.getPhone(), contact.getEmail(), contact.getJobPosition(), contact.getAccountUuid()));
+                    .addContact(new Contact(contact.getFirstName(), contact.getLastName(), contact.getPhone(), contact.getEmail(), contact.getJobPosition()));
             return new ResponseEntity<>(_contact, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

@@ -38,7 +38,7 @@ public class NewsletterLeadController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsletterLead> getLeadById(@PathVariable("id") UUID id) {
+    public ResponseEntity<NewsletterLead> getLeadById(@PathVariable("id") Integer id) {
         Optional<NewsletterLead> contactData = newsletterLeadService.getNewsletterLeadById(id);
 
         if (contactData.isPresent()) {

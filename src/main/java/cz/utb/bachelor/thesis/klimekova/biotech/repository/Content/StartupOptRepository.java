@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface StartupOptRepository extends JpaRepository<StartupOpt, UUID> {
+public interface StartupOptRepository extends JpaRepository<StartupOpt, Integer> {
 
 }

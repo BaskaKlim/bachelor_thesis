@@ -13,7 +13,6 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 
 @Table(name = "NewsletterLeads")
@@ -26,7 +25,7 @@ public class NewsletterLead {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Integer id;
     @NotBlank(message = "First is mandatory")
     @Size(min = 2, max = 15)
     private String firstName;
@@ -41,13 +40,13 @@ public class NewsletterLead {
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "lead_categories",
-            joinColumns = @JoinColumn(name = "lead_id"),
+            joinColumns = @JoinColumn(name = "newsletterLead_id"),
             inverseJoinColumns = @JoinColumn(name = "biotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "lead_contenttypes",
-            joinColumns = @JoinColumn(name = "lead_id"),
+            joinColumns = @JoinColumn(name = "newsletterLead_id"),
             inverseJoinColumns = @JoinColumn(name = "contentType_id"))
     private Set<ContentType> contentTypes = new HashSet<>();
 

@@ -11,7 +11,6 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Table(name = "Account",
         uniqueConstraints = {
@@ -26,8 +25,8 @@ import java.util.UUID;
 
 public class Account {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotBlank(message = "Name of account is mandatory")
     @Size(min = 3, max = 14)

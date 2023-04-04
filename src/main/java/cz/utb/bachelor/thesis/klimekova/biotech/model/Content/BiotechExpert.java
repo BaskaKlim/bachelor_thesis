@@ -12,7 +12,7 @@ import lombok.Setter;
 
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
+
 
 @Entity
 @Table(name = "BiotechExperts")
@@ -25,7 +25,7 @@ public class BiotechExpert {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Integer id;
     @NotBlank(message = "First is mandatory")
     @Size(min = 2, max = 15)
     private String firstName;
@@ -46,19 +46,20 @@ public class BiotechExpert {
     @Size(max = 400)
     private String backgroundDescription;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "expert_categories",
-            joinColumns = @JoinColumn(name = "expert_id"),
-            inverseJoinColumns = @JoinColumn(name = "expertCategory_id"))
+    //TODO: fix the manyTomany relation
+   /* @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "BiotechExpert_ExpertCategories",
+            joinColumns = @JoinColumn(name = "BiotechExpert_id"),
+            inverseJoinColumns = @JoinColumn(name = "ExpertCategory_id"))
     private Set<ExpertCategory> expertise = new HashSet<>();
-
-    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Set<ExpertCategory> expertise) {
+*/
+    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobPosition = jobPosition;
         this.email = email;
         this.linkedinUrl = linkedinUrl;
         this.backgroundDescription = backgroundDescription;
-        this.expertise = expertise;
+    //    this.expertise = expertise;
     }
 }

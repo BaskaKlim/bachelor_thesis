@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.UUID;
 
 @Service
 public class AccountService {
@@ -20,7 +19,7 @@ public class AccountService {
         this.accountRepository = accountRepository;
     }
 
-    public Optional<Account> getAccountById(UUID id) {
+    public Optional<Account> getAccountById(Integer id) {
         return accountRepository.findById(id);
     }
 
@@ -29,7 +28,7 @@ public class AccountService {
 
     }
 
-    public void deleteAccountById(UUID id) {
+    public void deleteAccountById(Integer id) {
         accountRepository.deleteById(id);
     }
 

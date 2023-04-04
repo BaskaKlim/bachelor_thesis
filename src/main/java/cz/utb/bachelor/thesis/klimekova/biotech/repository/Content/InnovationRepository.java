@@ -7,6 +7,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface InnovationRepository extends JpaRepository<Innovation, UUID> {
+public interface InnovationRepository extends JpaRepository<Innovation, Integer> {
 
 }

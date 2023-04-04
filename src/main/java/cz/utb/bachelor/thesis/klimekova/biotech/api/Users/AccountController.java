@@ -36,7 +36,7 @@ public class AccountController {
 
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> getAccountById(@PathVariable("id") UUID id) {
+    public ResponseEntity<Account> getAccountById(@PathVariable("id") Integer id) {
         Optional<Account> accountData = accountService.getAccountById(id);
 
         if (accountData.isPresent()) {

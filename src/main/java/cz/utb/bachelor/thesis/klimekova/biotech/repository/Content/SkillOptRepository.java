@@ -8,6 +8,6 @@ import org.springframework.stereotype.Repository;
 import java.util.UUID;
 
 @Repository
-public interface SkillOptRepository extends JpaRepository<SkillOpt, UUID> {
+public interface SkillOptRepository extends JpaRepository<SkillOpt, Integer> {
 
 }

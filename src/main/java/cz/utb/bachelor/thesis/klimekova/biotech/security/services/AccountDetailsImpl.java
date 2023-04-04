@@ -15,7 +15,7 @@ public class AccountDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
 
-    private UUID id;
+    private Integer id;
     private String name;
     private String description;
     private String url;
@@ -29,7 +29,7 @@ public class AccountDetailsImpl implements UserDetails {
     private Set<Contact> contacts = new HashSet<>();
     private Collection<? extends GrantedAuthority> authorities;
 
-    public AccountDetailsImpl(UUID id, String name, String description, String url, String email, String username, String password,
+    public AccountDetailsImpl(Integer id, String name, String description, String url, String email, String username, String password,
                               Set<Role> roles, Set<Contact> contacts, Collection<? extends GrantedAuthority> authorities) {
         this.name = name;
         this.description = description;
@@ -65,7 +65,7 @@ public class AccountDetailsImpl implements UserDetails {
         return authorities;
     }
 
-    public UUID getId() {
+    public Integer getId() {
         return id;
     }
 

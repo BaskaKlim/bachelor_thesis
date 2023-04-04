@@ -11,7 +11,6 @@ import lombok.Setter;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 @Entity
 @Table(name = "StartupOpportunities")
@@ -21,7 +20,7 @@ import java.util.UUID;
 public class StartupOpt {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private UUID id;
+    private Integer id;
     @NotBlank(message = "Title of startup opportunity is mandatory")
     private String title;
 
