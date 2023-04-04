@@ -17,7 +17,6 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 
-
 @Configuration
 //@EnableWebSecurity
 @EnableGlobalMethodSecurity(
@@ -25,6 +24,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
         // jsr250Enabled = true,
         prePostEnabled = true)
 public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
+    /*
 
     @Value("${spring.h2.console.path}")
     private String h2ConsolePath;
@@ -106,5 +106,6 @@ public class WebSecurityConfig { // extends WebSecurityConfigurerAdapter {
         return http.build();
     }
 
+*/
 
 }
