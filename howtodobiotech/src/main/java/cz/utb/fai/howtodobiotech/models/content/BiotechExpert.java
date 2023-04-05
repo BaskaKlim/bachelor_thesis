@@ -1,5 +1,6 @@
 package cz.utb.fai.howtodobiotech.models.content;
 
+import cz.utb.fai.howtodobiotech.models.categories.ExpertCategory;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -8,6 +9,9 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.HashSet;
+import java.util.Set;
 
 
 @Entity
@@ -42,13 +46,12 @@ public class BiotechExpert {
     @Size(max = 400)
     private String backgroundDescription;
 
-    //TODO: fix the manyTomany relation
-   /* @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "BiotechExpert_ExpertCategories",
             joinColumns = @JoinColumn(name = "BiotechExpert_id"),
             inverseJoinColumns = @JoinColumn(name = "ExpertCategory_id"))
     private Set<ExpertCategory> expertise = new HashSet<>();
-*/
+
     public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription) {
         this.firstName = firstName;
         this.lastName = lastName;
@@ -56,6 +59,6 @@ public class BiotechExpert {
         this.email = email;
         this.linkedinUrl = linkedinUrl;
         this.backgroundDescription = backgroundDescription;
-    //    this.expertise = expertise;
+        this.expertise = expertise;
     }
 }
