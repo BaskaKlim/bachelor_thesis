@@ -40,6 +40,8 @@ public class StartupOpt {
     @NotBlank(message = "Website of startup opportunity or service is mandatory")
     private String website;
 
+    private Integer accountId;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "StartupOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "startupOpt_id"),
@@ -52,13 +54,26 @@ public class StartupOpt {
             inverseJoinColumns = @JoinColumn(name = "category_id"))
     private Set<StartupSupportCategory> supportCategories = new HashSet<>();
 
-    public StartupOpt( String title, String provider, String description,  Date startDate, Date endDate,  String website, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
+    public StartupOpt(String title, String provider, String description, Date startDate, Date endDate, String website, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
         this.title = title;
         this.provider = provider;
         this.description = description;
         this.startDate = startDate;
         this.endDate = endDate;
         this.website = website;
+        this.categories = categories;
+        this.supportCategories = supportCategories;
+    }
+
+    public StartupOpt(Integer id, String title, String provider, String description, Date startDate, Date endDate, String website, Integer accountId, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
+        this.id = id;
+        this.title = title;
+        this.provider = provider;
+        this.description = description;
+        this.startDate = startDate;
+        this.endDate = endDate;
+        this.website = website;
+        this.accountId = accountId;
         this.categories = categories;
         this.supportCategories = supportCategories;
     }

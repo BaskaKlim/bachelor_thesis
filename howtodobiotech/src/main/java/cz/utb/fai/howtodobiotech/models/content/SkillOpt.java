@@ -43,6 +43,8 @@ public class SkillOpt {
     @NotBlank(message = "Website of skill opportunity or service is mandatory")
     private String website;
 
+    private Integer accountId;
+
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "SkillOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "skillOpt_id"),
