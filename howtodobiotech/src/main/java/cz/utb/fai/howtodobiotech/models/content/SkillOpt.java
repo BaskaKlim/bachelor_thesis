@@ -44,13 +44,13 @@ public class SkillOpt {
     private String website;
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "skillOpt_biotechCategories",
+    @JoinTable(name = "SkillOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "skillOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "biotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "skillOpt_skillCategories",
+    @JoinTable(name = "SkillOpt_SkillCategories",
             joinColumns = @JoinColumn(name = "skillOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "skillCategory_id"))
     private Set<SkillCategory> skillCategories = new HashSet<>();
