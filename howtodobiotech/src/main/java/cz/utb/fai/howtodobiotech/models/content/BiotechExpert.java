@@ -52,7 +52,7 @@ public class BiotechExpert {
             inverseJoinColumns = @JoinColumn(name = "ExpertCategory_id"))
     private Set<ExpertCategory> expertise = new HashSet<>();
 
-    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription) {
+    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Set<ExpertCategory> expertise) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobPosition = jobPosition;

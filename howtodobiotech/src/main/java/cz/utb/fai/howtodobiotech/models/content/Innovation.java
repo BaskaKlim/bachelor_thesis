@@ -39,7 +39,7 @@ public class Innovation {
     private Set<BiotechCategory> categories = new HashSet<>();
 
 
-    public Innovation(String title, String description, String website) {
+    public Innovation(String title, String description, String website, Set<BiotechCategory> categories) {
         this.title = title;
         this.description = description;
         this.website = website;
