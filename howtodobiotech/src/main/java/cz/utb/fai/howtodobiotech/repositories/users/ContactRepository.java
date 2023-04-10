@@ -11,4 +11,5 @@ import java.util.Optional;
 @Repository
 public interface ContactRepository extends JpaRepository<Contact, Integer> {
     Optional<Contact> findByAccountId(Integer account);
+    Optional<Contact> findByLastName(String lastName);
 }

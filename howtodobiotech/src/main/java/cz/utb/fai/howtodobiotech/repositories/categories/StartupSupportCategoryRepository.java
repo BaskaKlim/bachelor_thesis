@@ -4,7 +4,9 @@ import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.Optional;
+
 @Repository
 public interface StartupSupportCategoryRepository extends JpaRepository<StartupSupportCategory, Integer> {
-
+    Optional<StartupSupportCategory> findByName(String name);
 }
