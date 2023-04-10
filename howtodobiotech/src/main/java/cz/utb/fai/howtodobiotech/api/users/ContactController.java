@@ -1,4 +1,4 @@
-package cz.utb.fai.howtodobiotech.api;
+package cz.utb.fai.howtodobiotech.api.users;
 
 import cz.utb.fai.howtodobiotech.models.users.Contact;
 import cz.utb.fai.howtodobiotech.services.users.ContactService;
