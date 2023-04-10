@@ -36,7 +36,7 @@ public class NewsletterLeadService  {
     public NewsletterLead updateNewsletterLead(NewsletterLead newsletterLead) {
         return newsletterLeadRepository.save(newsletterLead);
     }
-    public List<NewsletterLead> getAllNewsletterLead() {
+    public List<NewsletterLead> getAllNewsletterLeads() {
         List<NewsletterLead> newsletterLeads = new ArrayList<NewsletterLead>();
         newsletterLeadRepository.findAll().forEach(newsletterLeads::add);
 
