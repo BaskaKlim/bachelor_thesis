@@ -15,7 +15,7 @@ import java.util.Optional;
 @Repository
 public interface SkillOptRepository extends JpaRepository<SkillOpt, Integer> {
     Optional<SkillOpt> findByCategories (EBiotechCategory biotechCategory);
-    Optional<SkillOpt> findBySkill (ESkillCategory skillCategory);
+    Optional<SkillOpt> findBySkillCategories (ESkillCategory skillCategory);
     Optional<SkillOpt> findByTitle (String title);
 
     Optional<SkillOpt> findByOrganizer (String organizer);

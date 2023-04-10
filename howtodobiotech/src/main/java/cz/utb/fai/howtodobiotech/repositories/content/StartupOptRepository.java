@@ -15,12 +15,12 @@ import java.util.Optional;
 public interface StartupOptRepository extends JpaRepository<StartupOpt, Integer> {
 
     Optional<StartupOpt> findByCategories (EBiotechCategory biotechCategory);
-    Optional<SkillOpt> findBySupportCategory (ESupportCategory supportCategory);
-    Optional<SkillOpt> findByTitle (String title);
+    Optional<StartupOpt> findBySupportCategories (ESupportCategory supportCategory);
+    Optional<StartupOpt> findByTitle (String title);
 
-    Optional<SkillOpt> findByOrganizer (String organizer);
+    Optional<StartupOpt> findByProvider (String organizer);
 
-    Optional<SkillOpt> findByStartDate(Date startDate);
+    Optional<StartupOpt> findByStartDate(Date startDate);
 
     Optional<SkillOpt> findByEndDate (Date endDate);
 }

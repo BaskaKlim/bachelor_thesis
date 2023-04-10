@@ -10,5 +10,5 @@ import java.util.Optional;
 
 @Repository
 public interface ContentTypeRepository extends JpaRepository<ContentType, Integer> {
-    Optional<ContentType> findByContentType(EContentType contentType);
+    Optional<ContentType> findByName(EContentType contentType);
 }

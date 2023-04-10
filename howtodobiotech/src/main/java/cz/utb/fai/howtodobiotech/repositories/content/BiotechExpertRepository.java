@@ -11,6 +11,6 @@ import java.util.Optional;
 
 @Repository
 public interface BiotechExpertRepository extends JpaRepository<BiotechExpert, Integer> {
-    Optional<BiotechExpert> findByName(String lastName);
+    Optional<BiotechExpert> findByLastName(String lastName);
     Optional<BiotechExpert> findByExpertise(EExpertCategory expertise);
 }

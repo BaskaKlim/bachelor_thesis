@@ -37,11 +37,15 @@ public class Contact {
     @NotBlank(message = "Job position is mandatory")
     private String jobPosition;
 
-    public Contact(String firstName, String lastName, String phone, String email, String jobPosition) {
+    private Integer accountId;
+
+
+    public Contact(String firstName, String lastName, String phone, String email, String jobPosition, Integer accountId) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.phone = phone;
         this.email = email;
         this.jobPosition = jobPosition;
+        this.accountId = accountId;
     }
 }
