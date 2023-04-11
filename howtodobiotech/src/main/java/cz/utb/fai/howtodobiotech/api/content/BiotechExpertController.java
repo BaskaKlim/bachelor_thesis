@@ -70,20 +70,20 @@ public class BiotechExpertController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BiotechExpert> updateContact(@PathVariable("id") Integer id, @RequestBody BiotechExpert account) {
+    public ResponseEntity<BiotechExpert> updateContact(@PathVariable("id") Integer id, @RequestBody BiotechExpert expert) {
         Optional<BiotechExpert> expertData = biotechExpertService.getBiotechExpertById(id);
         if (expertData.isPresent()) {
-            BiotechExpert _account = expertData.get();
-            _account.setFirstName(account.getFirstName());
-            _account.setLastName(account.getLastName());
-            _account.setJobPosition(account.getJobPosition());
-            _account.setEmail(account.getEmail());
-            _account.setBackgroundDescription(account.getJobPosition());
-            _account.setBackgroundDescription(account.getBackgroundDescription());
-            _account.setExpertise(account.getExpertise());
+            BiotechExpert _expert = expertData.get();
+            _expert.setFirstName(expert.getFirstName());
+            _expert.setLastName(expert.getLastName());
+            _expert.setJobPosition(expert.getJobPosition());
+            _expert.setEmail(expert.getEmail());
+            _expert.setBackgroundDescription(expert.getJobPosition());
+            _expert.setBackgroundDescription(expert.getBackgroundDescription());
+            _expert.setExpertise(expert.getExpertise());
 
 
-            return new ResponseEntity<>(biotechExpertService.updateBiotechExpert(_account), HttpStatus.OK);
+            return new ResponseEntity<>(biotechExpertService.updateBiotechExpert(_expert), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

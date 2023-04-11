@@ -21,5 +21,5 @@ public class ContentType {
 
     @Enumerated(EnumType.STRING)
     @Column(length = 20)
-    private EContentType name;
+    private EContentType type;
 }

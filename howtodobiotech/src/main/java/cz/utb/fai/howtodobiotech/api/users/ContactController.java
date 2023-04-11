@@ -69,19 +69,19 @@ public class ContactController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Contact> updateContact(@PathVariable("id") Integer id, @RequestBody Contact account) {
+    public ResponseEntity<Contact> updateContact(@PathVariable("id") Integer id, @RequestBody Contact contact) {
         Optional<Contact> contactData = contactService.getContactById(id);
         if (contactData.isPresent()) {
-            Contact _account = contactData.get();
-            _account.setFirstName(account.getFirstName());
-            _account.setLastName(account.getLastName());
-            _account.setPhone(account.getPhone());
-            _account.setEmail(account.getEmail());
-            _account.setJobPosition(account.getJobPosition());
-            _account.setAccountId(account.getAccountId());
+            Contact _contact = contactData.get();
+            _contact.setFirstName(contact.getFirstName());
+            _contact.setLastName(contact.getLastName());
+            _contact.setPhone(contact.getPhone());
+            _contact.setEmail(contact.getEmail());
+            _contact.setJobPosition(contact.getJobPosition());
+            _contact.setAccountId(contact.getAccountId());
 
 
-            return new ResponseEntity<>(contactService.updateContact(_account), HttpStatus.OK);
+            return new ResponseEntity<>(contactService.updateContact(_contact), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

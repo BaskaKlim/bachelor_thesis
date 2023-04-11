@@ -2,6 +2,7 @@ package cz.utb.fai.howtodobiotech.services.content;
 
 import cz.utb.fai.howtodobiotech.models.content.BiotechExpert;
 import cz.utb.fai.howtodobiotech.repositories.content.BiotechExpertRepository;
+import cz.utb.fai.howtodobiotech.utils.enums.EExpertCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -42,4 +43,11 @@ public class BiotechExpertService {
         biotechExpertRepository.deleteById(id);
     }
 
+
+    public Optional<BiotechExpert> findByLastName(String lastName) {
+        return biotechExpertRepository.findByLastName(lastName);
+    }
+    public Optional<BiotechExpert> findByExpertise(EExpertCategory expertise){
+        return biotechExpertRepository.findByExpertise(expertise);
+    }
 }
