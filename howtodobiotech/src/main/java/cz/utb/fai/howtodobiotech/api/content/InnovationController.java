@@ -70,7 +70,7 @@ public class InnovationController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Innovation> updateCInnovation(@PathVariable("id") Integer id, @RequestBody Innovation innovation) {
+    public ResponseEntity<Innovation> updateInnovation(@PathVariable("id") Integer id, @RequestBody Innovation innovation) {
         Optional<Innovation> innovationData = innovationService.getInnovationById(id);
         if (innovationData.isPresent()) {
             Innovation _innovation = innovationData.get();
