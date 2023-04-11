@@ -58,7 +58,7 @@ public class AccountController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Boolean> deleteUser(@PathVariable("id") Integer id) {
+    public ResponseEntity<Boolean> deleteAccount(@PathVariable("id") Integer id) {
         try {
             accountService.deleteAccountById(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
