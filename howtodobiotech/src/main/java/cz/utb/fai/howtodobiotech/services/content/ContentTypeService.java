@@ -1,6 +1,5 @@
 package cz.utb.fai.howtodobiotech.services.content;
 
-import cz.utb.fai.howtodobiotech.models.content.BiotechExpert;
 import cz.utb.fai.howtodobiotech.models.content.ContentType;
 import cz.utb.fai.howtodobiotech.repositories.content.ContentTypeRepository;
 import cz.utb.fai.howtodobiotech.utils.enums.EContentType;
@@ -45,7 +44,7 @@ public class ContentTypeService {
         contentTypeRepository.deleteById(id);
     }
 
-    public Optional<ContentType> findByName(EContentType contentType) {
+    public Optional<ContentType> findByType(EContentType contentType) {
         return contentTypeRepository.findByType(contentType);
     }
 }

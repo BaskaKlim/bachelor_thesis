@@ -1,6 +1,5 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
-import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.services.content.StartupOptService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -81,8 +80,6 @@ public class StartupOptController {
             _startupOpt.setWebsite(startupOpt.getWebsite());
             _startupOpt.setCategories(startupOpt.getCategories());
             _startupOpt.setSupportCategories(startupOpt.getSupportCategories());
-
-
 
             return new ResponseEntity<>(startupOptService.updateStartupOpt(_startupOpt), HttpStatus.OK);
         } else {

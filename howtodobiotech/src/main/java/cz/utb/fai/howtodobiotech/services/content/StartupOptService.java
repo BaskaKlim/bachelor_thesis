@@ -1,6 +1,5 @@
 package cz.utb.fai.howtodobiotech.services.content;
 
-
 import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.repositories.content.StartupOptRepository;
