@@ -18,7 +18,7 @@ public class ContentTypeController {
     @Autowired
     ContentTypeService contentTypeService;
 
-    @GetMapping("/type}")
+    @GetMapping("/{type}")
     public ResponseEntity<ContentType> selectContentByType(@PathVariable("type") EContentType type) {
         Optional<ContentType> contentData = contentTypeService.findByType(type);
 
