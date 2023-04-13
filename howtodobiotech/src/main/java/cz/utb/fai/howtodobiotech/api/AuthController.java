@@ -11,6 +11,7 @@ import cz.utb.fai.howtodobiotech.repositories.users.RoleRepository;
 import cz.utb.fai.howtodobiotech.security.jwt.JwtUtils;
 import cz.utb.fai.howtodobiotech.security.services.AccountDetailsImpl;
 import cz.utb.fai.howtodobiotech.utils.enums.ERole;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseCookie;
@@ -21,7 +22,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
-import javax.validation.Valid;
 
 import java.util.Collections;
 import java.util.HashSet;
