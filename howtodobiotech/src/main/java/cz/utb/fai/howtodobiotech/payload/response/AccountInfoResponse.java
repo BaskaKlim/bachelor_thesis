@@ -1,11 +1,7 @@
 package cz.utb.fai.howtodobiotech.payload.response;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import cz.utb.fai.howtodobiotech.models.users.Contact;
-import org.springframework.security.core.GrantedAuthority;
 
-import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
