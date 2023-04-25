@@ -1,6 +1,5 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
-import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.services.content.SkillOptService;
 import org.springframework.beans.factory.annotation.Autowired;
