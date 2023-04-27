@@ -15,6 +15,8 @@ import java.util.Optional;
 public interface StartupOptRepository extends JpaRepository<StartupOpt, Integer> {
 
     Optional<StartupOpt> findByCategories (EBiotechCategory biotechCategory);
+
+
     Optional<StartupOpt> findBySupportCategories (ESupportCategory supportCategory);
     Optional<StartupOpt> findByTitle (String title);
 

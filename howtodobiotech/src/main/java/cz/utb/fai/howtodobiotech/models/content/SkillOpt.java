@@ -53,6 +53,7 @@ public class SkillOpt {
     private Integer accountId;
 
     @NotBlank
+    @Enumerated
     private ECountry country;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "SkillOpt_BiotechCategories",

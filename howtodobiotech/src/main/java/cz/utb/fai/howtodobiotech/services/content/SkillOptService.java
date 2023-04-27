@@ -42,6 +42,7 @@ public class SkillOptService {
         return skillOptRepository.save(skillOpt);
 
     }
+
     public SkillOpt updateSkillOpt(SkillOpt skillOpt) {
         return skillOptRepository.save(skillOpt);
     }
@@ -50,15 +51,14 @@ public class SkillOptService {
         skillOptRepository.deleteById(id);
     }
 
-    public Optional<SkillOpt> selectSkillOptByBiotechCategory(EBiotechCategory biotechCategory) {
-        return skillOptRepository.findByBiotechCategories(biotechCategory);
-    }
-    public List<SkillOpt> selectSkillOptBySkillCategory(Integer skillCategoryId) {
-        Optional<SkillCategory> category =  skillCategoryRepository.findById(skillCategoryId);
-        List<SkillOpt> skillOpts = skillOptRepository.findBySkillCategories(category);
-        return skillOpts;
+    public List<SkillOpt> selectSkillOptByBiotechCategory(EBiotechCategory biotechCategoryName) {
+        return skillOptRepository.findByBiotechCategoryName(biotechCategoryName);
     }
 
+    public List<SkillOpt> selectSkillOptBySkillCategory(ESkillCategory skillCategoryName) {
+        return skillOptRepository.findBySkillCategoryName(skillCategoryName);
+
+    }
 
     public Optional<SkillOpt> selectSkillOptByTitle(String title) {
         return skillOptRepository.findByTitle(title);
