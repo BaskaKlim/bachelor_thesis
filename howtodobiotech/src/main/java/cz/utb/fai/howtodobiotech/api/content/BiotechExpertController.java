@@ -1,7 +1,6 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
 import cz.utb.fai.howtodobiotech.models.content.BiotechExpert;
-import cz.utb.fai.howtodobiotech.models.users.Contact;
 import cz.utb.fai.howtodobiotech.services.content.BiotechExpertService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -52,7 +51,7 @@ public class BiotechExpertController {
     public ResponseEntity<BiotechExpert> createBiotechExpert(@RequestBody BiotechExpert expert) {
         try {
             BiotechExpert _expert = biotechExpertService
-                    .addBiotechExpert(new BiotechExpert(expert.getFirstName(), expert.getLastName(), expert.getJobPosition(), expert.getEmail(), expert.getLinkedinUrl(), expert.getBackgroundDescription(), expert.getExpertise()));
+                    .addBiotechExpert(new BiotechExpert(expert.getFirstName(), expert.getLastName(), expert.getJobPosition(), expert.getEmail(), expert.getLinkedinUrl(), expert.getBackgroundDescription(),expert.getCountry(), expert.getExpertise()));
             return new ResponseEntity<>(_expert, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -80,6 +79,7 @@ public class BiotechExpertController {
             _expert.setEmail(expert.getEmail());
             _expert.setBackgroundDescription(expert.getJobPosition());
             _expert.setBackgroundDescription(expert.getBackgroundDescription());
+            _expert.setCountry(expert.getCountry());
             _expert.setExpertise(expert.getExpertise());
 
 

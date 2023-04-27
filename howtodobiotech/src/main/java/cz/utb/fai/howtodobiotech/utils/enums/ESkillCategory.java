@@ -1,10 +1,11 @@
 package cz.utb.fai.howtodobiotech.utils.enums;
 
 public enum ESkillCategory {
-    WORKSHOP,
-    SUMMER_WINTER_SCHOOL,
-    CONFERENCE,
-    INTERNSHIP,
-    ACADEMY,
+    workshop,
+    summer_winter_school,
+    conference,
+    internship,
+    academy,
+    hackathon
 
 }

@@ -1,6 +1,7 @@
 package cz.utb.fai.howtodobiotech.models.content;
 
 import cz.utb.fai.howtodobiotech.models.categories.ExpertCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
@@ -43,8 +44,10 @@ public class BiotechExpert {
     private String linkedinUrl;
 
     @NotBlank(message = "Description of organization is mandatory")
-    @Size(max = 400)
+    @Size(max = 1000)
     private String backgroundDescription;
+
+    private ECountry country;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "BiotechExpert_ExpertCategories",
@@ -52,13 +55,14 @@ public class BiotechExpert {
             inverseJoinColumns = @JoinColumn(name = "ExpertCategory_id"))
     private Set<ExpertCategory> expertise = new HashSet<>();
 
-    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Set<ExpertCategory> expertise) {
+    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, ECountry country, Set<ExpertCategory> expertise) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobPosition = jobPosition;
         this.email = email;
         this.linkedinUrl = linkedinUrl;
         this.backgroundDescription = backgroundDescription;
+        this.country = country;
         this.expertise = expertise;
     }
 }

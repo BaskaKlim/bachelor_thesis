@@ -55,13 +55,7 @@ public class Account {
             inverseJoinColumns = @JoinColumn(name = "role_id"))
     private Set<Role> roles = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "Account_Contacts",
-            joinColumns = @JoinColumn(name = "account_id"),
-            inverseJoinColumns = @JoinColumn(name = "contact_id"))
-    private  Set<Contact> contacts = new HashSet<>();
-
-    public Account(String name, String description, String url, String email, String username, String password, Set<Role> roles, Set<Contact> contacts) {
+    public Account(String name, String description, String url, String email, String username, String password, Set<Role> roles) {
         this.name = name;
         this.description = description;
         this.url = url;
@@ -69,6 +63,5 @@ public class Account {
         this.username = username;
         this.password = password;
         this.roles = roles;
-        this.contacts = contacts;
     }
 }

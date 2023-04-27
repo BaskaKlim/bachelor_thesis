@@ -1,9 +1,6 @@
 package cz.utb.fai.howtodobiotech.payload.response;
 
-import cz.utb.fai.howtodobiotech.models.users.Contact;
-
 import java.util.List;
-import java.util.Set;
 
 public class AccountInfoResponse {
 
@@ -15,9 +12,8 @@ public class AccountInfoResponse {
     private String username;
 
     private List<String> roles;
-    private Set<Contact> contacts ;
 
-    public AccountInfoResponse(Integer id, String name, String description, String url, String email, String username, List<String> roles, Set<Contact> contacts) {
+    public AccountInfoResponse(Integer id, String name, String description, String url, String email, String username, List<String> roles) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -25,7 +21,6 @@ public class AccountInfoResponse {
         this.email = email;
         this.username = username;
         this.roles = roles;
-        this.contacts = contacts;
     }
 
     public String getName() {
@@ -76,11 +71,4 @@ public class AccountInfoResponse {
         this.roles = roles;
     }
 
-    public Set<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(Set<Contact> contacts) {
-        this.contacts = contacts;
-    }
 }

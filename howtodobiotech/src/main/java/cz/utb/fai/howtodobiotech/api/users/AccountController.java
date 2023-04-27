@@ -11,13 +11,13 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-
 @CrossOrigin(origins = "http://localhost:8081")
 @RequestMapping("api/accounts")
 @RestController
 public class AccountController {
     @Autowired
     AccountService accountService;
+
 
     @GetMapping()
     public ResponseEntity<List<Account>> getAllAccounts() {
@@ -50,7 +50,7 @@ public class AccountController {
     public ResponseEntity<Account> createAccount(@RequestBody Account account) {
         try {
             Account _account = accountService
-                    .addAccount(new Account(account.getName(), account.getDescription(), account.getUrl(), account.getEmail(), account.getUsername(), account.getPassword(), account.getRoles(), account.getContacts()));
+                    .addAccount(new Account(account.getName(), account.getDescription(), account.getUrl(), account.getEmail(), account.getUsername(), account.getPassword(), account.getRoles()));
             return new ResponseEntity<>(_account, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -79,7 +79,6 @@ public class AccountController {
             _account.setUsername(account.getUsername());
             _account.setPassword(account.getPassword());
             _account.setRoles(account.getRoles());
-            _account.setContacts(account.getContacts());
 
             return new ResponseEntity<>(accountService.updateUser(_account), HttpStatus.OK);
         } else {

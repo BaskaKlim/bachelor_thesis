@@ -4,7 +4,6 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import cz.utb.fai.howtodobiotech.models.users.Account;
-import cz.utb.fai.howtodobiotech.models.users.Contact;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -24,9 +23,7 @@ public class AccountDetailsImpl implements UserDetails {
     @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    private Set<Contact> contacts = new HashSet<>();
-
-    public AccountDetailsImpl(Integer id, String name, String description, String url, String email, String username, String password, Collection<? extends GrantedAuthority> authorities, Set<Contact> contacts) {
+    public AccountDetailsImpl(Integer id, String name, String description, String url, String email, String username, String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.description = description;
@@ -35,7 +32,6 @@ public class AccountDetailsImpl implements UserDetails {
         this.username = username;
         this.password = password;
         this.authorities = authorities;
-        this.contacts = contacts;
     }
 
     public static AccountDetailsImpl build(Account account) {
@@ -51,8 +47,7 @@ public class AccountDetailsImpl implements UserDetails {
                 account.getEmail(),
                 account.getUsername(),
                 account.getPassword(),
-                authorities,
-                account.getContacts());
+                authorities);
     }
 
     @Override
@@ -80,9 +75,6 @@ public class AccountDetailsImpl implements UserDetails {
         return email;
     }
 
-    public Set<Contact> getContacts() {
-        return contacts;
-    }
 
     @Override
     public String getPassword() {

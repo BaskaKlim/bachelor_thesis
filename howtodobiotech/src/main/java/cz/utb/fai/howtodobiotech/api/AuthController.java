@@ -72,8 +72,7 @@ public class AuthController {
                         accountDetails.getUrl(),
                         accountDetails.getEmail(),
                         accountDetails.getUsername(),
-                        roles,
-                        accountDetails.getContacts()));
+                        roles));
     }
 
     @PostMapping("/signup")
@@ -96,8 +95,7 @@ public class AuthController {
                 signUpRequest.getEmail(),
                 signUpRequest.getUsername(),
                 encoder.encode(signUpRequest.getPassword()),
-                Collections.singleton(defaultRole),
-                signUpRequest.getContacts()
+                Collections.singleton(defaultRole)
                 );
 
         Set<String> strRoles = signUpRequest.getRole();

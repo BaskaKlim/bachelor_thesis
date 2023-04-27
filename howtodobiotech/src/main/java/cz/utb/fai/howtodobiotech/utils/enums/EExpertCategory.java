@@ -7,6 +7,10 @@ public enum EExpertCategory {
     BIOLOGY,
     BIOINFORMATICS,
     DATA_SCIENCE,
-    LEGAL
+    LEGAL,
+    MVP_PRTOTOTYPING,
+    BUSINESS_VALIDATION,
+    PRODUCT_DESING
+
 
 }

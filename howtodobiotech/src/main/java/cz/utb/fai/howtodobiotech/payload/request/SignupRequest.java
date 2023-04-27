@@ -1,11 +1,9 @@
 package cz.utb.fai.howtodobiotech.payload.request;
 
-import cz.utb.fai.howtodobiotech.models.users.Contact;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 
-import java.util.HashSet;
 import java.util.Set;
 
 public class SignupRequest {
@@ -34,9 +32,8 @@ public class SignupRequest {
 
     private Set<String> role;
 
-    private  Set<Contact> contacts = new HashSet<>();
 
-    public SignupRequest(String name, String description, String url, String email, String username, String password, Set<String> role, Set<Contact> contacts) {
+    public SignupRequest(String name, String description, String url, String email, String username, String password, Set<String> role) {
         this.name = name;
         this.description = description;
         this.url = url;
@@ -44,7 +41,6 @@ public class SignupRequest {
         this.username = username;
         this.password = password;
         this.role = role;
-        this.contacts = contacts;
     }
 
     public SignupRequest() {
@@ -104,13 +100,5 @@ public class SignupRequest {
 
     public void setUrl(String url) {
         this.url = url;
-    }
-
-    public Set<Contact> getContacts() {
-        return contacts;
-    }
-
-    public void setContacts(Set<Contact> contacts) {
-        this.contacts = contacts;
     }
 }

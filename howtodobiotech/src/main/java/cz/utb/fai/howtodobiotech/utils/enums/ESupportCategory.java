@@ -5,6 +5,5 @@ public enum ESupportCategory {
     ACCELERATOR,
     INVESTMENT,
     MENTORING,
-    AWARDS,
-    GRAND_APPLICATION
+    AWARDS
 }
