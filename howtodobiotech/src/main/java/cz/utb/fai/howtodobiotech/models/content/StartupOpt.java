@@ -2,6 +2,7 @@ package cz.utb.fai.howtodobiotech.models.content;
 
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
 import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import jakarta.persistence.*;
@@ -51,22 +52,26 @@ public class StartupOpt {
     private String website;
     @NotBlank
     private Integer accountId;
-    @NotBlank
-    private ECountry country;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "Country_StartupOpportunities",
+            joinColumns = @JoinColumn(name = "StartupOpt_id"),
+            inverseJoinColumns = @JoinColumn(name = "Country_Id"))
+    private Country country;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "StartupOpt_BiotechCategories",
-            joinColumns = @JoinColumn(name = "startupOpt_id"),
-            inverseJoinColumns = @JoinColumn(name = "biotechCategory_id"))
+            joinColumns = @JoinColumn(name = "StartupOpt_id"),
+            inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "StartupOpt_SupportCategories",
-            joinColumns = @JoinColumn(name = "startupOpt_id"),
-            inverseJoinColumns = @JoinColumn(name = "category_id"))
+            joinColumns = @JoinColumn(name = "StartupOpt_id"),
+            inverseJoinColumns = @JoinColumn(name = "Category_id"))
     private Set<StartupSupportCategory> supportCategories = new HashSet<>();
 
-    public StartupOpt(String title, String provider, String description, Date startDate, Date endDate, String website, Integer accountId, ECountry country, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
+    public StartupOpt(String title, String provider, String description, Date startDate, Date endDate, String website, Integer accountId, Country country, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
         this.title = title;
         this.provider = provider;
         this.description = description;

@@ -1,4 +1,4 @@
-2023-04-27 19:22:48 jdbc[13]: exception
+2023-04-28 21:03:16 jdbc[24]: exception
 org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (to disable automatic closing at VM shutdown, add ";DB_CLOSE_ON_EXIT=FALSE" to the db URL) [90121-214]
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:678)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
@@ -98,30 +98,39 @@ org.h2.jdbc.JdbcSQLNonTransientConnectionException: Database is already closed (
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-04-27 19:40:19 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Table "SKILLOPPORTUNITIES" not found; SQL statement:
-INSERT INTO SkillOpportunities (title, organizer, description, startDate, endDate, website, accountId, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 'Slovakia') [42102-214]
-2023-04-27 19:40:40 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Column "STARTDATE" not found; SQL statement:
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, startDate, endDate, website, accountId, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 'Slovakia') [42122-214]
-	at org.h2.message.DbException.getJdbcSQLException(DbException.java:502)
+2023-04-28 22:01:24 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]SKILL_CATEGORIES"; expected "SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+SKILL_CATEGORIES [42001-214]
+2023-04-28 22:07:03 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]NSERT INTO SKILL_OPPORTUNITIES (ID, ACCOUNT_ID, DESCRIPTION, END_DATE, ORGANIZER, START_DATE, TITLE, WEBSITE)\000d\000aVALUES\000d\000a(1, 1, 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26T22:00:00.000+00:00', 'CIVITTA', '2023-04-26T22:00:00.000+00:00', 'Hack Healthcare Slovakia 2022', 'hackhealthcare.sk/')"; SQL statement:
+NSERT INTO SKILL_OPPORTUNITIES (ID, ACCOUNT_ID, DESCRIPTION, END_DATE, ORGANIZER, START_DATE, TITLE, WEBSITE)
+VALUES
+(1, 1, 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26T22:00:00.000+00:00', 'CIVITTA', '2023-04-26T22:00:00.000+00:00', 'Hack Healthcare Slovakia 2022', 'hackhealthcare.sk/') [42000-214]
+2023-04-28 22:07:18 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]NSERT INTO SKILL_OPPORTUNITIES (ID, ACCOUNT_ID, DESCRIPTION, END_DATE, ORGANIZER, START_DATE, TITLE, WEBSITE)\000d\000aVALUES\000d\000a(1, 1, 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26T22:00:00.000+00:00', 'CIVITTA', '2023-04-26T22:00:00.000+00:00', 'Hack Healthcare Slovakia 2022', 'hackhealthcare.sk/')"; SQL statement:
+NSERT INTO SKILL_OPPORTUNITIES (ID, ACCOUNT_ID, DESCRIPTION, END_DATE, ORGANIZER, START_DATE, TITLE, WEBSITE)
+VALUES
+(1, 1, 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26T22:00:00.000+00:00', 'CIVITTA', '2023-04-26T22:00:00.000+00:00', 'Hack Healthcare Slovakia 2022', 'hackhealthcare.sk/') [42000-214]
+2023-04-28 22:07:39 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Cannot parse "DATE" constant "2023-04-26T22:00:00.000+00:00"; SQL statement:
+INSERT INTO SKILL_OPPORTUNITIES (ID, ACCOUNT_ID, DESCRIPTION, END_DATE, ORGANIZER, START_DATE, TITLE, WEBSITE)
+VALUES
+(1, 1, 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26T22:00:00.000+00:00', 'CIVITTA', '2023-04-26T22:00:00.000+00:00', 'Hack Healthcare Slovakia 2022', 'hackhealthcare.sk/') [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
 	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
-	at org.h2.message.DbException.get(DbException.java:223)
-	at org.h2.message.DbException.get(DbException.java:199)
-	at org.h2.table.Table.getColumn(Table.java:749)
-	at org.h2.command.Parser.parseColumn(Parser.java:1256)
-	at org.h2.command.Parser.parseColumnList(Parser.java:1241)
-	at org.h2.command.Parser.parseInsert(Parser.java:1641)
-	at org.h2.command.Parser.parsePrepared(Parser.java:814)
-	at org.h2.command.Parser.parse(Parser.java:689)
-	at org.h2.command.Parser.parse(Parser.java:661)
-	at org.h2.command.Parser.prepareCommand(Parser.java:569)
-	at org.h2.engine.SessionLocal.prepareLocal(SessionLocal.java:631)
-	at org.h2.engine.SessionLocal.prepareCommand(SessionLocal.java:554)
-	at org.h2.jdbc.JdbcConnection.prepareCommand(JdbcConnection.java:1116)
-	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:237)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
 	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
 	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
 	at org.h2.server.web.WebApp.query(WebApp.java:1137)
@@ -213,44 +222,124 @@ VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
-2023-04-27 19:41:19 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLDataException: Data conversion error converting "'Slovakia' (SKILL_OPPORTUNITIES: ""COUNTRY"" SMALLINT)"; SQL statement:
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 'Slovakia') [22018-214]
-2023-04-27 19:43:13 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 9[*]');"; SQL statement:
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 9'); [42000-214]
-2023-04-27 19:43:43 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM SKILL_OPPORTUNITIES \000d\000aINSERT [*]INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 9)"; SQL statement:
-SELECT * FROM SKILL_OPPORTUNITIES 
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 2, 9) [42000-214]
-2023-04-27 20:05:53 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM SKILL_OPPORTUNITIES \000d\000a\000d\000aINSERT [*]INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 8)"; SQL statement:
-SELECT * FROM SKILL_OPPORTUNITIES 
-
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 8) [42000-214]
-2023-04-27 20:06:32 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM SKILL_OPPORTUNITIES \000d\000a\000d\000aINSERT [*]INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, ""Slovakia"")"; SQL statement:
-SELECT * FROM SKILL_OPPORTUNITIES 
-
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, "Slovakia") [42000-214]
-2023-04-27 20:06:42 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM SKILL_OPPORTUNITIES \000d\000a\000d\000aINSERT [*]INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 'Slovakia')"; SQL statement:
-SELECT * FROM SKILL_OPPORTUNITIES 
-
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 'Slovakia') [42000-214]
-2023-04-27 20:06:49 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "SELECT * FROM SKILL_OPPORTUNITIES \000d\000a\000d\000aINSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 9[*]');"; SQL statement:
-SELECT * FROM SKILL_OPPORTUNITIES 
-
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 9'); [42000-214]
-2023-04-27 20:07:01 jdbc[13]: exception
-org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)\000d\000aVALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 9[*]');"; SQL statement:
-INSERT INTO SKILL_OPPORTUNITIES  (title, organizer, description, START_DATE, END_DATE, website, ACCOUNT_ID, country)
-VALUES ('Hack Healthcare Slovakia 2022', 'CIVITTA', 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26 22:00:00', '2023-04-26 22:00:00', 'hackhealthcare.sk/', 1, 9'); [42000-214]
+Caused by: java.lang.NumberFormatException: 26T22:00:00.000+00:00
+	at org.h2.util.StringUtils.parseUInt31(StringUtils.java:1059)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:192)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 102 more
+2023-04-28 22:07:44 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLDataException: Cannot parse "DATE" constant "2023-04-26T22:00:00.000+00:00"; SQL statement:
+INSERT INTO SKILL_OPPORTUNITIES (ID, ACCOUNT_ID, DESCRIPTION, END_DATE, ORGANIZER, START_DATE, TITLE, WEBSITE)
+VALUES
+(1, 1, 'Hack Healthcare Slovakia is the first major hackathon in Slovakia focused on accelerating change in healthcare. Hackathon is a scientific and professional event, which aims to stimulate a new level of creativity and collaboration to unlock the promise of digital technologies in the healthcare system. We bring together hackers, students, entrepreneurs and healthcare experts to create new solutions to improve patients’ lives faster.', '2023-04-26T22:00:00.000+00:00', 'CIVITTA', '2023-04-26T22:00:00.000+00:00', 'Hack Healthcare Slovakia 2022', 'hackhealthcare.sk/') [22007-214]
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:506)
+	at org.h2.message.DbException.getJdbcSQLException(DbException.java:477)
+	at org.h2.message.DbException.get(DbException.java:212)
+	at org.h2.value.ValueDate.parse(ValueDate.java:53)
+	at org.h2.value.Value.convertToDate(Value.java:1854)
+	at org.h2.value.Value.convertTo(Value.java:1147)
+	at org.h2.value.Value.convertForAssignTo(Value.java:1092)
+	at org.h2.table.Column.validateConvertUpdateSequence(Column.java:369)
+	at org.h2.table.Table.convertInsertRow(Table.java:926)
+	at org.h2.command.dml.Insert.insertRows(Insert.java:167)
+	at org.h2.command.dml.Insert.update(Insert.java:135)
+	at org.h2.command.dml.DataChangeStatement.update(DataChangeStatement.java:74)
+	at org.h2.command.CommandContainer.update(CommandContainer.java:169)
+	at org.h2.command.Command.executeUpdate(Command.java:252)
+	at org.h2.jdbc.JdbcStatement.executeInternal(JdbcStatement.java:252)
+	at org.h2.jdbc.JdbcStatement.execute(JdbcStatement.java:223)
+	at org.h2.server.web.WebApp.getResult(WebApp.java:1339)
+	at org.h2.server.web.WebApp.query(WebApp.java:1137)
+	at org.h2.server.web.WebApp.query(WebApp.java:1113)
+	at org.h2.server.web.WebApp.process(WebApp.java:244)
+	at org.h2.server.web.WebApp.processRequest(WebApp.java:176)
+	at org.h2.server.web.JakartaWebServlet.doGet(JakartaWebServlet.java:129)
+	at org.h2.server.web.JakartaWebServlet.doPost(JakartaWebServlet.java:166)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:563)
+	at jakarta.servlet.http.HttpServlet.service(HttpServlet.java:631)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:205)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.tomcat.websocket.server.WsFilter.doFilter(WsFilter.java:53)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:110)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.security.web.FilterChainProxy.lambda$doFilterInternal$3(FilterChainProxy.java:231)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:365)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.invoke(FilterSecurityInterceptor.java:117)
+	at org.springframework.security.web.access.intercept.FilterSecurityInterceptor.doFilter(FilterSecurityInterceptor.java:83)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:126)
+	at org.springframework.security.web.access.ExceptionTranslationFilter.doFilter(ExceptionTranslationFilter.java:120)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:131)
+	at org.springframework.security.web.session.SessionManagementFilter.doFilter(SessionManagementFilter.java:85)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.AnonymousAuthenticationFilter.doFilter(AnonymousAuthenticationFilter.java:100)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter.doFilter(SecurityContextHolderAwareRequestFilter.java:179)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.savedrequest.RequestCacheAwareFilter.doFilter(RequestCacheAwareFilter.java:63)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at cz.utb.fai.howtodobiotech.security.jwt.AuthTokenFilter.doFilterInternal(AuthTokenFilter.java:52)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:107)
+	at org.springframework.security.web.authentication.logout.LogoutFilter.doFilter(LogoutFilter.java:93)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.web.filter.CorsFilter.doFilterInternal(CorsFilter.java:91)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.header.HeaderWriterFilter.doHeadersAfter(HeaderWriterFilter.java:90)
+	at org.springframework.security.web.header.HeaderWriterFilter.doFilterInternal(HeaderWriterFilter.java:75)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:82)
+	at org.springframework.security.web.context.SecurityContextHolderFilter.doFilter(SecurityContextHolderFilter.java:69)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter.doFilterInternal(WebAsyncManagerIntegrationFilter.java:62)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.session.DisableEncodeUrlFilter.doFilterInternal(DisableEncodeUrlFilter.java:42)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.springframework.security.web.FilterChainProxy$VirtualFilterChain.doFilter(FilterChainProxy.java:374)
+	at org.springframework.security.web.FilterChainProxy.doFilterInternal(FilterChainProxy.java:233)
+	at org.springframework.security.web.FilterChainProxy.doFilter(FilterChainProxy.java:191)
+	at org.springframework.web.filter.DelegatingFilterProxy.invokeDelegate(DelegatingFilterProxy.java:352)
+	at org.springframework.web.filter.DelegatingFilterProxy.doFilter(DelegatingFilterProxy.java:268)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.RequestContextFilter.doFilterInternal(RequestContextFilter.java:100)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.FormContentFilter.doFilterInternal(FormContentFilter.java:93)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.springframework.web.filter.CharacterEncodingFilter.doFilterInternal(CharacterEncodingFilter.java:201)
+	at org.springframework.web.filter.OncePerRequestFilter.doFilter(OncePerRequestFilter.java:116)
+	at org.apache.catalina.core.ApplicationFilterChain.internalDoFilter(ApplicationFilterChain.java:174)
+	at org.apache.catalina.core.ApplicationFilterChain.doFilter(ApplicationFilterChain.java:149)
+	at org.apache.catalina.core.StandardWrapperValve.invoke(StandardWrapperValve.java:166)
+	at org.apache.catalina.core.StandardContextValve.invoke(StandardContextValve.java:90)
+	at org.apache.catalina.authenticator.AuthenticatorBase.invoke(AuthenticatorBase.java:493)
+	at org.apache.catalina.core.StandardHostValve.invoke(StandardHostValve.java:115)
+	at org.apache.catalina.valves.ErrorReportValve.invoke(ErrorReportValve.java:93)
+	at org.apache.catalina.core.StandardEngineValve.invoke(StandardEngineValve.java:74)
+	at org.apache.catalina.connector.CoyoteAdapter.service(CoyoteAdapter.java:341)
+	at org.apache.coyote.http11.Http11Processor.service(Http11Processor.java:390)
+	at org.apache.coyote.AbstractProcessorLight.process(AbstractProcessorLight.java:63)
+	at org.apache.coyote.AbstractProtocol$ConnectionHandler.process(AbstractProtocol.java:894)
+	at org.apache.tomcat.util.net.NioEndpoint$SocketProcessor.doRun(NioEndpoint.java:1741)
+	at org.apache.tomcat.util.net.SocketProcessorBase.run(SocketProcessorBase.java:52)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1191)
+	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+Caused by: java.lang.NumberFormatException: 26T22:00:00.000+00:00
+	at org.h2.util.StringUtils.parseUInt31(StringUtils.java:1059)
+	at org.h2.util.DateTimeUtils.parseDateValue(DateTimeUtils.java:192)
+	at org.h2.value.ValueDate.parse(ValueDate.java:51)
+	... 102 more

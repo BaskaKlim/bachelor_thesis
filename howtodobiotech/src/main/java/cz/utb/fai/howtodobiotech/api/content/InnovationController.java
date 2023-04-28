@@ -52,7 +52,7 @@ public class InnovationController {
     public ResponseEntity<Innovation> createInnovation(@RequestBody Innovation innovation) {
         try {
             Innovation _expert = innovationService
-                    .addInnovation(new Innovation(innovation.getTitle(), innovation.getDescription(), innovation.getWebsite(),innovation.getCountry(), innovation.getCategories()));
+                    .addInnovation(new Innovation(innovation.getTitle(), innovation.getDescription(), innovation.getWebsite(), innovation.getCountry(),innovation.getCategories()));
             return new ResponseEntity<>(_expert, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);

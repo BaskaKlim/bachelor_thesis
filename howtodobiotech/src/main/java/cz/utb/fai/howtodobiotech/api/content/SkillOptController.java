@@ -55,7 +55,7 @@ public class SkillOptController {
     public ResponseEntity<SkillOpt> createSkillOpt(@RequestBody SkillOpt skillOpt) {
         try {
             SkillOpt _skillOpt = skillOptService
-                    .addSkillOpt(new SkillOpt(skillOpt.getTitle(), skillOpt.getOrganizer(), skillOpt.getDescription(), skillOpt.getStartDate(), skillOpt.getEndDate(), skillOpt.getWebsite(), skillOpt.getCountry(),skillOpt.getAccountId(),skillOpt.getBiotechCategories(), skillOpt.getSkillCategories()));
+                    .addSkillOpt(new SkillOpt(skillOpt.getTitle(), skillOpt.getOrganizer(), skillOpt.getDescription(), skillOpt.getStartDate(), skillOpt.getEndDate(), skillOpt.getWebsite(), skillOpt.getCountry(), skillOpt.getAccountId(), skillOpt.getBiotechCategories(), skillOpt.getSkillCategories()));
             return new ResponseEntity<>(_skillOpt, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -96,7 +96,7 @@ public class SkillOptController {
     }
 
     @GetMapping("/by-biotech-category/{biotechCategoryName}")
-    public ResponseEntity<List<SkillOpt>> getSkillOptByBiotechCategory(@PathVariable ("biotechCategoryName") EBiotechCategory biotechCategoryName) {
+    public ResponseEntity<List<SkillOpt>> getSkillOptByBiotechCategory(@PathVariable("biotechCategoryName") EBiotechCategory biotechCategoryName) {
         List<SkillOpt> skillOpts = skillOptService.selectSkillOptByBiotechCategory(biotechCategoryName);
 
         if (skillOpts.isEmpty()) {
@@ -106,7 +106,7 @@ public class SkillOptController {
     }
 
     @GetMapping("/by-skill-category/{skillCategoryName}")
-    public ResponseEntity<List<SkillOpt>>getSkillOptBySkillCategory(@PathVariable("skillCategoryName") ESkillCategory skillCategoryName) {
+    public ResponseEntity<List<SkillOpt>> getSkillOptBySkillCategory(@PathVariable("skillCategoryName") ESkillCategory skillCategoryName) {
         List<SkillOpt> skillOpts = skillOptService.selectSkillOptBySkillCategory(skillCategoryName);
 
         if (skillOpts.isEmpty()) {
@@ -138,7 +138,7 @@ public class SkillOptController {
     }
 
     @GetMapping("/by-start-date/{startDate}")
-    public ResponseEntity<SkillOpt> getSkillOptByStartDate(@PathVariable("startDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date startDate) {
+    public ResponseEntity<SkillOpt> getSkillOptByStartDate(@PathVariable("startDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date startDate) {
         Optional<SkillOpt> skillOpt = skillOptService.selectSkillOptByStartDate(startDate);
 
         if (skillOpt.isPresent()) {
@@ -149,7 +149,7 @@ public class SkillOptController {
     }
 
     @GetMapping("/by-end-date/{endDate}")
-    public ResponseEntity<SkillOpt> getSkillOptByEndDate(@PathVariable("endDate") @DateTimeFormat(pattern="yyyy-MM-dd") Date endDate) {
+    public ResponseEntity<SkillOpt> getSkillOptByEndDate(@PathVariable("endDate") @DateTimeFormat(pattern = "yyyy-MM-dd") Date endDate) {
         Optional<SkillOpt> skillOpt = skillOptService.selectSkillOptByEndDate(endDate);
 
         if (skillOpt.isPresent()) {

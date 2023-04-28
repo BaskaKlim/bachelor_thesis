@@ -4,10 +4,12 @@ import java.time.Instant;
 import java.util.*;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.services.content.StartupOptService;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import cz.utb.fai.howtodobiotech.utils.enums.ESupportCategory;
 import org.joda.time.LocalDate;
 import org.junit.jupiter.api.BeforeEach;
@@ -58,6 +60,7 @@ public class StartupOptControllerTest {
         startupOpt.setProvider("Provider");
         startupOpt.setStartDate(LocalDate.now().toDate());
         startupOpt.setEndDate(LocalDate.now().toDate());
+        startupOpt.setCountry( new Country(9, ECountry.Slovakia) );
         startupOpt.setCategories(categorySet);
         startupOpt.setSupportCategories(supportCategories);
         startupOptList = new ArrayList<>();

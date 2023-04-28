@@ -1,6 +1,7 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.services.content.InnovationService;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
@@ -41,7 +42,7 @@ class InnovationControllerTest {
         categorySet.add(category1);
         categorySet.add(category2);
         int innovationId = 1;
-        Innovation innovation = new Innovation(innovationId, "Title", "Description", "Website",null,categorySet);
+        Innovation innovation = new Innovation(innovationId, "Title", "Description", "Website", new Country(9, ECountry.Slovakia) ,categorySet);
         when(innovationService.getInnovationById(innovationId)).thenReturn(Optional.of(innovation));
 
         ResponseEntity<Innovation> response = innovationController.selectInnovationById(innovationId);
@@ -70,8 +71,8 @@ class InnovationControllerTest {
         categorySet.add(category1);
         categorySet.add(category2);
         List<Innovation> innovations = new ArrayList<>();
-        innovations.add(new Innovation(1, "Title1", "Description1", "Website1", null,categorySet));
-        innovations.add(new Innovation(2, "Title2", "Description2", "Website2", null, categorySet));
+        innovations.add(new Innovation(1, "Title1", "Description1", "Website1",  new Country(9,ECountry.Slovakia) ,categorySet));
+        innovations.add(new Innovation(2, "Title2", "Description2", "Website2",  new Country(9,ECountry.Slovakia) , categorySet));
         when(innovationService.getAllInnovations()).thenReturn(innovations);
 
         ResponseEntity<List<Innovation>> response = innovationController.getAllInnovations();

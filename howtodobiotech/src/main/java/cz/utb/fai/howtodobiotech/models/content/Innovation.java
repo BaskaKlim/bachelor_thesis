@@ -1,6 +1,7 @@
 package cz.utb.fai.howtodobiotech.models.content;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
@@ -36,7 +37,11 @@ public class Innovation {
     private String website;
 
     @NotBlank
-    private ECountry country;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinTable(name = "Country_Innovations",
+            joinColumns = @JoinColumn(name = "Innovation_id"),
+            inverseJoinColumns = @JoinColumn(name = "Country_Id"))
+    private Country country;
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "Innovation_BiotechCategories",
             joinColumns = @JoinColumn(name = "Innovation_id"),
@@ -44,7 +49,7 @@ public class Innovation {
     private Set<BiotechCategory> categories = new HashSet<>();
 
 
-    public Innovation(String title, String description, String website, ECountry country,Set<BiotechCategory> categories) {
+    public Innovation(String title, String description, String website, Country country, Set<BiotechCategory> categories) {
         this.title = title;
         this.description = description;
         this.website = website;

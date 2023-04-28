@@ -1,10 +1,11 @@
 package cz.utb.fai.howtodobiotech.models.content;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.SkillCategory;
-import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -49,25 +50,27 @@ public class SkillOpt {
     @NotBlank(message = "Website of skill opportunity or service is mandatory")
     private String website;
 
-    @NotBlank
+    @NotNull
     private Integer accountId;
 
-    @NotBlank
-    @Enumerated
-    private ECountry country;
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToOne()
+    @JoinTable(name = "Country_SkillOpportunities",
+            joinColumns = @JoinColumn(name = "SkillOpt_id"),
+            inverseJoinColumns = @JoinColumn(name = "Country_Id"))
+    private Country country;
+    @ManyToMany()
     @JoinTable(name = "SkillOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "SkillOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))
     private Set<BiotechCategory> biotechCategories = new HashSet<>();
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable(name = "SkillOpt_SkillCategories",
             joinColumns = @JoinColumn(name = "SkillOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "SkillCategory_id"))
     private Set<SkillCategory> skillCategories = new HashSet<>();
 
-    public SkillOpt(String title, String organizer, String description, Date startDate, Date endDate, String website, ECountry country, Integer accountId, Set<BiotechCategory> biotechCategories, Set<SkillCategory> skillCategories) {
+    public SkillOpt(String title, String organizer, String description, Date startDate, Date endDate, String website, Country country, Integer accountId, Set<BiotechCategory> biotechCategories, Set<SkillCategory> skillCategories) {
         this.title = title;
         this.organizer = organizer;
         this.description = description;

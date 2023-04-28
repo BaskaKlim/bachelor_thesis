@@ -3,8 +3,9 @@ import static org.mockito.Mockito.when;
 import java.util.*;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
-import org.joda.time.LocalDate;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -46,6 +47,7 @@ public class SkillOptControllerTest {
         skillOpt.setOrganizer("Organizer");
         skillOpt.setStartDate(new Date());
         skillOpt.setEndDate(new Date());
+        skillOpt.setCountry( new Country(9, ECountry.Slovakia) );
         skillOpt.setBiotechCategories(categorySet);
         skillOptList = new ArrayList<>();
         skillOptList.add(skillOpt);
