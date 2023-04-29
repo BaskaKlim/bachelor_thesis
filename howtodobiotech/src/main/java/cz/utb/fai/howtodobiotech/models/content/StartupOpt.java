@@ -7,6 +7,7 @@ import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
 import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -39,33 +40,32 @@ public class StartupOpt {
     private String description;
     @Temporal(TemporalType.DATE)
     @Column(name = "START_DATE")
-    @NotBlank(message = "Start date of startup opportunity or service is mandatory")
+    @NotNull(message = "Start date of startup opportunity or service is mandatory")
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "END_DATE")
-    @NotBlank(message = "End date of startup opportunity or service is mandatory")
-
+    @NotNull(message = "End date of startup opportunity or service is mandatory")
     private Date endDate;
 
     @NotBlank(message = "Website of startup opportunity or service is mandatory")
     private String website;
-    @NotBlank
+    @NotNull
     private Integer accountId;
 
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "StartupOpt_Countries",
             joinColumns = @JoinColumn(name = "StartupOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "Country_Id"))
     private Set<Country> countries;
 
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "StartupOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "StartupOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
 
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "StartupOpt_SupportCategories",
             joinColumns = @JoinColumn(name = "StartupOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "Category_id"))

@@ -35,14 +35,12 @@ public class SkillOptService {
     public List<SkillOpt> selectAllSkillOpts() {
         List<SkillOpt> skillOptList = new ArrayList<SkillOpt>();
         skillOptRepository.findAllWithDetails().forEach(skillOptList::add);
-        ;
 
         return skillOptList;
     }
 
     public SkillOpt addSkillOpt(SkillOpt skillOpt) {
         return skillOptRepository.save(skillOpt);
-
     }
 
     @Transactional
