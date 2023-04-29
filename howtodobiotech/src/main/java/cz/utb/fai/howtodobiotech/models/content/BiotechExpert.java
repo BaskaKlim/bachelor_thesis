@@ -48,27 +48,27 @@ public class BiotechExpert {
     @Size(max = 1000)
     private String backgroundDescription;
 
-    @NotBlank
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "Country_BiotechExperts",
+
+    @ManyToMany()
+    @JoinTable(name = "BiotechExpert_Countries",
             joinColumns = @JoinColumn(name = "BiotechExpert_id"),
             inverseJoinColumns = @JoinColumn(name = "Country_Id"))
-    private Country country;
+    private Set<Country> countries;
 
-    @ManyToMany(fetch = FetchType.LAZY)
+    @ManyToMany()
     @JoinTable(name = "BiotechExpert_ExpertCategories",
             joinColumns = @JoinColumn(name = "BiotechExpert_id"),
             inverseJoinColumns = @JoinColumn(name = "ExpertCategory_id"))
     private Set<ExpertCategory> expertise = new HashSet<>();
 
-    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Country country, Set<ExpertCategory> expertise) {
+    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Set<Country> countries, Set<ExpertCategory> expertise) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobPosition = jobPosition;
         this.email = email;
         this.linkedinUrl = linkedinUrl;
         this.backgroundDescription = backgroundDescription;
-        this.country = country;
+        this.countries = countries;
         this.expertise = expertise;
     }
 }

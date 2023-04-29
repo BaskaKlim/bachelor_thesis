@@ -3,6 +3,7 @@ package cz.utb.fai.howtodobiotech.api.content;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.content.BiotechExpert;
@@ -35,8 +36,8 @@ class BiotechExpertControllerTest {
     @BeforeEach
     void setUp() {
         expertList = new ArrayList<>();
-        expertList.add(new BiotechExpert(1, "John", "Doe", "Job 1", "john.doe@test.com", "www.linkedin.com", "Description 1", new Country(9,ECountry.Slovakia) ,null));
-        expertList.add(new BiotechExpert(2, "Jane", "Doe", "Job 2", "jane.doe@test.com", "www.linkedin.com", "Description 2", new Country(8,ECountry.Poland),  null));
+        expertList.add(new BiotechExpert(1, "John", "Doe", "Job 1", "john.doe@test.com", "www.linkedin.com", "Description 1", (Set<Country>) new Country(9,ECountry.SLOVAKIA),null));
+        expertList.add(new BiotechExpert(2, "Jane", "Doe", "Job 2", "jane.doe@test.com", "www.linkedin.com", "Description 2", (Set<Country>) new Country(8,ECountry.POLAND),  null));
     }
 
     @Test

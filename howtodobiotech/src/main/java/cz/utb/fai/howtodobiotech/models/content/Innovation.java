@@ -36,24 +36,24 @@ public class Innovation {
     @NotBlank(message = "Website is mandatory")
     private String website;
 
-    @NotBlank
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinTable(name = "Country_Innovations",
+
+    @ManyToMany()
+    @JoinTable(name = "Innovation_Countries",
             joinColumns = @JoinColumn(name = "Innovation_id"),
             inverseJoinColumns = @JoinColumn(name = "Country_Id"))
-    private Country country;
-    @ManyToMany(fetch = FetchType.LAZY)
+    private Set<Country> countries ;
+    @ManyToMany()
     @JoinTable(name = "Innovation_BiotechCategories",
             joinColumns = @JoinColumn(name = "Innovation_id"),
             inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))
     private Set<BiotechCategory> categories = new HashSet<>();
 
 
-    public Innovation(String title, String description, String website, Country country, Set<BiotechCategory> categories) {
+    public Innovation(String title, String description, String website, Set<Country> countries, Set<BiotechCategory> categories) {
         this.title = title;
         this.description = description;
         this.website = website;
-        this.country = country;
+        this.countries = countries;
         this.categories = categories;
     }
 }

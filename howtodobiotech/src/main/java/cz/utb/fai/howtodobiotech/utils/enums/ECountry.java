@@ -1,17 +1,17 @@
 package cz.utb.fai.howtodobiotech.utils.enums;
 
 public enum ECountry {
-    Albania,
-    Croatia,
-    Czechia,
-    Estonia,
-    Hungary,
-    Latvia,
-    Lithuania,
-    Poland,
-    Slovakia,
-    Slovenia,
-    Ukraine,
+    ALBANIA,
+    CROATIA,
+    CZECHIA,
+    ESTONIA,
+    HUNGARY,
+    LATVIA,
+    LITHUANIA,
+    POLAND,
+    SLOVAKIA,
+    SLOVENIA,
+    UKRAINE,
     CEE
 
 }

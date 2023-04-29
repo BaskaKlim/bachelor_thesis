@@ -34,8 +34,8 @@ public class SkillOptControllerTest {
     @BeforeEach
     void setUp() {
         Set<BiotechCategory> categorySet = new HashSet<>();
-        BiotechCategory category1 = new BiotechCategory(1, EBiotechCategory.Energy);
-        BiotechCategory category2 = new BiotechCategory(2, EBiotechCategory.Marine);
+        BiotechCategory category1 = new BiotechCategory(1, EBiotechCategory.ENERGY);
+        BiotechCategory category2 = new BiotechCategory(2, EBiotechCategory.MARINE);
         categorySet.add(category1);
         categorySet.add(category2);
 
@@ -47,7 +47,7 @@ public class SkillOptControllerTest {
         skillOpt.setOrganizer("Organizer");
         skillOpt.setStartDate(new Date());
         skillOpt.setEndDate(new Date());
-        skillOpt.setCountry( new Country(9, ECountry.Slovakia) );
+        skillOpt.setCountries((Set<Country>) new Country(9, ECountry.SLOVAKIA));
         skillOpt.setBiotechCategories(categorySet);
         skillOptList = new ArrayList<>();
         skillOptList.add(skillOpt);

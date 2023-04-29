@@ -41,8 +41,8 @@ public class StartupOptControllerTest {
     void setup() {
         MockitoAnnotations.openMocks(this);
         Set<BiotechCategory> categorySet = new HashSet<>();
-        BiotechCategory category1 = new BiotechCategory(1, EBiotechCategory.Energy);
-        BiotechCategory category2 = new BiotechCategory(2, EBiotechCategory.Marine);
+        BiotechCategory category1 = new BiotechCategory(1, EBiotechCategory.ENERGY);
+        BiotechCategory category2 = new BiotechCategory(2, EBiotechCategory.MARINE);
         categorySet.add(category1);
         categorySet.add(category2);
 
@@ -60,7 +60,7 @@ public class StartupOptControllerTest {
         startupOpt.setProvider("Provider");
         startupOpt.setStartDate(LocalDate.now().toDate());
         startupOpt.setEndDate(LocalDate.now().toDate());
-        startupOpt.setCountry( new Country(9, ECountry.Slovakia) );
+        startupOpt.setCountries((Set<Country>) new Country(9, ECountry.SLOVAKIA));
         startupOpt.setCategories(categorySet);
         startupOpt.setSupportCategories(supportCategories);
         startupOptList = new ArrayList<>();

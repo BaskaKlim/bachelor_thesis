@@ -1,6 +1,7 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
 import cz.utb.fai.howtodobiotech.models.categories.SkillCategory;
+import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.services.content.SkillOptService;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
@@ -37,25 +38,19 @@ public class SkillOptController {
 
     @GetMapping()
     public ResponseEntity<List<SkillOpt>> getAllSkillOpts() {
-        try {
-            List<SkillOpt> skillOptList = new ArrayList<>();
-
-            skillOptService.selectAllSkillOpts().forEach(skillOptList::add);
-            if (skillOptList.isEmpty()) {
+        List<SkillOpt> skillOpts = new ArrayList<>();
+           skillOptService.selectAllSkillOpts().forEach(skillOpts::add);
+            if (skillOpts.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
-
-            return new ResponseEntity<>(skillOptList, HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return new ResponseEntity<>(skillOpts, HttpStatus.OK);
         }
-    }
 
     @PostMapping()
     public ResponseEntity<SkillOpt> createSkillOpt(@RequestBody SkillOpt skillOpt) {
         try {
             SkillOpt _skillOpt = skillOptService
-                    .addSkillOpt(new SkillOpt(skillOpt.getTitle(), skillOpt.getOrganizer(), skillOpt.getDescription(), skillOpt.getStartDate(), skillOpt.getEndDate(), skillOpt.getWebsite(), skillOpt.getCountry(), skillOpt.getAccountId(), skillOpt.getBiotechCategories(), skillOpt.getSkillCategories()));
+                    .addSkillOpt(new SkillOpt(skillOpt.getTitle(), skillOpt.getOrganizer(), skillOpt.getDescription(), skillOpt.getStartDate(), skillOpt.getEndDate(), skillOpt.getWebsite(), skillOpt.getCountries(), skillOpt.getAccountId(), skillOpt.getBiotechCategories(), skillOpt.getSkillCategories()));
             return new ResponseEntity<>(_skillOpt, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -73,26 +68,10 @@ public class SkillOptController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<SkillOpt> updateSkillOpt(@PathVariable("id") Integer id, @RequestBody SkillOpt skillOpt) {
-        Optional<SkillOpt> skillOptData = skillOptService.selectSkillOptById(id);
-        if (skillOptData.isPresent()) {
-            SkillOpt _skillOpt = skillOptData.get();
-            _skillOpt.setTitle(skillOpt.getTitle());
-            _skillOpt.setOrganizer(skillOpt.getOrganizer());
-            _skillOpt.setDescription(skillOpt.getDescription());
-            _skillOpt.setStartDate(skillOpt.getStartDate());
-            _skillOpt.setEndDate(skillOpt.getEndDate());
-            _skillOpt.setWebsite(skillOpt.getWebsite());
-            _skillOpt.setCountry(skillOpt.getCountry());
-            _skillOpt.setAccountId(skillOpt.getAccountId());
-            _skillOpt.setAccountId(skillOpt.getAccountId());
-            _skillOpt.setBiotechCategories(skillOpt.getBiotechCategories());
-            _skillOpt.setSkillCategories(skillOpt.getSkillCategories());
+    public ResponseEntity<?> updateSkillOptWithDetails(@PathVariable Integer id, @RequestBody SkillOpt request) {
+        skillOptService.updateSkillOpt(id,request );
 
-            return new ResponseEntity<>(skillOptService.updateSkillOpt(_skillOpt), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/by-biotech-category/{biotechCategoryName}")

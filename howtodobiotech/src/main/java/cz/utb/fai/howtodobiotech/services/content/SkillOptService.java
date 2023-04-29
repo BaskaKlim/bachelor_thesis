@@ -1,7 +1,10 @@
 package cz.utb.fai.howtodobiotech.services.content;
 
 
+import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
+import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.SkillCategory;
+import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.repositories.categories.SkillCategoryRepository;
 import cz.utb.fai.howtodobiotech.repositories.content.SkillOptRepository;
@@ -9,17 +12,15 @@ import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
 import cz.utb.fai.howtodobiotech.utils.enums.ESkillCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+import org.webjars.NotFoundException;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class SkillOptService {
     SkillOptRepository skillOptRepository;
-
-    SkillCategoryRepository skillCategoryRepository;
 
     @Autowired
     public SkillOptService(SkillOptRepository skillOptRepository) {
@@ -33,7 +34,8 @@ public class SkillOptService {
 
     public List<SkillOpt> selectAllSkillOpts() {
         List<SkillOpt> skillOptList = new ArrayList<SkillOpt>();
-        skillOptRepository.findAll().forEach(skillOptList::add);
+        skillOptRepository.findAllWithDetails().forEach(skillOptList::add);
+        ;
 
         return skillOptList;
     }
@@ -43,8 +45,26 @@ public class SkillOptService {
 
     }
 
-    public SkillOpt updateSkillOpt(SkillOpt skillOpt) {
-        return skillOptRepository.save(skillOpt);
+    @Transactional
+    public void updateSkillOpt(Integer id, SkillOpt skillOptDto) {
+        SkillOpt skillOpt = skillOptRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Skill opportunity not found with id: " + id));
+
+        Set<Country> countries = skillOptDto.getCountries();
+        Set<BiotechCategory> biotechCategories = skillOptDto.getBiotechCategories();
+        Set<SkillCategory> skillCategories = skillOptDto.getSkillCategories();
+        skillOpt.setTitle(skillOptDto.getTitle());
+        skillOpt.setOrganizer(skillOptDto.getOrganizer());
+        skillOpt.setDescription(skillOptDto.getDescription());
+        skillOpt.setStartDate(skillOptDto.getStartDate());
+        skillOpt.setEndDate(skillOptDto.getEndDate());
+        skillOpt.setWebsite(skillOptDto.getWebsite());
+        skillOpt.setCountries(countries);
+        skillOpt.setAccountId(skillOptDto.getAccountId());
+        skillOpt.setBiotechCategories(biotechCategories);
+        skillOpt.setSkillCategories(skillCategories);
+
+        skillOptRepository.save(skillOpt);
     }
 
     public void deleteSkillOptById(Integer id) {

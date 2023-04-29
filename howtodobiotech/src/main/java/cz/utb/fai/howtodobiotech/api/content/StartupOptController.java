@@ -50,7 +50,7 @@ public class StartupOptController {
     public ResponseEntity<StartupOpt> createStartupOpt(@RequestBody StartupOpt startupOpt) {
         try {
             StartupOpt _startupOpt = startupOptService
-                    .addSStartupOpt(new StartupOpt(startupOpt.getTitle(), startupOpt.getProvider(), startupOpt.getDescription(), startupOpt.getStartDate(), startupOpt.getEndDate(), startupOpt.getWebsite(), startupOpt.getAccountId(),startupOpt.getCountry(),startupOpt.getCategories(), startupOpt.getSupportCategories()));
+                    .addSStartupOpt(new StartupOpt(startupOpt.getTitle(), startupOpt.getProvider(), startupOpt.getDescription(), startupOpt.getStartDate(), startupOpt.getEndDate(), startupOpt.getWebsite(), startupOpt.getAccountId(),startupOpt.getCountries(),startupOpt.getCategories(), startupOpt.getSupportCategories()));
             return new ResponseEntity<>(_startupOpt, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -79,7 +79,7 @@ public class StartupOptController {
             _startupOpt.setEndDate(startupOpt.getEndDate());
             _startupOpt.setAccountId(startupOpt.getAccountId());
             _startupOpt.setWebsite(startupOpt.getWebsite());
-            _startupOpt.setCountry(startupOpt.getCountry());
+            _startupOpt.setCountries(startupOpt.getCountries());
             _startupOpt.setCategories(startupOpt.getCategories());
             _startupOpt.setSupportCategories(startupOpt.getSupportCategories());
 

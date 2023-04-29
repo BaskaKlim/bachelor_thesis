@@ -51,7 +51,7 @@ public class BiotechExpertController {
     public ResponseEntity<BiotechExpert> createBiotechExpert(@RequestBody BiotechExpert expert) {
         try {
             BiotechExpert _expert = biotechExpertService
-                    .addBiotechExpert(new BiotechExpert(expert.getFirstName(), expert.getLastName(), expert.getJobPosition(), expert.getEmail(), expert.getLinkedinUrl(), expert.getBackgroundDescription(),expert.getCountry(), expert.getExpertise()));
+                    .addBiotechExpert(new BiotechExpert(expert.getFirstName(), expert.getLastName(), expert.getJobPosition(), expert.getEmail(), expert.getLinkedinUrl(), expert.getBackgroundDescription(),expert.getCountries(), expert.getExpertise()));
             return new ResponseEntity<>(_expert, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -79,7 +79,7 @@ public class BiotechExpertController {
             _expert.setEmail(expert.getEmail());
             _expert.setBackgroundDescription(expert.getJobPosition());
             _expert.setBackgroundDescription(expert.getBackgroundDescription());
-            _expert.setCountry(expert.getCountry());
+            _expert.setCountries(expert.getCountries());
             _expert.setExpertise(expert.getExpertise());
 
 
