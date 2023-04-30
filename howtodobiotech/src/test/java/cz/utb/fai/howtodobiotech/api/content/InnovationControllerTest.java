@@ -43,9 +43,9 @@ class InnovationControllerTest {
         categorySet.add(category2);
         int innovationId = 1;
         Innovation innovation = new Innovation(innovationId, "Title", "Description", "Website", (Set<Country>) new Country(9, ECountry.SLOVAKIA),categorySet);
-        when(innovationService.getInnovationById(innovationId)).thenReturn(Optional.of(innovation));
+        when(innovationService.selectInnovationById(innovationId)).thenReturn(Optional.of(innovation));
 
-        ResponseEntity<Innovation> response = innovationController.selectInnovationById(innovationId);
+        ResponseEntity<Innovation> response = innovationController.getInnovationById(innovationId);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(innovation, response.getBody());
@@ -55,9 +55,9 @@ class InnovationControllerTest {
     @DisplayName("Test selectInnovationById() method with invalid ID")
     void testSelectInnovationByIdInvalid() {
         int innovationId = 1;
-        when(innovationService.getInnovationById(innovationId)).thenReturn(Optional.empty());
+        when(innovationService.selectInnovationById(innovationId)).thenReturn(Optional.empty());
 
-        ResponseEntity<Innovation> response = innovationController.selectInnovationById(innovationId);
+        ResponseEntity<Innovation> response = innovationController.getInnovationById(innovationId);
 
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
     }
@@ -73,7 +73,7 @@ class InnovationControllerTest {
         List<Innovation> innovations = new ArrayList<>();
         innovations.add(new Innovation(1, "Title1", "Description1", "Website1", (Set<Country>) new Country(9,ECountry.SLOVAKIA),categorySet));
         innovations.add(new Innovation(2, "Title2", "Description2", "Website2", (Set<Country>) new Country(9,ECountry.SLOVAKIA), categorySet));
-        when(innovationService.getAllInnovations()).thenReturn(innovations);
+        when(innovationService.selectAllInnovations()).thenReturn(innovations);
 
         ResponseEntity<List<Innovation>> response = innovationController.getAllInnovations();
 
@@ -84,7 +84,7 @@ class InnovationControllerTest {
     @Test
     @DisplayName("Test getAllInnovations() method with no innovations present")
     void testGetAllInnovationsEmpty() {
-        when(innovationService.getAllInnovations()).thenReturn(new ArrayList<>());
+        when(innovationService.selectAllInnovations()).thenReturn(new ArrayList<>());
 
         ResponseEntity<List<Innovation>> response = innovationController.getAllInnovations();
 
@@ -117,7 +117,7 @@ class InnovationControllerTest {
     @DisplayName("Test createInnovation() method with invalid input")
     void testCreateInnovationInvalid() {
         Innovation innovation = new Innovation();
-        when(innovationService.addInnovation(innovation)).thenThrow(new IllegalArgumentException());
+        when(innovationService.insertInnovation(innovation)).thenThrow(new IllegalArgumentException());
         ResponseEntity<Innovation> response = innovationController.createInnovation(null);
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }

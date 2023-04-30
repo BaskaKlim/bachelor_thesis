@@ -1,12 +1,10 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
-import cz.utb.fai.howtodobiotech.models.categories.SkillCategory;
-import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.services.content.SkillOptService;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import cz.utb.fai.howtodobiotech.utils.enums.ESkillCategory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,8 +20,12 @@ import java.util.Optional;
 @RequestMapping("api/skill-opportunities")
 @RestController
 public class SkillOptController {
-    @Autowired
+    final
     SkillOptService skillOptService;
+
+    public SkillOptController(SkillOptService skillOptService) {
+        this.skillOptService = skillOptService;
+    }
 
     @GetMapping("/{id}")
     public ResponseEntity<SkillOpt> getSkillOptById(@PathVariable("id") Integer id) {
@@ -39,18 +41,18 @@ public class SkillOptController {
     @GetMapping()
     public ResponseEntity<List<SkillOpt>> getAllSkillOpts() {
         List<SkillOpt> skillOpts = new ArrayList<>();
-           skillOptService.selectAllSkillOpts().forEach(skillOpts::add);
-            if (skillOpts.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
-            }
-            return new ResponseEntity<>(skillOpts, HttpStatus.OK);
+        skillOptService.selectAllSkillOpts().forEach(skillOpts::add);
+        if (skillOpts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
+        return new ResponseEntity<>(skillOpts, HttpStatus.OK);
+    }
 
     @PostMapping()
     public ResponseEntity<SkillOpt> createSkillOpt(@RequestBody SkillOpt skillOpt) {
         try {
             SkillOpt _skillOpt = skillOptService
-                    .addSkillOpt(new SkillOpt(skillOpt.getTitle(), skillOpt.getOrganizer(), skillOpt.getDescription(), skillOpt.getStartDate(), skillOpt.getEndDate(), skillOpt.getWebsite(), skillOpt.getCountries(), skillOpt.getAccountId(), skillOpt.getBiotechCategories(), skillOpt.getSkillCategories()));
+                    .insertSkillOpt(new SkillOpt(skillOpt.getTitle(), skillOpt.getOrganizer(), skillOpt.getDescription(), skillOpt.getStartDate(), skillOpt.getEndDate(), skillOpt.getWebsite(), skillOpt.getCountries(), skillOpt.getAccountId(), skillOpt.getBiotechCategories(), skillOpt.getSkillCategories()));
             return new ResponseEntity<>(_skillOpt, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -61,17 +63,21 @@ public class SkillOptController {
     public ResponseEntity<Boolean> deleteSkillOpt(@PathVariable("id") Integer id) {
         try {
             skillOptService.deleteSkillOptById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateSkillOptWithDetails(@PathVariable Integer id, @RequestBody SkillOpt request) {
-        skillOptService.updateSkillOpt(id,request );
+    public ResponseEntity<?> updateSkillOpt(@PathVariable Integer id, @RequestBody SkillOpt request) {
+        try {
+            skillOptService.updateSkillOpt(id, request);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
 
-        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/by-biotech-category/{biotechCategoryName}")
@@ -94,6 +100,17 @@ public class SkillOptController {
         return new ResponseEntity<>(skillOpts, HttpStatus.OK);
     }
 
+    @GetMapping("/by-country/{countryName}")
+    public ResponseEntity<List<SkillOpt>> getSkillOptByCountry(@PathVariable("countryName") ECountry countryName) {
+        List<SkillOpt> skillOpts = skillOptService.selectSkillOptByCountry(countryName);
+
+        if (skillOpts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(skillOpts, HttpStatus.OK);
+    }
+
+
     @GetMapping("/by-title/{title}")
     public ResponseEntity<SkillOpt> getSkillOptByTitle(@PathVariable String title) {
         Optional<SkillOpt> skillOpt = skillOptService.selectSkillOptByTitle(title);
@@ -101,7 +118,7 @@ public class SkillOptController {
         if (skillOpt.isPresent()) {
             return new ResponseEntity<>(skillOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(skillOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -112,7 +129,7 @@ public class SkillOptController {
         if (skillOpt.isPresent()) {
             return new ResponseEntity<>(skillOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(skillOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -123,7 +140,7 @@ public class SkillOptController {
         if (skillOpt.isPresent()) {
             return new ResponseEntity<>(skillOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(skillOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -134,7 +151,7 @@ public class SkillOptController {
         if (skillOpt.isPresent()) {
             return new ResponseEntity<>(skillOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(skillOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 }

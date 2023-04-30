@@ -6,6 +6,7 @@ import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.repositories.content.StartupOptRepository;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import cz.utb.fai.howtodobiotech.utils.enums.ESupportCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,21 +24,22 @@ public class StartupOptService {
         this.startupOptRepository = startupOptRepository;
     }
 
-    public Optional<StartupOpt> getStartupOptById(Integer id) {
+    public Optional<StartupOpt> selectStartupOptById(Integer id) {
         return startupOptRepository.findById(id);
     }
 
-    public List<StartupOpt> getAllStartupOpts() {
+    public List<StartupOpt> selectAllStartupOpts() {
         List<StartupOpt> startupOpts = new ArrayList<StartupOpt>();
         startupOptRepository.findAll().forEach(startupOpts::add);
 
         return startupOpts;
     }
 
-    public StartupOpt addSStartupOpt(StartupOpt startupOpt) {
+    public StartupOpt insertStartupOpt(StartupOpt startupOpt) {
         return startupOptRepository.save(startupOpt);
 
     }
+
     @Transactional
     public void updateStartupOpt(Integer id, StartupOpt startupOptDto) {
         StartupOpt startupOpt = startupOptRepository.findById(id)
@@ -72,6 +74,10 @@ public class StartupOptService {
 
     public List<StartupOpt> selectStartupOptBySupportCategory(ESupportCategory supportCategory) {
         return startupOptRepository.findBySupportCategoryName(supportCategory);
+    }
+
+    public List<StartupOpt> selectInnovationByCountry(ECountry countryName) {
+        return startupOptRepository.findByCountryName(countryName);
     }
 
     public Optional<StartupOpt> selectStartupOptByTitle(String title) {

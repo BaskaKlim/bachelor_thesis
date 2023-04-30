@@ -93,7 +93,7 @@ public class SkillOptControllerTest {
 */
     @Test
     void createSkillOpt_ShouldReturnInternalServerError() {
-        when(skillOptService.addSkillOpt(skillOpt)).thenThrow(new RuntimeException());
+        when(skillOptService.insertSkillOpt(skillOpt)).thenThrow(new RuntimeException());
         ResponseEntity<SkillOpt> responseEntity = skillOptController.createSkillOpt(skillOpt);
         Assertions.assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
         Assertions.assertNull(responseEntity.getBody());

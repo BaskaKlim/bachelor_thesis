@@ -1,13 +1,10 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
-import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
-import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.services.content.StartupOptService;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
-import cz.utb.fai.howtodobiotech.utils.enums.ESkillCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import cz.utb.fai.howtodobiotech.utils.enums.ESupportCategory;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -23,12 +20,16 @@ import java.util.Optional;
 @RestController
 public class StartupOptController {
 
-    @Autowired
+    final
     StartupOptService startupOptService;
 
+    public StartupOptController(StartupOptService startupOptService) {
+        this.startupOptService = startupOptService;
+    }
+
     @GetMapping("/{id}")
-    public ResponseEntity<StartupOpt> selectStartupOptById(@PathVariable("id") Integer id) {
-        Optional<StartupOpt> startupOptData = startupOptService.getStartupOptById(id);
+    public ResponseEntity<StartupOpt> getStartupOptById(@PathVariable("id") Integer id) {
+        Optional<StartupOpt> startupOptData = startupOptService.selectStartupOptById(id);
 
         if (startupOptData.isPresent()) {
             return new ResponseEntity<>(startupOptData.get(), HttpStatus.OK);
@@ -42,7 +43,7 @@ public class StartupOptController {
         try {
             List<StartupOpt> startupOpts = new ArrayList<>();
 
-            startupOptService.getAllStartupOpts().forEach(startupOpts::add);
+            startupOptService.selectAllStartupOpts().forEach(startupOpts::add);
             if (startupOpts.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -57,7 +58,7 @@ public class StartupOptController {
     public ResponseEntity<StartupOpt> createStartupOpt(@RequestBody StartupOpt startupOpt) {
         try {
             StartupOpt _startupOpt = startupOptService
-                    .addSStartupOpt(new StartupOpt(startupOpt.getTitle(), startupOpt.getProvider(), startupOpt.getDescription(), startupOpt.getStartDate(), startupOpt.getEndDate(), startupOpt.getWebsite(), startupOpt.getAccountId(),startupOpt.getCountries(),startupOpt.getCategories(), startupOpt.getSupportCategories()));
+                    .insertStartupOpt(new StartupOpt(startupOpt.getTitle(), startupOpt.getProvider(), startupOpt.getDescription(), startupOpt.getStartDate(), startupOpt.getEndDate(), startupOpt.getWebsite(), startupOpt.getAccountId(), startupOpt.getCountries(), startupOpt.getCategories(), startupOpt.getSupportCategories()));
             return new ResponseEntity<>(_startupOpt, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -68,7 +69,7 @@ public class StartupOptController {
     public ResponseEntity<Boolean> deleteStartupOpt(@PathVariable("id") Integer id) {
         try {
             startupOptService.deleteStartupOptById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -76,9 +77,12 @@ public class StartupOptController {
 
     @PutMapping("/{id}")
     public ResponseEntity<?> updateStartupOpt(@PathVariable Integer id, @RequestBody StartupOpt request) {
-       startupOptService.updateStartupOpt(id,request );
-
-        return ResponseEntity.ok().build();
+        try {
+            startupOptService.updateStartupOpt(id, request);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
     }
 
     @GetMapping("/by-biotech-category/{biotechCategoryName}")
@@ -101,6 +105,16 @@ public class StartupOptController {
         return new ResponseEntity<>(startupSupportCategories, HttpStatus.OK);
     }
 
+    @GetMapping("/by-country/{countryName}")
+    public ResponseEntity<List<StartupOpt>> getInnovationByCountry(@PathVariable("countryName") ECountry countryName) {
+        List<StartupOpt> innovations = startupOptService.selectInnovationByCountry(countryName);
+
+        if (innovations.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(innovations, HttpStatus.OK);
+    }
+
     @GetMapping("/by-title/{title}")
     public ResponseEntity<StartupOpt> getStartupOptByTitle(@PathVariable String title) {
         Optional<StartupOpt> startupOpt = startupOptService.selectStartupOptByTitle(title);
@@ -108,7 +122,7 @@ public class StartupOptController {
         if (startupOpt.isPresent()) {
             return new ResponseEntity<>(startupOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(startupOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -119,7 +133,7 @@ public class StartupOptController {
         if (startupOpt.isPresent()) {
             return new ResponseEntity<>(startupOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(startupOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -130,7 +144,7 @@ public class StartupOptController {
         if (startupOpt.isPresent()) {
             return new ResponseEntity<>(startupOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(startupOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 
@@ -141,7 +155,7 @@ public class StartupOptController {
         if (startupOpt.isPresent()) {
             return new ResponseEntity<>(startupOpt.get(), HttpStatus.OK);
         } else {
-            return new ResponseEntity<>(startupOpt.get(), HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
 

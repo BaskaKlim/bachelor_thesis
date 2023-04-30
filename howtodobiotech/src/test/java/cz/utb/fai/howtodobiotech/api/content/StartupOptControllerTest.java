@@ -1,6 +1,5 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
-import java.time.Instant;
 import java.util.*;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
@@ -69,7 +68,7 @@ public class StartupOptControllerTest {
 
     @Test
     void testGetAllStartupOpts() {
-        when(startupOptService.getAllStartupOpts()).thenReturn(startupOptList);
+        when(startupOptService.selectAllStartupOpts()).thenReturn(startupOptList);
 
         // Call the controller's getAllStartupOpts() method
         ResponseEntity<List<StartupOpt>> response = startupOptController.getAllStartupOpts();
@@ -86,10 +85,10 @@ public class StartupOptControllerTest {
     @Test
     void testGetStartupOptById() {
         // Create a startup opportunity to return from the service
-        when(startupOptService.getStartupOptById(1)).thenReturn(Optional.of(startupOpt));
+        when(startupOptService.selectStartupOptById(1)).thenReturn(Optional.of(startupOpt));
 
         // Call the controller's getStartupOptById() method
-        ResponseEntity<StartupOpt> response = startupOptController.selectStartupOptById(1);
+        ResponseEntity<StartupOpt> response = startupOptController.getStartupOptById(1);
 
         // Verify that the response contains the startup opportunity
         assertNotNull(response);
@@ -101,7 +100,7 @@ public class StartupOptControllerTest {
 
     @Test
     public void testCreateStartupOpt() {
-        when(startupOptService.addSStartupOpt(any(StartupOpt.class))).thenReturn(startupOpt);
+        when(startupOptService.insertStartupOpt(any(StartupOpt.class))).thenReturn(startupOpt);
         ResponseEntity<StartupOpt> responseEntity = startupOptController.createStartupOpt(startupOpt);
         assertEquals(HttpStatus.CREATED, responseEntity.getStatusCode());
         StartupOpt result = responseEntity.getBody();

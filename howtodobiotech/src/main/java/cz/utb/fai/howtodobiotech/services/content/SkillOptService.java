@@ -4,11 +4,10 @@ package cz.utb.fai.howtodobiotech.services.content;
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
 import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.SkillCategory;
-import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
-import cz.utb.fai.howtodobiotech.repositories.categories.SkillCategoryRepository;
 import cz.utb.fai.howtodobiotech.repositories.content.SkillOptRepository;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import cz.utb.fai.howtodobiotech.utils.enums.ESkillCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,7 +15,6 @@ import org.springframework.transaction.annotation.Transactional;
 import org.webjars.NotFoundException;
 
 import java.util.*;
-import java.util.stream.Collectors;
 
 @Service
 public class SkillOptService {
@@ -33,13 +31,13 @@ public class SkillOptService {
     }
 
     public List<SkillOpt> selectAllSkillOpts() {
-        List<SkillOpt> skillOptList = new ArrayList<SkillOpt>();
+        List<SkillOpt> skillOptList = new ArrayList<>();
         skillOptRepository.findAllWithDetails().forEach(skillOptList::add);
 
         return skillOptList;
     }
 
-    public SkillOpt addSkillOpt(SkillOpt skillOpt) {
+    public SkillOpt insertSkillOpt(SkillOpt skillOpt) {
         return skillOptRepository.save(skillOpt);
     }
 
@@ -76,6 +74,10 @@ public class SkillOptService {
     public List<SkillOpt> selectSkillOptBySkillCategory(ESkillCategory skillCategoryName) {
         return skillOptRepository.findBySkillCategoryName(skillCategoryName);
 
+    }
+
+    public List<SkillOpt> selectSkillOptByCountry(ECountry countryName) {
+        return skillOptRepository.findByCountryName(countryName);
     }
 
     public Optional<SkillOpt> selectSkillOptByTitle(String title) {

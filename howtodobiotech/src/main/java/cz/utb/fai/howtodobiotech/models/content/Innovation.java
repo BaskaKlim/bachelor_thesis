@@ -37,12 +37,12 @@ public class Innovation {
     private String website;
 
 
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "Innovation_Countries",
             joinColumns = @JoinColumn(name = "Innovation_id"),
             inverseJoinColumns = @JoinColumn(name = "Country_Id"))
     private Set<Country> countries ;
-    @ManyToMany()
+    @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "Innovation_BiotechCategories",
             joinColumns = @JoinColumn(name = "Innovation_id"),
             inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))

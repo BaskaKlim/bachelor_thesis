@@ -2,6 +2,7 @@ package cz.utb.fai.howtodobiotech.repositories.content;
 
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import cz.utb.fai.howtodobiotech.utils.enums.ESupportCategory;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,6 +23,9 @@ public interface StartupOptRepository extends JpaRepository<StartupOpt, Integer>
 
     @Query("SELECT s FROM StartupOpt s JOIN s.supportCategories sc WHERE sc.name = :supportCategoryName")
     List<StartupOpt> findBySupportCategoryName(@Param("supportCategoryName") ESupportCategory supportCategoryName);
+
+    @Query("SELECT s FROM StartupOpt s JOIN s.countries sc WHERE sc.name = :countryName")
+    List<StartupOpt> findByCountryName(@Param("countryName") ECountry countryName);
 
     Optional<StartupOpt> findByTitle(String title);
 
