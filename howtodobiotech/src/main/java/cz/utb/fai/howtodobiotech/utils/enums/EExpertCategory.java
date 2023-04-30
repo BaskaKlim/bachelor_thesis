@@ -10,7 +10,8 @@ public enum EExpertCategory {
     LEGAL,
     MVP_PRTOTOTYPING,
     BUSINESS_VALIDATION,
-    PRODUCT_DESING
+    PRODUCT_DESING,
+    CLINICAL_TRIAL
 
 
 }

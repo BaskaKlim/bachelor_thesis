@@ -1,7 +1,11 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
 import cz.utb.fai.howtodobiotech.models.content.BiotechExpert;
+import cz.utb.fai.howtodobiotech.models.content.Innovation;
 import cz.utb.fai.howtodobiotech.services.content.BiotechExpertService;
+import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
+import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
+import cz.utb.fai.howtodobiotech.utils.enums.EExpertCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -20,8 +24,8 @@ public class BiotechExpertController {
     BiotechExpertService biotechExpertService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<BiotechExpert> selectBiotechExpertById(@PathVariable("id") Integer id) {
-        Optional<BiotechExpert> expertData = biotechExpertService.getBiotechExpertById(id);
+    public ResponseEntity<BiotechExpert> getBiotechExpertById(@PathVariable("id") Integer id) {
+        Optional<BiotechExpert> expertData = biotechExpertService.selectBiotechExpertById(id);
 
         if (expertData.isPresent()) {
             return new ResponseEntity<>(expertData.get(), HttpStatus.OK);
@@ -35,7 +39,7 @@ public class BiotechExpertController {
         try {
             List<BiotechExpert> experts = new ArrayList<>();
 
-            biotechExpertService.getAllBiotechExperts().forEach(experts::add);
+            biotechExpertService.selectAllBiotechExperts().forEach(experts::add);
             if (experts.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -46,12 +50,11 @@ public class BiotechExpertController {
         }
     }
 
-
     @PostMapping()
     public ResponseEntity<BiotechExpert> createBiotechExpert(@RequestBody BiotechExpert expert) {
         try {
             BiotechExpert _expert = biotechExpertService
-                    .addBiotechExpert(new BiotechExpert(expert.getFirstName(), expert.getLastName(), expert.getJobPosition(), expert.getEmail(), expert.getLinkedinUrl(), expert.getBackgroundDescription(),expert.getCountries(), expert.getExpertise()));
+                    .insertBiotechExpert(new BiotechExpert(expert.getFirstName(), expert.getLastName(), expert.getJobPosition(), expert.getEmail(), expert.getLinkedinUrl(), expert.getBackgroundDescription(), expert.getCountries(), expert.getExpertises()));
             return new ResponseEntity<>(_expert, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -62,7 +65,7 @@ public class BiotechExpertController {
     public ResponseEntity<Boolean> deleteBiotechExpert(@PathVariable("id") Integer id) {
         try {
             biotechExpertService.deleteBiotechExpertById(id);
-            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            return new ResponseEntity<>(HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
@@ -70,23 +73,44 @@ public class BiotechExpertController {
 
     @PutMapping("/{id}")
     public ResponseEntity<BiotechExpert> updateContact(@PathVariable("id") Integer id, @RequestBody BiotechExpert expert) {
-        Optional<BiotechExpert> expertData = biotechExpertService.getBiotechExpertById(id);
-        if (expertData.isPresent()) {
-            BiotechExpert _expert = expertData.get();
-            _expert.setFirstName(expert.getFirstName());
-            _expert.setLastName(expert.getLastName());
-            _expert.setJobPosition(expert.getJobPosition());
-            _expert.setEmail(expert.getEmail());
-            _expert.setBackgroundDescription(expert.getJobPosition());
-            _expert.setBackgroundDescription(expert.getBackgroundDescription());
-            _expert.setCountries(expert.getCountries());
-            _expert.setExpertise(expert.getExpertise());
+        try {
+            biotechExpertService.updateBiotechExpert(id, expert);
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
+        }
+    }
 
+    @GetMapping("/by-expertise/{expertiseName}")
+    public ResponseEntity<List<BiotechExpert>> getBiotechExpertByExpertise(@PathVariable("expertiseName") EExpertCategory expertiseName) {
+        List<BiotechExpert> biotechExperts = biotechExpertService.selectBiotechExpertByExpertise(expertiseName);
 
-            return new ResponseEntity<>(biotechExpertService.updateBiotechExpert(_expert), HttpStatus.OK);
+        if (biotechExperts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(biotechExperts, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-country/{countryName}")
+    public ResponseEntity<List<BiotechExpert>> getBiotechExpertByCountry(@PathVariable("countryName") ECountry countryName) {
+        List<BiotechExpert> biotechExperts = biotechExpertService.selectBiotechExpertByCountry(countryName);
+
+        if (biotechExperts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(biotechExperts, HttpStatus.OK);
+    }
+
+    @GetMapping("/by-last-name/{lastName}")
+    public ResponseEntity<BiotechExpert> getBiotechExpertOptByTitle(@PathVariable String lastName) {
+        Optional<BiotechExpert> biotechExpert = biotechExpertService.selectBiotechExpertByLastName(lastName);
+
+        if (biotechExpert.isPresent()) {
+            return new ResponseEntity<>(biotechExpert.get(), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
     }
+
 
 }

@@ -6,9 +6,11 @@ import java.util.Optional;
 import java.util.Set;
 
 import cz.utb.fai.howtodobiotech.models.categories.Country;
+import cz.utb.fai.howtodobiotech.models.categories.ExpertCategory;
 import cz.utb.fai.howtodobiotech.models.content.BiotechExpert;
 import cz.utb.fai.howtodobiotech.services.content.BiotechExpertService;
 import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
+import cz.utb.fai.howtodobiotech.utils.enums.EExpertCategory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -36,8 +38,8 @@ class BiotechExpertControllerTest {
     @BeforeEach
     void setUp() {
         expertList = new ArrayList<>();
-        expertList.add(new BiotechExpert(1, "John", "Doe", "Job 1", "john.doe@test.com", "www.linkedin.com", "Description 1", (Set<Country>) new Country(9,ECountry.SLOVAKIA),null));
-        expertList.add(new BiotechExpert(2, "Jane", "Doe", "Job 2", "jane.doe@test.com", "www.linkedin.com", "Description 2", (Set<Country>) new Country(8,ECountry.POLAND),  null));
+        expertList.add(new BiotechExpert(1, "John", "Doe", "Job 1", "john.doe@test.com", "www.linkedin.com", "Description 1", (Set<Country>) new Country(9,ECountry.SLOVAKIA), (Set<ExpertCategory>) new ExpertCategory(5,EExpertCategory.BIOINFORMATICS)));
+        expertList.add(new BiotechExpert(2, "Jane", "Doe", "Job 2", "jane.doe@test.com", "www.linkedin.com", "Description 2", (Set<Country>) new Country(8,ECountry.POLAND), (Set<ExpertCategory>) new ExpertCategory(4,EExpertCategory.BIOLOGY)));
     }
 
     @Test
@@ -46,10 +48,10 @@ class BiotechExpertControllerTest {
         // Arrange
         int id = 1;
         BiotechExpert expert = expertList.get(0);
-        when(biotechExpertService.getBiotechExpertById(id)).thenReturn(Optional.of(expert));
+        when(biotechExpertService.selectBiotechExpertById(id)).thenReturn(Optional.of(expert));
 
         // Act
-        ResponseEntity<BiotechExpert> response = biotechExpertController.selectBiotechExpertById(id);
+        ResponseEntity<BiotechExpert> response = biotechExpertController.getBiotechExpertById(id);
 
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -61,10 +63,10 @@ class BiotechExpertControllerTest {
     void testSelectBiotechExpertById_NotFound() {
         // Arrange
         int id = 3;
-        when(biotechExpertService.getBiotechExpertById(id)).thenReturn(Optional.empty());
+        when(biotechExpertService.selectBiotechExpertById(id)).thenReturn(Optional.empty());
 
         // Act
-        ResponseEntity<BiotechExpert> response = biotechExpertController.selectBiotechExpertById(id);
+        ResponseEntity<BiotechExpert> response = biotechExpertController.getBiotechExpertById(id);
 
         // Assert
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
@@ -74,7 +76,7 @@ class BiotechExpertControllerTest {
     @DisplayName("Test getAllBiotechExperts - success")
     void testGetAllBiotechExperts_Success() {
         // Arrange
-        when(biotechExpertService.getAllBiotechExperts()).thenReturn(expertList);
+        when(biotechExpertService.selectAllBiotechExperts()).thenReturn(expertList);
 
         // Act
         ResponseEntity<List<BiotechExpert>> response = biotechExpertController.getAllBiotechExperts();
@@ -88,7 +90,7 @@ class BiotechExpertControllerTest {
     @DisplayName("Test getAllBiotechExperts - no content")
     void testGetAllBiotechExperts_NoContent() {
         // Arrange
-        when(biotechExpertService.getAllBiotechExperts()).thenReturn(new ArrayList<BiotechExpert>());
+        when(biotechExpertService.selectAllBiotechExperts()).thenReturn(new ArrayList<BiotechExpert>());
 
         // Act
         ResponseEntity<List<BiotechExpert>> response = biotechExpertController.getAllBiotechExperts();
