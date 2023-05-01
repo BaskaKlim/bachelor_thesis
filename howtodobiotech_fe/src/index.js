@@ -1,19 +1,14 @@
 import React from 'react';
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";import './index.css';
+import ReactDOM from 'react-dom';
 
 import App from './App';
-import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import { Provider } from 'react-redux';
+import store from './store';
 
-
-const container = document.getElementById("root");
-const root = createRoot(container);
-
-root.render(
-  <BrowserRouter>
+ReactDOM.render(
+  <Provider store={store}>
     <App />
-  </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
 );
-
-reportWebVitals();
