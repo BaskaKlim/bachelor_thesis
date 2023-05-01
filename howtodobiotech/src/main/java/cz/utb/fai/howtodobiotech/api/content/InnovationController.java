@@ -35,6 +35,7 @@ public class InnovationController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @GetMapping()
     public ResponseEntity<List<Innovation>> getAllInnovations() {
         try {
