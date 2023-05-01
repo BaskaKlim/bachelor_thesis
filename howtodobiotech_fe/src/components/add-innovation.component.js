@@ -2,11 +2,40 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { createInnovation } from "../actions/innovations";
 
+const categoryOptions = [
+  { id: 1, name: 'MEDICINE' },
+  { id: 2, name: 'BIOINFORMATICS' },
+  { id: 3, name: 'ENERGY' },
+  { id: 4, name: 'FOOD' },
+  { id: 5, name: 'ENVIRONMENTAL' },
+  { id: 6, name: 'AGRICULTURE' },
+  { id: 7, name: 'MARINE' },
+];
+
+const countryOptions = [
+  { id: 1, name: 'ALBANIA' },
+  { id: 2, name: 'CROATIA' },
+  { id: 3, name: 'CZECHIA' },
+  { id: 4, name: 'ESTONIA' },
+  { id: 5, name: 'HUNGARY' },
+  { id: 6, name: 'LATVIA' },
+  { id: 7, name: 'LITHUANIA' },
+  { id: 8, name: 'POLAND' },
+  { id: 9, name: 'SLOVAKIA' },
+  { id: 10, name: 'SLOVENIA' },
+  { id: 11, name: 'UKRAINE' },
+  { id: 12, name: 'CEE' },
+];
+
+
 class AddInnovation extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeWebsite = this.onChangeWebsite.bind(this);
+    this.onChangeCountries = this.onChangeCountries.bind(this);
+    this.onChangeCategories = this.onChangeCategories.bind(this);
     this.saveInnovation = this.saveInnovation.bind(this);
     this.newInnovation = this.newInnovation.bind(this);
 
@@ -14,9 +43,12 @@ class AddInnovation extends Component {
       id: null,
       title: "",
       description: "",
-
+      website: "",
+      countries: new Set(),
+      categories: new Set(),
       submitted: false,
     };
+    
   }
 
   onChangeTitle(e) {
@@ -31,41 +63,75 @@ class AddInnovation extends Component {
     });
   }
 
-  saveInnovation() {
-    const { title, description } = this.state;
+  onChangeWebsite(e) {
+    this.setState({
+      website: e.target.value,
+    });
+  }
+
+  onChangeCountries = (e) => {
+    const selectedCountryIds = Array.from(e.target.selectedOptions, option => parseInt(option.value));
+    const countries = new Set(selectedCountryIds.map(id => countryOptions.find(country => country.id === id)));
+    this.setState({
+      countries: countries,
+    });
+  };
+
+  onChangeCategories = (e) => {
+    const selectedCategoryIds = Array.from(e.target.selectedOptions, option => parseInt(option.value));
+    const categories = new Set(selectedCategoryIds.map(id => categoryOptions.find(category => category.id === id)));
+    this.setState({
+      categories: categories,
+    });
+  };
+
+
+  saveInnovation = () => {
+    const { title, description, website, countries, categories } = this.state;
 
     this.props
-      .createInnovation(title, description)
-      .then((data) => {
+      .createInnovation(
+        title,
+        description,
+        website,
+        Array.from(countries),
+        Array.from(categories)
+      )
+      .then(() => {
         this.setState({
-          id: data.id,
-          title: data.title,
-          description: data.description,
-    
-
           submitted: true,
         });
-        console.log(data);
       })
       .catch((e) => {
         console.log(e);
       });
-  }
+  };
 
-  newInnovation() {
+
+  newInnovation = () => {
     this.setState({
-      id: null,
       title: "",
       description: "",
-
+      website: "",
+      countries: new Set(),
+      categories: new Set(),
       submitted: false,
     });
-  }
+  };
 
   render() {
+    const {
+      title,
+      description,
+      website,
+      countries,
+      categories,
+      submitted,
+    } = this.state;
+  
     return (
       <div className="submit-form">
-        {this.state.submitted ? (
+        {submitted ? (
           <div>
             <h4>You submitted successfully!</h4>
             <button className="btn btn-success" onClick={this.newInnovation}>
@@ -81,25 +147,73 @@ class AddInnovation extends Component {
                 className="form-control"
                 id="title"
                 required
-                value={this.state.title}
+                value={title}
                 onChange={this.onChangeTitle}
                 name="title"
               />
             </div>
-
+  
             <div className="form-group">
               <label htmlFor="description">Description</label>
-              <input
-                type="text"
+              <textarea
                 className="form-control"
                 id="description"
                 required
-                value={this.state.description}
+                value={description}
                 onChange={this.onChangeDescription}
                 name="description"
               />
             </div>
-
+  
+            <div className="form-group">
+              <label htmlFor="website">Website</label>
+              <input
+                type="text"
+                className="form-control"
+                id="website"
+                required
+                value={website}
+                onChange={this.onChangeWebsite}
+                name="website"
+              />
+            </div>
+  
+            <div className="form-group">
+              <label htmlFor="countries">Countries</label>
+              <select
+                multiple
+                className="form-control"
+                id="countries"
+                value={[...countries].map((country) => country.id)}
+                onChange={this.onChangeCountries}
+                name="countries"
+              >
+                {countryOptions.map((country) => (
+                  <option key={country.id} value={country.id}>
+                    {country.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+  
+            <div className="form-group">
+              <label htmlFor="categories">Categories</label>
+              <select
+                multiple
+                className="form-control"
+                id="categories"
+                value={[...categories].map((category) => category.id)}
+                onChange={this.onChangeCategories}
+                name="categories"
+              >
+                {categoryOptions.map((category) => (
+                  <option key={category.id} value={category.id}>
+                    {category.name}
+                  </option>
+                ))}
+              </select>
+            </div>
+  
             <button onClick={this.saveInnovation} className="btn btn-success">
               Submit
             </button>
@@ -108,6 +222,7 @@ class AddInnovation extends Component {
       </div>
     );
   }
+  
 }
 
 export default connect(null, { createInnovation })(AddInnovation);

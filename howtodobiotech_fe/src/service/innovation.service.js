@@ -34,6 +34,5 @@ class InnovationDataService {
     return http.get(`/by-title/${title}`);
   }
 }
-const innovationDataServiceInstance = new InnovationDataService();
-
-export default innovationDataServiceInstance;
+const instance = new InnovationDataService();
+export default instance;

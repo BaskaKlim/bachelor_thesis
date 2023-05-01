@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { retrieveInnovations, getInnovationByTitle } from "../actions/innovations";
+import { getAllInnovations, getInnovationByTitle } from "../actions/innovations";
 import { Link } from "react-router-dom";
 
 class InnovationsList extends Component {
@@ -18,7 +18,7 @@ class InnovationsList extends Component {
   }
 
   componentDidMount() {
-    this.props.retrieveInnovations();
+    this.props.getAllInnovations();
   }
 
   onChangeSearchTitle(e) {
@@ -61,7 +61,7 @@ class InnovationsList extends Component {
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.getInnovationOptByTitle}
+                onClick={this.getInnovationtByTitle}
               > Search
               </button>
             </div>
@@ -80,7 +80,7 @@ class InnovationsList extends Component {
                   }
                   key={index}
                 >
-                  {innovations.title}
+                  {innovation.title}
                 </li>
               ))}
           </ul>
@@ -134,6 +134,6 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-retrieveInnovations,
+getAllInnovations,
 getInnovationByTitle,
 })(InnovationsList);

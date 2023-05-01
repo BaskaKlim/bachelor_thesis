@@ -22,7 +22,7 @@ import {
     }
   };
   
-  export const retrieveInnovations = () => async (dispatch) => {
+  export const getAllInnovations = () => async (dispatch) => {
     try {
       const res = await InnovationDataService.getAllInnovations();
   

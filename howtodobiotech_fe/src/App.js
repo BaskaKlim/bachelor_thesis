@@ -33,10 +33,9 @@ class App extends Component {
 
         <div className="container mt-3">
           <Switch>
-            <Route path="/" element={<InnovationList/>} />
-            <Route path="/innovations" element={<InnovationList/>} />
-            <Route path="/add" element={<AddInnovation/>} />
-            <Route path="/innovations/:id" element={<Innovation/>} />
+            <Route exact path={["/", "/innovations"]} component={InnovationList} />
+            <Route exact path="/add" component={AddInnovation} />
+            <Route path="/innovations/:id" component={Innovation} />
           </Switch>
         </div>
         </Router>
