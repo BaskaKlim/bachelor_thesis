@@ -7,6 +7,8 @@ import './App.css';
 import AddInnovation from "./components/add-innovation.component";
 import Innovation from "./components/innovation.component";
 import InnovationList from "./components/innovations-list.component";
+import List from "./components/list";
+
 
 
 class App extends Component {

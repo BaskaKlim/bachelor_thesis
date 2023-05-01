@@ -23,15 +23,15 @@ class InnovationDataService {
 
 
   getInnovationByBiotechCategory(biotechCategoryName) {
-    return http.get(`/by-biotech-category/${biotechCategoryName}`);
+    return http.get(`/innovations/by-biotech-category/${biotechCategoryName}`);
   }
 
   getInnovationByCountry(countryName) {
-    return http.get(`/by-country/${countryName}`);
+    return http.get(`/innovations/by-country/${countryName}`);
   }
 
   getInnovationOptByTitle(title) {
-    return http.get(`/by-title/${title}`);
+    return http.get(`/innovations/by-title/${title}`);
   }
 }
 const instance = new InnovationDataService();

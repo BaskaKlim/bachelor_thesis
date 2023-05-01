@@ -1,13 +1,21 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllInnovations, getInnovationByTitle } from "../actions/innovations";
+import {
+  getAllInnovations,
+  getInnovationByTitle,
+} from "../actions/innovations";
 import { Link } from "react-router-dom";
+import InnovationDataService from "../service/innovation.service";
+
+
+
 
 class InnovationsList extends Component {
   constructor(props) {
     super(props);
     this.onChangeSearchTitle = this.onChangeSearchTitle.bind(this);
     this.refreshData = this.refreshData.bind(this);
+    this.setActiveInnovation = this.setActiveInnovation.bind(this);
     this.getInnovationByTitle = this.getInnovationByTitle.bind(this);
 
     this.state = {
@@ -18,7 +26,13 @@ class InnovationsList extends Component {
   }
 
   componentDidMount() {
-    this.props.getAllInnovations();
+    InnovationDataService.getAllInnovations()
+      .then((response) => {
+        this.setState({ innovations: response.data });
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   onChangeSearchTitle(e) {
@@ -31,8 +45,15 @@ class InnovationsList extends Component {
 
   refreshData() {
     this.setState({
-        currentInnovation: null,
-        currentIndex: -1,
+      currentInnovation: null,
+      currentIndex: -1,
+    });
+  }
+
+  setActiveInnovation(innovation, index) {
+    this.setState({
+      currentInnovation: innovation,
+      currentIndex: index,
     });
   }
 
@@ -43,8 +64,8 @@ class InnovationsList extends Component {
   }
 
   render() {
+    const { innovations } = this.state;
     const { searchTitle, currentInnovation, currentIndex } = this.state;
-    const { innovations } = this.props;
 
     return (
       <div className="list row">
@@ -61,15 +82,16 @@ class InnovationsList extends Component {
               <button
                 className="btn btn-outline-secondary"
                 type="button"
-                onClick={this.getInnovationtByTitle}
-              > Search
+                onClick={this.getInnovationByTitle}
+              >
+                {" "}
+                Search
               </button>
             </div>
           </div>
         </div>
         <div className="col-md-6">
           <h4>Innovations List</h4>
-
           <ul className="list-group">
             {innovations &&
               innovations.map((innovation, index) => (
@@ -78,13 +100,13 @@ class InnovationsList extends Component {
                     "list-group-item " +
                     (index === currentIndex ? "active" : "")
                   }
+                  onClick={() => this.setActiveInnovation(innovation, index)}
                   key={index}
                 >
                   {innovation.title}
                 </li>
               ))}
           </ul>
-
         </div>
         <div className="col-md-6">
           {currentInnovation ? (
@@ -102,11 +124,7 @@ class InnovationsList extends Component {
                 </label>{" "}
                 {currentInnovation.description}
               </div>
-              <div>
-                <label>
-                  <strong>Status:</strong>
-                </label>{" "}
-              </div>
+            
 
               <Link
                 to={"/innovations/" + currentInnovation.id}
@@ -127,13 +145,11 @@ class InnovationsList extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    innovations: state.innovations,
-  };
-};
 
-export default connect(mapStateToProps, {
-getAllInnovations,
-getInnovationByTitle,
-})(InnovationsList);
+const mapStateToProps = (state) => ({
+  innovations: state.innovations,
+});
+
+export default connect(mapStateToProps, { getAllInnovations, getInnovationByTitle })(
+  InnovationsList
+);

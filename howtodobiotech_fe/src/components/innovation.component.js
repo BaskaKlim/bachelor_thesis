@@ -6,146 +6,98 @@ import InnovationDataService from "../service/innovation.service";
 class Innovation extends Component {
   constructor(props) {
     super(props);
-    this.onChangeTitle = this.onChangeTitle.bind(this);
-    this.onChangeDescription = this.onChangeDescription.bind(this);
-    this.getInnovation = this.getInnovation.bind(this);
-    this.updateStatus = this.updateStatus.bind(this);
-    this.updateContent = this.updateContent.bind(this);
-    this.removeInnovation = this.removeInnovation.bind(this);
 
     this.state = {
-        currentInnovation: {
-        id: null,
-        title: "",
-        description: "",
-      },
-      message: "",
+      innovation: null,
     };
   }
 
   componentDidMount() {
-    this.getInnovation(this.props.match.params.id);
+    this.getInnovationById(this.props.match.params.id);
   }
 
-  onChangeTitle(e) {
-    const title = e.target.value;
-
-    this.setState(function (prevState) {
-      return {
-        currentInnovation: {
-          ...prevState.currentInnovation,
-          title: title,
-        },
-      };
-    });
-  }
-
-  onChangeDescription(e) {
-    const description = e.target.value;
-
-    this.setState((prevState) => ({
-        currentInnovation: {
-        ...prevState.currentInnovation,
-        description: description,
-      },
-    }));
-  }
-
-  getInnovation(id) {
+  getInnovationById(id) {
     InnovationDataService.getInnovationById(id)
       .then((response) => {
-        this.setState({
-          currentInnovation: response.data,
-        });
-        console.log(response.data);
+        this.setState({ innovation: response.data });
       })
-      .catch((e) => {
-        console.log(e);
+      .catch((error) => {
+        console.log(error);
       });
   }
 
-
-
-  updateContent() {
+  updateInnovation = () => {
+    const { innovation } = this.state;
     this.props
-      .updateInnovation(this.state.currentInnovation.id, this.state.currentInnovation)
-      .then((reponse) => {
-        console.log(reponse);
-        
-        this.setState({ message: "The innovation was updated successfully!" });
-      })
-      .catch((e) => {
-        console.log(e);
-      });
-  }
-
-  removeInnovation() {
-    this.props
-      .deleteInnovation(this.state.currentInnovation.id)
+      .updateInnovation(innovation.id, innovation)
       .then(() => {
         this.props.history.push("/innovations");
       })
       .catch((e) => {
         console.log(e);
       });
-  }
+  };
+
+  deleteInnovation = () => {
+    const { innovation } = this.state;
+    this.props
+      .deleteInnovation(innovation.id)
+      .then(() => {
+        this.props.history.push("/innovations");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
   render() {
-    const { currentInnovation } = this.state;
+    const { innovation } = this.state;
 
     return (
       <div>
-        {currentInnovation ? (
-          <div className="edit-form">
+        {innovation ? (
+          <div>
             <h4>Innovation</h4>
-            <form>
-              <div className="form-group">
-                <label htmlFor="title">Title</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="title"
-                  value={currentInnovation.title}
-                  onChange={this.onChangeTitle}
-                />
-              </div>
-              <div className="form-group">
-                <label htmlFor="description">Description</label>
-                <input
-                  type="text"
-                  className="form-control"
-                  id="description"
-                  value={currentInnovation.description}
-                  onChange={this.onChangeDescription}
-                />
-              </div>
-            </form>
+            <p>
+              <strong>Title:</strong> {innovation.title}
+            </p>
+            <p>
+              <strong>Description:</strong> {innovation.description}
+            </p>
+            <p>
+              <strong>Website:</strong> {innovation.website}
+            </p>
+            <p>
+              <strong>Countries:</strong>{" "}
+              {innovation.countries.map((country) => country.name).join(", ")}
+            </p>
+            <p>
+              <strong>Categories:</strong>{" "}
+              {innovation.categories
+                .map((category) => category.name)
+                .join(", ")}
+            </p>
 
-            <button
-              className="badge badge-danger mr-2"
-              onClick={this.removeInnovation}
-            >
-              Delete
-            </button>
-
-            <button
-              type="submit"
-              className="badge badge-success"
-              onClick={this.updateContent}
-            >
+            <button onClick={this.updateInnovation} className="btn btn-warning">
               Update
             </button>
-            <p>{this.state.message}</p>
+            <button onClick={this.deleteInnovation} className="btn btn-danger">
+              Delete
+            </button>
           </div>
         ) : (
-          <div>
-            <br />
-            <p>Please click on a Innovation...</p>
-          </div>
+          <div>Loading...</div>
         )}
       </div>
     );
   }
 }
 
-export default connect(null, { updateInnovation, deleteInnovation })(Innovation);
+const mapStateToProps = (state) => ({
+  innovations: state.innovations,
+});
+
+
+export default connect(mapStateToProps, { updateInnovation, deleteInnovation })(
+  Innovation
+);
