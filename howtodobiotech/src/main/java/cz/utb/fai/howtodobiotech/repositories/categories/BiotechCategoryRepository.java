@@ -9,4 +9,6 @@ import java.util.Optional;
 @Repository
 public interface BiotechCategoryRepository extends JpaRepository<BiotechCategory,Integer> {
     Optional<BiotechCategory> findByName(String name);
+
+    Optional<BiotechCategory> findById(Integer id);
 }

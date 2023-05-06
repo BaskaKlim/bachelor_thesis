@@ -4,10 +4,9 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import './App.css';
 
 
-import AddInnovation from "./components/add-innovation.component";
-import Innovation from "./components/innovation.component";
-import InnovationList from "./components/innovations-list.component";
-import List from "./components/list";
+import AddInnovation from "./components/innovations/templates/add-innovation.component";
+import Innovation from "./components/innovations/organisms/innovation.component";
+import List from "./components/innovations/templates/innovations -list.component";
 
 
 
@@ -36,7 +35,7 @@ class App extends Component {
         <div className="container mt-3">
     
           <Switch>
-            <Route exact path={["/", "/innovations"]} component={InnovationList} />
+            <Route exact path={["/", "/innovations"]} component={List} />
             <Route exact path="/add" component={AddInnovation} />
             <Route path="/innovations/:id" component={Innovation} />
           </Switch>
