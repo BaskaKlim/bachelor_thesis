@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { updateInnovation, deleteInnovation } from "../../../actions/innovations";
 import InnovationDataService from "../../../service/innovation.service";
 
+
 class Innovation extends Component {
   constructor(props) {
     super(props);
@@ -50,11 +51,23 @@ class Innovation extends Component {
       });
   };
 
+  handleFilter = async (filteredInnovations) => {
+    if (filteredInnovations.length > 0) {
+      const title = filteredInnovations[0].title;
+      const response = await InnovationDataService.getInnovationByTitle(title);
+      this.setState({ innovations: response.data });
+    } else {
+      this.setState({ innovations: this.props.innovations });
+    }
+  };
+
+
   render() {
     const { innovation } = this.state;
 
     return (
       <div>
+       
         {innovation ? (
           <div>
             <h4>Innovation</h4>

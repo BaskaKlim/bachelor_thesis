@@ -30,7 +30,7 @@ class InnovationDataService {
     return http.get(`/innovations/by-country/${countryName}`);
   }
 
-  getInnovationOptByTitle(title) {
+  getInnovationByTitle(title) {
     return http.get(`/innovations/by-title/${title}`);
   }
 
