@@ -33,6 +33,14 @@ class InnovationDataService {
   getInnovationOptByTitle(title) {
     return http.get(`/innovations/by-title/${title}`);
   }
+
+   getAllCategories() {
+    return http.get("/categories");
+  }
+  getAllCountries() {
+    return http.get('/countries');
+  }
+
 }
 const instance = new InnovationDataService();
 export default instance;
