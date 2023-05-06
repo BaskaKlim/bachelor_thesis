@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import InnovationsList from '../templates/innovations -list.component';
-import InnovationDataService from '../../../service/innovation.service'; // import the service
+import InnovationDataService from '../../../service/innovation.service'; 
+import CarouselBanner from '../molecules/Carousel.banner'
 
-class InnovationPage extends Component {
+
+class NetworkPage extends Component {
   constructor(props) {
     super(props);
 
@@ -34,11 +36,11 @@ class InnovationPage extends Component {
 
     return (
       <div>
-       
+        <CarouselBanner/>
         <InnovationsList filteredInnovations={filteredInnovations} />
       </div>
     );
   }
 }
 
-export default InnovationPage;
+export default NetworkPage;

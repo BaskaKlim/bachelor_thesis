@@ -39,3 +39,43 @@
     flex: 0 0 calc(100% - 40px);
   }
 }
+
+.category-button {
+  background-color: #f1f1f1;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 8px;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+.category-button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.all-categories-button {
+  background-color: #888;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 8px;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+.all-categories-button:hover {
+  background-color: #666;
+}
+

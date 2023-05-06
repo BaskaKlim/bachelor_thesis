@@ -6,15 +6,14 @@ import Card from '../atoms/card';
 import styles from './InnovationsList.module.css'; // Import the new CSS module
 
 const categoryOptions = [
-  { id: 1, name: 'MEDICINE', imageUrl: '/assets/medicine.jpg' },
-  { id: 2, name: 'BIOINFORMATICS', imageUrl: '/assets/bioinformatics.jpg' },
-  { id: 3, name: 'ENERGY', imageUrl: '/assets/energy.jpg' },
-  { id: 4, name: 'FOOD', imageUrl: '/assets/food.jpg' },
-  { id: 5, name: 'ENVIRONMENTAL', imageUrl: '/assets/environmental.jpg' },
-  { id: 6, name: 'AGRICULTURE', imageUrl: '/assets/agriculture.jpg' },
-  { id: 7, name: 'MARINE', imageUrl: '/assets/marine.jpg' },
+  { id: 1, name: 'MEDICINE', imageUrl: '/assets/medicine.jpg', color: '#fa6c61' },
+  { id: 2, name: 'BIOINFORMATICS', imageUrl: '/assets/bioinformatics.jpg', color: '#c75b80' },
+  { id: 3, name: 'ENERGY', imageUrl: '/assets/energy.jpg', color: '#8667a1' },
+  { id: 4, name: 'FOOD', imageUrl: '/assets/food.jpg', color: '#ffc233' },
+  { id: 5, name: 'ENVIRONMENTAL', imageUrl: '/assets/environmental.jpg', color: '#438c67' },
+  { id: 6, name: 'AGRICULTURE', imageUrl: '/assets/agriculture.jpg', color: '#2196f3' },
+  { id: 7, name: 'MARINE', imageUrl: '/assets/marine.jpg', color: '#3374ff' },
 ];
-
 class InnovationsList extends Component {
   constructor(props) {
     super(props);
@@ -76,15 +75,20 @@ class InnovationsList extends Component {
       <div>
         <h4>List of Innovations</h4>
 
-        {/* Add buttons to filter by category */}
+
         <div>
-          <button onClick={this.showAllInnovations}>All Categories</button>
-          {categoryOptions.map((category) => (
-            <button key={category.id} onClick={() => this.filterByCategory(category.id)}>
-              {category.name}
-            </button>
-          ))}
-        </div>
+  <button className={styles['all-categories-button']} onClick={this.showAllInnovations}>All Categories</button>
+  {categoryOptions.map((category) => (
+    <button
+      key={category.id}
+      onClick={() => this.filterByCategory(category.id)}
+      style={{ backgroundColor: category.color }}
+      className={styles['category-button']}
+    >
+      {category.name}
+    </button>
+  ))}
+</div>
 
         {filteredInnovations.length > 0 ? (
           <ul className={styles['cards-list']}>
