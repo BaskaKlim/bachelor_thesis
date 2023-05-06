@@ -1,0 +1,41 @@
+/* InnovationsList.module.css */
+
+.card-container {
+  margin: 20px auto;
+}
+
+.cards-list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  list-style-type: none;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 0 0 calc(33.333% - 40px);
+  margin: 20px;
+  max-width: 300px;
+}
+
+.category-image {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 15px;
+}
+
+@media screen and (max-width: 1024px) {
+  .list-item {
+    flex: 0 0 calc(50% - 40px);
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .list-item {
+    flex: 0 0 calc(100% - 40px);
+  }
+}
