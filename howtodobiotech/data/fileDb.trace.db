@@ -1832,3 +1832,6 @@ VALUES (5, "Vladimir is an entrepreneur with a scientific background. He started
 	at org.apache.tomcat.util.threads.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:659)
 	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
 	at java.base/java.lang.Thread.run(Thread.java:833)
+2023-05-07 10:42:43 jdbc[13]: exception
+org.h2.jdbc.JdbcSQLSyntaxErrorException: Syntax error in SQL statement "[*]STARTUP_OPT_BIOTECH_CATEGORIES"; expected "SAVEPOINT, SCRIPT, SHUTDOWN, SHOW"; SQL statement:
+STARTUP_OPT_BIOTECH_CATEGORIES [42001-214]
