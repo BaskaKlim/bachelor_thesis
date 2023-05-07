@@ -7,7 +7,7 @@ import './App.css';
 import AddInnovation from "./components/innovations/templates/add-innovation.component";
 import Innovation from "./components/innovations/organisms/innovation.component";
 import NetworkPage from "./components/innovations/pages/network.page";
-
+import StartupOptList from "./components/startups/templates/startupOpts-list.component"; 
 
 
 class App extends Component {
@@ -29,6 +29,11 @@ class App extends Component {
                 Add
               </Link>
             </li>
+            <li className="nav-item">
+              <Link to={"/startups"} className="nav-link">
+                Startup Opportunities
+              </Link>
+            </li>
           </div>
         </nav>
 
@@ -38,6 +43,8 @@ class App extends Component {
             <Route exact path={["/", "/innovations"]} component={NetworkPage} />
             <Route exact path="/add" component={AddInnovation} />
             <Route path="/innovations/:id" component={Innovation} />
+            <Route path="/startups" component={StartupOptList} /> 
+
           </Switch>
         </div>
         </Router>

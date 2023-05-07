@@ -1,6 +1,8 @@
 import { combineReducers } from "redux";
-import innivations from "./innovations";
+import innovations from "./innovations";
+import startups from "./startups";
 
 export default combineReducers({
-    innivations,
+    innovations,
+    startups
 });
