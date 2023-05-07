@@ -1,0 +1,61 @@
+.footer {
+  background-color: #2B2B2B;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
+  padding: 40px 0;
+  color: white;
+  box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.logoSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 16px;
+}
+
+.logo {
+  max-width: 150px;
+  margin-bottom: 16px;
+}
+
+.shortText {
+  text-align: center;
+  max-width: 250px;
+}
+
+.contactSection {
+  padding: 16px;
+}
+
+.socialMediaSection {
+  padding: 16px;
+}
+
+.socialMediaIcons {
+  display: flex;
+}
+
+.socialMediaIcon {
+  font-size: 24px;
+  margin: 0 8px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.socialMediaIcon:hover {
+  transform: scale(1.2);
+}
+
+.socialMediaIcon:active {
+  transform: scale(0.8);
+}
+
+@media screen and (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+  }
+}

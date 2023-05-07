@@ -6,13 +6,13 @@ import Card from '../atoms/card';
 import styles from './InnovationsList.module.css'; // Import the new CSS module
 
 const categoryOptions = [
-  { id: 1, name: 'MEDICINE', imageUrl: '/assets/medicine.jpg', color: '#fa6c61' },
-  { id: 2, name: 'BIOINFORMATICS', imageUrl: '/assets/bioinformatics.jpg', color: '#221196' },
-  { id: 3, name: 'ENERGY', imageUrl: '/assets/energy.jpg', color: '#857cd9' },
-  { id: 4, name: 'FOOD', imageUrl: '/assets/food.jpg', color: '#1826de' },
-  { id: 5, name: 'ENVIRONMENTAL', imageUrl: '/assets/environmental.jpg', color: '#749cdb' },
-  { id: 6, name: 'AGRICULTURE', imageUrl: '/assets/agriculture.jpg', color: '#f73a2d' },
-  { id: 7, name: 'MARINE', imageUrl: '/assets/marine.jpg', color: '#3374ff' },
+  { id: 1, name: 'MEDICINE', imageUrl: '/assets/medicine.jpg', color: '#E35149' },
+  { id: 2, name: 'BIOINFORMATICS', imageUrl: '/assets/bioinformatics.jpg', color: '#110777' },
+  { id: 3, name: 'ENERGY', imageUrl: '/assets/energy.jpg', color: '#7369ff' },
+  { id: 4, name: 'FOOD', imageUrl: '/assets/food.jpg', color: '#FF928F' },
+  { id: 5, name: 'ENVIRONMENTAL', imageUrl: '/assets/environmental.jpg', color: '#91B3FA' },
+  { id: 6, name: 'AGRICULTURE', imageUrl: '/assets/agriculture.jpg', color: '#A22B25' },
+  { id: 7, name: 'MARINE', imageUrl: '/assets/marine.jpg', color: '#4B4DF7' },
 ];
 class InnovationsList extends Component {
   constructor(props) {

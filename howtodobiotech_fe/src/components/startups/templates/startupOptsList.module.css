@@ -20,7 +20,7 @@
 }
 
 .support-category-image {
-  width: 200px;
+  width: 300px;
   height: auto;
   border-radius: 4px;
   margin-bottom: 15px;
@@ -78,3 +78,5 @@
 .all-categories-button:hover {
   background-color: #666;
 }
+
+

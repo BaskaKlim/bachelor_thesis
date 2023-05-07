@@ -57,7 +57,6 @@ class StartupOpt extends Component {
       <div>
         {startupOpt ? (
           <div>
-            <h4>Startup Opportunity</h4>
             <p>
               <strong>Title:</strong> {startupOpt.title}
             </p>
