@@ -48,6 +48,7 @@ public class SkillOpt {
     @NotNull(message = "End date of skill opportunity or service is mandatory")
     private Date endDate;
     @NotBlank(message = "Website of skill opportunity or service is mandatory")
+    @Size(max = 400)
     private String website;
 
     @NotNull
