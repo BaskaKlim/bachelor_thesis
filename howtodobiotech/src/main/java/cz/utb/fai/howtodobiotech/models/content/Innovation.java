@@ -34,6 +34,7 @@ public class Innovation {
     private String description;
 
     @NotBlank(message = "Website is mandatory")
+    @Size(max = 400)
     private String website;
 
 

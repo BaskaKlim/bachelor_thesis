@@ -4,7 +4,6 @@ package cz.utb.fai.howtodobiotech.models.content;
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
 import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
-import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
@@ -13,7 +12,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import org.joda.time.LocalDate;
 
 import java.util.Date;
 import java.util.HashSet;
@@ -49,8 +47,9 @@ public class StartupOpt {
     private Date endDate;
 
     @NotBlank(message = "Website of startup opportunity or service is mandatory")
+    @Size(max = 400)
     private String website;
-    @NotNull
+
     private Integer accountId;
 
     @ManyToMany(fetch=FetchType.EAGER)
