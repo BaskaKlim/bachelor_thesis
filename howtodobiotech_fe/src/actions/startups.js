@@ -6,10 +6,29 @@ import {
   } from "./types";
   
   import StartupOptDataService from "../service/Startup.service";
-  
-  export const createStartupOpt = (title, provider, description, startDate, endDate, website, accountId, countries, categories, supportCategories) => async (dispatch) => {
+  export const createStartupOpt = (
+    title,
+    provider,
+    description,
+    startDate,
+    endDate,
+    website,
+    countries,
+    categories,
+    supportCategories
+  ) => async (dispatch) => {
     try {
-      const res = await StartupOptDataService.createStartupOpt({ title, provider, description, startDate, endDate, website, accountId, countries, categories, supportCategories });
+      const res = await StartupOptDataService.createStartupOpt({
+        title,
+        provider,
+        description,
+        startDate,
+        endDate,
+        website,
+        countries,
+        categories,
+        supportCategories,
+      });
   
       dispatch({
         type: CREATE_STARTUP_OPT,
@@ -21,7 +40,7 @@ import {
       return Promise.reject(err);
     }
   };
-  
+
   export const getAllStartupOpts = () => async (dispatch) => {
     try {
       const res = await StartupOptDataService.getAllStartupOpts();

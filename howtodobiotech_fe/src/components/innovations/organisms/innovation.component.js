@@ -3,7 +3,6 @@ import { connect } from "react-redux";
 import { updateInnovation, deleteInnovation } from "../../../actions/innovations";
 import InnovationDataService from "../../../service/innovation.service";
 
-
 class Innovation extends Component {
   constructor(props) {
     super(props);

@@ -24,8 +24,8 @@ class StartupOptPage extends Component {
 
         <StartupOptList />
         <CenteredTextWithButton
-          text="Your centered text goes here."
-          textButton="Click to redirect"
+          text="Are you an investor, VC funding manager, or do you lead business & mentoring programs for biotech startups and young scientists? If so, we invite you to sign up to our platform and add your support opportunities into our database. By doing so, you'll gain access to a wide network of biotech innovators and entrepreneurs, and help shape the future of the industry. Join us today and be a part of the biotech revolution!."
+          textButton="create profile"
         />
       </div>
     );

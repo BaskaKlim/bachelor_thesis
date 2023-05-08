@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createInnovation } from "../../../actions/innovations";
-import styles from "./AddInnovation.module.css";
+import { createStartupOpt } from "../../../actions/startups";
+import styles from "./AddStartupOpt.module.css";
 
 const categoryOptions = [
   { id: 1, name: "MEDICINE", imageUrl: "../../public/assets/medicine.jpg" },
@@ -40,24 +40,40 @@ const countryOptions = [
   { id: 12, name: "CEE" },
 ];
 
-class AddInnovation extends Component {
+const supportOptions = [
+  { id: 1, name: "INCUBATOR" },
+  { id: 2, name: "ACCELERATOR" },
+  { id: 3, name: "INVESTMENT" },
+  { id: 4, name: "MENTORING" },
+  { id: 5, name: "AWARDS" },
+];
+
+class AddStartupOpt extends Component {
   constructor(props) {
     super(props);
     this.onChangeTitle = this.onChangeTitle.bind(this);
+    this.onChangeProvider = this.onChangeProvider.bind(this);
     this.onChangeDescription = this.onChangeDescription.bind(this);
+    this.onChangeStartDate = this.onChangeStartDate.bind(this);
+    this.onChangeEndDate = this.onChangeEndDate.bind(this);
     this.onChangeWebsite = this.onChangeWebsite.bind(this);
     this.onChangeCountries = this.onChangeCountries.bind(this);
     this.onChangeCategories = this.onChangeCategories.bind(this);
-    this.saveInnovation = this.saveInnovation.bind(this);
-    this.newInnovation = this.newInnovation.bind(this);
+    this.onChangeSupportCategories = this.onChangeSupportCategories.bind(this);
+    this.saveStartupOpt = this.saveStartupOpt.bind(this);
+    this.newStartupOpt = this.newStartupOpt.bind(this);
 
     this.state = {
       id: null,
       title: "",
+      provider: "",
       description: "",
+      startDate: "",
+      endDate: "",
       website: "",
       countries: new Set(),
       categories: new Set(),
+      supportCategories: new Set(),
       submitted: false,
     };
   }
@@ -68,9 +84,26 @@ class AddInnovation extends Component {
     });
   }
 
+  onChangeProvider(e) {
+    this.setState({
+      provider: e.target.value,
+    });
+  }
+
   onChangeDescription(e) {
     this.setState({
       description: e.target.value,
+    });
+  }
+  onChangeStartDate(event) {
+    this.setState({
+      startDate: event.target.value,
+    });
+  }
+
+  onChangeEndDate(event) {
+    this.setState({
+      endDate: event.target.value,
     });
   }
 
@@ -79,20 +112,6 @@ class AddInnovation extends Component {
       website: e.target.value,
     });
   }
-
-  onChangeCountries = (e) => {
-    const selectedCountryIds = Array.from(e.target.selectedOptions, (option) =>
-      parseInt(option.value)
-    );
-    const countries = new Set(
-      selectedCountryIds.map((id) =>
-        countryOptions.find((country) => country.id === id)
-      )
-    );
-    this.setState({
-      countries: countries,
-    });
-  };
 
   onChangeCategories = (e) => {
     const selectedCategoryIds = Array.from(e.target.selectedOptions, (option) =>
@@ -108,41 +127,113 @@ class AddInnovation extends Component {
     });
   };
 
-  saveInnovation = () => {
-    const { title, description, website, countries, categories } = this.state;
+  onChangeCountries = (e) => {
+    const selectedCountryIds = Array.from(e.target.selectedOptions, (option) =>
+      parseInt(option.value)
+    );
+    const countries = new Set(
+      selectedCountryIds.map((id) =>
+        countryOptions.find((country) => country.id === id)
+      )
+    );
+    this.setState({
+      countries: countries,
+    });
+  };
+
+  onChangeSupportCategories = (e) => {
+    const selectedSupportOptionIds = Array.from(
+      e.target.selectedOptions,
+      (option) => parseInt(option.value)
+    );
+    const supportCategories = new Set(
+      selectedSupportOptionIds.map((id) =>
+        supportOptions.find((supportCategory) => supportCategory.id === id)
+      )
+    );
+    this.setState({
+      supportCategories: supportCategories,
+    });
+  };
+
+  saveStartupOpt = () => {
+    const {
+      title,
+      provider,
+      description,
+      startDate,
+      endDate,
+      website,
+      countries,
+      categories,
+      supportCategories,
+    } = this.state;
+
+    console.log('Saving startup opt with the following data:', {
+      title,
+      provider,
+      description,
+      startDate,
+      endDate,
+      website,
+      countries: Array.from(countries),
+      categories: Array.from(categories),
+      supportCategories: Array.from(supportCategories),
+    });
+
 
     this.props
-      .createInnovation(
+      .createStartupOpt(
         title,
+        provider,
         description,
+        startDate,
+        endDate,
         website,
         Array.from(countries),
-        Array.from(categories)
+        Array.from(categories),
+        Array.from(supportCategories)
       )
       .then(() => {
+        console.log('Startup opt saved successfully');
         this.setState({
           submitted: true,
         });
       })
       .catch((e) => {
-        console.log(e);
+        console.log('Error while saving startup opt:', e);
       });
   };
 
-  newInnovation = () => {
+
+  newStartupOpt = () => {
+    console.log('Resetting form for a new startup opt');
     this.setState({
       title: "",
+      provider: "",
       description: "",
+      startDate: "",
+      endDate: "",
       website: "",
       countries: new Set(),
       categories: new Set(),
+      supportCategories: new Set(),
       submitted: false,
     });
   };
-
   render() {
-    const { title, description, website, countries, categories, submitted } =
-      this.state;
+    const {
+      title,
+      provider,
+      description,
+      startDate,
+      endDate,
+      website,
+      countries,
+      categories,
+      supportCategories,
+      submitted,
+    } = this.state;
 
     return (
       <div className={styles.card}>
@@ -150,15 +241,12 @@ class AddInnovation extends Component {
           {submitted ? (
             <div>
               <h4>You submitted successfully!</h4>
-              <button className="btn btn-success" onClick={this.newInnovation}>
+              <button className="btn btn-success" onClick={this.newStartupOpt}>
                 Add
               </button>
             </div>
           ) : (
             <div>
-              <div>
-                <h2>Add new</h2>
-              </div>
               <div className={styles["form-group"]}>
                 <label htmlFor="title">Title</label>
                 <input
@@ -169,6 +257,18 @@ class AddInnovation extends Component {
                   value={title}
                   onChange={this.onChangeTitle}
                   name="title"
+                />
+              </div>
+              <div className={styles["form-group"]}>
+                <label htmlFor="provider">Provider</label>
+                <input
+                  type="text"
+                  className="form-control"
+                  id="provider"
+                  required
+                  value={provider}
+                  onChange={this.onChangeProvider}
+                  name="provider"
                 />
               </div>
 
@@ -184,6 +284,31 @@ class AddInnovation extends Component {
                 />
               </div>
 
+              <div className={styles["form-group"]}>
+                <label htmlFor="startDate">Start Date</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="startDate"
+                  required
+                  value={startDate}
+                  onChange={this.onChangeStartDate}
+                  name="startDate"
+                />
+              </div>
+
+              <div className={styles["form-group"]}>
+                <label htmlFor="endDate">End Date</label>
+                <input
+                  type="date"
+                  className="form-control"
+                  id="endDate"
+                  required
+                  value={endDate}
+                  onChange={this.onChangeEndDate}
+                  name="endDate"
+                />
+              </div>
               <div className={styles["form-group"]}>
                 <label htmlFor="website">Website</label>
                 <input
@@ -233,7 +358,27 @@ class AddInnovation extends Component {
                 </select>
               </div>
 
-              <button onClick={this.saveInnovation} className="btn btn-success">
+              <div className={styles["form-group"]}>
+                <label htmlFor="supportCategories">Support Options</label>
+                <select
+                  multiple
+                  className="form-control"
+                  id="supportCategories"
+                  value={[...supportCategories].map(
+                    (supportCategory) => supportCategory.id
+                  )}
+                  onChange={this.onChangeSupportCategories}
+                  name="supportCategories"
+                >
+                  {supportOptions.map((supportCategory) => (
+                    <option key={supportCategory.id} value={supportCategory.id}>
+                      {supportCategory.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <button onClick={this.saveStartupOpt} className="btn btn-success">
                 Submit
               </button>
             </div>
@@ -243,5 +388,4 @@ class AddInnovation extends Component {
     );
   }
 }
-
-export default connect(null, { createInnovation })(AddInnovation);
+export default connect(null, { createStartupOpt })(AddStartupOpt);

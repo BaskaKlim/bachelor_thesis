@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateStartupOpt, deleteStartupOpt } from "../../../actions/startups";
-import StartupOptDataService from "../../../service/startupOpt.service";
+import StartupOptDataService from "../../../service/Startup.service";
 
 class StartupOpt extends Component {
   constructor(props) {
@@ -31,7 +31,7 @@ class StartupOpt extends Component {
     this.props
       .updateStartupOpt(startupOpt.id, startupOpt)
       .then(() => {
-        this.props.history.push("/startup-opts");
+        this.props.history.push("/startup-opportunities");
       })
       .catch((e) => {
         console.log(e);
@@ -43,7 +43,7 @@ class StartupOpt extends Component {
     this.props
       .deleteStartupOpt(startupOpt.id)
       .then(() => {
-        this.props.history.push("/startup-opts");
+        this.props.history.push("/startup-opportunities");
       })
       .catch((e) => {
         console.log(e);
