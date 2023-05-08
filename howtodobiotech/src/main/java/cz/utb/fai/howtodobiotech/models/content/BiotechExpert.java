@@ -45,6 +45,8 @@ public class BiotechExpert {
     @Size(max = 400)
     private String linkedinUrl;
 
+    private String profileImageUrl;
+
     @NotBlank(message = "Description of organization is mandatory")
     @Size(max = 2000)
     private String backgroundDescription;
@@ -61,12 +63,13 @@ public class BiotechExpert {
             inverseJoinColumns = @JoinColumn(name = "ExpertCategory_id"))
     private Set<ExpertCategory> expertises = new HashSet<>();
 
-    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String backgroundDescription, Set<Country> countries, Set<ExpertCategory> expertises) {
+    public BiotechExpert(String firstName, String lastName, String jobPosition, String email, String linkedinUrl, String profileImageUrl, String backgroundDescription, Set<Country> countries, Set<ExpertCategory> expertises) {
         this.firstName = firstName;
         this.lastName = lastName;
         this.jobPosition = jobPosition;
         this.email = email;
         this.linkedinUrl = linkedinUrl;
+        this.profileImageUrl = profileImageUrl;
         this.backgroundDescription = backgroundDescription;
         this.countries = countries;
         this.expertises = expertises;

@@ -11,7 +11,8 @@ public enum EExpertCategory {
     MVP_PRTOTOTYPING,
     BUSINESS_VALIDATION,
     PRODUCT_DESING,
-    CLINICAL_TRIAL
+    CLINICAL_TRIAL,
+    FINANCE
 
 
 }

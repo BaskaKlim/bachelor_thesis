@@ -38,8 +38,8 @@ class BiotechExpertControllerTest {
     @BeforeEach
     void setUp() {
         expertList = new ArrayList<>();
-        expertList.add(new BiotechExpert(1, "John", "Doe", "Job 1", "john.doe@test.com", "www.linkedin.com", "Description 1", (Set<Country>) new Country(9,ECountry.SLOVAKIA), (Set<ExpertCategory>) new ExpertCategory(5,EExpertCategory.BIOINFORMATICS)));
-        expertList.add(new BiotechExpert(2, "Jane", "Doe", "Job 2", "jane.doe@test.com", "www.linkedin.com", "Description 2", (Set<Country>) new Country(8,ECountry.POLAND), (Set<ExpertCategory>) new ExpertCategory(4,EExpertCategory.BIOLOGY)));
+        expertList.add(new BiotechExpert(1, "John", "Doe", "Job 1", "john.doe@test.com", "www.linkedin.com", "www.profile.sk","Description 1", (Set<Country>) new Country(9,ECountry.SLOVAKIA), (Set<ExpertCategory>) new ExpertCategory(5,EExpertCategory.BIOINFORMATICS)));
+        expertList.add(new BiotechExpert(2, "Jane", "Doe", "Job 2", "jane.doe@test.com", "www.linkedin.com", "www.profile.sk","Description 2", (Set<Country>) new Country(8,ECountry.POLAND), (Set<ExpertCategory>) new ExpertCategory(4,EExpertCategory.BIOLOGY)));
     }
 
     @Test
