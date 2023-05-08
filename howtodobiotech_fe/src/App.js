@@ -38,25 +38,19 @@ class App extends Component {
               </button>
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
+                <li className="nav-item">
+                    <Link to={"/skills"} className="nav-link">
+                      Skills
+                    </Link>
+                  </li>
                   <li className="nav-item">
                     <Link to={"/startups"} className="nav-link">
-                      Startup Opportunities
+                      Startups
                     </Link>
                   </li>
                   <li className="nav-item">
                     <Link to={"/network"} className="nav-link">
                       Network
-                    </Link>
-                  </li>
-                  <li className="nav-item">
-                    <Link to={"/innovations/add"} className="nav-link">
-                      AddInnovation
-                    </Link>
-                  </li>
-
-                  <li className="nav-item">
-                    <Link to={"/startup-opportunities/add"} className="nav-link">
-                      AddStartup
                     </Link>
                   </li>
                 </ul>

@@ -6,12 +6,37 @@ import Card from "../atoms/card";
 import styles from "./SkillOptsList.module.css";
 
 const skillCategories = [
-  { id: 1, name: "WORKSHOP",  imageUrl: "/assets/workshop.png",color: "#FFA6A2" },
-  { id: 2, name: "SUMMER_WINTER_SCHOOL",  imageUrl: "/assets/school.png",color: "#4B4DF7" },
-  { id: 3, name: "CONFERENCE",  imageUrl: "/assets/conference.png",color: "#FE7062" },
-  { id: 4, name: "INTERNSHIP", imageUrl: "/assets/internship.png", color: "#CEDAF6" },
-  { id: 5, name: "ACADEMY",  imageUrl: "/assets/academy.png",color: "#B23730" },
-  { id: 6, name: "HACKATHON",  imageUrl: "/assets/hackathon.png",color: "#9695F2" },
+  {
+    id: 1,
+    name: "WORKSHOP",
+    imageUrl: "/assets/workshop.png",
+    color: "#FFA6A2",
+  },
+  {
+    id: 2,
+    name: "SUMMER_WINTER_SCHOOL",
+    imageUrl: "/assets/school.png",
+    color: "#4B4DF7",
+  },
+  {
+    id: 3,
+    name: "CONFERENCE",
+    imageUrl: "/assets/conference.png",
+    color: "#FE7062",
+  },
+  {
+    id: 4,
+    name: "INTERNSHIP",
+    imageUrl: "/assets/internship.png",
+    color: "#CEDAF6",
+  },
+  { id: 5, name: "ACADEMY", imageUrl: "/assets/academy.png", color: "#B23730" },
+  {
+    id: 6,
+    name: "HACKATHON",
+    imageUrl: "/assets/hackathon.png",
+    color: "#9695F2",
+  },
 ];
 
 const categoryOptions = [
@@ -40,20 +65,48 @@ const categoryOptions = [
   { id: 7, name: "MARINE", imageUrl: "/assets/marine.jpg", color: "#4B4DF7" },
 ];
 
+
+
 class SkillOptList extends Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
       skillOpts: [],
       filteredSkillOpts: [],
       selectedCategory: null,
       selectedSkillCategory: null,
+      currentPage: 1, // current page number
+      skillOptsPerPage: 6, // number of skillOpts to be displayed per page
     };
   }
+
+  paginate = (skillOpts) => {
+    const { currentPage, skillOptsPerPage } = this.state;
+  
+    const startIndex = (currentPage - 1) * skillOptsPerPage;
+    const endIndex = startIndex + skillOptsPerPage;
+  
+    return skillOpts.slice(startIndex, endIndex);
+  };
+
+  handlePrevPage = () => {
+    this.setState((prevState) => ({
+      currentPage: prevState.currentPage - 1,
+    }), this.filterSkillOpts);
+  };
+  
+  handleNextPage = () => {
+    this.setState((prevState) => ({
+      currentPage: prevState.currentPage + 1,
+    }), this.filterSkillOpts);
+  };
   
   handleSkillCategoryFilter = (skillCategoryId) => {
-    this.setState({ selectedSkillCategory: skillCategoryId }, this.filterSkillOpts);
+    this.setState(
+      { selectedSkillCategory: skillCategoryId },
+      this.filterSkillOpts
+    );
   };
   filterSkillOpts = () => {
     const { selectedCategory, selectedSkillCategory, skillOpts } = this.state;
@@ -76,23 +129,29 @@ class SkillOptList extends Component {
       return hasSelectedCategory && hasSelectedSkillCategory;
     });
   
-    this.setState({ filteredSkillOpts });
+    const paginatedSkillOpts = this.paginate(filteredSkillOpts); // get skillOpts for the current page
+    this.setState({ filteredSkillOpts: paginatedSkillOpts });
   };
   
-  
+
   handleCategoryFilter = (categoryId) => {
     this.setState({ selectedCategory: categoryId }, this.filterSkillOpts);
   };
 
   findCategoryImageUrl = (skillOpt) => {
-    const lastSkillCategory = skillOpt.skillCategories[skillOpt.skillCategories.length - 1];
-    const category = skillCategories.find((category) => category.id === lastSkillCategory.id);
+    const lastSkillCategory =
+      skillOpt.skillCategories[skillOpt.skillCategories.length - 1];
+    const category = skillCategories.find(
+      (category) => category.id === lastSkillCategory.id
+    );
     return category ? category.imageUrl : null;
   };
 
   showAllSkillOpts = () => {
     this.setState({ selectedCategory: null }, this.filterSkillOpts);
   };
+
+ 
 
   componentDidMount() {
     SkillOptDataService.getAllSkillOpts()
@@ -112,7 +171,18 @@ class SkillOptList extends Component {
   }
 
   render() {
-    const { filteredSkillOpts } = this.state;
+    const { filteredSkillOpts, currentPage, skillOptsPerPage } = this.state;
+    const indexOfLastSkillOpt = currentPage * skillOptsPerPage;
+    const indexOfFirstSkillOpt = indexOfLastSkillOpt - skillOptsPerPage;
+    const currentSkillOpts = filteredSkillOpts.slice(
+      indexOfFirstSkillOpt,
+      indexOfLastSkillOpt
+    );
+  
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredSkillOpts.length / skillOptsPerPage); i++) {
+      pageNumbers.push(i);
+    }
   
     return (
       <div>
@@ -146,24 +216,45 @@ class SkillOptList extends Component {
         </div>
         <div style={{ margin: "50px 0" }}></div>
         {filteredSkillOpts.length > 0 ? (
-        <ul className={styles["cards-list"]}>
-          {filteredSkillOpts.map((skillOpt) => {
-            const imageUrl = this.findCategoryImageUrl(skillOpt);
-            return (
-              <li
-                key={skillOpt.id}
-                className={`${styles["card-container"]} ${styles["list-item"]}`}
-              >
-                {imageUrl && <img src={imageUrl} alt="Category" className={styles["category-image"]} />}
-                <Card skillOpt={skillOpt} />
-              </li>
-            );
-          })}
-        </ul>
-      ) : (
-        <div>Loading...</div>
-      )}
-    </div>
+          <div>
+            <ul className={styles["cards-list"]}>
+              {currentSkillOpts.map((skillOpt) => {
+                const imageUrl = this.findCategoryImageUrl(skillOpt);
+                return (
+                  <li
+                    key={skillOpt.id}
+                    className={`${styles["card-container"]} ${styles["list-item"]}`}
+                  >
+                    {imageUrl && (
+                      <img
+                        src={imageUrl}
+                        alt="Category"
+                        className={styles["category-image"]}
+                      />
+                    )}
+                    <Card skillOpt={skillOpt} />
+                  </li>
+                );
+              })}
+            </ul>
+            <div className={styles["pagination"]}>
+              {pageNumbers.map((number) => (
+                <button
+                  key={number}
+                  onClick={() => this.setState({ currentPage: number })}
+                  className={`${styles["page-button"]} ${
+                    number === currentPage && styles["active"]
+                  }`}
+                >
+                  {number}
+                </button>
+              ))}
+            </div>
+          </div>
+        ) : (
+          <div>Loading...</div>
+        )}
+      </div>
     );
   }
 }  
@@ -172,4 +263,6 @@ const mapStateToProps = (state) => ({
   skillOpts: state.skillOpts,
 });
 
-export default connect(mapStateToProps, { updateSkillOpt, deleteSkillOpt })(SkillOptList);
+export default connect(mapStateToProps, { updateSkillOpt, deleteSkillOpt })(
+  SkillOptList
+);

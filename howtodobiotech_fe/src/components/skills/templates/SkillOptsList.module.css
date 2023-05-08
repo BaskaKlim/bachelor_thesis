@@ -83,4 +83,34 @@
 }
 
 
+.pagination-list {
+  display: flex;
+  justify-content: center;
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+}
+
+.pagination-item {
+  margin: 0 0.5rem;
+  display: inline-block;
+  font-size: 1.1rem;
+}
+
+.pagination-item button {
+  border: none;
+  background-color: #F0F0F0;
+  color: #444444;
+  padding: 0.25rem 0.5rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+
+.pagination-item button:hover {
+  background-color: #DDDDDD;
+}
+
+.active button {
+  background-color: #3E3E3E;
+  color: #FFFFFF;
+}
 
