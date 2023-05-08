@@ -6,7 +6,7 @@ const Footer = () => {
   return (
     <footer className={styles.footer}>
       <div className={styles.logoSection}>
-        <img className={styles.logo} src="/assets/2.png" alt="Your Organization Logo" />
+        <img className={styles.logo} src="/assets/logo_blue.png" alt="How To Do Biotech" />
         <p className={styles.shortText}>Find the right resources, mentorship, and support they need.</p>
       </div>
       <div className={styles.contactSection}>

@@ -12,6 +12,8 @@ import StartupOpt from "./components/startups/organisms/startupOpt.component";
 
 import NetworkPage from "./components/innovations/pages/network.page";
 import StartupOptPage from "./components/startups/pages/startup.page";
+import SkillPage from "./components/skills/pages/Skill.page"; // Import SkillPage component
+
 
 class App extends Component {
   render() {
@@ -66,6 +68,7 @@ class App extends Component {
             <Switch>
               <Route exact path={["/", "/network"]} component={NetworkPage} />
               <Route path="/startups" component={StartupOptPage} />
+              <Route path="/skills" component={SkillPage} /> {/* Add new route for SkillPage */}
               <Route path="/innovations/add" component={AddInnovation} />
               <Route path="/startup-opportunities/add" component={AddStartupOpt} />
               <Route path="/innovations/:id" component={Innovation} />
