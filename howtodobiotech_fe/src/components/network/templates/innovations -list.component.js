@@ -21,8 +21,11 @@ class InnovationsList extends Component {
     this.state = {
       innovations: [],
       filteredInnovations: [],
+      currentPage: 1,
+      innovationsPerPage: 6,
     };
   }
+
 
   filterByCategory = (categoryId) => {
     const filteredInnovations = this.state.innovations.filter((innovation) =>
@@ -34,6 +37,11 @@ class InnovationsList extends Component {
   showAllInnovations = () => {
     this.setState({ filteredInnovations: this.state.innovations });
   };
+
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
+  };
+
 
   componentDidMount() {
     InnovationDataService.getAllInnovations()
@@ -69,30 +77,33 @@ class InnovationsList extends Component {
   }
 
   render() {
-    const { filteredInnovations } = this.state;
+    const { filteredInnovations, currentPage, innovationsPerPage } = this.state;
+    const totalPages = Math.ceil(filteredInnovations.length / innovationsPerPage);
+    const startIndex = (currentPage - 1) * innovationsPerPage;
+    const endIndex = startIndex + innovationsPerPage;
+    const displayedInnovations = filteredInnovations.slice(startIndex, endIndex);
 
     return (
       <div>
         <h4>List of Innovations</h4>
 
-
         <div>
-  <button className={styles['all-categories-button']} onClick={this.showAllInnovations}>All Categories</button>
-  {categoryOptions.map((category) => (
-    <button
-      key={category.id}
-      onClick={() => this.filterByCategory(category.id)}
-      style={{ backgroundColor: category.color }}
-      className={styles['category-button']}
-    >
-      {category.name}
-    </button>
-  ))}
-</div>
+          <button className={styles['all-categories-button']} onClick={this.showAllInnovations}>All Categories</button>
+          {categoryOptions.map((category) => (
+            <button
+              key={category.id}
+              onClick={() => this.filterByCategory(category.id)}
+              style={{ backgroundColor: category.color }}
+              className={styles['category-button']}
+            >
+              {category.name}
+            </button>
+          ))}
+        </div>
 
-        {filteredInnovations.length > 0 ? (
+        {displayedInnovations.length > 0 ? (
           <ul className={styles['cards-list']}>
-            {filteredInnovations.map((innovation) => {
+            {displayedInnovations.map((innovation) => {
               const firstCategory = innovation.categories[0];
               const category = categoryOptions.find((cat) => cat.id === firstCategory.id);
 
@@ -109,6 +120,21 @@ class InnovationsList extends Component {
                 </li>
               );
             })}
+            <div className={styles.pagination}>
+              <div className={styles.paginationButtons}>
+                {[...Array(totalPages)].map((_, number) => {
+                  return (
+                    <button
+                      key={number}
+                      onClick={() => this.handlePageChange(number + 1)}
+                      className={`${styles.pageButton} ${currentPage === number + 1 ? styles.active : ''}`}
+                    >
+                      {number + 1}
+                    </button>
+                  );
+                })}
+              </div>
+            </div>
           </ul>
         ) : (
           <div>Loading...</div>

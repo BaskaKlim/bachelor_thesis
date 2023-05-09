@@ -67,9 +67,7 @@ class Expert extends Component {
             <p>
               <strong>Job Position:</strong> {expert.jobPosition}
             </p>
-            <p>
-              <strong>Email:</strong> {expert.email}
-            </p>
+        
             <p>
               <strong>LinkedIn URL:</strong> {expert.linkedinUrl}
             </p>

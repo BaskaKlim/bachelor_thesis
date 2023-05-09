@@ -81,6 +81,10 @@ class SkillOptList extends Component {
     };
   }
 
+  handlePageClick = (event) => {
+    this.setState({ currentPage: Number(event.target.id) }, this.filterSkillOpts);
+  };
+  
   paginate = (skillOpts) => {
     const { currentPage, skillOptsPerPage } = this.state;
   
@@ -129,10 +133,8 @@ class SkillOptList extends Component {
       return hasSelectedCategory && hasSelectedSkillCategory;
     });
   
-    const paginatedSkillOpts = this.paginate(filteredSkillOpts); // get skillOpts for the current page
-    this.setState({ filteredSkillOpts: paginatedSkillOpts });
+    this.setState({ filteredSkillOpts });
   };
-  
 
   handleCategoryFilter = (categoryId) => {
     this.setState({ selectedCategory: categoryId }, this.filterSkillOpts);
@@ -151,13 +153,11 @@ class SkillOptList extends Component {
     this.setState({ selectedCategory: null }, this.filterSkillOpts);
   };
 
- 
-
   componentDidMount() {
     SkillOptDataService.getAllSkillOpts()
       .then((response) => {
         const skillOpts = response.data;
-        this.setState({ skillOpts, filteredSkillOpts: skillOpts });
+        this.setState({ skillOpts, filteredSkillOpts: skillOpts }, this.filterSkillOpts);
       })
       .catch((error) => {
         console.log(error);
@@ -172,12 +172,13 @@ class SkillOptList extends Component {
 
   render() {
     const { filteredSkillOpts, currentPage, skillOptsPerPage } = this.state;
-    const indexOfLastSkillOpt = currentPage * skillOptsPerPage;
-    const indexOfFirstSkillOpt = indexOfLastSkillOpt - skillOptsPerPage;
-    const currentSkillOpts = filteredSkillOpts.slice(
-      indexOfFirstSkillOpt,
-      indexOfLastSkillOpt
-    );
+
+  const indexOfLastSkillOpt = currentPage * skillOptsPerPage;
+  const indexOfFirstSkillOpt = indexOfLastSkillOpt - skillOptsPerPage;
+  const currentSkillOpts = filteredSkillOpts.slice(
+    indexOfFirstSkillOpt,
+    indexOfLastSkillOpt
+  );
   
     const pageNumbers = [];
     for (let i = 1; i <= Math.ceil(filteredSkillOpts.length / skillOptsPerPage); i++) {
@@ -218,7 +219,7 @@ class SkillOptList extends Component {
         {filteredSkillOpts.length > 0 ? (
           <div>
             <ul className={styles["cards-list"]}>
-              {currentSkillOpts.map((skillOpt) => {
+    {currentSkillOpts.map((skillOpt) => {
                 const imageUrl = this.findCategoryImageUrl(skillOpt);
                 return (
                   <li
@@ -237,18 +238,20 @@ class SkillOptList extends Component {
                 );
               })}
             </ul>
-            <div className={styles["pagination"]}>
-              {pageNumbers.map((number) => (
-                <button
-                  key={number}
-                  onClick={() => this.setState({ currentPage: number })}
-                  className={`${styles["page-button"]} ${
-                    number === currentPage && styles["active"]
-                  }`}
-                >
-                  {number}
-                </button>
-              ))}
+            <div className={styles.pagination}>
+            <div className={styles.paginationButtons}>
+            {pageNumbers.map((number) => {
+                return (
+                  <button
+                    key={number}
+                    id={number}
+                    onClick={this.handlePageClick}
+                    className={`${styles.pageButton} ${currentPage === number ? styles.active : ''}`}
+                  >
+                    {number}
+                  </button>
+                );
+              })}</div>
             </div>
           </div>
         ) : (
@@ -257,7 +260,7 @@ class SkillOptList extends Component {
       </div>
     );
   }
-}  
+}
 
 const mapStateToProps = (state) => ({
   skillOpts: state.skillOpts,

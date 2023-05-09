@@ -1,9 +1,12 @@
 import React, { Component } from 'react';
 import InnovationsList from '../templates/innovations -list.component';
-import ExpertList from "../../experts/templates/ExpertList"; // Import the ExpertList component
+import ExpertList from "../templates/ExpertList"; // Import the ExpertList component
 import ExpertDataService from '../../../service/ExpertDataService'; // Import ExpertDataService
 import InnovationDataService from '../../../service/innovation.service'; 
 import CarouselBanner from '../molecules/Carousel.banner'
+import CenteredTextWithButton from "../../common/organisms/CenteredTextWithButton";
+
+import styles from './network.page';
 
 
 class NetworkPage extends Component {
@@ -50,10 +53,27 @@ class NetworkPage extends Component {
 
     return (
       <div>
+        
         <CarouselBanner />
-      
+        <div className={styles["intro"]}>
+          <p>
+            Welcome to How To Do Biotech, your one-stop platform for finding
+            skill development opportunities in the biotech industry. Our
+            platform is designed to make it easy for you to find the courses,
+            workshops, and events that best suit your needs to improve your skills. Whether you're a
+            student, a professional, or an PhD researcher looking to enhance your
+            biotech skills, you can find the right opportunity here.
+          </p>
+        </div>
+        <div></div>
         <ExpertList filteredExperts={filteredExperts} /> 
+        <CenteredTextWithButton
+          text="
+          Are you an organizer of biotech skill development courses, workshops, or events?  Are you looking for interns and researchers? We invite you to sign up to our platform and create an account for your organization. Add your workshops, internships, or hackathons to our database and attract young talents in science through our platform. Join us today and be a part of the biotech skill development revolution!"
+          textButton="create profile"
+        />
         <InnovationsList filteredInnovations={filteredInnovations} />
+        
       </div>
     );
   }

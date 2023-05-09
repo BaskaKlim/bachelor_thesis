@@ -72,6 +72,8 @@ class StartupOptList extends Component {
       filteredStartupOpts: [],
       selectedCategory: null,
       selectedSupportOption: null,
+      currentPage: 1,
+      startupOptsPerPage: 6
     };
   }
 
@@ -96,22 +98,27 @@ class StartupOptList extends Component {
     this.setState({ filteredStartupOpts });
   };
 
+  
   handleCategoryFilter = (categoryId) => {
-    this.setState({ selectedCategory: categoryId }, this.filterStartupOpts);
+    this.setState({ selectedCategory: categoryId, currentPage: 1 }, this.filterStartupOpts);
   };
 
   handleSupportOptionFilter = (supportOptionId) => {
     this.setState(
-      { selectedSupportOption: supportOptionId },
+      { selectedSupportOption: supportOptionId, currentPage: 1 },
       this.filterStartupOpts
     );
   };
 
   showAllStartupOpts = () => {
     this.setState(
-      { selectedCategory: null, selectedSupportOption: null },
+      { selectedCategory: null, selectedSupportOption: null, currentPage: 1 },
       this.filterStartupOpts
     );
+  };
+
+  handlePageClick = (event) => {
+    this.setState({ currentPage: Number(event.target.id) });
   };
 
   componentDidMount() {
@@ -132,7 +139,16 @@ class StartupOptList extends Component {
   }
 
   render() {
-    const { filteredStartupOpts } = this.state;
+    const { filteredStartupOpts, currentPage, startupOptsPerPage } = this.state;
+
+    const indexOfLastStartupOpt = currentPage * startupOptsPerPage;
+    const indexOfFirstStartupOpt = indexOfLastStartupOpt - startupOptsPerPage;
+    const currentStartupOpts = filteredStartupOpts.slice(indexOfFirstStartupOpt, indexOfLastStartupOpt);
+
+    const pageNumbers = [];
+    for (let i = 1; i <= Math.ceil(filteredStartupOpts.length / startupOptsPerPage); i++) {
+      pageNumbers.push(i);
+    }
 
     return (
       <div>
@@ -167,34 +183,52 @@ class StartupOptList extends Component {
         <div style={{ margin: "50px 0" }}></div>
 
         {filteredStartupOpts.length > 0 ? (
-          <ul className={styles["cards-list"]}>
-            {filteredStartupOpts.map((startupOpt) => {
-              const firstSupportCategory =
-                startupOpt.supportCategories && startupOpt.supportCategories[0];
-              const supportCategory =
-                firstSupportCategory &&
-                supportOptions.find(
-                  (supportOption) =>
-                    supportOption.id === firstSupportCategory.id
-                );
+          <div>
+            <ul className={styles["cards-list"]}>
+              {currentStartupOpts.map((startupOpt) => {
+                const firstSupportCategory =
+                  startupOpt.supportCategories && startupOpt.supportCategories[0];
+                const supportCategory =
+                  firstSupportCategory &&
+                  supportOptions.find(
+                    (supportOption) =>
+                      supportOption.id === firstSupportCategory.id
+                  );
 
-              return (
-                <li
-                  key={startupOpt.id}
-                  className={`${styles["card-container"]} ${styles["list-item"]}`}
-                >
-                  {supportCategory && (
-                    <img
-                      src={supportCategory.imageUrl}
-                      alt={supportCategory.name}
-                      className={styles["support-category-image"]}
-                    />
-                  )}
-                  <Card startupOpt={startupOpt} />
-                </li>
-              );
-            })}
-          </ul>
+                return (
+                  <li
+                    key={startupOpt.id}
+                    className={`${styles["card-container"]} ${styles["list-item"]}`}
+                  >
+                    {supportCategory && (
+                      <img
+                        src={supportCategory.imageUrl}
+                        alt={supportCategory.name}
+                        className={styles["support-category-image"]}
+                      />
+                    )}
+                    <Card startupOpt={startupOpt} />
+                  </li>
+                );
+              })}
+            </ul>
+            <div className={styles.pagination}>
+            <div className={styles.paginationButtons}>
+              {pageNumbers.map((number) => {
+                return (
+                  <button
+                    key={number}
+                    id={number}
+                    onClick={this.handlePageClick}
+                    className={`${styles.pageButton} ${currentPage === number ? styles.active : ''}`}
+                  >
+                    {number}
+                  </button>
+                );
+              })}
+            </div>
+            </div>
+          </div>
         ) : (
           <div>Loading...</div>
         )}
@@ -202,6 +236,8 @@ class StartupOptList extends Component {
     );
   }
 }
+
+
 const mapStateToProps = (state) => ({
   startupOpts: state.startupOpts,
 });

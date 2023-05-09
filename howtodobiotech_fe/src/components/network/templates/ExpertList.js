@@ -6,29 +6,32 @@ import ExpertCard from "../atoms/ExpertCard";
 import styles from "./ExpertList.module.css";
 
 const expertiseOptions = [
-  {id:1, name: "BUSINESS_DEVELOPMENT", color: '#E35149'},
-  {id:2, name: "LIFE_SCIENCE", color: '#A22B25'},
-  {id:3, name: "CHEMISTRY", color: '#110777'},
-  {id:4, name: "BIOLOGY", color: '#E35149'},
-  {id:5, name: "BIOINFORMATICS", color: '#7369ff'},
-  {id:6, name: "DATA_SCIENCE", color: '#E35149'},
-  {id:7, name: "LEGAL", color: '#4B4DF7'},
-  {id:8, name: "MVP_PRTOTOTYPING", color: '#E35149'},
-  {id:9, name: "BUSINESS_VALIDATION", color: '#E35149'},
-  {id:10, name: "PRODUCT_DESING", color: '#E35149'},
-  {id:11, name: "CLINICAL_TRIAL", color: '#FF928F'},
-  {id:12, name: "FINANCE", color: '#91B3FA'}
-];class ExpertList extends Component {
+  { id: 1, name: "BUSINESS_DEVELOPMENT", color: "#E35149" },
+  { id: 2, name: "LIFE_SCIENCE", color: "#A22B25" },
+  { id: 3, name: "CHEMISTRY", color: "#110777" },
+  { id: 4, name: "BIOLOGY", color: "#E35149" },
+  { id: 5, name: "BIOINFORMATICS", color: "#7369ff" },
+  { id: 6, name: "DATA_SCIENCE", color: "#E35149" },
+  { id: 7, name: "LEGAL", color: "#4B4DF7" },
+  { id: 8, name: "MVP_PRTOTOTYPING", color: "#E35149" },
+  { id: 9, name: "BUSINESS_VALIDATION", color: "#E35149" },
+  { id: 10, name: "PRODUCT_DESING", color: "#E35149" },
+  { id: 11, name: "CLINICAL_TRIAL", color: "#FF928F" },
+  { id: 12, name: "FINANCE", color: "#91B3FA" },
+];
+
+class ExpertList extends Component {
   constructor(props) {
     super(props);
-
+  
     this.state = {
       experts: [],
       filteredExperts: [],
-      currentPage: 1
+      currentPage: 1,
+      expertsPerPage: 6,
     };
   }
-
+  
   filterByExpertise = (expertise) => {
     const filteredExperts = this.state.experts.filter((expert) =>
       expert.expertises.some(
@@ -59,13 +62,16 @@ const expertiseOptions = [
   }
 
   componentDidUpdate(prevProps) {
-    if (this.props.filteredExperts !== prevProps.filteredExperts) {
-      this.setState({ filteredExperts: this.props.filteredExperts });
+    if (this.props.experts !== prevProps.experts) {
+      this.setState({
+        experts: this.props.experts,
+        filteredExperts: this.props.experts,
+      });
     }
   }
+
   render() {
-    const { filteredExperts, currentPage } = this.state;
-    const expertsPerPage = 6;
+    const { filteredExperts, currentPage, expertsPerPage } = this.state;
     const totalPages = Math.ceil(filteredExperts.length / expertsPerPage);
     const startIndex = (currentPage - 1) * expertsPerPage;
     const endIndex = startIndex + expertsPerPage;
@@ -73,29 +79,7 @@ const expertiseOptions = [
   
     return (
       <div>
-        <h4>List of Experts</h4>
-  
-        <div>
-          <button
-            className={styles["all-expertises-button"]}
-            onClick={this.showAllExperts}
-          >
-            All Expertises
-          </button>
-          {expertiseOptions.map((expertise) => (
-            <button
-              key={expertise.id}
-              onClick={() => this.filterByExpertise(expertise.name)}
-              className={styles["expertise-button"]}
-              style={{ backgroundColor: expertise.color }}
-            >
-              {expertise.name.toLowerCase().replace(/^\w/, (c) =>
-                c.toUpperCase()
-              )}
-            </button>
-          ))}
-        </div>
-  
+        ...
         {displayedExperts.length > 0 ? (
           <div>
             <ul className={styles["cards-list"]}>
@@ -108,22 +92,21 @@ const expertiseOptions = [
                 </li>
               ))}
             </ul>
-            <nav>
-              <ul className="pagination">
-                {[...Array(totalPages)].map((_, index) => (
-                  <li key={index} className="page-item">
+            <div className={styles.pagination}>
+              <div className={styles.paginationButtons}>
+                {[...Array(totalPages)].map((_, number) => {
+                  return (
                     <button
-                      className={`page-link ${
-                        index + 1 === currentPage ? "active" : ""
-                      }`}
-                      onClick={() => this.handlePageChange(index + 1)}
+                      key={number}
+                      onClick={() => this.handlePageChange(number + 1)}
+                      className={`${styles.pageButton} ${currentPage === number + 1 ? styles.active : ''}`}
                     >
-                      {index + 1}
+                      {number + 1}
                     </button>
-                  </li>
-                ))}
-              </ul>
-            </nav>
+                  );
+                })}
+              </div>
+            </div>
           </div>
         ) : (
           <div>Loading...</div>
@@ -131,9 +114,12 @@ const expertiseOptions = [
       </div>
     );
   }
+  
 }
 const mapStateToProps = (state) => ({
   experts: state.experts,
 });
 
-export default connect(mapStateToProps, { updateExpert, deleteExpert })(ExpertList);
+export default connect(mapStateToProps, { updateExpert, deleteExpert })(
+  ExpertList
+);

@@ -4,13 +4,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Footer from "./components/common/organisms/Footer";
 
-import AddInnovation from "./components/innovations/templates/add-innovation.component";
+import AddInnovation from "./components/network/templates/add-innovation.component";
 import AddStartupOpt from "./components/startups/templates/add-startup-opt.component";
 
-import Innovation from "./components/innovations/organisms/innovation.component";
+import Innovation from "./components/network/organisms/innovation.component";
 import StartupOpt from "./components/startups/organisms/startupOpt.component";
 
-import NetworkPage from "./components/innovations/pages/network.page";
+import NetworkPage from "./components/network/pages/network.page";
 import StartupOptPage from "./components/startups/pages/startup.page";
 import SkillPage from "./components/skills/pages/Skill.page"; // Import SkillPage component
 
