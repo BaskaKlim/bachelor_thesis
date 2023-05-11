@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
-import WebsiteButton from '../../common/atoms/web.button';
+import WebsiteButton from '../../common/atoms/Web.button';
 import CategoryLabel from '../../common/atoms/Category.label';
 import CountryLabel from '../../common/atoms/Country.label';
 

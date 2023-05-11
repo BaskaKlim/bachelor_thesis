@@ -5,7 +5,7 @@ import styles from './Label.module.css'
 
 const CountryLabel = ({ country }) => {
   return (
-    <MDBBadge bg="success" className={styles.labelStyle}>{country.name}</MDBBadge>
+    <MDBBadge bg="secondary" className={styles.labelStyle}>{country.name}</MDBBadge>
   );
 };
 

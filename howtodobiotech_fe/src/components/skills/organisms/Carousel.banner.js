@@ -31,8 +31,8 @@ const CarouselBanner = () => {
         showIndicators={false}
         infiniteLoop
         autoPlay
-        interval={5000}
-        transitionTime={700}
+        interval={10000}
+        transitionTime={1200}
         swipeable
       >
         {items.map((item, index) => (

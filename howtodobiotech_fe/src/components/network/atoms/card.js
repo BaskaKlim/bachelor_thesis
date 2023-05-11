@@ -1,11 +1,13 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
-import WebsiteButton from '../../common/atoms/web.button'
+import WebsiteButton from '../../common/atoms/Web.button'
 import CategoryLabel from '../../common/atoms/Category.label';
 import CountryLabel from '../../common/atoms/Country.label';
 
 const Card = ({ innovation }) => {
-  const categoryLabels = innovation.categories.map((category) => <CategoryLabel key={category.id} category={category} />);
+  const categoryLabels = [...innovation.biotechCategories, ...innovation.skillCategories].map((category) => (
+    <CategoryLabel key={category.id} category={category} />
+  ));
   const countryLabels = innovation.countries.map((country) => <CountryLabel key={country.id} country={country} />);
 
   return (
@@ -17,10 +19,14 @@ const Card = ({ innovation }) => {
           <WebsiteButton url={innovation.website} />
         </MDBCardText>
         <MDBCardText>
-          {categoryLabels}
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {categoryLabels}
+          </div>
         </MDBCardText>
         <MDBCardText>
-         {countryLabels}
+          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+            {countryLabels}
+          </div>
         </MDBCardText>
       </MDBCardBody>
     </MDBCard>
@@ -28,3 +34,4 @@ const Card = ({ innovation }) => {
 };
 
 export default Card;
+
