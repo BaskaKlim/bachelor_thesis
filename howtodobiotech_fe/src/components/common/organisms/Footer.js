@@ -1,30 +1,108 @@
-import React from 'react';
-import styles from './Footer.module.css';
-import { FaFacebook, FaTwitter, FaLinkedin, FaInstagram } from 'react-icons/fa';
+import React from "react";
+import {
+  MDBFooter,
+  MDBContainer,
+  MDBRow,
+  MDBCol,
+  MDBInput,
+  MDBBtn,
+  MDBIcon,
+} from "mdb-react-ui-kit";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faInstagram,
+  faLinkedin,
+  faGitlab,
+} from "@fortawesome/free-brands-svg-icons";
+
+import styles from "./Footer.module.css";
 
 const Footer = () => {
   return (
-    <footer className={styles.footer}>
-      <div className={styles.logoSection}>
-        <img className={styles.logo} src="/assets/logo_blue.png" alt="How To Do Biotech" />
-        <p className={styles.shortText}>Find the right resources, mentorship, and support they need.</p>
-      </div>
-      <div className={styles.contactSection}>
-        <h4>Contact Us</h4>
-        <p>Email: contact@example.com</p>
-        <p>Phone: +1 (555) 123-4567</p>
-        <p>Address: 1234 Startup Avenue, City, Country</p>
-      </div>
-      <div className={styles.socialMediaSection}>
-        <h4>Follow Us</h4>
-        <div className={styles.socialMediaIcons}>
-          <a href="https://www.facebook.com/yourorganization" target="_blank" rel="noopener noreferrer" className={styles.socialMediaIcon}><FaFacebook /></a>
-          <a href="https://twitter.com/yourorganization" target="_blank" rel="noopener noreferrer" className={styles.socialMediaIcon}><FaTwitter /></a>
-          <a href="https://www.linkedin.com/company/yourorganization" target="_blank" rel="noopener noreferrer" className={styles.socialMediaIcon}><FaLinkedin /></a>
-          <a href="https://www.instagram.com/yourorganization" target="_blank" rel="noopener noreferrer" className={styles.socialMediaIcon}><FaInstagram /></a>
-        </div>
-      </div>
-    </footer>
+    <MDBFooter
+      className={`page-footer font-small pt-4 mt-4 ${styles.footerBackground}`}
+    >
+      <MDBContainer fluid className="text-center text-md-left">
+        <MDBRow>
+          <MDBCol md="3" className="text-center">
+            <div className={styles.logoSection}>
+              <img
+                className={styles.logo}
+                src="/assets/logo_blue_landscape.png"
+                alt="How To Do Biotech"
+              />
+              <p className={styles.shortText}>
+                Find the right resources, mentorship, and support they need.
+              </p>
+            </div>
+          </MDBCol>
+
+          <MDBCol
+            md="6"
+            className={`text-center fluid ${styles.subscriptionSection}`}
+          >
+            <p className={styles.lightText}>
+              Subscribe for our news and get all information about skill
+              opportunities and support for your biotech ides.
+            </p>
+            <div className={styles.formContainer}>
+              <form className={`input-group ${styles.centeredForm}`}>
+                <MDBInput
+                  hint="Your email"
+                  type="text"
+                  containerClass="mt-0 mb-0"
+                />
+                <MDBBtn color="secondary" className="mb-0 ml-2">
+                  Subscribe
+                </MDBBtn>
+              </form>
+
+              <div className={styles.agreementSection}>
+                <input
+                  type="checkbox"
+                  id="privacyPolicy"
+                  name="privacyPolicy"
+                  value="Agree"
+                />
+                <label htmlFor="privacyPolicy">
+                  {" "}
+                  I agree with the <span></span>
+                  <a href="#!" className="mr-4">
+                    Privacy Policy
+                  </a>
+                  <a href="#!">Terms and Conditions</a>
+                </label>
+              </div>
+            </div>
+            <div className={styles.allRightsReserved}>
+              © {new Date().getFullYear()} Barbara Klimekova| Opensource licence
+            </div>
+          </MDBCol>
+
+          <MDBCol md="3" className="text-center">
+            <h4 className={styles.contact}>Contact Us</h4>
+            <div className={styles.contactSection}>
+              <p>b_klimekova@utb.cz</p>
+              <p>+421 901705737</p>
+            </div>
+            <div className={styles.socialMediaSection}>
+              <FontAwesomeIcon
+                icon={faInstagram}
+                className={styles.socialMediaIcon}
+              />
+              <FontAwesomeIcon
+                icon={faLinkedin}
+                className={styles.socialMediaIcon}
+              />
+              <FontAwesomeIcon
+                icon={faGitlab}
+                className={styles.socialMediaIcon}
+              />
+            </div>
+          </MDBCol>
+        </MDBRow>
+      </MDBContainer>
+    </MDBFooter>
   );
 };
 

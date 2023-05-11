@@ -1,0 +1,19 @@
+.labelStyle {
+    background-color: #f2f2f2;
+    color: #BDD0FB;
+    padding: 5px;
+    margin: 2px;
+    border-radius: 4px;
+    display: inline-block; /* to keep them inline */
+    cursor: pointer; /* optional, if you want the labels to be clickable */
+  }
+  
+  .labelStyle:hover {
+    background-color: #d9d9d9;
+  }
+  
+  .labelStyle.active {
+    background-color: #BDD0FB;
+    color: #fff;
+  }
+  

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
 import SkillOptDataService from "../../../service/Skill.service";
-import Card from "../atoms/card";
+import Card from "../organisms/SkillCard";
 import styles from "./SkillOptsList.module.css";
 
 const skillCategories = [

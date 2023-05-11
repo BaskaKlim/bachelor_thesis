@@ -1,8 +1,8 @@
 import React from 'react';
 import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
 import WebsiteButton from '../../common/atoms/web.button';
-import CategoryLabel from '../../common/category.label';
-import CountryLabel from '../../common/country.label';
+import CategoryLabel from '../../common/atoms/Category.label';
+import CountryLabel from '../../common/atoms/Country.label';
 
 const Card = ({ startupOpt }) => {
   const categoryLabels = startupOpt.categories.map((category) => <CategoryLabel key={category.id} category={category} />);
