@@ -1,0 +1,56 @@
+.startupCard {
+  max-width: 22rem;
+  align-items: center;
+}
+
+.startupCardTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.startupCardDescription {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.startupCardProvider {
+
+  padding-bottom: 15px;
+  text-align: center;
+  font-size: 15x;
+}
+
+.startupCardDateContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  
+}
+
+.startupCardDateIcon {
+  margin-right: 10px;
+}
+
+.startupCardDate {
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.startupCardLabels {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.cardText{
+align-content: center;
+align-items: center;
+}
+
+  

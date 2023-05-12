@@ -1,0 +1,55 @@
+.skillOptCard {
+  max-width: 22rem;
+  align-items: center;
+}
+
+.skillOptCardTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.skillOptCardDescription {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.skillOptCardOrganizer {
+  padding-bottom: 15px;
+  text-align: center;
+  font-size: 15x;
+}
+
+.skillOptCardDateContainer {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  
+}
+
+.skillOptCardDateIcon {
+  margin-right: 10px;
+}
+
+.skillOptCardDate {
+  background-color: #f2f2f2;
+  padding: 5px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.skillOptCardLabels {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.cardText{
+align-content: center;
+align-items: center;
+}
+
+  

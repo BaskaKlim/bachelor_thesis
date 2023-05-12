@@ -2,17 +2,17 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
-import Footer from "./components/common/organisms/Footer";
+import Footer from "./components/organisms/common/Footer.component";
 
-import AddInnovation from "./components/network/templates/add-innovation.component";
-import AddStartupOpt from "./components/startups/templates/add-startup-opt.component";
+import AddInnovation from "./components/templates/network/Innovation-add.component";
+import AddStartupOpt from "./components/templates/startups/StartupOpt-add.component";
 
-import Innovation from "./components/network/organisms/innovation.component";
-import StartupOpt from "./components/startups/organisms/startupOpt.component";
+import Innovation from "./components/organisms/network/Innovation.component";
+import StartupOpt from "./components/organisms/startups/StartupOpt.component";
 
-import NetworkPage from "./components/network/pages/network.page";
-import StartupOptPage from "./components/startups/pages/startup.page";
-import SkillPage from "./components/skills/pages/Skill.page"; // Import SkillPage component
+import NetworkPage from "./components/pages/Network.page";
+import StartupOptPage from "./components/pages/Startup.page";
+import SkillPage from "./components/pages/Skill.page"; 
 
 
 class App extends Component {
