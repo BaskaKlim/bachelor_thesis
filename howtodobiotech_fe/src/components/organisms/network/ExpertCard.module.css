@@ -1,0 +1,80 @@
+.expertCard {
+  max-width: 22rem;
+  align-items: center;
+  max-width: 22rem;
+  align-items: center;
+}
+
+.cardTitle {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.jobPosition {
+  text-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+.cardDescription {
+  margin-top: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 1.2rem;
+}
+
+.cardLabels {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+}
+
+.cardText {
+  align-content: center;
+  align-items: center;
+}
+
+.cardImage {
+ max-width: 200px;
+  max-height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  padding: 2px;
+  background-color: white;
+}
+
+.expandButton {
+  color: #b0b0b0;
+  background-color: transparent;
+  border: none;
+  padding: 0;
+  transition: none;
+}
+
+.expandButtonIcon {
+  color: #b0b0b0;
+}
+
+.linkedinButton {
+  color: #939292;
+  background-color: transparent;
+  border: none;
+  transition: none;
+  text-align: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.linkedinButtonIcon {
+  color: #979494;
+  padding-right: 5px;
+  font-size: 1.5rem;
+  text-align: center;
+  align-items: center;
+  
+}
+
+.labelSection{
+  padding-top: 5px;
+}

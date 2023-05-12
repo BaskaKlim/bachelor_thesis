@@ -5,7 +5,7 @@ import ExpertDataService from "../../service/ExpertDataService";
 import InnovationDataService from "../../service/innovation.service";
 import CarouselBanner from "../organisms/network/InnovationCarousel.banner";
 import CenteredTextWithButton from "../organisms/common/CenteredText.component";
-
+import Newsletter from "../organisms/common/Newsletter.banner";
 import styles from "./NetworkPage.module.css";
 
 class NetworkPage extends Component {
@@ -72,11 +72,10 @@ class NetworkPage extends Component {
         </div>
         <div></div>
         <ExpertList filteredExperts={filteredExperts} />
-        <CenteredTextWithButton
-          text="
-          Are you an organizer of biotech skill development courses, workshops, or events?  Are you looking for interns and researchers? We invite you to sign up to our platform and create an account for your organization. Add your workshops, internships, or hackathons to our database and attract young talents in science through our platform. Join us today and be a part of the biotech skill development revolution!"
-          textButton="create profile"
-        />
+        
+        <div>
+        <Newsletter text="Stay informed, inspired, and connected with How To Do Biotech. Together, let's unlock the endless possibilities of the biotech world." backgroundColor="#edebeb" />
+        </div>
 
         <InnovationsList filteredInnovations={filteredInnovations} />
       </div>

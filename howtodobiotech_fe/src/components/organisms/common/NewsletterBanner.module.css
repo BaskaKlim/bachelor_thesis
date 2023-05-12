@@ -1,0 +1,86 @@
+/* NewsletterBanner.module.css */
+.newsletterBackground {
+  background-color: #f7f7f7;
+  padding-bottom: 25px;
+  
+}
+
+.subscriptionSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+}
+
+.lightText {
+  color: #333;
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+  text-align: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group {
+  width: 100%;
+  margin-bottom: 1rem;
+}
+
+.centeredForm {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.agreementSection {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1rem;
+}
+
+.agreementSection label {
+  display: flex;
+  align-items: center;
+  margin-top: 0.5rem;
+}
+
+.agreementSection label a {
+  margin-right: 0.5rem;
+}
+
+.agreementSection label span {
+  width: 5px;
+  height: 5px;
+  margin: 0 0.5rem;
+  background-color: #333;
+  border-radius: 50%;
+  display: inline-block;
+}
+
+.agreementSection input[type="checkbox"] {
+  margin-right: 0.5rem;
+}
+
+.allRightsReserved {
+  font-size: 0.8rem;
+  margin-top: 1rem;
+  text-align: center;
+}
+
+/* Additional Styles */
+
+.subscribeButton {
+  background-color: #5271FF;
+  border-color: #5271FF;
+}
+
+.inputField {
+  border-color: #5271FF;
+}

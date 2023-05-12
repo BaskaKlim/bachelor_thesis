@@ -10,31 +10,40 @@ const skillCategories = [
   {
     id: 1,
     name: "WORKSHOP",
+    title: "WORKSHOP",
     imageUrl: "/assets/workshop.png",
     color: "#FFA6A2",
   },
   {
     id: 2,
     name: "SUMMER_WINTER_SCHOOL",
+    title:"SUMMER WINTER SCHOOL",
     imageUrl: "/assets/school.png",
     color: "#4B4DF7",
   },
   {
     id: 3,
     name: "CONFERENCE",
+    title:"CONFERENCE",
     imageUrl: "/assets/conference.png",
     color: "#FE7062",
   },
   {
     id: 4,
     name: "INTERNSHIP",
+    title: "INTERNSHIP",
     imageUrl: "/assets/internship.png",
     color: "#CEDAF6",
   },
-  { id: 5, name: "ACADEMY", imageUrl: "/assets/academy.png", color: "#B23730" },
+  { id: 5, 
+    name: "ACADEMY", 
+    title: "ACADEMY", 
+    imageUrl: "/assets/academy.png", 
+    color: "#B23730" },
   {
     id: 6,
     name: "HACKATHON",
+    title: "HACKATHON",
     imageUrl: "/assets/hackathon.png",
     color: "#9695F2",
   },
@@ -51,8 +60,8 @@ const categoryOptions = [
     name: "BIOINFORMATICS",
     color: "#110777",
   },
-  { id: 3, name: "ENERGY", imageUrl: "/assets/energy.jpg", color: "#7369ff" },
-  { id: 4, name: "FOOD", imageUrl: "/assets/food.jpg", color: "#FF928F" },
+  { id: 3, name: "ENERGY",   color: "#7369ff" },
+  { id: 4, name: "FOOD",   color: "#FF928F" },
   {
     id: 5,
     name: "ENVIRONMENTAL",
@@ -63,7 +72,7 @@ const categoryOptions = [
     name: "AGRICULTURE",
     color: "#A22B25",
   },
-  { id: 7, name: "MARINE", imageUrl: "/assets/marine.jpg", color: "#4B4DF7" },
+  { id: 7, name: "MARINE",  color: "#4B4DF7" },
 ];
 
 class SkillOptList extends Component {
@@ -216,7 +225,7 @@ class SkillOptList extends Component {
               style={{ backgroundColor: category.color }}
               className={styles["category-button"]}
             >
-              {category.name}
+              {category.title}
             </button>
           ))}
           {categoryOptions.map((category) => (

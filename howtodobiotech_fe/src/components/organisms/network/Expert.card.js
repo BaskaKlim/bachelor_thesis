@@ -7,85 +7,109 @@ import {
   MDBTypography,
   MDBCardImage,
   MDBBtn,
+  MDBCollapse,
 } from "mdb-react-ui-kit";
-import {
-  FaLinkedin,
-  FaMapMarkerAlt,
-  FaUserTie,
-  FaChevronDown,
-} from "react-icons/fa";
+import { FaLinkedin, FaChevronDown, FaChevronUp } from "react-icons/fa";
+import styles from "./ExpertCard.module.css";
+import CategoryLabel from "../../atoms/common/Category.label";
+import CountryLabel from "../../atoms/common/Country.label";
 
 const ExpertCard = ({ expert }) => {
   const [isExpanded, setIsExpanded] = useState(false);
 
   const countryLabels = expert.countries.map((country) => (
-    <MDBTypography key={country.id} variant="caption" className="text-muted">
-      <FaMapMarkerAlt />
-      {country.name.charAt(0).toUpperCase() +
-        country.name.slice(1).toLowerCase()}
-    </MDBTypography>
+    <CountryLabel key={country.id} country={country} className="labelStyle" />
   ));
 
   const expertiseLabels = expert.expertises.map((expertise) => (
-    <MDBTypography key={expertise.id} variant="caption" className="text-muted">
+    <CategoryLabel
+      key={expertise.id}
+      variant="caption"
+      category={{ id: expertise.id, name: expertise.name }}
+      className="labelStyle"
+    >
       {expertise.name.charAt(0).toUpperCase() +
         expertise.name.slice(1).toLowerCase()}
-    </MDBTypography>
+    </CategoryLabel>
   ));
 
+  const truncatedBackgroundDescription =
+    expert.backgroundDescription && expert.backgroundDescription.slice(0, 200);
+
   return (
-    <MDBCard className="shadow-2-strong mb-4">
+    <MDBCard className={`shadow-2-strong mb-4 ${styles.expertCard}`}>
       <MDBCardImage
         src={expert.profileImageUrl}
         alt={`${expert.firstName} ${expert.lastName} profile`}
         fluid
-        className="rounded-circle p-2 bg-white"
+        className={styles.cardImage}
       />
       <MDBCardBody>
-        <MDBCardTitle className="fw-bold">{`${expert.firstName} ${expert.lastName}`}</MDBCardTitle>
-        <MDBTypography variant="subtitle1" className="mb-3">
-          <FaUserTie className="me-2" />
+        <MDBCardTitle className={`fw-bold ${styles.cardTitle}`}>
+          {`${expert.firstName} ${expert.lastName}`}
+        </MDBCardTitle>
+        
+        <MDBTypography
+          variant="subtitle1"
+          className={`mb-3 ${styles.jobPosition}`}
+        >
           {expert.jobPosition}
         </MDBTypography>
-        <MDBCardText className="mb-3">
-          <div className="me-2" />
-          {countryLabels}
-        </MDBCardText>
-        <MDBCardText className="mb-3">
-          <strong>Background: </strong>
-          {isExpanded
-            ? expert.backgroundDescription
-            : `${expert.backgroundDescription.slice(0, 120)}...`}
-          {!isExpanded && (
+  
+        <MDBCardText className={styles.linkedinButton}>
+          {expert.linkedinUrl && (
             <MDBBtn
-              color="primary"
-              size="sm"
-              className="ms-2 py-0"
-              onClick={() => setIsExpanded(true)}
+              href={expert.linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              color="grey"
+              className={styles.linkedinButton}
             >
-              <FaChevronDown />
+              <FaLinkedin className={styles.linkedinButtonIcon} />
+              LinkedIn
             </MDBBtn>
           )}
         </MDBCardText>
-        <MDBCardText className="mb-0">
-          <strong>Expertises: </strong>
-          {expertiseLabels}
+  
+        <MDBCardText className={`mb-3 ${styles.cardText}`}>
+          <strong>Background: </strong>
+          {expert.backgroundDescription && (
+            <>
+              {isExpanded ? (
+                <MDBCollapse show={isExpanded}>
+                  <span>{expert.backgroundDescription}</span>
+                </MDBCollapse>
+              ) : (
+                <>
+                  <span>{truncatedBackgroundDescription}</span>
+                  {expert.backgroundDescription.length > 200 && (
+                    <MDBBtn
+                      color="light"
+                      size="sm"
+                      className={`ms-2 py-0 ${styles.expandButton}`}
+                      onClick={() => setIsExpanded(!isExpanded)}
+                    >
+                      {isExpanded ? (
+                        <FaChevronUp className={styles.expandButtonIcon} />
+                      ) : (
+                        <FaChevronDown className={styles.expandButtonIcon} />
+                      )}
+                    </MDBBtn>
+                  )}
+                </>
+              )}
+            </>
+          )}
         </MDBCardText>
-        {expert.linkedinUrl && (
-          <MDBBtn
-            href={expert.linkedinUrl}
-            target="_blank"
-            rel="noreferrer"
-            color="primary"
-            className="d-flex align-items-center mt-3"
-          >
-            <FaLinkedin className="me-2" />
-            LinkedIn
-          </MDBBtn>
-        )}
+  
+        <div className={styles.labelSection}>
+          <MDBCardText className={`mb-0 ${styles.cardText}`}>
+            {expertiseLabels}
+            {countryLabels}
+          </MDBCardText>
+        </div>
       </MDBCardBody>
     </MDBCard>
   );
-};
-
-export default ExpertCard;
+}
+export default  ExpertCard;

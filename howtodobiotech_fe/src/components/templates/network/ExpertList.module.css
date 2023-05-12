@@ -40,52 +40,55 @@
     }
   }
   
-  .all-expertises-button {
-    background-color: #f1f1f1;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 8px;
-    cursor: pointer;
-    border-radius: 20px;
-    padding: 8px 16px;
-    transition: background-color 0.3s;
-  }
   
-  .all-expertises-button:hover {
-    background-color: #ddd;
-    color: black;
-  }
-  
-  .expertise-button {
-    background-color: #f1f1f1;
-    border: none;
-    color: white;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 14px;
-    margin: 4px 8px;
-    cursor: pointer;
-    border-radius: 20px;
-    padding: 8px 16px;
-    transition: background-color 0.3s;
-  }
-  
-  .expertise-button:hover {
-    background-color: #ddd;
-    color: black;
-  }
 
+.category-button {
+  background-color: #f1f1f1;
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 8px;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+.category-button:hover {
+  background-color: #ddd;
+  color: black;
+}
+
+.all-categories-button {
+  background-color: #888;
+  color: white;
+  border: none;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 14px;
+  margin: 4px 8px;
+  cursor: pointer;
+  border-radius: 20px;
+  padding: 8px 16px;
+  transition: background-color 0.3s;
+}
+
+.all-categories-button:hover {
+  background-color: #666;
+}
   .paginationButtons {
     display: flex;
     justify-content: center;
     align-items: center;
   }
   
+  .cards-list{
+    padding-top: 25px;
+  }
   .pageButton {
     width: 2.5rem;
     height: 2.5rem;
@@ -112,4 +115,5 @@
     background-color: #BDD0FB;
     color: #fff;
   }
-    
+
+  

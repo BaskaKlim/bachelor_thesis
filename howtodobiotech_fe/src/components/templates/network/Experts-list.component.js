@@ -7,24 +7,24 @@ import styles from "./ExpertList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
 const expertiseOptions = [
-  { id: 1, name: "BUSINESS_DEVELOPMENT", color: "#E35149" },
-  { id: 2, name: "LIFE_SCIENCE", color: "#A22B25" },
-  { id: 3, name: "CHEMISTRY", color: "#110777" },
-  { id: 4, name: "BIOLOGY", color: "#E35149" },
-  { id: 5, name: "BIOINFORMATICS", color: "#7369ff" },
-  { id: 6, name: "DATA_SCIENCE", color: "#E35149" },
-  { id: 7, name: "LEGAL", color: "#4B4DF7" },
-  { id: 8, name: "MVP_PRTOTOTYPING", color: "#E35149" },
-  { id: 9, name: "BUSINESS_VALIDATION", color: "#E35149" },
-  { id: 10, name: "PRODUCT_DESING", color: "#E35149" },
-  { id: 11, name: "CLINICAL_TRIAL", color: "#FF928F" },
-  { id: 12, name: "FINANCE", color: "#91B3FA" },
+  { id: 1, name: "BUSINESS_DEVELOPMENT", title: "BUSINESS DEVELOPMENT",  color: "#E35149" },
+  { id: 2, name: "LIFE_SCIENCE",title: "LIFE SCIENCE", color: "#110777" },
+  { id: 3, name: "CHEMISTRY", title: "CHEMISTRY",color: "#7369ff" },
+  { id: 4, name: "BIOLOGY", title: "BIOLOGY",color: "#FF928F" },
+  { id: 5, name: "BIOINFORMATICS",title: "BIOINFORMATICS", color: "#91B3FA" },
+  { id: 6, name: "DATA_SCIENCE", title: "DATA SCIENCE",color: "#A22B25" },
+  { id: 7, name: "LEGAL",title: "LEGAL", color: "#4B4D4B4DF7F7" },
+  { id: 8, name: "MVP_PRTOTOTYPING", title: "MVP PRTOTOTYPING",color: "#A22B25" },
+  { id: 9, name: "BUSINESS_VALIDATION",title: "BUSINESS VALIDATION", color: "#7369ff" },
+  { id: 10, name: "PRODUCT_DESING",title: "PRODUCT DESING", color: "#FF928F" },
+  { id: 11, name: "CLINICAL_TRIAL", title: "CLINICAL TRIAL",color: "#110777" },
+  { id: 12, name: "FINANCE",title: "FINANCE", color: "#E35149" },
 ];
 
 class ExpertList extends Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
       experts: [],
       filteredExperts: [],
@@ -32,7 +32,7 @@ class ExpertList extends Component {
       expertsPerPage: 6,
     };
   }
-  
+
   filterByExpertise = (expertise) => {
     const filteredExperts = this.state.experts.filter((expert) =>
       expert.expertises.some(
@@ -40,11 +40,11 @@ class ExpertList extends Component {
           expertiseObj.name.toLowerCase() === expertise.toLowerCase()
       )
     );
-    this.setState({ filteredExperts });
+    this.setState({ filteredExperts, currentPage: 1 });
   };
 
   showAllExperts = () => {
-    this.setState({ filteredExperts: this.state.experts });
+    this.setState({ filteredExperts: this.state.experts, currentPage: 1 });
   };
 
   handlePageChange = (page) => {
@@ -70,7 +70,6 @@ class ExpertList extends Component {
       });
     }
   }
-
   render() {
     const { filteredExperts, currentPage, expertsPerPage } = this.state;
     const totalPages = Math.ceil(filteredExperts.length / expertsPerPage);
@@ -80,14 +79,27 @@ class ExpertList extends Component {
   
     return (
       <div>
-        ...
+        <div className={styles.filterOptions}>
+          <button className={styles['all-categories-button']} onClick={this.showAllExperts}> All Experts</button>
+          {expertiseOptions.map((expertise) => (
+            <button
+              key={expertise.id}
+              onClick={() => this.filterByExpertise(expertise.name)}
+              style={{ backgroundColor: expertise.color }}
+              className={`${styles['category-button']} ${styles.active}`}
+            >
+              {expertise.title}
+            </button>
+          ))}
+        </div>
+  
         {displayedExperts.length > 0 ? (
           <div>
-            <ul className={styles["cards-list"]}>
+            <ul className={styles['cards-list']}>
               {displayedExperts.map((expert) => (
                 <li
                   key={expert.id}
-                  className={`${styles["card-container"]} ${styles["list-item"]}`}
+                  className={`${styles['card-container']} ${styles['list-item']}`}
                 >
                   <ExpertCard expert={expert} />
                 </li>
@@ -100,7 +112,9 @@ class ExpertList extends Component {
                     <button
                       key={number}
                       onClick={() => this.handlePageChange(number + 1)}
-                      className={`${styles.pageButton} ${currentPage === number + 1 ? styles.active : ''}`}
+                      className={`${styles.pageButton} ${
+                        currentPage === number + 1 ? styles.active : ''
+                      }`}
                     >
                       {number + 1}
                     </button>
@@ -111,9 +125,9 @@ class ExpertList extends Component {
           </div>
         ) : (
           <NotFoundPage
-          title="Did not find what you were looking for?"
-          text="If you need help from expert with special expertise, let us know. Our network is huge, we can help to connect you to the right people."
-        />
+            title="Did not find what you were looking for?"
+            text="If you need help from an expert with special expertise, let us know. Our network is huge, and we can help to connect you to the right people."
+          />
         )}
       </div>
     );
