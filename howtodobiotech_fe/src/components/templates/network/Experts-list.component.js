@@ -4,6 +4,7 @@ import { updateExpert, deleteExpert } from "../../../actions/experts";
 import ExpertDataService from "../../../service/ExpertDataService";
 import ExpertCard from "../../organisms/network/Expert.card";
 import styles from "./ExpertList.module.css";
+import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
 const expertiseOptions = [
   { id: 1, name: "BUSINESS_DEVELOPMENT", color: "#E35149" },
@@ -109,7 +110,10 @@ class ExpertList extends Component {
             </div>
           </div>
         ) : (
-          <div>Loading...</div>
+          <NotFoundPage
+          title="Did not find what you were looking for?"
+          text="If you need help from expert with special expertise, let us know. Our network is huge, we can help to connect you to the right people."
+        />
         )}
       </div>
     );

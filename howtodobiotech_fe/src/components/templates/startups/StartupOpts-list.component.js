@@ -4,6 +4,8 @@ import { updateStartupOpt, deleteStartupOpt } from "../../../actions/startups";
 import StartupOptDataService from "../../../service/Startup.service";
 import Card from "../../organisms/startups/Startup.card";
 import styles from "./StartupOptsList.module.css";
+import NotFoundPage from "../../organisms/common/NotFoundPage.component";
+
 
 const supportOptions = [
   {
@@ -73,7 +75,7 @@ class StartupOptList extends Component {
       selectedCategory: null,
       selectedSupportOption: null,
       currentPage: 1,
-      startupOptsPerPage: 6
+      startupOptsPerPage: 6,
     };
   }
 
@@ -98,9 +100,11 @@ class StartupOptList extends Component {
     this.setState({ filteredStartupOpts });
   };
 
-  
   handleCategoryFilter = (categoryId) => {
-    this.setState({ selectedCategory: categoryId, currentPage: 1 }, this.filterStartupOpts);
+    this.setState(
+      { selectedCategory: categoryId, currentPage: 1 },
+      this.filterStartupOpts
+    );
   };
 
   handleSupportOptionFilter = (supportOptionId) => {
@@ -143,10 +147,17 @@ class StartupOptList extends Component {
 
     const indexOfLastStartupOpt = currentPage * startupOptsPerPage;
     const indexOfFirstStartupOpt = indexOfLastStartupOpt - startupOptsPerPage;
-    const currentStartupOpts = filteredStartupOpts.slice(indexOfFirstStartupOpt, indexOfLastStartupOpt);
+    const currentStartupOpts = filteredStartupOpts.slice(
+      indexOfFirstStartupOpt,
+      indexOfLastStartupOpt
+    );
 
     const pageNumbers = [];
-    for (let i = 1; i <= Math.ceil(filteredStartupOpts.length / startupOptsPerPage); i++) {
+    for (
+      let i = 1;
+      i <= Math.ceil(filteredStartupOpts.length / startupOptsPerPage);
+      i++
+    ) {
       pageNumbers.push(i);
     }
 
@@ -187,7 +198,8 @@ class StartupOptList extends Component {
             <ul className={styles["cards-list"]}>
               {currentStartupOpts.map((startupOpt) => {
                 const firstSupportCategory =
-                  startupOpt.supportCategories && startupOpt.supportCategories[0];
+                  startupOpt.supportCategories &&
+                  startupOpt.supportCategories[0];
                 const supportCategory =
                   firstSupportCategory &&
                   supportOptions.find(
@@ -213,30 +225,34 @@ class StartupOptList extends Component {
               })}
             </ul>
             <div className={styles.pagination}>
-            <div className={styles.paginationButtons}>
-              {pageNumbers.map((number) => {
-                return (
-                  <button
-                    key={number}
-                    id={number}
-                    onClick={this.handlePageClick}
-                    className={`${styles.pageButton} ${currentPage === number ? styles.active : ''}`}
-                  >
-                    {number}
-                  </button>
-                );
-              })}
-            </div>
+              <div className={styles.paginationButtons}>
+                {pageNumbers.map((number) => {
+                  return (
+                    <button
+                      key={number}
+                      id={number}
+                      onClick={this.handlePageClick}
+                      className={`${styles.pageButton} ${
+                        currentPage === number ? styles.active : ""
+                      }`}
+                    >
+                      {number}
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           </div>
         ) : (
-          <div>Loading...</div>
+          <NotFoundPage
+            title="We are sorry!"
+            text="There is no support options for biotech teams in chosen categories right now. Stay tuned and check the possibilities later."
+          />
         )}
       </div>
     );
   }
 }
-
 
 const mapStateToProps = (state) => ({
   startupOpts: state.startupOpts,

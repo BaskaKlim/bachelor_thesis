@@ -4,6 +4,7 @@ import { updateInnovation, deleteInnovation } from '../../../actions/innovations
 import InnovationDataService from '../../../service/innovation.service';
 import Card from '../../organisms/network/Innovation.card';
 import styles from './InnovationsList.module.css'; // Import the new CSS module
+import NotFoundPage from '../../organisms/common/NotFoundPage.component';
 
 const categoryOptions = [
   { id: 1, name: 'MEDICINE', imageUrl: '/assets/medicine.jpg', color: '#E35149' },
@@ -137,7 +138,10 @@ class InnovationsList extends Component {
             </div>
           </ul>
         ) : (
-          <div>Loading...</div>
+          <NotFoundPage
+          title="Did not find what you were looking for?"
+          text="Help us build the biggest database of biotech innovations in our region. Let us know about interesting teams of scientists or startups you know."
+        />
         )}
       </div>
     );

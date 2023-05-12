@@ -4,6 +4,7 @@ import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
 import SkillOptDataService from "../../../service/Skill.service";
 import Card from "../../organisms/skills/Skill.card";
 import styles from "./SkillOptsList.module.css";
+import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
 const skillCategories = [
   {
@@ -275,14 +276,12 @@ class SkillOptList extends Component {
             </div>
           </div>
         ) : (
-          <div className={styles.notFoundContainer}>
-            <p>We are sorry, no skill options in chosen categories found.</p>
-            <img
-              src="/assets/404.jpg"
-              alt="Not Found"
-              className={styles["notFoundImage"]}
+         
+            <NotFoundPage
+              title="We are sorry!"
+              text="No opportunity to gain new skills was found in chosen categories. Sign up to newsletter and stay in touch!"
             />
-          </div>
+         
         )}
       </div>
     );
