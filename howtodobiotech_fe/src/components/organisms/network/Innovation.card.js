@@ -1,32 +1,78 @@
-import React from 'react';
-import { MDBCard, MDBCardBody, MDBCardTitle, MDBCardText } from 'mdb-react-ui-kit';
-import WebsiteButton from '../../atoms/common/Web.button'
-import CategoryLabel from '../../atoms/common/Category.label';
-import CountryLabel from '../../atoms/common/Country.label';
+import React, { useState } from "react";
+import {
+  MDBCard,
+  MDBCardBody,
+  MDBCardTitle,
+  MDBCardText,
+  MDBCollapse,
+  MDBBtn,
+} from "mdb-react-ui-kit";
+import WebsiteButton from "../../atoms/common/Web.button";
+import CategoryLabel from "../../atoms/common/Category.label";
+import CountryLabel from "../../atoms/common/Country.label";
+import styles from "./InnovationCard.module.css";
+import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const Card = ({ innovation }) => {
-  const categoryLabels = Array.isArray(innovation.biotechCategories)
-  ? [...innovation.biotechCategories, ...innovation.skillCategories].map((category) => (
-      <CategoryLabel key={category.id} category={category} />
-    ))
-  : null;
-  const countryLabels = innovation.countries.map((country) => <CountryLabel key={country.id} country={country} />);
+  const [isExpanded, setIsExpanded] = useState(false);
+
+  const categoryLabels = innovation.categories.map((category) => (
+    <CategoryLabel
+      key={category.id}
+      category={category}
+      className="labelStyle"
+    />
+  ));
+  const countryLabels = innovation.countries.map((country) => (
+    <CountryLabel key={country.id} country={country} />
+  ));
+
+  const truncatedDescription =
+    innovation.description.length > 200
+      ? innovation.description.substring(0, 200) + "..."
+      : innovation.description;
 
   return (
-    <MDBCard style={{ maxWidth: '22rem' }}>
+    <MDBCard className={styles.cardContainer}>
       <MDBCardBody>
-        <MDBCardTitle>{innovation.title}</MDBCardTitle>
-        <MDBCardText>{innovation.description}</MDBCardText>
-        <MDBCardText>
+        <MDBCardTitle className={styles.cardTitle}>
+          {innovation.title}
+        </MDBCardTitle>
+        <MDBCardText className={styles.cardButton}>
           <WebsiteButton url={innovation.website} />
         </MDBCardText>
-        <MDBCardText>
-          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-            {categoryLabels}
-          </div>
+
+        <MDBCardText className={`mb-3 ${styles.cardText}`}>
+          {innovation.description.length > 250 && (
+            <>
+              {isExpanded ? (
+                <MDBCollapse show={isExpanded}>
+                  <span>{innovation.description}</span>
+                </MDBCollapse>
+              ) : (
+                <>
+                  <span>{truncatedDescription}</span>
+                  <MDBBtn
+                    color="light"
+                    size="sm"
+                    className={`ms-2 py-0 ${styles.expandButton}`}
+                    onClick={() => setIsExpanded(!isExpanded)}
+                  >
+                    {isExpanded ? (
+                      <FaChevronUp className={styles.expandButtonIcon} />
+                    ) : (
+                      <FaChevronDown className={styles.expandButtonIcon} />
+                    )}
+                  </MDBBtn>
+                </>
+              )}
+            </>
+          )}
         </MDBCardText>
-        <MDBCardText>
-          <div style={{ display: 'flex', flexWrap: 'wrap' }}>
+
+        <MDBCardText className={styles.cardText}>
+          <div style={{ display: "flex", flexWrap: "wrap" }}>
+            {categoryLabels}
             {countryLabels}
           </div>
         </MDBCardText>
@@ -36,4 +82,3 @@ const Card = ({ innovation }) => {
 };
 
 export default Card;
-

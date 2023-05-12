@@ -72,9 +72,28 @@ class NetworkPage extends Component {
         </div>
         <div></div>
         <ExpertList filteredExperts={filteredExperts} />
-        
+
         <div>
-        <Newsletter text="Stay informed, inspired, and connected with How To Do Biotech. Together, let's unlock the endless possibilities of the biotech world." backgroundColor="#edebeb" />
+          <Newsletter
+            text="Stay informed, inspired, and connected with How To Do Biotech. Together, let's unlock the endless possibilities of the biotech world."
+            backgroundColor="#edebeb"
+          />
+        </div>
+
+        <div className={styles["intro"]}>
+          <p>
+            Discover the extraordinary world of biotech innovation in the CEE
+            region through our comprehensive database. Our platform empowers you
+            to navigate and explore the diverse landscape of biotech innovation,
+            ensuring you stay at the forefront of scientific breakthroughs in
+            the European region. With filtering you can effortlessly explore a
+            wide range of categories. Uncover the latest advancements in
+            medicine, where breakthrough vaccines and regenerative therapies are
+            revolutionizing healthcare. Dive into the realm of bioinformatics,
+            unraveling the secrets of DNA and amino acid sequences. Explore the
+            realms of food, environment, agriculture, marine, and energy
+            biotechnology, each offering transformative solutions.
+          </p>
         </div>
 
         <InnovationsList filteredInnovations={filteredInnovations} />

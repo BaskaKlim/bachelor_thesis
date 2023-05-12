@@ -1,0 +1,36 @@
+
+.cardContainer {
+    max-width: 22rem;
+  }
+  
+  .cardTitle {
+    text-align: center;
+    font-size: 1.2rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .cardDescription {
+    margin-top: 10px;
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  .cardButton {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 10px;
+  }
+  
+  .cardLabels {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+  
+  .cardText {
+    align-content: center;
+    align-items: center;
+  }
+  

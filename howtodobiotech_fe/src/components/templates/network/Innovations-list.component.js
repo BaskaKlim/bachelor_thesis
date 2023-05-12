@@ -42,7 +42,7 @@ class InnovationsList extends Component {
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
   };
-
+  
 
   componentDidMount() {
     InnovationDataService.getAllInnovations()
@@ -78,15 +78,15 @@ class InnovationsList extends Component {
   }
 
   render() {
-    const { filteredInnovations, currentPage, innovationsPerPage } = this.state;
-    const totalPages = Math.ceil(filteredInnovations.length / innovationsPerPage);
-    const startIndex = (currentPage - 1) * innovationsPerPage;
-    const endIndex = startIndex + innovationsPerPage;
-    const displayedInnovations = filteredInnovations.slice(startIndex, endIndex);
+ const { filteredInnovations, currentPage, innovationsPerPage } = this.state;
+const totalPages = Math.ceil(filteredInnovations.length / innovationsPerPage);
+const startIndex = (currentPage - 1) * innovationsPerPage;
+const endIndex = startIndex + innovationsPerPage;
+const displayedInnovations = filteredInnovations.slice(startIndex, endIndex);
 
     return (
       <div>
-        <h4>List of Innovations</h4>
+
 
         <div>
           <button className={styles['all-categories-button']} onClick={this.showAllInnovations}>All Categories</button>
