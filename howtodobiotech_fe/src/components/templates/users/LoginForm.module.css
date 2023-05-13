@@ -1,0 +1,136 @@
+/* LoginForm.module.css */
+
+.textBlack {
+    color: black;
+  }
+  
+  .loginCard {
+    background-color: #ffffff;
+    border-radius: 25px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  .title {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+    padding-top: 40%;
+    color: #0b0161;
+  }
+  
+  .loginRow {
+    justify-content: center;
+  }
+  
+  .loginCardBody {
+    padding: 2rem;
+  }
+  
+  .loginForm {
+    margin-bottom: 2rem;
+  }
+  
+  .loginTitle {
+    text-align: center;
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1.5rem;
+  }
+  
+  .loginFormOutline {
+    margin-bottom: 1rem;
+  }
+  
+  .loginInput {
+    width: 100%;
+  }
+  
+  .errorFeedback {
+    font-size: 0.9rem;
+    color: #e5554d;
+  }
+  
+  .loginActions {
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .loginButton {
+    background-color: #5271ff;
+    color: white;
+    transition: background-color 0.3s;
+  }
+  
+  .loginButton:hover {
+    background-color: #484bf2;
+  }
+  
+  .forgotPasswordLink {
+    color: #5271ff;
+  }
+  
+  .registrationImage {
+    align-content: center;
+    margin-bottom: 20px;
+        max-width: 800px;
+    
+      }  
+
+  .flexRow {
+    display: flex;
+    flex-direction: row;
+  }
+  
+  .alignItemsCenter {
+    align-items: center;
+  }
+  
+  .mb4 {
+    margin-bottom: 1rem;
+  }
+  
+  .w100 {
+    width: 100%;
+  }
+  
+  .invalid {
+    border-color: #e5554d !important;
+  }
+  
+  .flexColumn {
+    display: flex;
+    flex-direction: column;
+    padding-left: 10%;
+  }
+  
+  .order2 {
+    order: 2;
+  }
+  
+  .orderLg1 {
+    order: 1;
+  }
+  
+  .order1 {
+    order: 1;
+    
+  }
+  
+  .orderLg2 {
+
+    order: 2;
+  }
+  
+  .mb4 {
+    margin-bottom: 1rem;
+  }
+  
+  .textCenter {
+    text-align: center;
+  }
+  
+  .h2 {
+    font-size: 1.5rem;
+  }
+ 
+  
