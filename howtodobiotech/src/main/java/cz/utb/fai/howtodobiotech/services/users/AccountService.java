@@ -34,7 +34,7 @@ public class AccountService {
         return accountRepository.save(account);
     }
 
-    public Account updateUser(Account account) {
+    public Account updateAccount(Account account) {
         return accountRepository.save(account);
     }
 
@@ -51,8 +51,8 @@ public class AccountService {
         return accountRepository.existsByUsername(username);
     }
 
-    public  Boolean existsByPassword(String password){
-        return accountRepository.existsByPassword(password);
+    public  Boolean existsByEmail(String email){
+        return accountRepository.existsByEmail(email);
     };
 
 }

@@ -1,6 +1,8 @@
 package cz.utb.fai.howtodobiotech.security.services;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import cz.utb.fai.howtodobiotech.models.users.Account;
@@ -8,8 +10,6 @@ import cz.utb.fai.howtodobiotech.models.users.Account;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 public class AccountDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
@@ -20,16 +20,17 @@ public class AccountDetailsImpl implements UserDetails {
     private String url;
     private String email;
     private String username;
-    @JsonIgnore
     private String password;
     private Collection<? extends GrantedAuthority> authorities;
-    public AccountDetailsImpl(Integer id, String name, String description, String url, String email, String username, String password, Collection<? extends GrantedAuthority> authorities) {
+
+    public AccountDetailsImpl(Integer id, String name, String description, String url, String username, String email,
+                              String password, Collection<? extends GrantedAuthority> authorities) {
         this.id = id;
         this.name = name;
         this.description = description;
         this.url = url;
-        this.email = email;
         this.username = username;
+        this.email = email;
         this.password = password;
         this.authorities = authorities;
     }
@@ -44,8 +45,8 @@ public class AccountDetailsImpl implements UserDetails {
                 account.getName(),
                 account.getDescription(),
                 account.getUrl(),
-                account.getEmail(),
                 account.getUsername(),
+                account.getEmail(),
                 account.getPassword(),
                 authorities);
     }
@@ -74,7 +75,6 @@ public class AccountDetailsImpl implements UserDetails {
     public String getEmail() {
         return email;
     }
-
 
     @Override
     public String getPassword() {
@@ -114,5 +114,10 @@ public class AccountDetailsImpl implements UserDetails {
             return false;
         AccountDetailsImpl user = (AccountDetailsImpl) o;
         return Objects.equals(id, user.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
     }
 }

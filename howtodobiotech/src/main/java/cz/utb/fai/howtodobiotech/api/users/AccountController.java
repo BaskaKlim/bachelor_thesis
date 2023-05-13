@@ -80,7 +80,7 @@ public class AccountController {
             _account.setPassword(account.getPassword());
             _account.setRoles(account.getRoles());
 
-            return new ResponseEntity<>(accountService.updateUser(_account), HttpStatus.OK);
+            return new ResponseEntity<>(accountService.updateAccount(_account), HttpStatus.OK);
         } else {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }

@@ -13,7 +13,7 @@ public interface AccountRepository extends JpaRepository<Account, Integer> {
 
     Boolean existsByUsername(String username);
 
-    Boolean existsByPassword(String password);
+    Boolean existsByEmail(String password);
 
 
 }

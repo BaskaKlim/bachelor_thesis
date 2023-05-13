@@ -45,8 +45,7 @@ public class Account {
     @Size(min = 3, max = 14)
     private String username;
 
-    @NotBlank(message = "Password is mandatory")
-    @Size(min = 10, max = 30, message = "Password should be between 10 to 30 characters or numbers")
+    @Size(min = 10, message = "Password should be minimum 10 characters or numbers long")
     private String password;
 
     @ManyToMany(fetch = FetchType.LAZY)
@@ -63,5 +62,14 @@ public class Account {
         this.username = username;
         this.password = password;
         this.roles = roles;
+    }
+
+    public Account(String name, String description, String url, String email, String username, String password) {
+        this.name = name;
+        this.description = description;
+        this.url = url;
+        this.email = email;
+        this.username = username;
+        this.password = password;
     }
 }
