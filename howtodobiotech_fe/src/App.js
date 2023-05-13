@@ -6,14 +6,14 @@ import Footer from "./components/organisms/common/Footer.component";
 
 import AddInnovation from "./components/templates/network/Innovation-add.component";
 import AddStartupOpt from "./components/templates/startups/StartupOpt-add.component";
+import RegistrationForm from "./components/templates/users/Registration.form";
 
 import Innovation from "./components/organisms/network/Innovation.component";
 import StartupOpt from "./components/organisms/startups/StartupOpt.component";
 
 import NetworkPage from "./components/pages/Network.page";
 import StartupOptPage from "./components/pages/Startup.page";
-import SkillPage from "./components/pages/Skill.page"; 
-
+import SkillPage from "./components/pages/Skill.page";
 
 class App extends Component {
   render() {
@@ -38,7 +38,7 @@ class App extends Component {
               </button>
               <div className="collapse navbar-collapse" id="navbarNav">
                 <ul className="navbar-nav">
-                <li className="nav-item">
+                  <li className="nav-item">
                     <Link to={"/skills"} className="nav-link">
                       Skills
                     </Link>
@@ -53,6 +53,11 @@ class App extends Component {
                       Network
                     </Link>
                   </li>
+                  <li className="nav-item">
+                    <Link to={"/registration"} className="nav-link">
+                      Register
+                    </Link>
+                  </li>
                 </ul>
               </div>
             </div>
@@ -62,11 +67,16 @@ class App extends Component {
             <Switch>
               <Route exact path={["/", "/network"]} component={NetworkPage} />
               <Route path="/startups" component={StartupOptPage} />
-              <Route path="/skills" component={SkillPage} /> {/* Add new route for SkillPage */}
+              <Route path="/skills" component={SkillPage} />{" "}
+              {/* Add new route for SkillPage */}
               <Route path="/innovations/add" component={AddInnovation} />
-              <Route path="/startup-opportunities/add" component={AddStartupOpt} />
+              <Route
+                path="/startup-opportunities/add"
+                component={AddStartupOpt}
+              />
               <Route path="/innovations/:id" component={Innovation} />
               <Route path="/startup-opportunities/:id" component={StartupOpt} />
+              <Route path="/registration" component={RegistrationForm} /> {/* Update route path */}
             </Switch>
           </div>
         </Router>
