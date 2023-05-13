@@ -6,7 +6,7 @@ import {
     DELETE_EXPERT,
   } from "./types";
   
-  import ExpertDataService from "../service/ExpertDataService";
+  import ExpertDataService from "../service/Expert.service";
   
   export const createExpert = (
     firstName,

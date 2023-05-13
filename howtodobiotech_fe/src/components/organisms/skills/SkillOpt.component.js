@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skillOpts";
-import SkillOptDataService from "../../../service/SkillOpt.service";
+import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
+import SkillOptDataService from "../../../service/Skill.service";
 
 class SkillOpt extends Component {
   constructor(props) {

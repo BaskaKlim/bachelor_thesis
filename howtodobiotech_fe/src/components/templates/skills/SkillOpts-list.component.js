@@ -49,6 +49,7 @@ const skillCategories = [
   },
 ];
 
+
 const categoryOptions = [
   {
     id: 1,

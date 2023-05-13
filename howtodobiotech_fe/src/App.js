@@ -4,16 +4,23 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Footer from "./components/organisms/common/Footer.component";
 
-import AddInnovation from "./components/templates/network/Innovation-add.component";
-import AddStartupOpt from "./components/templates/startups/StartupOpt-add.component";
-import RegistrationForm from "./components/templates/users/Registration.form";
-import LoginForm from "./components/templates/users/Login.form"
-import Innovation from "./components/organisms/network/Innovation.component";
-import StartupOpt from "./components/organisms/startups/StartupOpt.component";
-
 import NetworkPage from "./components/pages/Network.page";
 import StartupOptPage from "./components/pages/Startup.page";
 import SkillPage from "./components/pages/Skill.page";
+
+import RegistrationForm from "./components/templates/users/Registration.form";
+import LoginForm from "./components/templates/users/Login.form"
+
+import AddInnovation from "./components/organisms/network/Innovation-add.component";
+import AddStartupOpt from "./components/organisms/startups/StartupOpt-add.component";
+import AddSkillOpt from "./components/organisms/skills/SkillOpt-add.component"
+import InnovationUpdateForm  from "./components/templates/network/Innovation-update.form"
+
+import Innovation from "./components/organisms/network/Innovation.component";
+import StartupOpt from "./components/organisms/startups/StartupOpt.component";
+import SkillOpt from "./components/organisms/skills/SkillOpt.component"
+import Expert from "./components/organisms/network/Expert.component"
+
 
 class App extends Component {
   render() {
@@ -68,14 +75,20 @@ class App extends Component {
               <Route exact path={["/", "/network"]} component={NetworkPage} />
               <Route path="/startups" component={StartupOptPage} />
               <Route path="/skills" component={SkillPage} />{" "}
-              {/* Add new route for SkillPage */}
+           
+
               <Route path="/innovations/add" component={AddInnovation} />
-              <Route
-                path="/startup-opportunities/add"
-                component={AddStartupOpt}
-              />
+              <Route path="/startup-opportunities/add" component={AddStartupOpt} />
+              <Route path="/skill-opportunities/add" component={AddSkillOpt} />
+              <Route path="/innovations/update/:id" component={InnovationUpdateForm} />
+
+
+
               <Route path="/innovations/:id" component={Innovation} />
               <Route path="/startup-opportunities/:id" component={StartupOpt} />
+              <Route path="/skill-opportunities/:id" component={SkillOpt} />
+              <Route path="/experts/:id" component={Expert} />
+             
               <Route path="/registration" component={RegistrationForm} />  
               <Route path="/login" component={LoginForm} />  
 

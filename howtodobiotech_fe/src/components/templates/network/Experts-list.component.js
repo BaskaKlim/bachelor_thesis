@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateExpert, deleteExpert } from "../../../actions/experts";
-import ExpertDataService from "../../../service/ExpertDataService";
+import ExpertDataService from "../../../service/Expert.service";
 import ExpertCard from "../../organisms/network/Expert.card";
 import styles from "./ExpertList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";

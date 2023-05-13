@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateExpert, deleteExpert } from "../../../actions/experts";
-import ExpertDataService from "../../../service/expert.service";
+import ExpertDataService from "../../../service/Expert.service";
 
 class Expert extends Component {
   constructor(props) {

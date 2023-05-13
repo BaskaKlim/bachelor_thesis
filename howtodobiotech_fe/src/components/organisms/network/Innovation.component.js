@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateInnovation, deleteInnovation } from "../../../actions/innovations";
 import InnovationDataService from "../../../service/innovation.service";
+import { Link } from "react-router-dom";
 
 class Innovation extends Component {
   constructor(props) {
@@ -31,7 +32,7 @@ class Innovation extends Component {
     this.props
       .updateInnovation(innovation.id, innovation)
       .then(() => {
-        this.props.history.push("/innovations");
+        this.props.history.push("/innovations/update/"+innovation.id);
       })
       .catch((e) => {
         console.log(e);

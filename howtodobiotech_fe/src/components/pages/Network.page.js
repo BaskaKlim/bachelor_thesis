@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import InnovationsList from "../templates/network/Innovations-list.component";
 import ExpertList from "../templates/network/Experts-list.component";
-import ExpertDataService from "../../service/ExpertDataService";
+import ExpertDataService from "../../service/Expert.service";
 import InnovationDataService from "../../service/innovation.service";
 import CarouselBanner from "../organisms/network/InnovationCarousel.banner";
 import Newsletter from "../organisms/common/Newsletter.banner";

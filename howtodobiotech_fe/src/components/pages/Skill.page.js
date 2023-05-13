@@ -20,7 +20,7 @@ class SkillOptPage extends Component {
             biotech skills, you can find the right opportunity here.
           </p>
         </div>
-        <div></div>
+
 
         <SkillOptList />
         <CenteredTextWithButton
