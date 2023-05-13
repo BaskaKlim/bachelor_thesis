@@ -7,7 +7,7 @@ import Footer from "./components/organisms/common/Footer.component";
 import AddInnovation from "./components/templates/network/Innovation-add.component";
 import AddStartupOpt from "./components/templates/startups/StartupOpt-add.component";
 import RegistrationForm from "./components/templates/users/Registration.form";
-
+import LoginForm from "./components/templates/users/Login.form"
 import Innovation from "./components/organisms/network/Innovation.component";
 import StartupOpt from "./components/organisms/startups/StartupOpt.component";
 
@@ -76,7 +76,9 @@ class App extends Component {
               />
               <Route path="/innovations/:id" component={Innovation} />
               <Route path="/startup-opportunities/:id" component={StartupOpt} />
-              <Route path="/registration" component={RegistrationForm} /> {/* Update route path */}
+              <Route path="/registration" component={RegistrationForm} />  
+              <Route path="/login" component={LoginForm} />  
+
             </Switch>
           </div>
         </Router>

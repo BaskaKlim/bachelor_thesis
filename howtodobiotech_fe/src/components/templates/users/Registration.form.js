@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import {
@@ -13,12 +13,15 @@ import {
   MDBIcon,
   MDBCheckbox,
   MDBCardTitle,
+  MDBAlert,
 } from "mdb-react-ui-kit";
 
 import styles from "./RegistrationForm.module.css";
 import authService from "../../../service/Auth.servise";
 
 const RegistrationForm = () => {
+  const [registrationStatus, setRegistrationStatus] = useState(null);
+
   const validationSchema = Yup.object().shape({
     name: Yup.string()
       .required("Name of account is mandatory")
@@ -55,17 +58,14 @@ const RegistrationForm = () => {
     onSubmit: async (values) => {
       try {
         await authService.register(values);
-        // Registration successful, perform any necessary actions (e.g., show success message, redirect, etc.)
-        console.log("Registration successful!");
+        // Registration successful
+        setRegistrationStatus("success");
       } catch (error) {
-        // Registration error, handle the error (e.g., show error message)
-        console.error("Registration error:", error);
+        // Registration error
+        setRegistrationStatus("error");
       }
     },
   });
-
-
-
   return (
     <MDBContainer fluid>
       <MDBCard className={`${styles.textBlack} ${styles.registrationCard}`}>
@@ -227,7 +227,7 @@ const RegistrationForm = () => {
                     {formik.errors.description}
                   </div>
                 )}
-                <div className={styles.mb4}>
+               <div className={styles.mb4}>
                   <MDBCheckbox
                     name="newsletter"
                     value=""
@@ -244,6 +244,17 @@ const RegistrationForm = () => {
                   Register
                 </MDBBtn>
               </form>
+
+              {registrationStatus === "success" && (
+                <div className={`${styles.successMessage} ${styles.mb2}`}>
+                  Registration successful!
+                </div>
+              )}
+              {registrationStatus === "error" && (
+                <div className={`${styles.errorMessage} ${styles.mb2}`}>
+                  Registration error. Please try again.
+                </div>
+              )}
             </MDBCol>
 
             <MDBCol
