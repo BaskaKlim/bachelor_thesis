@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
+import { connect } from 'react-redux';
+import { register } from '../../../actions/auth';
 import { useHistory } from "react-router-dom";
 import {
   MDBBtn,
@@ -14,14 +16,15 @@ import {
   MDBIcon,
   MDBCheckbox,
   MDBCardTitle,
-  MDBAlert,
-} from "mdb-react-ui-kit";
-
+} from "mdb-react-ui-kit"
 import styles from "./RegistrationForm.module.css";
 import authService from "../../../service/Auth.servise";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const RegistrationForm = () => {
   const [registrationStatus, setRegistrationStatus] = useState(null);
+  const history = useHistory();
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -61,17 +64,20 @@ const RegistrationForm = () => {
         await authService.register(values);
         // Registration successful
         setRegistrationStatus("success");
-        useHistory.push("/login"); // Redirect to the login page
+        toast.success("Registration successful!");
+        history.push("/login"); // Redirect to the login page
       } catch (error) {
         // Registration error
         setRegistrationStatus("error");
+        toast.error("Registration error. Please try again.");
       }
     },
   });
   return (
-    <MDBContainer fluid>
+    <MDBContainer fluid ="true">
+      <ToastContainer />
       <MDBCard className={`${styles.textBlack} ${styles.registrationCard}`}>
-        <div className={styles.introText} fluid>
+        <div className={styles.introText} fluid="true">
           <MDBCardTitle className={styles.title}>
             Sign up your organization
           </MDBCardTitle>
@@ -106,7 +112,7 @@ const RegistrationForm = () => {
                         ? styles.invalid
                         : ""
                     }`}
-                    placeholder="Creste username"
+                    placeholder="Create username"
                     {...formik.getFieldProps("username")}
                   />
                 </div>
@@ -168,7 +174,7 @@ const RegistrationForm = () => {
                   <MDBIcon fas icon="envelope me-3" size="lg" />
                   <MDBInput
                     label=""
-                    id="form2"
+                    id="form4"
                     type="name"
                     className={`${styles.w100} ${
                       formik.touched.name && formik.errors.name
@@ -191,7 +197,7 @@ const RegistrationForm = () => {
                   <MDBIcon fas icon="link me-3" size="lg" />
                   <MDBInput
                     label=""
-                    id="form4"
+                    id="form5"
                     type="text"
                     className={`${styles.w100} ${
                       formik.touched.url && formik.errors.url
@@ -213,7 +219,7 @@ const RegistrationForm = () => {
                   <MDBIcon fas icon="align-left me-3" size="lg" />
                   <MDBInput
                     label=""
-                    id="form5"
+                    id="form6"
                     type="text"
                     className={`${styles.w100} ${styles.widerInput} ${
                       formik.touched.description && formik.errors.description
@@ -249,8 +255,6 @@ const RegistrationForm = () => {
                     Registration error. Please try again.
                   </div>
                 )}
-
-                {/* Submit button */}
                 <MDBBtn
                   className={`${styles.mb4} ${styles.registrationSubmitBtn}`}
                   size="lg"
@@ -267,7 +271,7 @@ const RegistrationForm = () => {
               className={`${styles.order1} ${styles.orderLg2} ${styles.alignItemsCenter}`}
             >
               <div className={styles.registrationImage}>
-                <MDBCardImage src="/assets/registration.jpg" fluid />
+                <MDBCardImage src="/assets/registration.jpg" fluid="true" />
               </div>
             </MDBCol>
           </MDBRow>
@@ -276,5 +280,8 @@ const RegistrationForm = () => {
     </MDBContainer>
   );
 };
+const mapDispatchToProps = {
+  register,
+};
 
-export default RegistrationForm;
+export default connect(null, mapDispatchToProps)(RegistrationForm);

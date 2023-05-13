@@ -11,7 +11,7 @@ const CenteredTextWithButton = ({ text, textButton }) => {
       <MDBContainer className={`${styles.container} component-wrapper`}>
         <MDBRow className={`${styles.centeredText} component-content`}>
           <MDBCol>
-            <p>{text}</p>
+            <div>{text}</div>
             <MDBBtn className={styles.redirectButton} onClick={handleClick}>
               {textButton}
             </MDBBtn>

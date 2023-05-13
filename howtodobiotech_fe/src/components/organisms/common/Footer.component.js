@@ -6,7 +6,6 @@ import {
   MDBCol,
   MDBInput,
   MDBBtn,
-  MDBIcon,
 } from "mdb-react-ui-kit";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,7 +21,7 @@ const Footer = () => {
     <MDBFooter
       className={`page-footer font-small pt-4 mt-4 ${styles.footerBackground}`}
     >
-      <MDBContainer fluid className="text-center text-md-left">
+      <MDBContainer fluid="true" className="text-center text-md-left">
         <MDBRow>
           <MDBCol md="3" className="text-center">
             <div className={styles.logoSection}>
@@ -31,9 +30,9 @@ const Footer = () => {
                 src="/assets/logo_blue_landscape.png"
                 alt="How To Do Biotech"
               />
-              <p className={styles.shortText}>
+              <div className={styles.shortText}>
                 Find the right resources, mentorship, and support they need.
-              </p>
+              </div>
             </div>
           </MDBCol>
 
@@ -41,16 +40,16 @@ const Footer = () => {
             md="6"
             className={`text-center fluid ${styles.subscriptionSection}`}
           >
-            <p className={styles.lightText}>
+            <div className={styles.lightText}>
               Subscribe for our news and get all information about skill
               opportunities and support for your biotech ides.
-            </p>
+            </div>
             <div className={styles.formContainer}>
               <form className={`input-group ${styles.centeredForm}`}>
                 <MDBInput
                   hint="Your email"
                   type="text"
-                  containerClass="mt-0 mb-0"
+                  containerclass="mt-0 mb-0"
                 />
                 <MDBBtn color="secondary" className="mb-0 ml-2">
                   Subscribe

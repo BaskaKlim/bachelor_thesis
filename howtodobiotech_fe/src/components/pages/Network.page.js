@@ -4,7 +4,6 @@ import ExpertList from "../templates/network/Experts-list.component";
 import ExpertDataService from "../../service/ExpertDataService";
 import InnovationDataService from "../../service/innovation.service";
 import CarouselBanner from "../organisms/network/InnovationCarousel.banner";
-import CenteredTextWithButton from "../organisms/common/CenteredText.component";
 import Newsletter from "../organisms/common/Newsletter.banner";
 import styles from "./NetworkPage.module.css";
 
@@ -70,7 +69,7 @@ class NetworkPage extends Component {
             programs and experience the vibrant innovation ecosystem firsthand.
           </p>
         </div>
-        <div></div>
+     
         <ExpertList filteredExperts={filteredExperts} />
 
         <div>

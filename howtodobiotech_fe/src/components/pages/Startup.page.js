@@ -20,7 +20,7 @@ class StartupOptPage extends Component {
             take your biotech startup to the next level.
           </p>
         </div>
-        <div></div>
+
 
         <StartupOptList />
         <CenteredTextWithButton

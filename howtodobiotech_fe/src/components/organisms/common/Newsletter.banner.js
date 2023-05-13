@@ -10,10 +10,10 @@ const Newsletter = ({ backgroundColor = "#ffffff", text }) => {
   return (
     <div className={`font-small pt-4 mt-4 ${styles.newsletterBackground}`} style={containerStyle}>
       <div className={`${styles.subscriptionSection}`}>
-        <p className={styles.lightText}>{text}</p>
+        <div className={styles.lightText}>{text}</div>
         <div className={styles.formContainer}>
           <form className={`input-group ${styles.centeredForm}`}>
-            <MDBInput hint="Your email" type="text" containerClass={`mt-0 mb-0 ${styles.inputField}`} />
+            <MDBInput hint="Your email" type="text" containerclass={`mt-0 mb-0 ${styles.inputField}`} />
             <MDBBtn color="secondary" className={`mb-0 ml-2 ${styles.subscribeButton}`}>
               Subscribe
             </MDBBtn>
