@@ -87,12 +87,23 @@ class InnovationUpdateForm extends Component {
   };
 
   handleCountryChange = (selectedCountries) => {
-    this.setState({ updatedCountries: selectedCountries });
+    const updatedCountries = selectedCountries.map((country) => ({
+      value: country.value,
+      label: country.label,
+    }));
+  
+    this.setState({ updatedCountries });
   };
-
+  
   handleCategoryChange = (selectedCategories) => {
-    this.setState({ updatedCategories: selectedCategories });
+    const updatedCategories = selectedCategories.map((category) => ({
+      value: category.value,
+      label: category.label,
+    }));
+  
+    this.setState({ updatedCategories });
   };
+  
 
   updateInnovation = () => {
     const {
@@ -103,22 +114,26 @@ class InnovationUpdateForm extends Component {
       updatedCountries,
       updatedCategories,
     } = this.state;
-
+  
+    const countryValues = updatedCountries.map((country) => ({
+      id: country.value.id,
+      name: country.value.name,
+    }));
+  
+    const categoryValues = updatedCategories.map((category) => ({
+      id: category.value.id,
+      name: category.value.name,
+    }));
+  
     const updatedInnovation = {
       id: innovation.id,
       title: updatedTitle,
       description: updatedDescription,
       website: updatedWebsite,
-      countries: updatedCountries.map((country) => ({
-        id: country.value,
-        name: country.label,
-      })),
-      categories: updatedCategories.map((category) => ({
-        id: category.value,
-        name: category.label,
-      })),
+      countries: countryValues,
+      categories: categoryValues,
     };
-
+  
     this.props
       .updateInnovation(innovation.id, updatedInnovation)
       .then((response) => {
@@ -130,6 +145,10 @@ class InnovationUpdateForm extends Component {
         console.log(e);
       });
   };
+  
+  
+  
+  
 
   deleteInnovation = () => {
     const { innovation } = this.state;
@@ -270,33 +289,31 @@ class InnovationUpdateForm extends Component {
                       value={updatedWebsite}
                       onChange={this.handleInputChange}
                     />
-                    <Select
-                      className="mb-4"
-                      options={categoryOptions.map((category) => ({
-                        value: category.id,
-                        label: category.name,
-                      }))}
-                      isMulti
-                      onChange={this.handleCategoryChange}
-                      value={updatedCategories.map((category) => ({
-                        id: category.id,
-                        name: category.name,
-                      }))}
-                    />
+                   <Select
+  className="mb-4"
+  options={categoryOptions.map((category) => ({
+    value: category,
+    label: category.name,
+    key: `category-${category.id}`,
+  }))}
+  isMulti
+  onChange={this.handleCategoryChange}
+  value={updatedCategories}
+/>
 
-                    <Select
-                      className="mb-4"
-                      options={countryOptions.map((country) => ({
-                        value: country.id,
-                        label: country.name,
-                      }))}
-                      isMulti
-                      onChange={this.handleCountryChange}
-                      value={updatedCountries.map((country) => ({
-                        id: country.id,
-                        name: country.name,
-                      }))}
-                    />
+<Select
+  className="mb-4"
+  options={countryOptions.map((country) => ({
+    value: country,
+    label: country.name,
+    key: `country-${country.id}`,
+  }))}
+  isMulti
+  onChange={this.handleCountryChange}
+  value={updatedCountries}
+/>
+
+
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>
