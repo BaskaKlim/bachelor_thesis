@@ -16,11 +16,15 @@ import AddInnovation from "./components/organisms/network/Innovation-add.compone
 import AddStartupOpt from "./components/organisms/startups/StartupOpt-add.component";
 import AddSkillOpt from "./components/organisms/skills/SkillOpt-add.component";
 import InnovationUpdateForm from "./components/templates/network/Innovation-update.form";
+import AccountUpdateForm from"./components/templates/users/Account-update.form"
+
 
 import Innovation from "./components/organisms/network/Innovation.component";
 import StartupOpt from "./components/organisms/startups/StartupOpt.component";
 import SkillOpt from "./components/organisms/skills/SkillOpt.component";
 import Expert from "./components/organisms/network/Expert.component";
+import Account from"./components/organisms/users/Account.component";
+
 
 class App extends Component {
   constructor(props) {
@@ -129,11 +133,17 @@ class App extends Component {
                 path="/innovations/update/:id"
                 component={InnovationUpdateForm}
               />
+                <Route
+                path="/accounts/update/:id"
+                component={AccountUpdateForm}
+              />
               <Route path="/innovations/:id" component={Innovation} />
               <Route path="/startup-opportunities/:id" component={StartupOpt} />
               <Route path="/skill-opportunities/:id" component={SkillOpt} />
               <Route path="/experts/:id" component={Expert} />
-              <Route path="/registration" component={RegistrationForm} />
+              <Route path="/accounts/:id" component={Account} />
+
+              <Route path="/register" component={RegistrationForm} />
               <Route path="/login" component={LoginForm} />
             </Switch>
           </div>
