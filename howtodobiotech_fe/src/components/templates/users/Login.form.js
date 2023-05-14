@@ -36,6 +36,7 @@ const Login = () => {
     
         console.log("Login successful!");
         history.push("/skills");
+        window.location.reload();
       } catch (error) {
         console.error("Login error:", error);
         toast.error("Invalid username or password.");
