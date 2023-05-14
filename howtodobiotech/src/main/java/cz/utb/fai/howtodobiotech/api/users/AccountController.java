@@ -1,7 +1,9 @@
 package cz.utb.fai.howtodobiotech.api.users;
 
 import cz.utb.fai.howtodobiotech.models.users.Account;
+import cz.utb.fai.howtodobiotech.security.jwt.JwtUtils;
 import cz.utb.fai.howtodobiotech.services.users.AccountService;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,7 +19,8 @@ import java.util.Optional;
 public class AccountController {
     @Autowired
     AccountService accountService;
-
+    @Autowired
+    JwtUtils jwtUtils;
 
     @GetMapping()
     public ResponseEntity<List<Account>> getAllAccounts() {
@@ -47,15 +50,17 @@ public class AccountController {
     }
 
     @PostMapping()
-    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+    public ResponseEntity<Account> createAccount(@RequestBody Account account, HttpServletResponse response) {
         try {
-            Account _account = accountService
-                    .addAccount(new Account(account.getName(), account.getDescription(), account.getUrl(), account.getEmail(), account.getUsername(), account.getPassword(), account.getRoles()));
+            Account _account = accountService.addAccount(new Account(account.getName(), account.getDescription(), account.getUrl(), account.getEmail(), account.getUsername(), account.getPassword(), account.getRoles()));
+            String token = jwtUtils.generateToken(_account.getUsername());
+            response.setHeader("Authorization", "Bearer " + token);
             return new ResponseEntity<>(_account, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
 
     @DeleteMapping(path = "/{id}")
     public ResponseEntity<Boolean> deleteAccount(@PathVariable("id") Integer id) {

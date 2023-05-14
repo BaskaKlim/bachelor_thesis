@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import {
   MDBContainer,
   MDBRow,
+  MDBBtn,
   MDBCol,
   MDBCard,
   MDBCardBody,
@@ -94,27 +95,29 @@ class Innovation extends Component {
       });
   };
 
-  handleFilter = async (filteredInnovations) => {
-    if (filteredInnovations.length > 0) {
-      const title = filteredInnovations[0].title;
-      const response = await InnovationDataService.getInnovationByTitle(title);
-      this.setState({ innovations: response.data });
-    } else {
-      this.setState({ innovations: this.props.innovations });
-    }
+  makeChanges = () => {
+    const { innovation } = this.state;
+    this.props.history.push(`/innovations/update/${innovation.id}`);
+  };
+
+  goBack = () => {
+    const { innovation } = this.state;
+    this.props.history.push(`/innovations//${innovation.id}`);
   };
 
   render() {
     const { innovation } = this.state;
     // Find the category object for the innovation
-    const category = innovation && innovation.categories && innovation.categories[0];
+    const category =
+      innovation && innovation.categories && innovation.categories[0];
     // Find the corresponding category option with the matching name
     const selectedCategoryOption = categoryOptions.find(
       (option) => category && option.name === category.name
     );
 
-    const imageUrl = selectedCategoryOption ? selectedCategoryOption.imageUrl : '';
-
+    const imageUrl = selectedCategoryOption
+      ? selectedCategoryOption.imageUrl
+      : "";
 
     return (
       <MDBContainer fluid="true">
@@ -157,6 +160,7 @@ class Innovation extends Component {
                         {innovation.description}
                       </div>
                     </div>
+                    
 
                     <MDBRow>
                       <MDBCol md="6">
@@ -187,19 +191,23 @@ class Innovation extends Component {
                         </div>
                       </MDBCol>
                     </MDBRow>
+                    <MDBBtn onClick={this.makeChanges} className={styles.btnUpdate}>
+                  Make Changes
+                </MDBBtn>
+               
                   </div>
                 )}
               </MDBCol>
 
               <MDBCol
-              md="10"
-              lg="6"
-              className={`${styles.order1} ${styles.orderLg2} ${styles.alignItemsCenter}`}
-            >
-              <div className={styles.registrationImage}>
-                <MDBCardImage src={imageUrl} fluid="true" />
-              </div>
-            </MDBCol>
+                md="10"
+                lg="6"
+                className={`${styles.order1} ${styles.orderLg2} ${styles.alignItemsCenter}`}
+              >
+                <div className={styles.registrationImage}>
+                  <MDBCardImage src={imageUrl} fluid="true" />
+                </div>
+              </MDBCol>
             </MDBRow>
           </MDBCardBody>
         </MDBCard>

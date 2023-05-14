@@ -1,24 +1,26 @@
 package cz.utb.fai.howtodobiotech.api.users;
-
 import cz.utb.fai.howtodobiotech.models.users.Account;
 import cz.utb.fai.howtodobiotech.models.users.Role;
 import cz.utb.fai.howtodobiotech.payload.request.LoginRequest;
 import cz.utb.fai.howtodobiotech.payload.request.SignupRequest;
-import cz.utb.fai.howtodobiotech.payload.response.AccountInfoResponse;
+import cz.utb.fai.howtodobiotech.payload.response.AuthResponse;
 import cz.utb.fai.howtodobiotech.payload.response.MessageResponse;
 import cz.utb.fai.howtodobiotech.repositories.users.RoleRepository;
 import cz.utb.fai.howtodobiotech.security.jwt.JwtUtils;
-import cz.utb.fai.howtodobiotech.security.services.AccountDetailsImpl;
 import cz.utb.fai.howtodobiotech.services.users.AccountService;
 import cz.utb.fai.howtodobiotech.utils.enums.ERole;
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseCookie;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.AuthenticationException;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,54 +30,52 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-
 @CrossOrigin(origins = "http://localhost:8081")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
     @Autowired
-    AuthenticationManager authenticationManager;
+    private AuthenticationManager authenticationManager;
 
     @Autowired
-    AccountService accountService;
+    private UserDetailsService userDetailsService;
 
     @Autowired
-    RoleRepository roleRepository;
+    private JwtUtils jwtUtils;
 
     @Autowired
-    PasswordEncoder encoder;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    JwtUtils jwtUtils;
+    private AccountService accountService;
 
-    @PostMapping("/signin")
-    public ResponseEntity<?> authenticateAccount(@Valid @RequestBody LoginRequest loginRequest) {
+    @Autowired
+    private RoleRepository roleRepository;
 
-        Authentication authentication = authenticationManager
-                .authenticate(new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword()));
+    @PostMapping("/authenticate")
+    public ResponseEntity<?> authenticateAccount(@RequestBody LoginRequest loginRequest) {
+        try {
+            // Authenticate the user
+            Authentication authentication = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
+            );
 
-        SecurityContextHolder.getContext().setAuthentication(authentication);
+            // Load the user details
+            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
 
-        AccountDetailsImpl accountDetails = (AccountDetailsImpl) authentication.getPrincipal();
+            // Generate the authentication token
+            String token = jwtUtils.generateToken(loginRequest.getUsername());
 
-        ResponseCookie jwtCookie = jwtUtils.generateJwtCookie(accountDetails);
-
-        List<String> roles = accountDetails.getAuthorities().stream()
-                .map(item -> item.getAuthority())
-                .collect(Collectors.toList());
-
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, jwtCookie.toString())
-                .body(new AccountInfoResponse(accountDetails.getId(),
-                        accountDetails.getName(),
-                        accountDetails.getDescription(),
-                        accountDetails.getUrl(),
-                        accountDetails.getUsername(),
-                        accountDetails.getEmail(),
-                        roles));
+            // Return the token in the response
+            return ResponseEntity.ok(new AuthResponse(token));
+        } catch (AuthenticationException e) {
+            // Handle invalid credentials
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Invalid credentials"));
+        }
     }
 
     @PostMapping("/signup")
-    public ResponseEntity<?> registerAccount(@Valid @RequestBody SignupRequest signUpRequest) {
+    public ResponseEntity<?> registerAccount(@Valid @RequestBody SignupRequest signUpRequest, HttpServletResponse response) {
         if (accountService.existsByUsername(signUpRequest.getUsername())) {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Username is already taken!"));
         }
@@ -84,15 +84,13 @@ public class AuthController {
             return ResponseEntity.badRequest().body(new MessageResponse("Error: Email is already in use!"));
         }
 
-
         // Create new account's account
         Account account = new Account(signUpRequest.getName(),
                 signUpRequest.getDescription(),
                 signUpRequest.getUrl(),
                 signUpRequest.getEmail(),
                 signUpRequest.getUsername(),
-                encoder.encode(signUpRequest.getPassword()
-           ));
+                passwordEncoder.encode(signUpRequest.getPassword()));
 
         Set<String> strRoles = signUpRequest.getRole();
         Set<Role> roles = new HashSet<>();
@@ -108,13 +106,11 @@ public class AuthController {
                         Role adminRole = roleRepository.findByName(ERole.ROLE_ADMIN)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(adminRole);
-
                         break;
                     case "account":
                         Role modRole = roleRepository.findByName(ERole.ROLE_USER)
                                 .orElseThrow(() -> new RuntimeException("Error: Role is not found."));
                         roles.add(modRole);
-
                         break;
                     default:
                         Role userRole = roleRepository.findByName(ERole.ROLE_OBSERVER)
@@ -127,13 +123,19 @@ public class AuthController {
         account.setRoles(roles);
         accountService.updateAccount(account);
 
+        // Generate the authentication token
+        String token = jwtUtils.generateToken(account.getUsername());
+
+        // Add the token to the response header
+        response.addHeader("Authorization", "Bearer " + token);
+
         return ResponseEntity.ok(new MessageResponse("User registered successfully!"));
     }
 
-    @PostMapping("/signout")
-    public ResponseEntity<?> logoutAccount() {
+    @PostMapping("/logout")
+    public ResponseEntity<?> logoutAccount(HttpServletResponse response) {
         ResponseCookie cookie = jwtUtils.getCleanJwtCookie();
-        return ResponseEntity.ok().header(HttpHeaders.SET_COOKIE, cookie.toString())
-                .body(new MessageResponse("You've been signed out!"));
+        response.setHeader(HttpHeaders.SET_COOKIE, cookie.toString());
+        return ResponseEntity.ok(new MessageResponse("You've been signed out!"));
     }
 }

@@ -104,6 +104,10 @@ class InnovationUpdateForm extends Component {
     this.setState({ updatedCategories });
   };
 
+
+  goBack = () => {
+    this.props.history.goBack();
+  };
   updateInnovation = () => {
     const {
       innovation,
@@ -304,12 +308,17 @@ class InnovationUpdateForm extends Component {
                     >
                       Update
                     </MDBBtn>
+                    
                     <MDBBtn
                       className={styles.btnDelete}
                       onClick={this.deleteInnovation}
                     >
                       Delete
                     </MDBBtn>
+                    <MDBBtn onClick={this.goBack} className={styles.btnBack}>
+                  Back
+                </MDBBtn>
+                   
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>

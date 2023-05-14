@@ -1,16 +1,14 @@
 package cz.utb.fai.howtodobiotech.security.services;
-
 import java.util.Collection;
 import java.util.List;
 import java.util.Objects;
 import java.util.stream.Collectors;
 
-import cz.utb.fai.howtodobiotech.models.users.Account;
-
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import cz.utb.fai.howtodobiotech.models.users.Account;
 public class AccountDetailsImpl implements UserDetails {
     private static final long serialVersionUID = 1L;
 
@@ -121,3 +119,4 @@ public class AccountDetailsImpl implements UserDetails {
         return Objects.hash(id);
     }
 }
+

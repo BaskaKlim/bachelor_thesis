@@ -6,8 +6,7 @@ import { MDBContainer, MDBRow, MDBCol, MDBCard, MDBCardBody, MDBInput, MDBBtn, M
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./LoginForm.module.css";
-import Cookies from "js-cookie";
-
+import authService from "../../../service/Auth.servise";
 
 const Login = () => {
   const history = useHistory();
@@ -28,11 +27,12 @@ const Login = () => {
       try {
         setIsSubmitting(true);
         
-        // Retrieve the JWT token from the cookie
-        const authToken = Cookies.get("jwtCookie");
+        // Send the login request to the server
+        const response = await authService.login(values);
+        const authToken = response.data.token;
     
         // Store the token in the local storage
-        window.localStorage.setItem("authToken", authToken);
+        localStorage.setItem("authToken", authToken);
     
         console.log("Login successful!");
         history.push("/skills");
@@ -43,7 +43,6 @@ const Login = () => {
         setIsSubmitting(false);
       }
     },
-    
   });
 
   return (
