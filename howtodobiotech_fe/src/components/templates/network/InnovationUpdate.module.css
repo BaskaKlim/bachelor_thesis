@@ -18,20 +18,21 @@
   padding: 2rem;
 }
 
-.cardRegistration {
+.cardUpdate {
   background-color: #f8f9fa;
 }
 
 .heading {
   padding-top: 10px;
-  color: #4145e4;
+  color: #5271FF;
   font-size: 1.5rem;
   font-weight: bold;
 }
 
 .headingNormal {
-  font-weight: normal;
-  margin-bottom: 2rem;
+  padding-top: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
 }
 
 .inputWrapper {
@@ -61,11 +62,9 @@
 }
 
 .bgIndigo {
-  background-color: #4145E4;
+  background-color: #5271FF;
 }
-.bgWhite{
-  
-}
+
 .btnUpdate{
   margin-right: 0.5rem;
 

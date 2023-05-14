@@ -174,7 +174,7 @@ class InnovationUpdateForm extends Component {
           className={`${styles.row} d-flex justify-content-center align-items-center h-100`}
         >
           <MDBCol col="12" className={`${styles.column} m-5`}>
-            <MDBCard className={`${styles.card} ${styles.cardRegistration}`}>
+            <MDBCard className={`${styles.card} ${styles.cardUpdate}`}>
               <MDBCardBody className={styles.cardBody}>
                 <MDBRow>
                   <MDBCol md="6" className={styles.card}>
