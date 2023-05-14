@@ -113,17 +113,17 @@ class InnovationUpdateForm extends Component {
       updatedCountries,
       updatedCategories,
     } = this.state;
-
+  
     const countryValues = updatedCountries.map((country) => ({
       id: country.value.id,
       name: country.value.name,
     }));
-
+  
     const categoryValues = updatedCategories.map((category) => ({
       id: category.value.id,
       name: category.value.name,
     }));
-
+  
     const updatedInnovation = {
       id: innovation.id,
       title: updatedTitle,
@@ -132,11 +132,13 @@ class InnovationUpdateForm extends Component {
       countries: countryValues,
       categories: categoryValues,
     };
-
+  
     this.props
       .updateInnovation(innovation.id, updatedInnovation)
       .then((response) => {
-        console.log("Update response:", updatedInnovation);
+        console.log("Update response:", response);
+        // Fetch the updated innovation data
+        this.getInnovationById(innovation.id);
         this.props.history.push("/innovations/update/" + innovation.id);
       })
       .catch((e) => {
@@ -144,7 +146,7 @@ class InnovationUpdateForm extends Component {
         console.log(e);
       });
   };
-
+  
   deleteInnovation = () => {
     const { innovation } = this.state;
     this.props
@@ -281,7 +283,7 @@ class InnovationUpdateForm extends Component {
                     />
 
                     <Select
-                      className={styles.select}
+                      className={`${styles.select} ${styles.textSelect}`}
                       options={countryOptions.map((country) => ({
                         value: country,
                         label: country.name,
