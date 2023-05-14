@@ -19,25 +19,22 @@ import {
 } from "mdb-react-ui-kit";
 
 const categoryOptions = [
-  { id: 1, name: "MEDICINE", imageUrl: "../../public/assets/medicine.jpg" },
+  { id: 1, name: "MEDICINE" },
   {
     id: 2,
     name: "BIOINFORMATICS",
-    imageUrl: "../../public/assets/bioinformatics.jpg",
   },
-  { id: 3, name: "ENERGY", imageUrl: "../../public/assets/energy.jpg" },
-  { id: 4, name: "FOOD", imageUrl: "../../public/assets/food.jpg" },
+  { id: 3, name: "ENERGY" },
+  { id: 4, name: "FOOD" },
   {
     id: 5,
     name: "ENVIRONMENTAL",
-    imageUrl: "../../public/assets/environmental.jpg",
   },
   {
     id: 6,
     name: "AGRICULTURE",
-    imageUrl: "../../public/assets/agriculture.jpg",
   },
-  { id: 7, name: "MARINE", imageUrl: "../../public/assets/marine.jpg" },
+  { id: 7, name: "MARINE" },
 ];
 
 const countryOptions = [
@@ -89,41 +86,12 @@ class InnovationUpdateForm extends Component {
     this.setState({ [id]: value });
   };
 
-  handleCountryChange = (country) => {
-    const { updatedCountries } = this.state;
-    const countryIndex = updatedCountries.findIndex((c) => c.id === country.id);
-
-    if (countryIndex > -1) {
-      this.setState((prevState) => ({
-        updatedCountries: [
-          ...prevState.updatedCountries.slice(0, countryIndex),
-          ...prevState.updatedCountries.slice(countryIndex + 1),
-        ],
-      }));
-    } else {
-      this.setState((prevState) => ({
-        updatedCountries: [...prevState.updatedCountries, country],
-      }));
-    }
+  handleCountryChange = (selectedCountries) => {
+    this.setState({ updatedCountries: selectedCountries });
   };
 
-  handleCategoryChange = (category) => {
-    const { updatedCategories } = this.state;
-    const categoryIndex = updatedCategories.findIndex(
-      (c) => c.id === category.id
-    );
-    if (categoryIndex > -1) {
-      this.setState((prevState) => ({
-        updatedCategories: [
-          ...prevState.updatedCategories.slice(0, categoryIndex),
-          ...prevState.updatedCategories.slice(categoryIndex + 1),
-        ],
-      }));
-    } else {
-      this.setState((prevState) => ({
-        updatedCategories: [...prevState.updatedCategories, category],
-      }));
-    }
+  handleCategoryChange = (selectedCategories) => {
+    this.setState({ updatedCategories: selectedCategories });
   };
 
   updateInnovation = () => {
@@ -137,22 +105,28 @@ class InnovationUpdateForm extends Component {
     } = this.state;
 
     const updatedInnovation = {
-      ...innovation,
+      id: innovation.id,
       title: updatedTitle,
       description: updatedDescription,
       website: updatedWebsite,
-      countries: updatedCountries.map((country) => ({ name: country.name })),
+      countries: updatedCountries.map((country) => ({
+        id: country.value,
+        name: country.label,
+      })),
       categories: updatedCategories.map((category) => ({
-        name: category.name,
+        id: category.value,
+        name: category.label,
       })),
     };
 
     this.props
       .updateInnovation(innovation.id, updatedInnovation)
-      .then(() => {
+      .then((response) => {
+        console.log("Update response:", updatedInnovation);
         this.props.history.push("/innovations/update/" + innovation.id);
       })
       .catch((e) => {
+        console.log("Update response:", updatedInnovation);
         console.log(e);
       });
   };
@@ -303,14 +277,13 @@ class InnovationUpdateForm extends Component {
                         label: category.name,
                       }))}
                       isMulti
-                      onChange={(selectedCategories) =>
-                        this.handleCategoryChange(selectedCategories)
-                      }
+                      onChange={this.handleCategoryChange}
                       value={updatedCategories.map((category) => ({
-                        value: category.id,
-                        label: category.name,
+                        id: category.id,
+                        name: category.name,
                       }))}
                     />
+
                     <Select
                       className="mb-4"
                       options={countryOptions.map((country) => ({
@@ -318,12 +291,10 @@ class InnovationUpdateForm extends Component {
                         label: country.name,
                       }))}
                       isMulti
-                      onChange={(selectedCountries) =>
-                        this.handleCountryChange(selectedCountries)
-                      }
+                      onChange={this.handleCountryChange}
                       value={updatedCountries.map((country) => ({
-                        value: country.id,
-                        label: country.name,
+                        id: country.id,
+                        name: country.name,
                       }))}
                     />
                   </MDBCol>

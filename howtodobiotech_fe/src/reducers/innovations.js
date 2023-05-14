@@ -19,6 +19,7 @@ function innovationReducer(innovations = initialState, action) {
       return payload;
 
     case UPDATE_INNOVATION:
+      console.log("Updating innovation in reducer:", payload); 
       return innovations.map((innovation) => {
         if (innovation.id === payload.id) {
           return {

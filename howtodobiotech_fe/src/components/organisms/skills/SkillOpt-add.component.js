@@ -34,14 +34,14 @@ const skillCategoryOptions = [
   {
     id: 2,
     name: "SUMMER_WINTER_SCHOOL",
-    title:"SUMMER WINTER SCHOOL",
+    title: "SUMMER WINTER SCHOOL",
     imageUrl: "/assets/school.png",
     color: "#4B4DF7",
   },
   {
     id: 3,
     name: "CONFERENCE",
-    title:"CONFERENCE",
+    title: "CONFERENCE",
     imageUrl: "/assets/conference.png",
     color: "#FE7062",
   },
@@ -52,11 +52,13 @@ const skillCategoryOptions = [
     imageUrl: "/assets/internship.png",
     color: "#CEDAF6",
   },
-  { id: 5, 
-    name: "ACADEMY", 
-    title: "ACADEMY", 
-    imageUrl: "/assets/academy.png", 
-    color: "#B23730" },
+  {
+    id: 5,
+    name: "ACADEMY",
+    title: "ACADEMY",
+    imageUrl: "/assets/academy.png",
+    color: "#B23730",
+  },
   {
     id: 6,
     name: "HACKATHON",
@@ -147,7 +149,6 @@ class AddSkillOpt extends Component {
       })
       .then(() => {
         console.log("Skill opportunity saved successfully");
-        // Add any further actions you want to perform after saving
       })
       .catch((e) => {
         console.log("Error while saving skill opportunity:", e);
@@ -270,5 +271,6 @@ class AddSkillOpt extends Component {
         <button onClick={this.saveSkillOpt}>Save</button>
       </div>
     );
-            }}
-    export default connect(null, { createSkillOpt })(AddSkillOpt);
+  }
+}
+export default connect(null, { createSkillOpt })(AddSkillOpt);

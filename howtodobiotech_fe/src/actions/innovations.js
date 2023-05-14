@@ -38,7 +38,7 @@ import {
   export const updateInnovation = (id, data) => async (dispatch) => {
     try {
       const res = await InnovationDataService.updateInnovation(id, data);
-  
+      console.log("Updating innovation:", id, data); 
       dispatch({
         type: UPDATE_INNOVATION,
         payload: data,
