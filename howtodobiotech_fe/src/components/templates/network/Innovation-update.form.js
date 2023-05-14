@@ -91,19 +91,18 @@ class InnovationUpdateForm extends Component {
       value: country.value,
       label: country.label,
     }));
-  
+
     this.setState({ updatedCountries });
   };
-  
+
   handleCategoryChange = (selectedCategories) => {
     const updatedCategories = selectedCategories.map((category) => ({
       value: category.value,
       label: category.label,
     }));
-  
+
     this.setState({ updatedCategories });
   };
-  
 
   updateInnovation = () => {
     const {
@@ -114,17 +113,17 @@ class InnovationUpdateForm extends Component {
       updatedCountries,
       updatedCategories,
     } = this.state;
-  
+
     const countryValues = updatedCountries.map((country) => ({
       id: country.value.id,
       name: country.value.name,
     }));
-  
+
     const categoryValues = updatedCategories.map((category) => ({
       id: category.value.id,
       name: category.value.name,
     }));
-  
+
     const updatedInnovation = {
       id: innovation.id,
       title: updatedTitle,
@@ -133,7 +132,7 @@ class InnovationUpdateForm extends Component {
       countries: countryValues,
       categories: categoryValues,
     };
-  
+
     this.props
       .updateInnovation(innovation.id, updatedInnovation)
       .then((response) => {
@@ -145,10 +144,6 @@ class InnovationUpdateForm extends Component {
         console.log(e);
       });
   };
-  
-  
-  
-  
 
   deleteInnovation = () => {
     const { innovation } = this.state;
@@ -172,98 +167,82 @@ class InnovationUpdateForm extends Component {
     } = this.state;
 
     return (
-      <MDBContainer fluid>
-        <MDBRow className="d-flex justify-content-center align-items-center h-100">
-          <MDBCol col="12" className="m-5">
-            <MDBCard
-              className="card-registration card-registration-2"
-              style={{ borderRadius: "15px" }}
-            >
-              <MDBCardBody className="p-0">
+      <MDBContainer fluid className={styles.container}>
+        <MDBRow
+          className={`${styles.row} d-flex justify-content-center align-items-center h-100`}
+        >
+          <MDBCol col="12" className={`${styles.column} m-5`}>
+            <MDBCard className={`${styles.card} ${styles.cardRegistration}`}>
+              <MDBCardBody className={styles.cardBody}>
                 <MDBRow>
-                  <MDBCol md="6">
+                  <MDBCol md="6" className={styles.card}>
                     {innovation && (
                       <div>
-                        <h3
-                          className="fw-normal mb-5"
-                          style={{ color: "#4835d4" }}
-                        >
-                          General Information
+                        <h3 className={styles.heading}>
+                          Published Information
                         </h3>
                         <MDBRow>
                           <MDBCol md="6">
-                            <MDBInput
-                              wrapperClass="mb-4"
-                              label="Title"
-                              size="lg"
-                              id="form1"
-                              type="text"
-                              value={innovation.title}
-                              disabled
-                            />
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Title</label>
+                              <div className={styles.value}>
+                                {innovation.title}
+                              </div>
+                            </div>
                           </MDBCol>
                           <MDBCol md="6">
-                            <MDBInput
-                              wrapperClass="mb-4"
-                              label="Description"
-                              size="lg"
-                              id="form2"
-                              type="text"
-                              value={innovation.description}
-                              disabled
-                            />
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Website</label>
+                              <div className={styles.value}>
+                                {innovation.website}
+                              </div>
+                            </div>
                           </MDBCol>
                         </MDBRow>
-                        <MDBInput
-                          wrapperClass="mb-4"
-                          label="Website"
-                          size="lg"
-                          id="form3"
-                          type="text"
-                          value={innovation.website}
-                          disabled
-                        />
+                        <div className={styles.inputWrapper}>
+                          <label className={styles.label}>Description</label>
+                          <div className={styles.value}>
+                            {innovation.description}
+                          </div>
+                        </div>
+
                         <MDBRow>
                           <MDBCol md="6">
-                            <MDBInput
-                              wrapperClass="mb-4"
-                              label="Countries"
-                              size="lg"
-                              id="form4"
-                              type="text"
-                              value={innovation.countries
-                                .map((country) => country.name)
-                                .join(", ")}
-                              disabled
-                            />
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Countries</label>
+                              <div className={styles.value}>
+                                {innovation.countries
+                                  .map((country) => country.name)
+                                  .join(", ")}
+                              </div>
+                            </div>
                           </MDBCol>
                           <MDBCol md="6">
-                            <MDBInput
-                              wrapperClass="mb-4"
-                              label="Categories"
-                              size="lg"
-                              id="form5"
-                              type="text"
-                              value={innovation.categories
-                                .map((category) => category.name)
-                                .join(", ")}
-                              disabled
-                            />
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Categories</label>
+                              <div className={styles.value}>
+                                {innovation.categories
+                                  .map((category) => category.name)
+                                  .join(", ")}
+                              </div>
+                            </div>
                           </MDBCol>
                         </MDBRow>
                       </div>
                     )}
                   </MDBCol>
 
-                  <MDBCol md="6">
-                    <h3
-                      className="fw-normal mb-5 text-white"
-                      style={{ color: "#4835d4" }}
+                  <MDBCol
+                    md="6"
+                    className={`${styles.textWhite} ${styles.bgIndigo} ${styles.card} `}
+                  >
+                    <h4
+                      className={`${styles.heading} ${styles.headingNormal} ${styles.textWhite} `}
                     >
-                      General Information
-                    </h3>
+                      Update information here...
+                    </h4>
                     <MDBInput
-                      wrapperClass="mb-4"
+                      wrapperClass={styles.inputWrapper}
                       label="Title"
                       size="lg"
                       id="updatedTitle"
@@ -272,7 +251,7 @@ class InnovationUpdateForm extends Component {
                       onChange={this.handleInputChange}
                     />
                     <MDBInput
-                      wrapperClass="mb-4"
+                      wrapperClass={styles.inputWrapper}
                       label="Description"
                       size="lg"
                       id="updatedDescription"
@@ -281,7 +260,7 @@ class InnovationUpdateForm extends Component {
                       onChange={this.handleInputChange}
                     />
                     <MDBInput
-                      wrapperClass="mb-4"
+                      wrapperClass={styles.inputWrapper}
                       label="Website"
                       size="lg"
                       id="updatedWebsite"
@@ -289,39 +268,44 @@ class InnovationUpdateForm extends Component {
                       value={updatedWebsite}
                       onChange={this.handleInputChange}
                     />
-                   <Select
-  className="mb-4"
-  options={categoryOptions.map((category) => ({
-    value: category,
-    label: category.name,
-    key: `category-${category.id}`,
-  }))}
-  isMulti
-  onChange={this.handleCategoryChange}
-  value={updatedCategories}
-/>
+                    <Select
+                      className={`${styles.select} ${styles.textSelect}`}
+                      options={categoryOptions.map((category) => ({
+                        value: category,
+                        label: category.name,
+                        key: `category-${category.id}`,
+                      }))}
+                      isMulti
+                      onChange={this.handleCategoryChange}
+                      value={updatedCategories}
+                    />
 
-<Select
-  className="mb-4"
-  options={countryOptions.map((country) => ({
-    value: country,
-    label: country.name,
-    key: `country-${country.id}`,
-  }))}
-  isMulti
-  onChange={this.handleCountryChange}
-  value={updatedCountries}
-/>
+                    <Select
+                      className={styles.select}
+                      options={countryOptions.map((country) => ({
+                        value: country,
+                        label: country.name,
 
-
+                        key: `country-${country.id}`,
+                      }))}
+                      isMulti
+                      onChange={this.handleCountryChange}
+                      value={updatedCountries}
+                    />
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>
-                  <MDBCol className="text-center mt-4">
-                    <MDBBtn color="warning" onClick={this.updateInnovation}>
+                  <MDBCol className={`${styles.textCenter} ${styles.buttons}`}>
+                    <MDBBtn
+                      className={styles.btnUpdate}
+                      onClick={this.updateInnovation}
+                    >
                       Update
                     </MDBBtn>
-                    <MDBBtn color="danger" onClick={this.deleteInnovation}>
+                    <MDBBtn
+                      className={styles.btnDelete}
+                      onClick={this.deleteInnovation}
+                    >
                       Delete
                     </MDBBtn>
                   </MDBCol>
