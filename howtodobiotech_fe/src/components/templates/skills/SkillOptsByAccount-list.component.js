@@ -1,12 +1,12 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllSkillOpts } from "../../../actions/skills";
+import { getSkillOptsByAccountId } from "../../../actions/skills";
 import SkillOptDataService from "../../../service/Skill.service";
 import { Link } from "react-router-dom";
-import styles from "./SkillOptsList.module.css";
+import styles from "./SkillOptsByAccountList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
-class SkillOptList extends Component {
+class SkillOptsByAccountList extends Component {
   constructor(props) {
     super(props);
 
@@ -16,14 +16,17 @@ class SkillOptList extends Component {
   }
 
   componentDidMount() {
-    SkillOptDataService.getAllSkillOpts()
-      .then((response) => {
-        const skillOpts = response.data;
-        this.setState({ skillOpts });
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+    const userId = localStorage.getItem("userId");
+    if (userId) {
+      SkillOptDataService.getSkillOptsByAccountId(userId)
+        .then((response) => {
+          const skillOpts = response.data;
+          this.setState({ skillOpts });
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
   }
 
   render() {
@@ -31,9 +34,15 @@ class SkillOptList extends Component {
 
     return (
       <div>
+        <div className={styles.title}>
+          <h4>Your organization upload these skill opportunities</h4>
+        </div>
+
         <div style={{ margin: "50px 0" }}></div>
         {skillOpts.length > 0 ? (
-          <table className={styles["skill-opts-table"]}>
+          <table
+            className={`${styles.skillOptsTable} ${styles.dashboardTable}`}
+          >
             <thead>
               <tr>
                 <th>Title</th>
@@ -49,7 +58,7 @@ class SkillOptList extends Component {
                   <td>
                     <Link
                       to={`/skill-opportunities/${skillOpt.id}`}
-                      className={styles["details-button"]}
+                      className={styles.detailButton}
                     >
                       Details
                     </Link>
@@ -61,7 +70,7 @@ class SkillOptList extends Component {
         ) : (
           <NotFoundPage
             title="We are sorry!"
-            text="No skill opportunities were found. Sign up for our newsletter to stay updated!"
+            text="You have not register any skill opportunity yet. Do it now."
           />
         )}
       </div>
@@ -73,4 +82,6 @@ const mapStateToProps = (state) => ({
   skillOpts: state.skillOpts,
 });
 
-export default connect(mapStateToProps, { getAllSkillOpts })(SkillOptList);
+export default connect(mapStateToProps, { getSkillOptsByAccountId })(
+  SkillOptsByAccountList
+);

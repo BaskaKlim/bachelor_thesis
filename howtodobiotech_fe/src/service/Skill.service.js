@@ -21,6 +21,10 @@ class SkillOptDataService {
     return http.delete(`/skill-opportunities/${id}`);
   }
 
+  getSkillOptsByAccountId(accountId) {
+    return http.get(`/skill-opportunities/by-account/${accountId}`);
+  }
+  
   getSkillOptByBiotechCategory(biotechCategoryName) {
     return http.get(`/skill-opportunities/by-biotech-category/${biotechCategoryName}`);
   }

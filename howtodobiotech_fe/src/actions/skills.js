@@ -134,3 +134,17 @@ export const getSkillOptBySkillCategory = (skillCategory) => async (dispatch) =>
     console.log(err);
   }
 };
+
+export const getSkillOptsByAccountId = (accountId) => async (dispatch) => {
+  try {
+    const res = await SkillOptDataService.getSkillOptsByAccountId(accountId);
+
+    dispatch({
+      type: RETRIEVE_SKILL_OPTS,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.log(err);
+  }
+};
+
