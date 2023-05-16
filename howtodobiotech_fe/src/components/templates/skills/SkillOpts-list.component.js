@@ -6,7 +6,7 @@ import Card from "../../organisms/skills/Skill.card";
 import styles from "./SkillOptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
-const skillCategories = [
+const skillCategoryOption = [
   {
     id: 1,
     name: "WORKSHOP",
@@ -17,14 +17,14 @@ const skillCategories = [
   {
     id: 2,
     name: "SUMMER_WINTER_SCHOOL",
-    title:"SUMMER WINTER SCHOOL",
+    title: "SUMMER WINTER SCHOOL",
     imageUrl: "/assets/school.png",
     color: "#4B4DF7",
   },
   {
     id: 3,
     name: "CONFERENCE",
-    title:"CONFERENCE",
+    title: "CONFERENCE",
     imageUrl: "/assets/conference.png",
     color: "#FE7062",
   },
@@ -35,11 +35,13 @@ const skillCategories = [
     imageUrl: "/assets/internship.png",
     color: "#CEDAF6",
   },
-  { id: 5, 
-    name: "ACADEMY", 
-    title: "ACADEMY", 
-    imageUrl: "/assets/academy.png", 
-    color: "#B23730" },
+  {
+    id: 5,
+    name: "ACADEMY",
+    title: "ACADEMY",
+    imageUrl: "/assets/academy.png",
+    color: "#B23730",
+  },
   {
     id: 6,
     name: "HACKATHON",
@@ -49,8 +51,7 @@ const skillCategories = [
   },
 ];
 
-
-const categoryOptions = [
+const biotechCategoryOptions = [
   {
     id: 1,
     name: "MEDICINE",
@@ -61,8 +62,8 @@ const categoryOptions = [
     name: "BIOINFORMATICS",
     color: "#110777",
   },
-  { id: 3, name: "ENERGY",   color: "#7369ff" },
-  { id: 4, name: "FOOD",   color: "#FF928F" },
+  { id: 3, name: "ENERGY", color: "#7369ff" },
+  { id: 4, name: "FOOD", color: "#FF928F" },
   {
     id: 5,
     name: "ENVIRONMENTAL",
@@ -73,7 +74,7 @@ const categoryOptions = [
     name: "AGRICULTURE",
     color: "#A22B25",
   },
-  { id: 7, name: "MARINE",  color: "#4B4DF7" },
+  { id: 7, name: "MARINE", color: "#4B4DF7" },
 ];
 
 class SkillOptList extends Component {
@@ -85,8 +86,8 @@ class SkillOptList extends Component {
       filteredSkillOpts: [],
       selectedCategory: null,
       selectedSkillCategory: null,
-      currentPage: 1, // current page number
-      skillOptsPerPage: 6, // number of skillOpts to be displayed per page
+      currentPage: 1,
+      skillOptsPerPage: 3,
     };
   }
 
@@ -161,14 +162,17 @@ class SkillOptList extends Component {
   findCategoryImageUrl = (skillOpt) => {
     const lastSkillCategory =
       skillOpt.skillCategories[skillOpt.skillCategories.length - 1];
-    const category = skillCategories.find(
+    const category = skillCategoryOption.find(
       (category) => category.id === lastSkillCategory.id
     );
     return category ? category.imageUrl : null;
   };
 
   showAllSkillOpts = () => {
-    this.setState({ selectedCategory: null }, this.filterSkillOpts);
+    this.setState(
+      { selectedCategory: null, selectedSkillCategory: null },
+      this.filterSkillOpts
+    );
   };
 
   componentDidMount() {
@@ -219,21 +223,34 @@ class SkillOptList extends Component {
           >
             All skill opportunities
           </button>
-          {skillCategories.map((category) => (
+          {skillCategoryOption.map((category) => (
             <button
               key={category.id}
               onClick={() => this.handleSkillCategoryFilter(category.id)}
-              style={{ backgroundColor: category.color }}
+              style={{
+                backgroundColor: category.color,
+                color:
+                  category.id === this.state.selectedSkillCategory
+                    ? "black"
+                    : "white",
+              }}
               className={styles["category-button"]}
             >
               {category.title}
             </button>
           ))}
-          {categoryOptions.map((category) => (
+
+          {biotechCategoryOptions.map((category) => (
             <button
               key={category.id}
               onClick={() => this.handleCategoryFilter(category.id)}
-              style={{ backgroundColor: category.color }}
+              style={{
+                backgroundColor: category.color,
+                color:
+                  category.id === this.state.selectedCategory
+                    ? "black"
+                    : "white",
+              }}
               className={styles["category-button"]}
             >
               {category.name}
@@ -286,12 +303,10 @@ class SkillOptList extends Component {
             </div>
           </div>
         ) : (
-         
-            <NotFoundPage
-              title="We are sorry!"
-              text="No opportunity to gain new skills was found in chosen categories. Sign up to newsletter and stay in touch!"
-            />
-         
+          <NotFoundPage
+            title="We are sorry!"
+            text="No opportunity to gain new skills was found in chosen categories. Sign up to newsletter and stay in touch!"
+          />
         )}
       </div>
     );

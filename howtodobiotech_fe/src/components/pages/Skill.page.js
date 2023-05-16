@@ -27,6 +27,7 @@ class SkillOptPage extends Component {
           text="
           Are you an organizer of biotech skill development courses, workshops, or events?  Are you looking for interns and researchers? We invite you to sign up to our platform and create an account for your organization. Add your workshops, internships, or hackathons to our database and attract young talents in science through our platform. Join us today and be a part of the biotech skill development revolution!"
           textButton="create profile"
+          url="/register"
         />
       </div>
     );

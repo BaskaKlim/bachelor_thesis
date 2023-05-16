@@ -2,17 +2,20 @@ import React from "react";
 import { MDBContainer, MDBRow, MDBCol, MDBBtn } from "mdb-react-ui-kit";
 import styles from "./CenteredText.module.css";
 
-const CenteredTextWithButton = ({ text, textButton }) => {
+const CenteredTextWithButton = ({ text, textButton, url }) => {
   const handleClick = () => {
-    window.location.href = "https://your-redirection-url.com";
+    window.location.href = url;
   };
   return (
-    <div>
-      <MDBContainer className={`${styles.container} component-wrapper`}>
-        <MDBRow className={`${styles.centeredText} component-content`}>
-          <MDBCol>
-            <div>{text}</div>
-            <MDBBtn className={styles.redirectButton} onClick={handleClick}>
+    <div className={styles.container}>
+      <MDBContainer>
+        <MDBRow className={styles.componentContent}>
+          <MDBCol className={`d-flex flex-column align-items-center ${styles.col}`}>
+            <div className={styles.centeredText}>{text}</div>
+            <MDBBtn
+              className={`${styles.redirectButton} ${styles.customButton}`}
+              onClick={handleClick}
+            >
               {textButton}
             </MDBBtn>
           </MDBCol>
@@ -23,3 +26,5 @@ const CenteredTextWithButton = ({ text, textButton }) => {
 };
 
 export default CenteredTextWithButton;
+
+
