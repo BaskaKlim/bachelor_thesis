@@ -74,7 +74,9 @@ const Footer = () => {
               </div>
             </div>
             <div className={styles.allRightsReserved}>
-              © {new Date().getFullYear()} Barbara Klimekova| Opensource licence
+              © {new Date().getFullYear()} Barbara Klimekova | Opensource licence
+             <div> 
+              <a href="https://www.freepik.com/free-vector/access-control-system-abstract-concept_12085707.htm#query=login&position=0&from_view=search&track=sph">Images by vectorjuice</a> on Freepik</div>
             </div>
           </MDBCol>
 
