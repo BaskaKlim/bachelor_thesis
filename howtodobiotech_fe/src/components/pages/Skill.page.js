@@ -21,7 +21,6 @@ class SkillOptPage extends Component {
           </p>
         </div>
 
-
         <SkillOptList />
         <CenteredTextWithButton
           text="

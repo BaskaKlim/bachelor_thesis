@@ -23,27 +23,24 @@
 }
 
 .redirectButton {
-  background-color: #3374ff;
-  border: none;
-  color: white;
-  text-align: center;
+  display: inline-block;
+  padding: 6px 12px;
   text-decoration: none;
-  font-size: 16px;
-  padding: 8px 16px;
-  cursor: pointer;
   border-radius: 4px;
+  background-color: #5271ff;
+  color: white;
   transition: background-color 0.3s;
+  text-align: center;
+  border: none;
+  text-align: center;
+  cursor: pointer;
   margin-top: auto;  
   margin-bottom: 10px;  
-  box-shadow: none !important;
-  transform: none !important;
 }
 
 .redirectButton:hover {
-  background-color: #1e4e99;
-}
-.redirectButton:focus {
-  outline: none;
+  background-color: #484bf2;
+    color: white;
 }
 
 
