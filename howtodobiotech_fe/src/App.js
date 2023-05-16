@@ -8,6 +8,7 @@ import Footer from "./components/organisms/common/Footer.component";
 import NetworkPage from "./components/pages/Network.page";
 import StartupOptPage from "./components/pages/Startup.page";
 import SkillPage from "./components/pages/Skill.page";
+import DashboardPage from "./components/pages/Dashboard.page"
 
 import RegistrationForm from "./components/templates/users/Registration.form";
 import LoginForm from "./components/templates/users/Login.form";
@@ -90,7 +91,7 @@ class App extends Component {
                   {isAuthenticated ? (
                     <>
                       <li className="nav-item">
-                        <Link to={"/my-account"} className="nav-link">
+                        <Link to={"/dashboard"} className="nav-link">
                           Moje konto
                         </Link>
                       </li>
@@ -123,6 +124,8 @@ class App extends Component {
               <Route exact path={["/", "/network"]} component={NetworkPage} />
               <Route path="/startups" component={StartupOptPage} />
               <Route path="/skills" component={SkillPage} />
+              <Route path="/dashboard" component={DashboardPage} />
+DashboardPage
               <Route path="/innovations/add" component={AddInnovation} />
               <Route
                 path="/startup-opportunities/add"
