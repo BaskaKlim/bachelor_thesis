@@ -35,13 +35,18 @@
   transition: background-color 0.3s;
   margin-top: auto;  
   margin-bottom: 10px;  
+  box-shadow: none !important;
+  transform: none !important;
 }
 
 .redirectButton:hover {
   background-color: #1e4e99;
 }
-
-.customButton {
-  transform: none !important;
-  transition: none !important;
+.redirectButton:focus {
+  outline: none;
 }
+
+
+
+
+
