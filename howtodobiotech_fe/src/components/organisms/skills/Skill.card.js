@@ -6,7 +6,6 @@ import {
   MDBCardText,
   MDBIcon,
   MDBCardFooter,
-  MDBCardImage
 } from "mdb-react-ui-kit";
 import WebsiteButton from "../../atoms/common/Web.button";
 import CategoryLabel from "../../atoms/common/Category.label";

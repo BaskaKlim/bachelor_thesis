@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import styles from "./SkillOptAdd.module.css";
+import styles from "./SkillOptUpdate.module.css";
 import { connect } from "react-redux";
-import { updateSkillOpt, createSkillOpt } from "../../../actions/skills";
+import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
 
 import Select from "react-select";
 
@@ -18,6 +18,7 @@ import {
 
 import CountryLabel from "../../atoms/common/Country.label";
 import CategoryLabel from "../../atoms/common/Category.label";
+import Button from "../../atoms/common/CallToAction.button";
 
 const categoryOptions = [
   { id: 1, name: "MEDICINE" },
@@ -101,45 +102,28 @@ const skillCategoryOption = [
 class SkillOptUpdateForm extends Component {
   constructor(props) {
     super(props);
-  
+
     this.state = {
       skillOpt: null,
-      title: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-      organizer: "",
-      website: "",
-      accountId: "",
-      countries: [],
-      biotechCategories: [],
-      skillCategories: [],
+      updatedTitle: "",
+      updatedDescription: "",
+      updatedStartDate: "",
+      updatedEndDate: "",
+      updatedOrganizer: "", 
+      updatedWebsite: "",
+      updatedCountries: [],
+      updatedBiotechCategories: [],
+      updatedSkillCategories: [],
     };
   }
-  
-  componentDidMount() {
-    const userId = localStorage.getItem("userId");
-    this.setState({ accountId: userId });
-  }
-  
 
-  createSkillOpt() {
-    const { title,  organizer, description, startDate, endDate, website, accountId, countries, biotechCategories, skillCategories } = this.state;
-    
-    const data = {
-      title,
-      organizer,
-      description,
-      startDate,
-      endDate,
-      website,
-      accountId,
-      countries,
-      biotechCategories,
-      skillCategories
-    };
-  
-    SkillOptDataService.createSkillOpt(data)
+  componentDidMount() {
+    const { id } = this.props.match.params;
+    this.getSkillOptById(id);
+  }
+
+  getSkillOptById(id) {
+    SkillOptDataService.getSkillOptById(id)
       .then((response) => {
         this.setState({ skillOpt: response.data });
       })
@@ -147,7 +131,6 @@ class SkillOptUpdateForm extends Component {
         console.log(error);
       });
   }
-  
 
   handleInputChange = (event) => {
     const target = event.target;
@@ -180,15 +163,13 @@ class SkillOptUpdateForm extends Component {
     const {
       skillOpt,
       updatedTitle,
-      organizer: updatedOrganizer,  
       updatedDescription,
       updatedWebsite,
-      updatedStartDate,
-      updatedEndDate,
       updatedCountries,
       updatedBiotechCategories,
       updatedSkillCategories,
-    
+      updatedStartDate,
+      updatedEndDate,
     } = this.state;
     const countryValues = updatedCountries.map((country) => ({
       id: country.value.id,
@@ -205,7 +186,8 @@ class SkillOptUpdateForm extends Component {
       name: skillCategory.value.name,
     }));
 
-    const newSkillOpt = {
+    const updatedSkillOpt = {
+      id: skillOpt.id,
       title: updatedTitle,
       description: updatedDescription,
       website: updatedWebsite,
@@ -214,20 +196,21 @@ class SkillOptUpdateForm extends Component {
       skillCategories: skillCategoryValues,
       startDate: updatedStartDate,
       endDate: updatedEndDate,
-      organizer: updatedOrganizer,  
-      accountId: localStorage.getItem("userId"),  
+      organizer: skillOpt.organizer, // Set to the value of skillOpt.organizer
+      accountId: localStorage.getItem("userId"), // Set accountId to userId from Local Storage
     };
+
     this.props
-      .createSkillOpt(newSkillOpt)
+      .updateSkillOpt(skillOpt.id, updatedSkillOpt)
       .then((response) => {
         console.log("Update response:", response);
         this.getSkillOptById(skillOpt.id);
-        this.props.history.push("/skill-opportunities/" + skillOpt.id);
+        this.props.history.push("/skill-opportunities/update/" + skillOpt.id);
       })
       .catch((e) => {
-        console.log("Update response:", newSkillOpt);
+        console.log("Update response:", updatedSkillOpt);
         console.log(e);
-        console.log(newSkillOpt);
+        console.log(updatedSkillOpt);
       });
   };
 
@@ -261,8 +244,18 @@ class SkillOptUpdateForm extends Component {
     this.props.history.goBack();
   };
 
+  deleteSkillOpt = () => {
+    const { skillOpt } = this.state;
+    this.props
+      .deleteSkillOpt(skillOpt.id)
+      .then(() => {
+        this.props.history.push("/dashboard");
+      })
+      .catch((e) => {
+        console.log(e);
+      });
+  };
 
-  
   render() {
     const {
       skillOpt,
@@ -472,11 +465,16 @@ class SkillOptUpdateForm extends Component {
                   <MDBCol className={`${styles.textCenter} ${styles.buttons}`}>
                     <button
                       className={styles.btnUpdate}
-                      onClick={this.createSkillOpt}
+                      onClick={this.updateSkillOpt}
                     >
-                      Add 
+                      Update
                     </button>
-
+                    <button
+                      className={styles.btnDelete}
+                      onClick={this.deleteSkillOpt}
+                    >
+                      Delete
+                    </button>
                     <button onClick={this.goBack} className={styles.btnBack}>
                       Back
                     </button>
@@ -495,8 +493,6 @@ const mapStateToProps = (state) => ({
   innovations: state.innovations,
 });
 
-export default connect(mapStateToProps, { updateSkillOpt, createSkillOpt })(
+export default connect(mapStateToProps, { updateSkillOpt, deleteSkillOpt })(
   SkillOptUpdateForm
 );
-
-  

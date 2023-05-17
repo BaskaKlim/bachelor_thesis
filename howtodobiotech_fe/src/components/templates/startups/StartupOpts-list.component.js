@@ -75,13 +75,45 @@ class StartupOptList extends Component {
       selectedCategory: null,
       selectedSupportOption: null,
       currentPage: 1,
-      startupOptsPerPage: 6,
+      startupOptsPerPage: 3,
     };
   }
 
+  handlePageClick = (event) => {
+    this.setState({ currentPage: Number(event.target.id) });
+  };
+
+  paginate = (startupOpt) => {
+    const { currentPage, startupOptsPerPage } = this.state;
+
+    const startIndex = (currentPage - 1) * startupOptsPerPage;
+    const endIndex = startIndex + startupOptsPerPage;
+
+    return startupOpt.slice(startIndex, endIndex);
+  };
+
+  handleNextPage = () => {
+    this.setState(
+      (prevState) => ({
+        currentPage: prevState.currentPage + 1,
+      }),
+      this.filterStartupOpts
+    );
+  };
+
+  handleSupportOptionFilter = (supportOptionId) => {
+    this.setState(
+      { selectedSupportOption: supportOptionId },
+      this.filterStartupOpts
+    );
+  };
+
+
   filterStartupOpts = () => {
+    
     const { selectedCategory, selectedSupportOption, startupOpts } = this.state;
 
+    
     const filteredStartupOpts = startupOpts.filter((startupOpt) => {
       const hasSelectedCategory =
         selectedCategory === null ||
@@ -102,28 +134,16 @@ class StartupOptList extends Component {
 
   handleCategoryFilter = (categoryId) => {
     this.setState(
-      { selectedCategory: categoryId, currentPage: 1 },
-      this.filterStartupOpts
-    );
-  };
-
-  handleSupportOptionFilter = (supportOptionId) => {
-    this.setState(
-      { selectedSupportOption: supportOptionId, currentPage: 1 },
-      this.filterStartupOpts
-    );
+      { selectedCategory: categoryId},this.filterStartupOpts);
   };
 
   showAllStartupOpts = () => {
     this.setState(
-      { selectedCategory: null, selectedSupportOption: null, currentPage: 1 },
+      { selectedCategory: null, selectedSupportOption: null },
       this.filterStartupOpts
     );
   };
 
-  handlePageClick = (event) => {
-    this.setState({ currentPage: Number(event.target.id) });
-  };
 
   componentDidMount() {
     StartupOptDataService.getAllStartupOpts()
@@ -180,6 +200,7 @@ class StartupOptList extends Component {
               {category.name}
             </button>
           ))}
+          
           {supportOptions.map((supportOption) => (
             <button
               key={supportOption.id}

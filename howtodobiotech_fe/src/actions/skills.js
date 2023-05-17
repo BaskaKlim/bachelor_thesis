@@ -14,6 +14,7 @@ export const createSkillOpt = (
   startDate,
   endDate,
   website,
+  accountId,
   countries,
   biotechCategories,
   skillCategories
@@ -26,9 +27,10 @@ export const createSkillOpt = (
       startDate,
       endDate,
       website,
+      accountId,
       countries,
       biotechCategories,
-      skillCategories,
+      skillCategories
     });
 
     dispatch({

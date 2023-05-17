@@ -18,7 +18,7 @@ import AddStartupOpt from "./components/organisms/startups/StartupOpt-add.compon
 import AddSkillOpt from "./components/organisms/skills/SkillOpt-add.component";
 import InnovationUpdateForm from "./components/templates/network/Innovation-update.form";
 import AccountUpdateForm from"./components/templates/users/Account-update.form"
-
+import SkillOptUpdateForm from"./components/templates/skills/SkillOpt-update.form"
 
 import Innovation from "./components/organisms/network/Innovation.component";
 import StartupOpt from "./components/organisms/startups/StartupOpt.component";
@@ -95,11 +95,7 @@ class App extends Component {
                           Moje konto
                         </Link>
                       </li>
-                      <li className="nav-item">
-                        <Link to={"/profile"} className="nav-link">
-                          Profile
-                        </Link>
-                      </li>
+                    
                       <li className="nav-item">
                         <Link to={"/"} className="nav-link" onClick={this.logout}>
                           Logout
@@ -125,21 +121,15 @@ class App extends Component {
               <Route path="/startups" component={StartupOptPage} />
               <Route path="/skills" component={SkillPage} />
               <Route path="/dashboard" component={DashboardPage} />
-DashboardPage
+
               <Route path="/innovations/add" component={AddInnovation} />
-              <Route
-                path="/startup-opportunities/add"
-                component={AddStartupOpt}
-              />
+              <Route path="/startup-opportunities/add"component={AddStartupOpt}/>
               <Route path="/skill-opportunities/add" component={AddSkillOpt} />
-              <Route
-                path="/innovations/update/:id"
-                component={InnovationUpdateForm}
-              />
-                <Route
-                path="/accounts/update/:id"
-                component={AccountUpdateForm}
-              />
+             
+              <Route path="/innovations/update/:id" component={InnovationUpdateForm}/>
+              <Route path="/skill-opportunities/update/:id" component={SkillOptUpdateForm}/>
+              <Route path="/accounts/update/:id" component={AccountUpdateForm} />
+
               <Route path="/innovations/:id" component={Innovation} />
               <Route path="/startup-opportunities/:id" component={StartupOpt} />
               <Route path="/skill-opportunities/:id" component={SkillOpt} />

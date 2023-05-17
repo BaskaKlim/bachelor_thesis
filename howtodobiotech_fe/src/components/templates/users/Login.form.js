@@ -36,12 +36,11 @@ const Login = () => {
       try {
         setIsSubmitting(true);
 
-        // Send the login request to the server
         const response = await authService.login(values);
         const authToken = response.data.token;
         const userId = response.data.userId;
-        // Store the token in the local storage
-        localStorage.setItem("authToken", authToken);        
+
+        localStorage.setItem("authToken", authToken);
         localStorage.setItem("userId", userId);
 
         console.log("Login successful!");
@@ -126,31 +125,30 @@ const Login = () => {
                     <div
                       className={`d-flex justify-content-between ${styles.loginActions}`}
                     >
-                      <MDBBtn
+                      <button
                         color="primary"
                         size="lg"
                         type="submit"
                         disabled={isSubmitting}
                         className={styles.loginButton}
                       >
-                        {isSubmitting ? "Logging in..." : "Log in"}
-                      </MDBBtn>
+                        Log in
+                      </button>
+
                       <a
                         href="/forgot-password"
                         className={styles.forgotPasswordLink}
                       >
                         Forgot password?
                       </a>
-                      
                     </div>
-                   
-                      <a href="/register" className={styles.forgotPasswordLink}>
-                        Do not have an account ?Sign up
-                      </a>
-                  
+
+                    <a href="/register" className={styles.forgotPasswordLink}>
+                      Do not have an account ?Sign up
+                    </a>
                   </form>
                 </MDBCol>
-                
+
                 <MDBCol
                   md="10"
                   lg="6"

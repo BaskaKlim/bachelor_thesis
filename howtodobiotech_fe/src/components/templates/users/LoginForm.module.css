@@ -56,13 +56,26 @@
   }
   
   .loginButton {
+    display: inline-block;
+    text-decoration: none;
+    border-radius: 4px;
     background-color: #5271ff;
     color: white;
     transition: background-color 0.3s;
+    text-align: center;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    margin-top: auto;  
+    margin-bottom: 10px;  
+    padding: 0.5rem 1rem;
+    margin-right: 0.5rem;
   }
   
   .loginButton:hover {
     background-color: #484bf2;
+    color: white;
+    border-radius: 4px;
   }
   
   .forgotPasswordLink {

@@ -62,12 +62,12 @@ const RegistrationForm = () => {
     onSubmit: async (values) => {
       try {
         await authService.register(values);
-        // Registration successful
+
         setRegistrationStatus("success");
         toast.success("Registration successful!");
-        history.push("/login"); // Redirect to the login page
+        history.push("/login");  
       } catch (error) {
-        // Registration error
+      
         setRegistrationStatus("error");
         toast.error("Registration error. Please try again.");
       }
@@ -255,13 +255,13 @@ const RegistrationForm = () => {
                     Registration error. Please try again.
                   </div>
                 )}
-                <MDBBtn
+                <button
                   className={`${styles.mb4} ${styles.registrationSubmitBtn}`}
                   size="lg"
                   type="submit"
                 >
                   Register
-                </MDBBtn>
+                </button>
               </form>
             </MDBCol>
 

@@ -7,18 +7,33 @@ import styles from "./ExpertList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
 const expertiseOptions = [
-  { id: 1, name: "BUSINESS_DEVELOPMENT", title: "BUSINESS DEVELOPMENT",  color: "#E35149" },
-  { id: 2, name: "LIFE_SCIENCE",title: "LIFE SCIENCE", color: "#110777" },
-  { id: 3, name: "CHEMISTRY", title: "CHEMISTRY",color: "#7369ff" },
-  { id: 4, name: "BIOLOGY", title: "BIOLOGY",color: "#FF928F" },
-  { id: 5, name: "BIOINFORMATICS",title: "BIOINFORMATICS", color: "#91B3FA" },
-  { id: 6, name: "DATA_SCIENCE", title: "DATA SCIENCE",color: "#A22B25" },
-  { id: 7, name: "LEGAL",title: "LEGAL", color: "#4B4D4B4DF7F7" },
-  { id: 8, name: "MVP_PRTOTOTYPING", title: "MVP PRTOTOTYPING",color: "#A22B25" },
-  { id: 9, name: "BUSINESS_VALIDATION",title: "BUSINESS VALIDATION", color: "#7369ff" },
-  { id: 10, name: "PRODUCT_DESING",title: "PRODUCT DESING", color: "#FF928F" },
-  { id: 11, name: "CLINICAL_TRIAL", title: "CLINICAL TRIAL",color: "#110777" },
-  { id: 12, name: "FINANCE",title: "FINANCE", color: "#E35149" },
+  {
+    id: 1,
+    name: "BUSINESS_DEVELOPMENT",
+    title: "BUSINESS DEVELOPMENT",
+    color: "#E35149",
+  },
+  { id: 2, name: "LIFE_SCIENCE", title: "LIFE SCIENCE", color: "#110777" },
+  { id: 3, name: "CHEMISTRY", title: "CHEMISTRY", color: "#7369ff" },
+  { id: 4, name: "BIOLOGY", title: "BIOLOGY", color: "#FF928F" },
+  { id: 5, name: "BIOINFORMATICS", title: "BIOINFORMATICS", color: "#91B3FA" },
+  { id: 6, name: "DATA_SCIENCE", title: "DATA SCIENCE", color: "#A22B25" },
+  { id: 7, name: "LEGAL", title: "LEGAL", color: "#4B4D4B4DF7F7" },
+  {
+    id: 8,
+    name: "MVP_PRTOTOTYPING",
+    title: "MVP PRTOTOTYPING",
+    color: "#A22B25",
+  },
+  {
+    id: 9,
+    name: "BUSINESS_VALIDATION",
+    title: "BUSINESS VALIDATION",
+    color: "#7369ff",
+  },
+  { id: 10, name: "PRODUCT_DESING", title: "PRODUCT DESING", color: "#FF928F" },
+  { id: 11, name: "CLINICAL_TRIAL", title: "CLINICAL TRIAL", color: "#110777" },
+  { id: 12, name: "FINANCE", title: "FINANCE", color: "#E35149" },
 ];
 
 class ExpertList extends Component {
@@ -29,7 +44,7 @@ class ExpertList extends Component {
       experts: [],
       filteredExperts: [],
       currentPage: 1,
-      expertsPerPage: 6,
+      expertsPerPage: 3,
     };
   }
 
@@ -76,30 +91,36 @@ class ExpertList extends Component {
     const startIndex = (currentPage - 1) * expertsPerPage;
     const endIndex = startIndex + expertsPerPage;
     const displayedExperts = filteredExperts.slice(startIndex, endIndex);
-  
+
     return (
       <div>
         <div className={styles.filterOptions}>
-          <button className={styles['all-categories-button']} onClick={this.showAllExperts}> All Experts</button>
+          <button
+            className={styles["all-categories-button"]}
+            onClick={this.showAllExperts}
+          >
+            {" "}
+            All Experts
+          </button>
           {expertiseOptions.map((expertise) => (
             <button
               key={expertise.id}
               onClick={() => this.filterByExpertise(expertise.name)}
               style={{ backgroundColor: expertise.color }}
-              className={`${styles['category-button']} ${styles.active}`}
+              className={`${styles["category-button"]} ${styles.active}`}
             >
               {expertise.title}
             </button>
           ))}
         </div>
-  
+
         {displayedExperts.length > 0 ? (
           <div>
-            <ul className={styles['cards-list']}>
+            <ul className={styles["cards-list"]}>
               {displayedExperts.map((expert) => (
                 <li
                   key={expert.id}
-                  className={`${styles['card-container']} ${styles['list-item']}`}
+                  className={`${styles["card-container"]} ${styles["list-item"]}`}
                 >
                   <ExpertCard expert={expert} />
                 </li>
@@ -113,7 +134,7 @@ class ExpertList extends Component {
                       key={number}
                       onClick={() => this.handlePageChange(number + 1)}
                       className={`${styles.pageButton} ${
-                        currentPage === number + 1 ? styles.active : ''
+                        currentPage === number + 1 ? styles.active : ""
                       }`}
                     >
                       {number + 1}
@@ -132,7 +153,6 @@ class ExpertList extends Component {
       </div>
     );
   }
-  
 }
 const mapStateToProps = (state) => ({
   experts: state.experts,
