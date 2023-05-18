@@ -39,7 +39,7 @@ const SkillCard = ({ skillOpt }) => {
         <MDBCardTitle className={styles.skillOptCardTitle}>
           {skillOpt.title}
         </MDBCardTitle>
-        <div class={styles.skillOptCardOrganizer}>
+        <div className={styles.skillOptCardOrganizer}>
           <MDBCardText>
             {" "}
             by {skillOpt.organizer}
@@ -50,7 +50,7 @@ const SkillCard = ({ skillOpt }) => {
           </MDBCardText>
         </div>
 
-        <MDBCardText class={styles.skillOptCardDescription}>
+        <MDBCardText className={styles.skillOptCardDescription}>
           {skillOpt.description}
         </MDBCardText>
 
@@ -64,7 +64,7 @@ const SkillCard = ({ skillOpt }) => {
         <MDBCardFooter>
           <div>
             <MDBIcon fas icon="calendar-alt" style={{ marginRight: "10px" }} />
-            <span class={styles.cskillOptCardDateContainer}>
+            <span className={styles.cskillOptCardDateContainer}>
               {new Date(skillOpt.startDate).toLocaleDateString(
                 "de-DE",
                 dateOptions

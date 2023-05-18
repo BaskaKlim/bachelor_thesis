@@ -25,7 +25,7 @@ const Footer = () => {
             </div>
             <div className={styles.formContainer}>
               <form className={`input-group ${styles.centeredForm}`}>
-                <MDBInput hint="Your email" type="text" containerClass="mt-0 mb-0" />
+                <MDBInput hint="Your email" type="text" containerclass="mt-0 mb-0" />
                 <MDBBtn color="secondary" className="mb-0 ml-2">
                   Subscribe
                 </MDBBtn>

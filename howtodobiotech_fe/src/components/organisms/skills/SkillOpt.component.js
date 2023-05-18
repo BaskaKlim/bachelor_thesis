@@ -222,12 +222,12 @@ class SkillOpt extends Component {
                         </div>
                       </MDBCol>
                     </MDBRow>
-                    <btn
+                    <button
                       onClick={this.makeChanges}
                       className={styles.btnUpdate}
                     >
                       Make Changes
-                    </btn>
+                    </button>
                   </div>
                 )}
               </MDBCol>

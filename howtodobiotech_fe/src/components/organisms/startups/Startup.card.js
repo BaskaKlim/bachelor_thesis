@@ -30,7 +30,7 @@ const Card = ({ startupOpt }) => {
         <MDBCardTitle className={styles.startupCardTitle}>
           {startupOpt.title}
         </MDBCardTitle>
-        <div class={styles.startupCardProvider}>
+        <div className={styles.startupCardProvider}>
           <MDBCardText>
             {" "}
             by {startupOpt.provider}
