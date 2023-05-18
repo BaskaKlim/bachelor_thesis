@@ -7,7 +7,6 @@ import Select from "react-select";
 
 import SkillOptDataService from "../../../service/Skill.service";
 import {
-  MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
@@ -18,7 +17,9 @@ import {
 
 import CountryLabel from "../../atoms/common/Country.label";
 import CategoryLabel from "../../atoms/common/Category.label";
-import Button from "../../atoms/common/CallToAction.button";
+import ButtonUpdate from "../../atoms/common/ButtonUpdate";
+import ButtonBack from "../../atoms/common/ButtonBack";
+import ButtonDelete from "../../atoms/common/ButtonDelete";
 
 const categoryOptions = [
   { id: 1, name: "MEDICINE" },
@@ -109,7 +110,7 @@ class SkillOptUpdateForm extends Component {
       updatedDescription: "",
       updatedStartDate: "",
       updatedEndDate: "",
-      updatedOrganizer: "", 
+      updatedOrganizer: "",
       updatedWebsite: "",
       updatedCountries: [],
       updatedBiotechCategories: [],
@@ -278,93 +279,98 @@ class SkillOptUpdateForm extends Component {
             <MDBCard className={`${styles.card} ${styles.cardUpdate}`}>
               <MDBCardBody className={styles.cardBody}>
                 <MDBRow>
-                <MDBCol md="6" className={styles.card}>
-                {skillOpt && (
-                  <div>
-                    <MDBRow>
-                      <MDBCol md="6">
+                  <MDBCol md="6" className={styles.card}>
+                    {skillOpt && (
+                      <div>
+                        <MDBRow>
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Title</label>
+                              <div className={styles.value}>
+                                {skillOpt.title}
+                              </div>
+                            </div>
+                          </MDBCol>
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Website</label>
+                              <div className={styles.value}>
+                                {skillOpt.website}
+                              </div>
+                            </div>
+                          </MDBCol>
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Start Date</label>
+                              <div className={styles.dateValue}>
+                                {skillOpt.startDate}
+                              </div>
+                            </div>
+                          </MDBCol>
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>End Date</label>
+                              <div className={styles.dateValue}>
+                                {skillOpt.endDate}
+                              </div>
+                            </div>
+                          </MDBCol>
+                        </MDBRow>
                         <div className={styles.inputWrapper}>
-                          <label className={styles.label}>Title</label>
-                          <div className={styles.value}>{skillOpt.title}</div>
-                        </div>
-                      </MDBCol>
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>Website</label>
-                          <div className={styles.value}>{skillOpt.website}</div>
-                        </div>
-                      </MDBCol>
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>Start Date</label>
-                          <div className={styles.dateValue}>
-                            {skillOpt.startDate}
-                          </div>
-                        </div>
-                      </MDBCol>
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>End Date</label>
-                          <div className={styles.dateValue}>
-                            {skillOpt.endDate}
-                          </div>
-                        </div>
-                      </MDBCol>
-                    </MDBRow>
-                    <div className={styles.inputWrapper}>
-                      <label className={styles.label}>Description</label>
-                      <div className={styles.value}>{skillOpt.description}</div>
-                    </div>
-
-                    <MDBRow>
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>Countries</label>
+                          <label className={styles.label}>Description</label>
                           <div className={styles.value}>
-                            {skillOpt.countries.map((country) => (
-                              <CountryLabel
-                                key={country.id}
-                                country={country}
-                              />
-                            ))}
+                            {skillOpt.description}
                           </div>
                         </div>
-                      </MDBCol>
 
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>Categories</label>
-                          <div className={styles.value}>
-                            {skillOpt.biotechCategories.map((category) => (
-                              <CategoryLabel
-                                key={category.id}
-                                category={category}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </MDBCol>
+                        <MDBRow>
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Countries</label>
+                              <div className={styles.value}>
+                                {skillOpt.countries.map((country) => (
+                                  <CountryLabel
+                                    key={country.id}
+                                    country={country}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          </MDBCol>
 
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>
-                            Type of opportunity
-                          </label>
-                          <div className={styles.value}>
-                            {skillOpt.skillCategories.map((category) => (
-                              <CategoryLabel
-                                key={category.id}
-                                category={category}
-                              />
-                            ))}
-                          </div>
-                        </div>
-                      </MDBCol>
-                    </MDBRow>
-                   
-                  </div>
-                )}
-              </MDBCol>
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>Categories</label>
+                              <div className={styles.value}>
+                                {skillOpt.biotechCategories.map((category) => (
+                                  <CategoryLabel
+                                    key={category.id}
+                                    category={category}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          </MDBCol>
+
+                          <MDBCol md="6">
+                            <div className={styles.inputWrapper}>
+                              <label className={styles.label}>
+                                Type of opportunity
+                              </label>
+                              <div className={styles.value}>
+                                {skillOpt.skillCategories.map((category) => (
+                                  <CategoryLabel
+                                    key={category.id}
+                                    category={category}
+                                  />
+                                ))}
+                              </div>
+                            </div>
+                          </MDBCol>
+                        </MDBRow>
+                      </div>
+                    )}
+                  </MDBCol>
 
                   <MDBCol
                     md="6"
@@ -463,21 +469,9 @@ class SkillOptUpdateForm extends Component {
                 </MDBRow>
                 <MDBRow>
                   <MDBCol className={`${styles.textCenter} ${styles.buttons}`}>
-                    <button
-                      className={styles.btnUpdate}
-                      onClick={this.updateSkillOpt}
-                    >
-                      Update
-                    </button>
-                    <button
-                      className={styles.btnDelete}
-                      onClick={this.deleteSkillOpt}
-                    >
-                      Delete
-                    </button>
-                    <button onClick={this.goBack} className={styles.btnBack}>
-                      Back
-                    </button>
+                    <ButtonUpdate onClick={this.updateSkillOpt} />
+                    <ButtonDelete onClick={this.deleteSkillOpt} />
+                    <ButtonBack onClick={this.goBack} />
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
