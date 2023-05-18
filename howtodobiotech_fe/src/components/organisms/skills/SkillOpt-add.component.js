@@ -3,53 +3,19 @@ import styles from "./SkillOptAdd.module.css";
 import { connect } from "react-redux";
 import { createSkillOpt } from "../../../actions/skills";
 
-import Select from "react-select";
-
 import SkillOptDataService from "../../../service/Skill.service";
 import {
-  MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,
   MDBCard,
   MDBCardBody,
-  MDBInput,
 } from "mdb-react-ui-kit";
 import InputField from "../../atoms/common/InputField";
+import CountriesSelect from "../../molecules/CountriesSelect";
+import SkillCategoriesSelect from "../../molecules/SkillCategoriesSelect";
+import BiotechCategoriesSelect from "../../molecules/BiotechCategoriesSelect";
 
-const categoryOptions = [
-  { id: 1, name: "MEDICINE" },
-  { id: 2, name: "BIOINFORMATICS" },
-  { id: 3, name: "ENERGY" },
-  { id: 4, name: "FOOD" },
-  { id: 5, name: "ENVIRONMENTAL" },
-  { id: 6, name: "AGRICULTURE" },
-  { id: 7, name: "MARINE" },
-];
-
-const countryOptions = [
-  { id: 1, name: "ALBANIA" },
-  { id: 2, name: "CROATIA" },
-  { id: 3, name: "CZECHIA" },
-  { id: 4, name: "ESTONIA" },
-  { id: 5, name: "HUNGARY" },
-  { id: 6, name: "LATVIA" },
-  { id: 7, name: "LITHUANIA" },
-  { id: 8, name: "POLAND" },
-  { id: 9, name: "SLOVAKIA" },
-  { id: 10, name: "SLOVENIA" },
-  { id: 11, name: "UKRAINE" },
-  { id: 12, name: "CEE" },
-];
-
-const skillCategoryOptions = [
-  { id: 1, name: "WORKSHOP", title: "WORKSHOP" },
-  { id: 2, name: "SUMMER_WINTER_SCHOOL", title: "SUMMER WINTER SCHOOL" },
-  { id: 3, name: "CONFERENCE", title: "CONFERENCE" },
-  { id: 4, name: "INTERNSHIP", title: "INTERNSHIP" },
-  { id: 5, name: "ACADEMY", title: "ACADEMY" },
-  { id: 6, name: "HACKATHON", title: "HACKATHON" },
-];
 
 class SkillOptAddForm extends Component {
   constructor(props) {
@@ -109,6 +75,11 @@ class SkillOptAddForm extends Component {
       },
     }));
   };
+
+
+
+
+  
 
   createSkillOpt = () => {
     const {
@@ -243,38 +214,18 @@ class SkillOptAddForm extends Component {
                       value={endDate}
                       onChange={this.handleInputChange}
                     />
-                    <Select
-                      className={`${styles.select} ${styles.textSelect}`}
-                      options={categoryOptions.map((category) => ({
-                        value: category,
-                        label: category.name,
-                        key: `category-${category.id}`,
-                      }))}
-                      isMulti
-                      onChange={this.handleBiotechCategoriesChange}
-                      value={biotechCategories}
-                    />
-                    <Select
-                      className={`${styles.select} ${styles.textSelect}`}
-                      options={skillCategoryOptions.map((skillCategory) => ({
-                        value: skillCategory,
-                        label: skillCategory.title,
-                        key: `category-${skillCategory.id}`,
-                      }))}
-                      isMulti
-                      onChange={this.handleSkillCategoriesChange}
+                   
+                    <SkillCategoriesSelect
                       value={skillCategories}
+                      onChange={this.handleSkillCategoriesChange}
                     />
-                    <Select
-                      className={`${styles.select} ${styles.textSelect}`}
-                      options={countryOptions.map((country) => ({
-                        value: country,
-                        label: country.name,
-                        key: `country-${country.id}`,
-                      }))}
-                      isMulti
-                      onChange={this.handleCountriesChange}
+                    <BiotechCategoriesSelect
+                      value={biotechCategories}
+                      onChange={this.handleBiotechCategoriesChange}
+                    />
+                    <CountriesSelect
                       value={countries}
+                      onChange={this.handleCountriesChange}
                     />
                   </MDBCol>
                 </MDBRow>
