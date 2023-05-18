@@ -5,6 +5,7 @@ import SkillOptDataService from "../../../service/Skill.service";
 import Card from "../../organisms/skills/Skill.card";
 import styles from "./SkillOptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
+import Pagination from "../../molecules/Pagination";
 
 const skillCategoryOption = [
   {
@@ -161,12 +162,23 @@ class SkillOptList extends Component {
 
   findCategoryImageUrl = (skillOpt) => {
     const lastSkillCategory =
-      skillOpt.skillCategories[skillOpt.skillCategories.length - 1];
-    const category = skillCategoryOption.find(
-      (category) => category.id === lastSkillCategory.id
-    );
-    return category ? category.imageUrl : null;
+      skillOpt.skillCategories && skillOpt.skillCategories.length > 0
+        ? skillOpt.skillCategories[skillOpt.skillCategories.length - 1]
+        : null;
+  
+    if (lastSkillCategory) {
+      const category = skillCategoryOption.find(
+        (category) => category.id === lastSkillCategory.id
+      );
+  
+      if (category) {
+        return category.imageUrl;
+      }
+    }
+  
+    return null;
   };
+  
 
   showAllSkillOpts = () => {
     this.setState(
@@ -196,23 +208,15 @@ class SkillOptList extends Component {
   }
 
   render() {
+
     const { filteredSkillOpts, currentPage, skillOptsPerPage } = this.state;
+  const totalPages = Math.ceil(filteredSkillOpts.length / skillOptsPerPage);
+  const startIndex = (currentPage - 1) * skillOptsPerPage;
+  const endIndex = startIndex + skillOptsPerPage;
+  const displayedSkillOpts = filteredSkillOpts.slice(startIndex, endIndex);
 
-    const indexOfLastSkillOpt = currentPage * skillOptsPerPage;
-    const indexOfFirstSkillOpt = indexOfLastSkillOpt - skillOptsPerPage;
-    const currentSkillOpts = filteredSkillOpts.slice(
-      indexOfFirstSkillOpt,
-      indexOfLastSkillOpt
-    );
+ 
 
-    const pageNumbers = [];
-    for (
-      let i = 1;
-      i <= Math.ceil(filteredSkillOpts.length / skillOptsPerPage);
-      i++
-    ) {
-      pageNumbers.push(i);
-    }
 
     return (
       <div>
@@ -261,7 +265,7 @@ class SkillOptList extends Component {
         {filteredSkillOpts.length > 0 ? (
           <div>
             <ul className={styles["cards-list"]}>
-              {currentSkillOpts.map((skillOpt) => {
+              {displayedSkillOpts.map((skillOpt) => {
                 const imageUrl = this.findCategoryImageUrl(skillOpt);
                 return (
                   <li
@@ -283,24 +287,11 @@ class SkillOptList extends Component {
                 );
               })}
             </ul>
-            <div className={styles.pagination}>
-              <div className={styles.paginationButtons}>
-                {pageNumbers.map((number) => {
-                  return (
-                    <button
-                      key={number}
-                      id={number}
-                      onClick={this.handlePageClick}
-                      className={`${styles.pageButton} ${
-                        currentPage === number ? styles.active : ""
-                      }`}
-                    >
-                      {number}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageClick={this.handlePageClick}
+          />
           </div>
         ) : (
           <NotFoundPage

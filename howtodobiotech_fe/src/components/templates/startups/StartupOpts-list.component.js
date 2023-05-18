@@ -5,7 +5,7 @@ import StartupOptDataService from "../../../service/Startup.service";
 import Card from "../../organisms/startups/Startup.card";
 import styles from "./StartupOptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
-
+import Pagination from "../../molecules/Pagination";
 
 const supportOptions = [
   {
@@ -83,14 +83,7 @@ class StartupOptList extends Component {
     this.setState({ currentPage: Number(event.target.id) });
   };
 
-  paginate = (startupOpt) => {
-    const { currentPage, startupOptsPerPage } = this.state;
-
-    const startIndex = (currentPage - 1) * startupOptsPerPage;
-    const endIndex = startIndex + startupOptsPerPage;
-
-    return startupOpt.slice(startIndex, endIndex);
-  };
+ 
 
   handleNextPage = () => {
     this.setState(
@@ -171,15 +164,11 @@ class StartupOptList extends Component {
       indexOfFirstStartupOpt,
       indexOfLastStartupOpt
     );
+    const totalPages = Math.ceil(
+      filteredStartupOpts.length / startupOptsPerPage
+    );
 
-    const pageNumbers = [];
-    for (
-      let i = 1;
-      i <= Math.ceil(filteredStartupOpts.length / startupOptsPerPage);
-      i++
-    ) {
-      pageNumbers.push(i);
-    }
+    
 
     return (
       <div>
@@ -246,23 +235,13 @@ class StartupOptList extends Component {
               })}
             </ul>
             <div className={styles.pagination}>
-              <div className={styles.paginationButtons}>
-                {pageNumbers.map((number) => {
-                  return (
-                    <button
-                      key={number}
-                      id={number}
-                      onClick={this.handlePageClick}
-                      className={`${styles.pageButton} ${
-                        currentPage === number ? styles.active : ""
-                      }`}
-                    >
-                      {number}
-                    </button>
-                  );
-                })}
-              </div>
-            </div>
+            <Pagination
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageClick={this.handlePageClick}
+            />
+          </div>
+       
           </div>
         ) : (
           <NotFoundPage
