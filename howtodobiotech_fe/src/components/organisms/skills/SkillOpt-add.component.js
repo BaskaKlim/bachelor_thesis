@@ -15,6 +15,7 @@ import {
   MDBCardBody,
   MDBInput,
 } from "mdb-react-ui-kit";
+import InputField from "../../atoms/common/InputField";
 
 const categoryOptions = [
   { id: 1, name: "MEDICINE" },
@@ -50,69 +51,80 @@ const skillCategoryOptions = [
   { id: 6, name: "HACKATHON", title: "HACKATHON" },
 ];
 
-class SkillOptUpdateForm extends Component {
+class SkillOptAddForm extends Component {
   constructor(props) {
     super(props);
 
     const userId = localStorage.getItem("userId");
 
     this.state = {
-      title: "",
-      description: "",
-      startDate: "",
-      endDate: "",
-      organizer: "",
-      website: "",
-      accountId: userId,
-      countries: [],
-      biotechCategories: [],
-      skillCategories: [],
+      formData: {
+        title: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        organizer: "",
+        website: "",
+        accountId: userId,
+        countries: [],
+        biotechCategories: [],
+        skillCategories: [],
+      },
     };
   }
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState({
-      [name]: value,
-    });
+    const { name, value } = event.target;
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        [name]: value,
+      },
+    }));
   };
 
   handleCountriesChange = (selectedOptions) => {
-    this.setState({
-      countries: selectedOptions,
-    });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        countries: selectedOptions,
+      },
+    }));
   };
 
   handleBiotechCategoriesChange = (selectedOptions) => {
-    this.setState({
-      biotechCategories: selectedOptions,
-    });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        biotechCategories: selectedOptions,
+      },
+    }));
   };
 
   handleSkillCategoriesChange = (selectedOptions) => {
-    this.setState({
-      skillCategories: selectedOptions,
-    });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        skillCategories: selectedOptions,
+      },
+    }));
   };
 
   createSkillOpt = () => {
     const {
       title,
-      organizer,
       description,
       startDate,
       endDate,
+      organizer,
       website,
-      accountId,
       countries,
       biotechCategories,
       skillCategories,
-    } = this.state;
+    } = this.state.formData;
 
-    const formattedStartDate = new Date(startDate).toISOString().split('T')[0];
-    const formattedEndDate = new Date(endDate).toISOString().split('T')[0];
+    const formattedStartDate = new Date(startDate).toISOString().split("T")[0];
+    const formattedEndDate = new Date(endDate).toISOString().split("T")[0];
 
     const data = {
       title,
@@ -121,7 +133,7 @@ class SkillOptUpdateForm extends Component {
       startDate: formattedStartDate,
       endDate: formattedEndDate,
       website,
-      accountId,
+      accountId: this.state.formData.accountId,
       countries: countries.map((country) => ({
         id: country.value.id,
         name: country.value.name,
@@ -163,7 +175,7 @@ class SkillOptUpdateForm extends Component {
       countries,
       biotechCategories,
       skillCategories,
-    } = this.state;
+    } = this.state.formData;
 
     return (
       <MDBContainer fluid className={styles.container}>
@@ -183,60 +195,48 @@ class SkillOptUpdateForm extends Component {
                     >
                       Update information here...
                     </h4>
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Title"
-                      size="lg"
                       id="title"
                       type="text"
                       name="title"
                       value={title}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Description"
-                      size="lg"
                       id="description"
                       type="text"
                       name="description"
                       value={description}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Website"
-                      size="lg"
                       id="website"
                       type="text"
                       name="website"
                       value={website}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Organizer"
-                      size="lg"
                       id="organizer"
                       type="text"
                       name="organizer"
                       value={organizer}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Start Date"
-                      size="lg"
                       id="startDate"
                       type="date"
                       name="startDate"
                       value={startDate}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="End Date"
-                      size="lg"
                       id="endDate"
                       type="date"
                       name="endDate"
@@ -301,4 +301,4 @@ class SkillOptUpdateForm extends Component {
   }
 }
 
-export default connect(null, { createSkillOpt })(SkillOptUpdateForm);
+export default connect(null, { createSkillOpt })(SkillOptAddForm);
