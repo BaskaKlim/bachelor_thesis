@@ -191,7 +191,7 @@ class SkillOptList extends Component {
          
 
           {isFilterOpen && (
-            <div className={styles["filter-container"]}>
+            <div className={styles.filters}>
               <SkillCategoryOptions
                 selectedCategory={selectedSkillCategory}
                 handleCategoryFilter={this.handleSkillCategoryFilter}

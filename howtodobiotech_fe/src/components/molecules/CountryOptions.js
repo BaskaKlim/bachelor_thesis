@@ -17,34 +17,25 @@ const countries = [
 ];
 
 const CountryOptions = ({ selectedCountry, handleCountryFilter }) => {
-  const rows = Math.ceil(countries.length / 7);  
-
   return (
     <div className={styles["filter-group"]}>
-      <div className={styles["filter-group-title"]}> Choose preferred country in CEE:
-     
-        {[...Array(rows)].map((_, rowIndex) => (
-          <div className={styles["row"]} key={rowIndex}>
-            {countries
-              .slice(rowIndex * 7, (rowIndex + 1) * 7) // Get the 7 items for the current row
-              .map((country) => (
-                <button
-                  key={country.id}
-                  onClick={() => handleCountryFilter(country.id)}
-                  style={{
-                    backgroundColor: country.id === selectedCountry ? "#4B4DF7" : "#EFEFEF",
-                    color: country.id === selectedCountry ? "black" : "gray",
-                  }}
-                  className={styles["categoryButton"]}
-                >
-                  {country.name}
-                </button>
-              ))}
-          </div>
+      <div className={styles["filter-group-title"]}>Choose preferred country in CEE:</div>
+      <div className={styles["options-container"]}>
+        {countries.map((country) => (
+          <button
+            key={country.id}
+            onClick={() => handleCountryFilter(country.id)}
+            style={{
+              backgroundColor: country.id === selectedCountry ? "#4B4DF7" : "#EFEFEF",
+              color: country.id === selectedCountry ? "black" : "gray",
+            }}
+            className={styles["categoryButton"]}
+          >
+            {country.name}
+          </button>
         ))}
       </div>
     </div>
-  
   );
 };
 

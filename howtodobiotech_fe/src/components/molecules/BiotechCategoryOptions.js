@@ -31,7 +31,7 @@ const biotechCategories = [
 const BiotechCategoryOptions = ({selectedCategory, handleCategoryFilter }) => {
   return (
     <div className="filter-group">
-      <div className="filter-group-title">Choose biotech field: 
+      <div className="filter-group-title">Choose biotech field: </div>
       {biotechCategories.map((category) => (
         <button
           key={category.id}
@@ -46,7 +46,7 @@ const BiotechCategoryOptions = ({selectedCategory, handleCategoryFilter }) => {
           {category.name}
         </button>
       ))}
-    </div>
+
     </div>
   );
 };

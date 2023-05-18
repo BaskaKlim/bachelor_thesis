@@ -93,12 +93,15 @@
 
 .filters{
   justify-content: center;
+  display: flex;
+  flex: 1.5;
 }
 
 .controlButtons{
   display: flex;
   flex: 1.5;
   justify-content: center;
+  padding-bottom: 5%;
  
 }
 
