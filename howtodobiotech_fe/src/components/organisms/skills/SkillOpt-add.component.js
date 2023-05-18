@@ -11,6 +11,10 @@ import {
   MDBCard,
   MDBCardBody,
 } from "mdb-react-ui-kit";
+
+
+import ButtonAdd from "../../atoms/common/ButtonAdd";
+import ButtonBack from "../../atoms/common/ButtonBack";
 import InputField from "../../atoms/common/InputField";
 import CountriesSelect from "../../molecules/CountriesSelect";
 import SkillCategoriesSelect from "../../molecules/SkillCategoriesSelect";
@@ -77,59 +81,55 @@ class SkillOptAddForm extends Component {
   };
 
 
+createSkillOpt = () => {
+  const {
+    title,
+    description,
+    startDate,
+    endDate,
+    organizer,
+    website,
+    countries,
+    biotechCategories,
+    skillCategories,
+  } = this.state.formData;
 
+  // Convert start and end dates to valid time values
+  const formattedStartDate = new Date(`${startDate}T00:00:00`);
+  const formattedEndDate = new Date(`${endDate}T23:59:59`);
 
-  
-
-  createSkillOpt = () => {
-    const {
-      title,
-      description,
-      startDate,
-      endDate,
-      organizer,
-      website,
-      countries,
-      biotechCategories,
-      skillCategories,
-    } = this.state.formData;
-
-    const formattedStartDate = new Date(startDate).toISOString().split("T")[0];
-    const formattedEndDate = new Date(endDate).toISOString().split("T")[0];
-
-    const data = {
-      title,
-      organizer,
-      description,
-      startDate: formattedStartDate,
-      endDate: formattedEndDate,
-      website,
-      accountId: this.state.formData.accountId,
-      countries: countries.map((country) => ({
-        id: country.value.id,
-        name: country.value.name,
-      })),
-      biotechCategories: biotechCategories.map((category) => ({
-        id: category.value.id,
-        name: category.value.name,
-      })),
-      skillCategories: skillCategories.map((skillCategory) => ({
-        id: skillCategory.value.id,
-        name: skillCategory.value.name,
-      })),
-    };
-
-    SkillOptDataService.createSkillOpt(data)
-      .then((response) => {
-        console.log(response);
-        // Handle successful creation (e.g., redirect, show success message)
-      })
-      .catch((error) => {
-        console.log(error);
-        console.log(data);
-        // Handle error (e.g., show error message)
-      });
+  const data = {
+    title,
+    organizer,
+    description,
+    startDate: formattedStartDate.toISOString(),
+    endDate: formattedEndDate.toISOString(),
+    website,
+    accountId: this.state.formData.accountId,
+    countries: countries.map((country) => ({
+      id: country.value.id,
+      name: country.value.name,
+    })),
+    biotechCategories: biotechCategories.map((category) => ({
+      id: category.value.id,
+      name: category.value.name,
+    })),
+    skillCategories: skillCategories.map((skillCategory) => ({
+      id: skillCategory.value.id,
+      name: skillCategory.value.name,
+    })),
   };
+
+  SkillOptDataService.createSkillOpt(data)
+    .then((response) => {
+      console.log(response);
+    })
+    .catch((error) => {
+      console.log(error);
+      console.log(data);
+    });
+};
+
 
   goBack = () => {
     this.props.history.goBack();
@@ -159,13 +159,14 @@ class SkillOptAddForm extends Component {
                 <MDBRow>
                   <MDBCol
                     md="6"
-                    className={`${styles.textWhite} ${styles.bgIndigo} ${styles.card} `}
+                    className={`${styles.textCenter} ${styles.bgIndigo} ${styles.card} `}
                   >
                     <h4
                       className={`${styles.heading} ${styles.headingNormal} ${styles.textWhite} `}
                     >
-                      Update information here...
+                      Add opportunity to gain new skills
                     </h4>
+                    <p>You are giving the chance to young science talents to grow. Thank you!</p>
                     <InputField
                       label="Title"
                       id="title"
@@ -231,16 +232,8 @@ class SkillOptAddForm extends Component {
                 </MDBRow>
                 <MDBRow>
                   <MDBCol className={`${styles.textCenter} ${styles.buttons}`}>
-                    <button
-                      className={styles.btnUpdate}
-                      onClick={this.createSkillOpt}
-                    >
-                      Add
-                    </button>
-
-                    <button onClick={this.goBack} className={styles.btnBack}>
-                      Back
-                    </button>
+                  <ButtonAdd onClick={this.createSkillOpt} />
+                  <ButtonBack onClick={this.goBack} />
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>
