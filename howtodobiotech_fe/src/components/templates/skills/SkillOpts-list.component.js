@@ -6,77 +6,9 @@ import Card from "../../organisms/skills/Skill.card";
 import styles from "./SkillOptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 import Pagination from "../../molecules/Pagination";
-
-const skillCategoryOption = [
-  {
-    id: 1,
-    name: "WORKSHOP",
-    title: "WORKSHOP",
-    imageUrl: "/assets/workshop.png",
-    color: "#FFA6A2",
-  },
-  {
-    id: 2,
-    name: "SUMMER_WINTER_SCHOOL",
-    title: "SUMMER WINTER SCHOOL",
-    imageUrl: "/assets/school.png",
-    color: "#4B4DF7",
-  },
-  {
-    id: 3,
-    name: "CONFERENCE",
-    title: "CONFERENCE",
-    imageUrl: "/assets/conference.png",
-    color: "#FE7062",
-  },
-  {
-    id: 4,
-    name: "INTERNSHIP",
-    title: "INTERNSHIP",
-    imageUrl: "/assets/internship.png",
-    color: "#CEDAF6",
-  },
-  {
-    id: 5,
-    name: "ACADEMY",
-    title: "ACADEMY",
-    imageUrl: "/assets/academy.png",
-    color: "#B23730",
-  },
-  {
-    id: 6,
-    name: "HACKATHON",
-    title: "HACKATHON",
-    imageUrl: "/assets/hackathon.png",
-    color: "#9695F2",
-  },
-];
-
-const biotechCategoryOptions = [
-  {
-    id: 1,
-    name: "MEDICINE",
-    color: "#E35149",
-  },
-  {
-    id: 2,
-    name: "BIOINFORMATICS",
-    color: "#110777",
-  },
-  { id: 3, name: "ENERGY", color: "#7369ff" },
-  { id: 4, name: "FOOD", color: "#FF928F" },
-  {
-    id: 5,
-    name: "ENVIRONMENTAL",
-    color: "#91B3FA",
-  },
-  {
-    id: 6,
-    name: "AGRICULTURE",
-    color: "#A22B25",
-  },
-  { id: 7, name: "MARINE", color: "#4B4DF7" },
-];
+import SkillCategoryOptions from "../../molecules/SkillCategoryOptions";
+import CountryOptions from "../../molecules/CountryOptions";
+import BiotechCategoryOptions from "../../molecules/BiotechCategoryOptions";
 
 class SkillOptList extends Component {
   constructor(props) {
@@ -87,8 +19,10 @@ class SkillOptList extends Component {
       filteredSkillOpts: [],
       selectedCategory: null,
       selectedSkillCategory: null,
+      selectedCountry: null,
       currentPage: 1,
       skillOptsPerPage: 3,
+      isFilterOpen: false,
     };
   }
 
@@ -128,12 +62,38 @@ class SkillOptList extends Component {
 
   handleSkillCategoryFilter = (skillCategoryId) => {
     this.setState(
-      { selectedSkillCategory: skillCategoryId },
+      { selectedSkillCategory: skillCategoryId, currentPage: 1 },
       this.filterSkillOpts
     );
   };
+
+  handleCategoryFilter = (categoryId) => {
+    this.setState(
+      { selectedCategory: categoryId, currentPage: 1 },
+      this.filterSkillOpts
+    );
+  };
+
+  handleCountryFilter = (countryId) => {
+    this.setState(
+      { selectedCountry: countryId, currentPage: 1 },
+      this.filterSkillOpts
+    );
+  };
+
+  toggleFilter = () => {
+    this.setState((prevState) => ({
+      isFilterOpen: !prevState.isFilterOpen,
+    }));
+  };
+
   filterSkillOpts = () => {
-    const { selectedCategory, selectedSkillCategory, skillOpts } = this.state;
+    const {
+      selectedCategory,
+      selectedSkillCategory,
+      selectedCountry,
+      skillOpts,
+    } = this.state;
 
     const filteredSkillOpts = skillOpts.filter((skillOpt) => {
       const hasSelectedCategory =
@@ -150,39 +110,27 @@ class SkillOptList extends Component {
             (skillCategory) => skillCategory.id === selectedSkillCategory
           ));
 
-      return hasSelectedCategory && hasSelectedSkillCategory;
+      const hasSelectedCountry =
+        selectedCountry === null ||
+        (skillOpt.countries &&
+          skillOpt.countries.some((country) => country.id === selectedCountry));
+
+      return (
+        hasSelectedCategory && hasSelectedSkillCategory && hasSelectedCountry
+      );
     });
 
     this.setState({ filteredSkillOpts });
   };
 
-  handleCategoryFilter = (categoryId) => {
-    this.setState({ selectedCategory: categoryId }, this.filterSkillOpts);
-  };
-
-  findCategoryImageUrl = (skillOpt) => {
-    const lastSkillCategory =
-      skillOpt.skillCategories && skillOpt.skillCategories.length > 0
-        ? skillOpt.skillCategories[skillOpt.skillCategories.length - 1]
-        : null;
-  
-    if (lastSkillCategory) {
-      const category = skillCategoryOption.find(
-        (category) => category.id === lastSkillCategory.id
-      );
-  
-      if (category) {
-        return category.imageUrl;
-      }
-    }
-  
-    return null;
-  };
-  
-
   showAllSkillOpts = () => {
     this.setState(
-      { selectedCategory: null, selectedSkillCategory: null },
+      {
+        selectedCategory: null,
+        selectedSkillCategory: null,
+        selectedCountry: null,
+        currentPage: 1,
+      },
       this.filterSkillOpts
     );
   };
@@ -201,102 +149,91 @@ class SkillOptList extends Component {
       });
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.filteredSkillOpts !== prevProps.filteredSkillOpts) {
-      this.setState({ filteredSkillOpts: this.props.filteredSkillOpts });
+  componentDidUpdate(prevProps, prevState) {
+    if (
+      this.state.selectedCategory !== prevState.selectedCategory ||
+      this.state.selectedSkillCategory !== prevState.selectedSkillCategory ||
+      this.state.selectedCountry !== prevState.selectedCountry
+    ) {
+      this.filterSkillOpts();
     }
   }
 
   render() {
-
-    const { filteredSkillOpts, currentPage, skillOptsPerPage } = this.state;
-  const totalPages = Math.ceil(filteredSkillOpts.length / skillOptsPerPage);
-  const startIndex = (currentPage - 1) * skillOptsPerPage;
-  const endIndex = startIndex + skillOptsPerPage;
-  const displayedSkillOpts = filteredSkillOpts.slice(startIndex, endIndex);
-
- 
-
+    const {
+      filteredSkillOpts,
+      currentPage,
+      skillOptsPerPage,
+      isFilterOpen,
+      selectedCategory,
+      selectedSkillCategory,
+      selectedCountry,
+    } = this.state;
+    const totalPages = Math.ceil(filteredSkillOpts.length / skillOptsPerPage);
+    const startIndex = (currentPage - 1) * skillOptsPerPage;
+    const endIndex = startIndex + skillOptsPerPage;
+    const displayedSkillOpts = filteredSkillOpts.slice(startIndex, endIndex);
 
     return (
-      <div>
-        <div>
-          <button
-            className={styles["all-categories-button"]}
-            onClick={this.showAllSkillOpts}
-          >
-            All skill opportunities
-          </button>
-          {skillCategoryOption.map((category) => (
+      <div className={styles.container}>
+         <div className={styles.controlButtons}>
             <button
-              key={category.id}
-              onClick={() => this.handleSkillCategoryFilter(category.id)}
-              style={{
-                backgroundColor: category.color,
-                color:
-                  category.id === this.state.selectedSkillCategory
-                    ? "black"
-                    : "white",
-              }}
-              className={styles["category-button"]}
+              className={styles.allButton}
+              onClick={this.showAllSkillOpts}
             >
-              {category.title}
+              All opportunities
             </button>
-          ))}
+            <button className={styles.filterButton} onClick={this.toggleFilter}>
+              Choose Filter
+            </button>
+          </div>
+        <div className={styles.filters}> 
+         
 
-          {biotechCategoryOptions.map((category) => (
-            <button
-              key={category.id}
-              onClick={() => this.handleCategoryFilter(category.id)}
-              style={{
-                backgroundColor: category.color,
-                color:
-                  category.id === this.state.selectedCategory
-                    ? "black"
-                    : "white",
-              }}
-              className={styles["category-button"]}
-            >
-              {category.name}
-            </button>
-          ))}
+          {isFilterOpen && (
+            <div className={styles["filter-container"]}>
+              <SkillCategoryOptions
+                selectedCategory={selectedSkillCategory}
+                handleCategoryFilter={this.handleSkillCategoryFilter}
+              />
+
+              <BiotechCategoryOptions
+                selectedCategory={selectedCategory}
+                handleCategoryFilter={this.handleCategoryFilter}
+              />
+
+              <CountryOptions
+                selectedCountry={selectedCountry}
+                handleCountryFilter={this.handleCountryFilter}
+              />
+            </div>
+          )}
         </div>
+
         <div style={{ margin: "50px 0" }}></div>
+
         {filteredSkillOpts.length > 0 ? (
           <div>
             <ul className={styles["cards-list"]}>
-              {displayedSkillOpts.map((skillOpt) => {
-                const imageUrl = this.findCategoryImageUrl(skillOpt);
-                return (
-                  <li
-                    key={skillOpt.id}
-                    className={`${styles["card-container"]} ${styles["list-item"]}`}
-                  >
-                    {imageUrl && (
-                      <div className={styles["image-container"]}>
-                        <div className={styles["image-overlay"]}></div>
-                        <img
-                          src={imageUrl}
-                          alt="Category"
-                          className={styles["category-image"]}
-                        />
-                      </div>
-                    )}
-                    <Card skillOpt={skillOpt} />
-                  </li>
-                );
-              })}
+              {displayedSkillOpts.map((skillOpt) => (
+                <li
+                  key={skillOpt.id}
+                  className={`${styles["card-container"]} ${styles["list-item"]}`}
+                >
+                  <Card skillOpt={skillOpt} />
+                </li>
+              ))}
             </ul>
             <Pagination
-            currentPage={currentPage}
-            totalPages={totalPages}
-            onPageClick={this.handlePageClick}
-          />
+              currentPage={currentPage}
+              totalPages={totalPages}
+              onPageClick={this.handlePageClick}
+            />
           </div>
         ) : (
           <NotFoundPage
             title="We are sorry!"
-            text="No opportunity to gain new skills was found in chosen categories. Sign up to newsletter and stay in touch!"
+            text="No opportunity to gain new skills was found in chosen categories. Sign up for the newsletter and stay in touch!"
           />
         )}
       </div>

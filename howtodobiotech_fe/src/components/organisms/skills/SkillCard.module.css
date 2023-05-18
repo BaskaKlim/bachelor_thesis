@@ -1,6 +1,7 @@
-.skillOptCard {
-  max-width: 22rem;
+.skillCard {
+  max-width:60px;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .skillOptCardTitle {
@@ -52,4 +53,16 @@ align-content: center;
 align-items: center;
 }
 
-  
+.scrollArrows {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  font-size: 1.5rem;
+  color: rgba(0, 0, 0, 0.4);
+  transition: color 0.3s ease;
+}
+
+.scrollArrows:hover {
+  color: rgba(0, 0, 0, 0.8);
+}

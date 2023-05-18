@@ -1,3 +1,8 @@
+.container{
+
+  justify-content: center;
+}
+
 .card-container {
   margin: 20px auto;
 }
@@ -61,47 +66,41 @@
   }
 }
 
-.category-button,
-.support-option-button {
-  background-color: #f1f1f1;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 8px;
-  cursor: pointer;
-  border-radius: 20px;
-  padding: 8px 16px;
-  transition: background-color 0.3s;
-}
 
-.category-button:hover,
-.support-option-button:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.all-categories-button {
-  background-color: #888;
+.allButton , .filterButton{
   color: white;
   border: none;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
+  font-size: 20px;
   margin: 4px 8px;
   cursor: pointer;
-  border-radius: 20px;
-  padding: 8px 16px;
+  border-radius: 8px;
+  padding: 10px 16px;
   transition: background-color 0.3s;
 }
-
-.all-categories-button:hover {
-  background-color: #666;
+.filterButton{
+  background-color: #4B4DF7;
+}
+.allButton{
+  background-color: #FE7062;
 }
 
+.allButton:hover , .filterButton:hover {
+  background-color: #bdbdbd;
+}
+
+.filters{
+  justify-content: center;
+}
+
+.controlButtons{
+  display: flex;
+  flex: 1.5;
+  justify-content: center;
+ 
+}
 
 
 
