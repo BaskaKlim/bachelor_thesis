@@ -44,7 +44,7 @@ const SkillCard = ({ skillOpt }) => {
 
     switch (skillCategory) {
       case 1:
-        imageSrc = "/assets/workshop.png";
+        imageSrc = "/assets/energy.jpg";
         break;
       case 2:
         imageSrc = "/assets/school.png";

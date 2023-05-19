@@ -19,7 +19,7 @@ import {
 } from "mdb-react-ui-kit"
 import styles from "./RegistrationForm.module.css";
 import authService from "../../../service/Auth.servise";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const RegistrationForm = () => {
@@ -64,12 +64,12 @@ const RegistrationForm = () => {
         await authService.register(values);
 
         setRegistrationStatus("success");
-        toast.success("Registration successful!");
+        alert("Registration successful!");
         history.push("/login");  
       } catch (error) {
       
         setRegistrationStatus("error");
-        toast.error("Registration error. Please try again.");
+        alert("Registration error. Please try again.");
       }
     },
   });

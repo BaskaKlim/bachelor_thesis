@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import StartupOptList from "../templates/startups/StartupOpts-list.component";
-import CenteredTextWithButton from "../organisms/common/CenteredText.component";
+import CenteredTextWithButton from "../organisms/common/CallToActionComponnetAccordingRole";
 import CarouselBanner from "../organisms/startups/StartupCarousel.banner";
 import styles from "./StartupPage.module.css";
 
@@ -24,8 +24,12 @@ class StartupOptPage extends Component {
 
         <StartupOptList />
         <CenteredTextWithButton
-          text="Are you an investor, VC funding manager, or do you lead business & mentoring programs for biotech startups and young scientists? If so, we invite you to sign up to our platform and add your support opportunities into our database. By doing so, you'll gain access to a wide network of biotech innovators and entrepreneurs, and help shape the future of the industry. Join us today and be a part of the biotech revolution!."
-          textButton="create profile"
+         textPublic="Are you an investor, VC funding manager, or do you lead business & mentoring programs for biotech startups and young scientists? If so, we invite you to sign up to our platform and add your support opportunities into our database. By doing so, you'll gain access to a wide network of biotech innovators and entrepreneurs, and help shape the future of the industry. Join us today and be a part of the biotech revolution!."
+         urlPublic="/register"
+         buttonTextPublic="create account"
+         textLoggedIn="Add your incubator, VC fond or mentoring program into the database now and spread it to the world of biotechnology startups."
+         urlLoggedIn="/startup-opportunities/add"
+         buttonTextLoggedIn="add support"
         />
       </div>
     );

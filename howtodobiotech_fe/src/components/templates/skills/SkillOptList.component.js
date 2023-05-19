@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
 import SkillOptDataService from "../../../service/Skill.service";
-import Card from "../../organisms/skills/Skill.card";
+import Card from "../../organisms/skills/SkillCard";
 import styles from "./SkillOptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 import Pagination from "../../molecules/Pagination";

@@ -1,5 +1,6 @@
 .container {
   padding: 2rem;
+  background-color: #ffffff;
 }
 
 .row {
@@ -27,6 +28,15 @@
   color: #5271FF;
   font-size: 1.5rem;
   font-weight: bold;
+  justify-content: center;
+  ali-items: center;
+}
+p{
+  color: #515253;
+  padding-left: 15px;
+  padding-right: 15px;
+  justify-content: center;
+  align-items: center;
 }
 
 .headingNormal {
@@ -53,3 +63,17 @@
 .buttons {
   padding-top: 10px;}
 
+  .imageColumn {
+    padding-top: 10%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ 
+  }
+  
+  .image {
+    max-height: 270px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }

@@ -48,7 +48,7 @@ const skillCategories = [
 const SkillCategoryOptions = ({selectedCategory, handleCategoryFilter }) => {
   return (
     <div className="filter-group">
-      <div className="filter-group-title">Choose opportunity :
+      <div className="filter-group-title">Choose opportunity :  </div>
       {skillCategories.map((category) => (
         <button
           key={category.id}
@@ -63,7 +63,7 @@ const SkillCategoryOptions = ({selectedCategory, handleCategoryFilter }) => {
         </button>
       ))}
     </div>
-    </div>
+  
   );
 };
 

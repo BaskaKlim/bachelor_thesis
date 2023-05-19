@@ -4,7 +4,7 @@ import styles from "./DashboardPage.module.css";
 class DashboardPage extends Component {
   render() {
     return (
-      <div>
+      <div className={styles.dashboard}>
         <div className={styles.title}>
           <h1>Dashboard</h1>
         </div>
