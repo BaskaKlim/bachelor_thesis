@@ -16,17 +16,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableGlobalMethodSecurity(
-        // securedEnabled = true,
-        // jsr250Enabled = true,
         prePostEnabled = true)
-public class WebSecurityConfig {
-
-    @Value("${spring.h2.console.path}")
-    private String h2ConsolePath;
-
+public class WebSecurityConfig implements WebMvcConfigurer {
     @Autowired
     AccountDetailsServiceImpl accountDetailsService;
 
@@ -69,15 +65,11 @@ public class WebSecurityConfig {
                 .and()
                 .authorizeRequests()
                 .requestMatchers("/api/auth/**").permitAll()
-                //.antMatchers(h2ConsolePath + "/**").permitAll()
                 .requestMatchers("/**").permitAll()
                 .anyRequest().authenticated();
 
-        // fix H2 database console: Refused to display ' in a frame because it set 'X-Frame-Options' to 'deny'
         http.headers().frameOptions().sameOrigin();
-
         http.authenticationProvider(authenticationProvider());
-
         http.addFilterBefore(authenticationJwtTokenFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

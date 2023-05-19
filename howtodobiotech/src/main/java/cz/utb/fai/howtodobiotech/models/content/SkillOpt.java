@@ -28,26 +28,20 @@ public class SkillOpt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @NotBlank(message = "Title of skill opportunity is mandatory")
     private String title;
 
-    @NotBlank(message = "Organizer providing skill opportunity  is mandatory")
     private String organizer;
 
-    @NotBlank(message = "Description of skill opportunity or service is mandatory")
     @Size(max = 1000)
     private String description;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "START_DATE")
-    @NotNull(message = "Start date of skill opportunity or service is mandatory")
     private Date startDate;
 
     @Temporal(TemporalType.DATE)
     @Column(name = "END_DATE")
-    @NotNull(message = "End date of skill opportunity or service is mandatory")
     private Date endDate;
-    @NotBlank(message = "Website of skill opportunity or service is mandatory")
     @Size(max = 400)
     private String website;
 

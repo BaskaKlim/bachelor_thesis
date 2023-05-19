@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin(origins = "http://localhost:8081")
-@RequestMapping("api/accounts")
 @RestController
+@RequestMapping("api/accounts")
 public class AccountController {
     @Autowired
     AccountService accountService;
@@ -72,22 +72,27 @@ public class AccountController {
         }
     }
 
+    @CrossOrigin(origins = "http://localhost:8081")
     @PutMapping("/{id}")
-    public ResponseEntity<Account> updateAccount(@PathVariable("id") Integer id, @RequestBody Account account) {
-        Optional<Account> accountData = accountService.getAccountById(id);
-        if (accountData.isPresent()) {
-            Account _account = accountData.get();
-            _account.setName(account.getName());
-            _account.setDescription(account.getDescription());
-            _account.setUrl(account.getUrl());
-            _account.setEmail(account.getEmail());
-            _account.setUsername(account.getUsername());
-            _account.setPassword(account.getPassword());
-            _account.setRoles(account.getRoles());
-
-            return new ResponseEntity<>(accountService.updateAccount(_account), HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> updateAccount(@PathVariable("id") Integer id, @RequestBody Account account) {
+        try {
+            Optional<Account> accountData = accountService.getAccountById(id);
+            if (accountData.isPresent()) {
+                Account _account = accountData.get();
+                _account.setName(account.getName());
+                _account.setDescription(account.getDescription());
+                _account.setUrl(account.getUrl());
+                _account.setEmail(account.getEmail());
+                _account.setUsername(account.getUsername());
+                _account.setPassword(account.getPassword());
+                _account.setRoles(account.getRoles());
+                accountService.updateAccount(_account);
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
     }
 

@@ -80,6 +80,10 @@ public class SkillOptService {
         return skillOptRepository.findByCountryName(countryName);
     }
 
+    public  List<SkillOpt> selectSkillOptByAccountId(Integer accountId) {
+        return skillOptRepository.findByAccountId(accountId);
+    }
+
     public Optional<SkillOpt> selectSkillOptByTitle(String title) {
         return skillOptRepository.findByTitle(title);
     }

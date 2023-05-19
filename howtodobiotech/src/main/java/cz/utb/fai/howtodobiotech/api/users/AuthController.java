@@ -7,6 +7,7 @@ import cz.utb.fai.howtodobiotech.payload.response.AuthResponse;
 import cz.utb.fai.howtodobiotech.payload.response.MessageResponse;
 import cz.utb.fai.howtodobiotech.repositories.users.RoleRepository;
 import cz.utb.fai.howtodobiotech.security.jwt.JwtUtils;
+import cz.utb.fai.howtodobiotech.security.services.AccountDetailsImpl;
 import cz.utb.fai.howtodobiotech.services.users.AccountService;
 import cz.utb.fai.howtodobiotech.utils.enums.ERole;
 import jakarta.servlet.http.HttpServletResponse;
@@ -30,7 +31,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-@CrossOrigin(origins = "http://localhost:8081")
+@CrossOrigin(origins = "*")
 @RestController
 @RequestMapping("/api/auth")
 public class AuthController {
@@ -53,24 +54,33 @@ public class AuthController {
     private RoleRepository roleRepository;
 
     @PostMapping("/authenticate")
-    public ResponseEntity<?> authenticateAccount(@RequestBody LoginRequest loginRequest) {
+    public ResponseEntity<AuthResponse> authenticate(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         try {
-            // Authenticate the user
             Authentication authentication = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(loginRequest.getUsername(), loginRequest.getPassword())
             );
 
-            // Load the user details
-            UserDetails userDetails = userDetailsService.loadUserByUsername(loginRequest.getUsername());
-
             // Generate the authentication token
             String token = jwtUtils.generateToken(loginRequest.getUsername());
 
-            // Return the token in the response
-            return ResponseEntity.ok(new AuthResponse(token));
+            AccountDetailsImpl userDetails = (AccountDetailsImpl) userDetailsService.loadUserByUsername(loginRequest.getUsername());
+            Integer userId = userDetails.getId();
+
+            response.setHeader("Authorization", "Bearer " + token);
+            response.setHeader("Access-Control-Allow-Origin", "http://localhost:8081");
+            response.setHeader("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE");
+            response.setHeader("Access-Control-Allow-Headers", "Origin, Content-Type, Authorization");
+
+            // Create the login response object
+            AuthResponse loginResponse = new AuthResponse(token, userId);
+
+
+            return ResponseEntity.ok(loginResponse);
         } catch (AuthenticationException e) {
             // Handle invalid credentials
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(new MessageResponse("Invalid credentials"));
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 

@@ -79,15 +79,16 @@ public class SkillOptController {
         }
 
     }
-
-    @GetMapping("/by-biotech-category/{biotechCategoryName}")
-    public ResponseEntity<List<SkillOpt>> getSkillOptByBiotechCategory(@PathVariable("biotechCategoryName") EBiotechCategory biotechCategoryName) {
-        List<SkillOpt> skillOpts = skillOptService.selectSkillOptByBiotechCategory(biotechCategoryName);
+    @GetMapping("/by-account/{accountId}")
+    public ResponseEntity<List<SkillOpt>> getSkillOptsByAccountId(@PathVariable("accountId") Integer accountId) {
+        List<SkillOpt> skillOpts = skillOptService.selectSkillOptByAccountId(accountId);
 
         if (skillOpts.isEmpty()) {
             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(skillOpts, HttpStatus.OK);
+
         }
-        return new ResponseEntity<>(skillOpts, HttpStatus.OK);
     }
 
     @GetMapping("/by-skill-category/{skillCategoryName}")

@@ -37,4 +37,6 @@ public interface SkillOptRepository extends JpaRepository<SkillOpt, Integer> {
     Optional<SkillOpt> findByStartDate(Date startDate);
 
     Optional<SkillOpt> findByEndDate(Date endDate);
+
+    List<SkillOpt> findByAccountId(Integer accountId);
 }
