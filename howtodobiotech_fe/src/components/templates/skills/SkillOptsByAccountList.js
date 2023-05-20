@@ -35,7 +35,7 @@ class SkillOptsByAccountList extends Component {
     return (
       <div>
         <div className={styles.title}>
-          <h4>Your organization upload these skill opportunities</h4>
+          <h4>Your skill opportunities:</h4>
         </div>
 
         <div style={{ margin: "50px 0" }}></div>

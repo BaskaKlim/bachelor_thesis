@@ -5,8 +5,8 @@ import {
   deleteInnovation,
 } from "../../../actions/innovations";
 import InnovationDataService from "../../../service/innovation.service";
-import Card from "../../organisms/network/Innovation.card";
-import styles from "./InnovationsList.module.css"; // Import the new CSS module
+import Card from "../../organisms/network/InnovationCard";
+import styles from "./InnovationsList.module.css"; //
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 
 const categoryOptions = [
@@ -144,13 +144,7 @@ class InnovationsList extends Component {
                   key={innovation.id}
                   className={`${styles["card-container"]} ${styles["list-item"]}`}
                 >
-                  {category && (
-                    <img
-                      src={category.imageUrl}
-                      alt={category.name}
-                      className={styles["category-image"]}
-                    />
-                  )}
+                 
                   <Card innovation={innovation} />
                 </li>
               );

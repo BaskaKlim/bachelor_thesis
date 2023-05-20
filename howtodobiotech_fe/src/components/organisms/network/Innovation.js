@@ -17,7 +17,7 @@ import {
 import InnovationDataService from "../../../service/innovation.service";
 import CountryLabel from "../../atoms/common/Country.label";
 import CategoryLabel from "../../atoms/common/Category.label";
-import styles from "./InnovationComponent.module.css";
+import styles from "./InnovationAdd.module.css";
 
 const categoryOptions = [
   {

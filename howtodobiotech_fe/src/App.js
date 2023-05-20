@@ -21,7 +21,7 @@ import AccountUpdateForm from"./components/templates/users/Account-update.form"
 import SkillOptUpdateForm from"./components/templates/skills/UpdateSkillOpt"
 import StartupOptUpdateForm from"./components/templates/startups/UpdateStartupOpt";
 
-import Innovation from "./components/organisms/network/Innovation.component";
+import Innovation from "./components/organisms/network/Innovation";
 import StartupOpt from "./components/organisms/startups/StartupOpt";
 import SkillOpt from "./components/organisms/skills/SkillOpt";
 import Expert from "./components/organisms/network/Expert.component";

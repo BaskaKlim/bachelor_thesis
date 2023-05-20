@@ -25,7 +25,7 @@ import BiotechCategoriesSelect from "../../molecules/BiotechCategoriesSelect";
 class StartupOptUpdateForm extends Component {
   constructor(props) {
     super(props);
-
+  
     this.state = {
       startupOpt: null,
       formData: {

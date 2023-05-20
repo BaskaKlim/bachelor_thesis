@@ -36,7 +36,7 @@ class StartupOptList extends Component {
     return (
       <div>
         <div className={styles.title}>
-          <h4>Your organization upload these support opportunities</h4>
+          <h4>Your support opportunities:</h4>
         </div>
 
         <div style={{ margin: "50px 0" }}></div>

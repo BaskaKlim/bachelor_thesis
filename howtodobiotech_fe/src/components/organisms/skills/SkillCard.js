@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -38,36 +38,7 @@ const SkillCard = ({ skillOpt }) => {
 
   const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
 
-  if (skillOpt.skillCategories.length > 0) {
-    const skillCategory = skillOpt.skillCategories[0].id;
 
-    switch (skillCategory) {
-      case 1:
-        imageSrc = "/assets/energy.jpg";
-        break;
-      case 2:
-        imageSrc = "/assets/school.png";
-        break;
-      case 3:
-        imageSrc = "/assets/conference.png";
-        break;
-      case 4:
-        imageSrc = "/assets/conference.png";
-        break;
-      case 5:
-        imageSrc = "/assets/intership.png";
-        break;
-      case 6:
-        imageSrc = "/assets/academy.png";
-        break;
-      case 7:
-        imageSrc = "/assets/hackathon.png";
-        break;
-      default:
-        imageSrc = "/assets/workshop.jpg";
-        break;
-    }
-  }
 
   return (
     <MDBCard style={{ maxWidth: "22rem" }} className={styles.skillCard}>

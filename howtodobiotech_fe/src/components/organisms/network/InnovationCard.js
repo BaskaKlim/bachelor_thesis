@@ -10,11 +10,14 @@ import {
 import WebsiteButton from "../../atoms/common/Web.button";
 import CategoryLabel from "../../atoms/common/Category.label";
 import CountryLabel from "../../atoms/common/Country.label";
+import InnovationImage from "../../molecules/InnovationImage";
+
 import styles from "./InnovationCard.module.css";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const Card = ({ innovation }) => {
   const [isExpanded, setIsExpanded] = useState(false);
+  let imageSrc = "";
 
   const categoryLabels = innovation.categories.map((category) => (
     <CategoryLabel
@@ -33,7 +36,9 @@ const Card = ({ innovation }) => {
       : innovation.description;
 
   return (
-    <MDBCard className={styles.cardContainer}>
+    <MDBCard style={{ maxWidth: "22rem" }} className={styles.card}>
+    <InnovationImage skillCategory={innovation.categories[0].id} />
+
       <MDBCardBody>
         <MDBCardTitle className={styles.cardTitle}>
           {innovation.title}
