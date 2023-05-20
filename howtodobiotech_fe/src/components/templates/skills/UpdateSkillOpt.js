@@ -189,10 +189,12 @@ class SkillOptUpdateForm extends Component {
     this.props
       .deleteSkillOpt(skillOpt.id)
       .then(() => {
+        alert("Opportunity was deleted successfully!");
         this.props.history.push("/dashboard");
       })
       .catch((e) => {
         console.log(e);
+        alert("Failed to delete your opportunity. Please try again.");
       });
   };
 
