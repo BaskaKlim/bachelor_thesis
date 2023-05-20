@@ -9,7 +9,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   MDBContainer,
   MDBRow,
-  MDBBtn,
   MDBCol,
   MDBCard,
   MDBCardBody,
@@ -19,7 +18,7 @@ import {
 
 import CountryLabel from "../../atoms/common/Country.label";
 import CategoryLabel from "../../atoms/common/Category.label";
-import styles from "./SkillComponent.module.css";
+import styles from "./SkillOpt.module.css";
 
 const categoryOptions = [
   {

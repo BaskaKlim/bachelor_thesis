@@ -153,7 +153,7 @@ class SkillOptAddForm extends Component {
           className={`${styles.row} d-flex justify-content-center align-items-center h-100`}
         >
           <MDBCol col="12" className={`${styles.column} m-5`}>
-            <MDBCard className={`${styles.card} ${styles.cardUpdate}`}>
+            <MDBCard className={`${styles.card} ${styles.cardAdd}`}>
               <MDBCardBody className={styles.cardBody}>
                 <MDBRow>
                   <MDBCol
@@ -223,15 +223,19 @@ class SkillOptAddForm extends Component {
                     />
                   </MDBCol>
                   <MDBCol md="6">
-                    <h4
-                      className={`${styles.heading} ${styles.headingNormal} ${styles.textWhite} `}
-                    >
-                      Add opportunity to gain new skills
-                    </h4>
-                    <p>
-                      You are giving the chance to young science talents to
-                      grow. Thank you!
-                    </p>
+                    <div className={styles.text}>
+                      <h4
+                        className={`${styles.heading} ${styles.headingNormal} ${styles.textWhite} `}
+                      >
+                        Add a opportunity <br />
+                        to gain new skills!
+                      </h4>
+                      <p>
+                        Internships, summer schools, academies, workshops or even
+                        hackathons can be valuable experience. You are giving
+                        the chance to young science talents grow. Thank you!
+                      </p>
+                    </div>
                     <div className={`${styles.imageColumn}`}>
                       <MDBCardImage
                         src="/assets/add_skill.jpg"
@@ -239,12 +243,14 @@ class SkillOptAddForm extends Component {
                         className={`${styles.image}`}
                       />
                     </div>
-                  </MDBCol>
-                </MDBRow>
-                <MDBRow>
-                  <MDBCol className={`${styles.textCenter} ${styles.buttons}`}>
-                    <ButtonAdd onClick={this.createSkillOpt} />
-                    <ButtonBack onClick={this.goBack} />
+                    <MDBRow>
+                      <MDBCol
+                        className={`${styles.textCenter} ${styles.buttons}`}
+                      >
+                        <ButtonAdd onClick={this.createSkillOpt} />
+                        <ButtonBack onClick={this.goBack} />
+                      </MDBCol>
+                    </MDBRow>
                   </MDBCol>
                 </MDBRow>
               </MDBCardBody>

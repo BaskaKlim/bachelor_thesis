@@ -19,8 +19,8 @@
   padding: 2rem;
 }
 
-.cardUpdate {
-  background-color: #f8f9fa;
+.cardAdd {
+  background-color: #ffffff;
 }
 
 .heading {
@@ -28,21 +28,21 @@
   color: #5271FF;
   font-size: 1.5rem;
   font-weight: bold;
-  justify-content: center;
-  ali-items: center;
+  text-align: center; /* Zarovnanie textu na stred */
 }
-p{
+
+p {
   color: #515253;
   padding-left: 15px;
   padding-right: 15px;
-  justify-content: center;
-  align-items: center;
+  text-align: center; /* Zarovnanie textu na stred */
 }
 
 .headingNormal {
   padding-top: 10px;
   font-size: 1.5rem;
   font-weight: bold;
+  text-align: center;  
 }
 
 .inputWrapper {
@@ -60,20 +60,37 @@ p{
 .bgIndigo {
   background-color: #5271FF;
 }
-.buttons {
-  padding-top: 10px;}
 
-  .imageColumn {
-    padding-top: 10%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
- 
-  }
-  
-  .image {
-    max-height: 270px;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
-  }
+.buttons {
+  padding-top: 10px;
+  display: flex;
+  justify-content: center;  
+}
+
+.buttons button {
+  margin: 0 2px;  
+  width: 90px;
+}
+
+
+.imageColumn {
+  padding-top: 5%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.image {
+  max-height: 270px;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.text {
+  justify-content: center;
+  align-items: center;
+  padding-top: 5%;
+  padding-left: 10%;
+  text-align: center; 
+}

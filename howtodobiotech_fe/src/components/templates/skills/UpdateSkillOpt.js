@@ -1,9 +1,7 @@
 import React, { Component } from "react";
-import styles from "./SkillOptUpdate.module.css";
+import styles from "./UpdateSkillOpt.module.css";
 import { connect } from "react-redux";
 import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
-
-import Select from "react-select";
 
 import SkillOptDataService from "../../../service/Skill.service";
 import {
@@ -11,8 +9,7 @@ import {
   MDBRow,
   MDBCol,
   MDBCard,
-  MDBCardBody,
-  MDBInput,
+  MDBCardBody
 } from "mdb-react-ui-kit";
 
 import CountryLabel from "../../atoms/common/Country.label";
@@ -20,85 +17,10 @@ import CategoryLabel from "../../atoms/common/Category.label";
 import ButtonUpdate from "../../atoms/common/ButtonUpdate";
 import ButtonBack from "../../atoms/common/ButtonBack";
 import ButtonDelete from "../../atoms/common/ButtonDelete";
-
-const categoryOptions = [
-  { id: 1, name: "MEDICINE" },
-  {
-    id: 2,
-    name: "BIOINFORMATICS",
-  },
-  { id: 3, name: "ENERGY" },
-  { id: 4, name: "FOOD" },
-  {
-    id: 5,
-    name: "ENVIRONMENTAL",
-  },
-  {
-    id: 6,
-    name: "AGRICULTURE",
-  },
-  { id: 7, name: "MARINE" },
-];
-
-const countryOptions = [
-  { id: 1, name: "ALBANIA" },
-  { id: 2, name: "CROATIA" },
-  { id: 3, name: "CZECHIA" },
-  { id: 4, name: "ESTONIA" },
-  { id: 5, name: "HUNGARY" },
-  { id: 6, name: "LATVIA" },
-  { id: 7, name: "LITHUANIA" },
-  { id: 8, name: "POLAND" },
-  { id: 9, name: "SLOVAKIA" },
-  { id: 10, name: "SLOVENIA" },
-  { id: 11, name: "UKRAINE" },
-  { id: 12, name: "CEE" },
-];
-
-const skillCategoryOption = [
-  {
-    id: 1,
-    name: "WORKSHOP",
-    title: "WORKSHOP",
-    imageUrl: "/assets/workshop.png",
-    color: "#FFA6A2",
-  },
-  {
-    id: 2,
-    name: "SUMMER_WINTER_SCHOOL",
-    title: "SUMMER WINTER SCHOOL",
-    imageUrl: "/assets/school.png",
-    color: "#4B4DF7",
-  },
-  {
-    id: 3,
-    name: "CONFERENCE",
-    title: "CONFERENCE",
-    imageUrl: "/assets/conference.png",
-    color: "#FE7062",
-  },
-  {
-    id: 4,
-    name: "INTERNSHIP",
-    title: "INTERNSHIP",
-    imageUrl: "/assets/internship.png",
-    color: "#CEDAF6",
-  },
-  {
-    id: 5,
-    name: "ACADEMY",
-    title: "ACADEMY",
-    imageUrl: "/assets/academy.png",
-    color: "#B23730",
-  },
-  {
-    id: 6,
-    name: "HACKATHON",
-    title: "HACKATHON",
-    imageUrl: "/assets/hackathon.png",
-    color: "#9695F2",
-  },
-];
+import InputField from "../../atoms/common/InputField";
+import CountriesSelect from "../../molecules/CountriesSelect";
+import SkillCategoriesSelect from "../../molecules/SkillCategoriesSelect";
+import BiotechCategoriesSelect from "../../molecules/BiotechCategoriesSelect";
 
 class SkillOptUpdateForm extends Component {
   constructor(props) {
@@ -106,15 +28,16 @@ class SkillOptUpdateForm extends Component {
 
     this.state = {
       skillOpt: null,
-      updatedTitle: "",
-      updatedDescription: "",
-      updatedStartDate: "",
-      updatedEndDate: "",
-      updatedOrganizer: "",
-      updatedWebsite: "",
-      updatedCountries: [],
-      updatedBiotechCategories: [],
-      updatedSkillCategories: [],
+      formData: {
+        title: "",
+        description: "",
+        startDate: "",
+        endDate: "",
+        website: "",
+        countries: [],
+        biotechCategories: [],
+        skillCategories: [],
+      },
     };
   }
 
@@ -134,43 +57,54 @@ class SkillOptUpdateForm extends Component {
   }
 
   handleInputChange = (event) => {
-    const target = event.target;
-    const name = target.name;
-    const value = target.value;
-    this.setState({
-      [name]: value,
-    });
+    const { name, value } = event.target;
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        [name]: value,
+      },
+    }));
   };
-
   handleCountriesChange = (selectedOptions) => {
-    this.setState({
-      updatedCountries: selectedOptions,
-    });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        countries: selectedOptions,
+      },
+    }));
   };
-
+  
   handleBiotechCategoriesChange = (selectedOptions) => {
-    this.setState({
-      updatedBiotechCategories: selectedOptions,
-    });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        biotechCategories: selectedOptions,
+      },
+    }));
   };
-
+  
   handleSkillCategoriesChange = (selectedOptions) => {
-    this.setState({
-      updatedSkillCategories: selectedOptions,
-    });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        skillCategories: selectedOptions,
+      },
+    }));
   };
-
+  
   updateSkillOpt = () => {
     const {
       skillOpt,
-      updatedTitle,
-      updatedDescription,
-      updatedWebsite,
-      updatedCountries,
-      updatedBiotechCategories,
-      updatedSkillCategories,
-      updatedStartDate,
-      updatedEndDate,
+      formData: {
+        title: updatedTitle,
+        description: updatedDescription,
+        website: updatedWebsite,
+        countries: updatedCountries,
+        biotechCategories: updatedBiotechCategories,
+        skillCategories: updatedSkillCategories,
+        startDate: updatedStartDate,
+        endDate: updatedEndDate,
+      },
     } = this.state;
     const countryValues = updatedCountries.map((country) => ({
       id: country.value.id,
@@ -197,8 +131,8 @@ class SkillOptUpdateForm extends Component {
       skillCategories: skillCategoryValues,
       startDate: updatedStartDate,
       endDate: updatedEndDate,
-      organizer: skillOpt.organizer, // Set to the value of skillOpt.organizer
-      accountId: localStorage.getItem("userId"), // Set accountId to userId from Local Storage
+      organizer: skillOpt.organizer,  
+      accountId: localStorage.getItem("userId"),  
     };
 
     this.props
@@ -207,11 +141,12 @@ class SkillOptUpdateForm extends Component {
         console.log("Update response:", response);
         this.getSkillOptById(skillOpt.id);
         this.props.history.push("/skill-opportunities/update/" + skillOpt.id);
+        alert("Opportunity updated successfully!");
       })
-      .catch((e) => {
+      .catch((error) => {
         console.log("Update response:", updatedSkillOpt);
-        console.log(e);
-        console.log(updatedSkillOpt);
+        console.log(error);
+        alert("Failed to update your opportunity. Please try again.");
       });
   };
 
@@ -220,9 +155,13 @@ class SkillOptUpdateForm extends Component {
       value: country.value,
       label: country.label,
     }));
-    this.setState({ updatedCountries });
+    this.setState((prevState) => ({
+      formData: {
+        ...prevState.formData,
+        countries: updatedCountries,
+      },
+    }));
   };
-
   handleCategoryChange = (selectedCategories) => {
     const updatedCategories = selectedCategories.map((category) => ({
       value: category.value,
@@ -258,8 +197,8 @@ class SkillOptUpdateForm extends Component {
   };
 
   render() {
+    const { skillOpt, formData } = this.state;
     const {
-      skillOpt,
       updatedTitle,
       updatedDescription,
       updatedStartDate,
@@ -268,7 +207,7 @@ class SkillOptUpdateForm extends Component {
       updatedCountries,
       updatedBiotechCategories,
       updatedSkillCategories,
-    } = this.state;
+    } = formData;
 
     return (
       <MDBContainer fluid className={styles.container}>
@@ -381,90 +320,61 @@ class SkillOptUpdateForm extends Component {
                     >
                       Update information here...
                     </h4>
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Title"
-                      size="lg"
-                      id="updatedTitle"
-                      type="
-                  text"
-                      name="updatedTitle"
+                      id="title"
+                      type="text"
+                      name="title"
                       value={updatedTitle}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Description"
-                      size="lg"
-                      id="updatedDescription"
+                      id="description"
                       type="text"
-                      name="updatedDescription"
+                      name="description"
                       value={updatedDescription}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="Website"
-                      size="lg"
-                      id="updated Website"
+                      id="website"
                       type="text"
-                      name="updatedWebsite"
+                      name="website"
                       value={updatedWebsite}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                  
+                    <InputField
                       label="Start Date"
-                      size="lg"
-                      id="updatedStartDate"
+                      id="startDate"
                       type="date"
-                      name="updatedStartDate"
+                      name="startDate"
                       value={updatedStartDate}
                       onChange={this.handleInputChange}
                     />
-                    <MDBInput
-                      wrapperClass={styles.inputWrapper}
+                    <InputField
                       label="End Date"
-                      size="lg"
-                      id="updatedEndDate"
+                      id="endDate"
                       type="date"
-                      name="updatedEndDate"
+                      name="endDate"
                       value={updatedEndDate}
                       onChange={this.handleInputChange}
                     />
-                    <Select
-                      className={`${styles.select} ${styles.textSelect}`}
-                      options={categoryOptions.map((category) => ({
-                        value: category,
-                        label: category.name,
-                        key: `category-${category.id}`,
-                      }))}
-                      isMulti
-                      onChange={this.handleBiotechCategoriesChange}
-                      value={updatedBiotechCategories}
-                    />
-                    <Select
-                      className={`${styles.select} ${styles.textSelect}`}
-                      options={skillCategoryOption.map((skillCategory) => ({
-                        value: skillCategory,
-                        label: skillCategory.name,
-                        key: `calegory-${skillCategory.id}`,
-                      }))}
-                      isMulti
-                      onChange={this.handleSkillCategoriesChange}
-                      value={updatedSkillCategories}
-                    />
-                    <Select
-                      className={`${styles.select} ${styles.textSelect}`}
-                      options={countryOptions.map((country) => ({
-                        value: country,
-                        label: country.name,
-                        key: `country-${country.id}`,
-                      }))}
-                      isMulti
-                      onChange={this.handleCountriesChange}
-                      value={updatedCountries}
-                    />
+                    <div className={`${styles.select} ${styles.textSelect}`}>
+                      <SkillCategoriesSelect
+                        value={updatedSkillCategories}
+                        onChange={this.handleSkillCategoriesChange}
+                      />
+                      <BiotechCategoriesSelect
+                        value={updatedBiotechCategories}
+                        onChange={this.handleBiotechCategoriesChange}
+                      />
+                      <CountriesSelect
+                        value={updatedCountries}
+                        onChange={this.handleCountriesChange}
+                      />
+                    </div>
                   </MDBCol>
                 </MDBRow>
                 <MDBRow>

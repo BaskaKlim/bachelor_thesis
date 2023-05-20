@@ -18,11 +18,11 @@ import AddStartupOpt from "./components/organisms/startups/StartupOpt-add.compon
 import AddSkillOpt from "./components/organisms/skills/AddSkillOpt";
 import InnovationUpdateForm from "./components/templates/network/Innovation-update.form";
 import AccountUpdateForm from"./components/templates/users/Account-update.form"
-import SkillOptUpdateForm from"./components/templates/skills/SkillOpt-update.form"
+import SkillOptUpdateForm from"./components/templates/skills/UpdateSkillOpt"
 
 import Innovation from "./components/organisms/network/Innovation.component";
 import StartupOpt from "./components/organisms/startups/StartupOpt.component";
-import SkillOpt from "./components/organisms/skills/SkillOpt.component";
+import SkillOpt from "./components/organisms/skills/SkillOpt";
 import Expert from "./components/organisms/network/Expert.component";
 import Account from"./components/organisms/users/Account.component";
 
