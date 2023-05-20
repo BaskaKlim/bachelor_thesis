@@ -1,4 +1,4 @@
-package cz.utb.fai.howtodobiotech.models.content;
+package cz.utb.fai.howtodobiotech.models.categories;
 
 import cz.utb.fai.howtodobiotech.utils.enums.EContentType;
 import jakarta.persistence.*;

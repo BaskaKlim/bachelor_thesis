@@ -1,7 +1,7 @@
 package cz.utb.fai.howtodobiotech.models.users;
 
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
-import cz.utb.fai.howtodobiotech.models.content.ContentType;
+import cz.utb.fai.howtodobiotech.models.categories.ContentType;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

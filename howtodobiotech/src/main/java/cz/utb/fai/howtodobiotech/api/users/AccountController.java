@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class AccountController {
     JwtUtils jwtUtils;
 
     @GetMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<Account>> getAllAccounts() {
         try {
             List<Account> accounts = new ArrayList<>();
@@ -39,7 +41,7 @@ public class AccountController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Account> selectUserById(@PathVariable("id") Integer id) {
+    public ResponseEntity<Account> getAccountById(@PathVariable("id") Integer id) {
         Optional<Account> accountData = accountService.getAccountById(id);
 
         if (accountData.isPresent()) {

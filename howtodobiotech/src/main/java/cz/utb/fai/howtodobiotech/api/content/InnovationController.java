@@ -6,6 +6,7 @@ import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
 import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -53,6 +54,7 @@ public class InnovationController {
     }
 
     @PostMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Innovation> createInnovation(@RequestBody Innovation innovation) {
         try {
             Innovation _expert = innovationService
@@ -64,6 +66,7 @@ public class InnovationController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Boolean> deleteInnovation(@PathVariable("id") Integer id) {
         try {
             innovationService.deleteInnovationById(id);
@@ -74,6 +77,7 @@ public class InnovationController {
     }
 
     @PutMapping("/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<?> updateInnovation(@PathVariable("id") Integer id, @RequestBody Innovation innovation) {
         try {
             innovationService.updateInnovation(id, innovation);

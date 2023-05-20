@@ -9,6 +9,7 @@ import cz.utb.fai.howtodobiotech.utils.enums.EExpertCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -50,7 +51,9 @@ public class BiotechExpertController {
         }
     }
 
+
     @PostMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<BiotechExpert> createBiotechExpert(@RequestBody BiotechExpert expert) {
         try {
             BiotechExpert _expert = biotechExpertService
@@ -62,6 +65,7 @@ public class BiotechExpertController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Boolean> deleteBiotechExpert(@PathVariable("id") Integer id) {
         try {
             biotechExpertService.deleteBiotechExpertById(id);
@@ -72,7 +76,8 @@ public class BiotechExpertController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<BiotechExpert> updateContact(@PathVariable("id") Integer id, @RequestBody BiotechExpert expert) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<BiotechExpert> updateBiotechExpert(@PathVariable("id") Integer id, @RequestBody BiotechExpert expert) {
         try {
             biotechExpertService.updateBiotechExpert(id, expert);
             return new ResponseEntity<>(HttpStatus.OK);

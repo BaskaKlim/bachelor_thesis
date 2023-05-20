@@ -1,7 +1,7 @@
-package cz.utb.fai.howtodobiotech.services.content;
+package cz.utb.fai.howtodobiotech.services.categories;
 
-import cz.utb.fai.howtodobiotech.models.content.ContentType;
-import cz.utb.fai.howtodobiotech.repositories.content.ContentTypeRepository;
+import cz.utb.fai.howtodobiotech.models.categories.ContentType;
+import cz.utb.fai.howtodobiotech.repositories.categories.ContentTypeRepository;
 import cz.utb.fai.howtodobiotech.utils.enums.EContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

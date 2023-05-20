@@ -1,7 +1,7 @@
-package cz.utb.fai.howtodobiotech.api.content;
+package cz.utb.fai.howtodobiotech.api.categories;
 
-import cz.utb.fai.howtodobiotech.models.content.ContentType;
-import cz.utb.fai.howtodobiotech.services.content.ContentTypeService;
+import cz.utb.fai.howtodobiotech.models.categories.ContentType;
+import cz.utb.fai.howtodobiotech.services.categories.ContentTypeService;
 import cz.utb.fai.howtodobiotech.utils.enums.EContentType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

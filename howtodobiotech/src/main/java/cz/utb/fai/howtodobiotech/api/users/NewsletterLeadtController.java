@@ -5,6 +5,7 @@ import cz.utb.fai.howtodobiotech.services.users.NewsletterLeadService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ public class NewsletterLeadtController {
     NewsletterLeadService newsletterLeadService;
 
     @GetMapping("/{id}")
-    public ResponseEntity<NewsletterLead> selectNewsletterLeadById(@PathVariable("id") Integer id) {
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
+    public ResponseEntity<NewsletterLead> getNewsletterLeadById(@PathVariable("id") Integer id) {
         Optional<NewsletterLead> contactData = newsletterLeadService.getNewsletterLeadById(id);
 
         if (contactData.isPresent()) {
@@ -31,6 +33,7 @@ public class NewsletterLeadtController {
     }
 
     @GetMapping()
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<List<NewsletterLead>> getAllNewsletterLeads() {
         try {
             List<NewsletterLead> newsletterLeads = new ArrayList<>();
@@ -59,6 +62,7 @@ public class NewsletterLeadtController {
     }
 
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Boolean> deleteNewsletterLead(@PathVariable("id") Integer id) {
         try {
             newsletterLeadService.deleteNewsletterLeadById(id);
