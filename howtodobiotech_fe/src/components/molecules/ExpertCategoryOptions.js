@@ -28,16 +28,14 @@ const expertiseCategories = [
   { id: 10, name: "PRODUCT_DESING", title: "PRODUCT DESING", color: "#FF928F" },
   { id: 11, name: "CLINICAL_TRIAL", title: "CLINICAL TRIAL", color: "#110777" },
   { id: 12, name: "FINANCE", title: "FINANCE", color: "#E35149" },
-];
-const ExpertCategoryOptions = ({ selectedCategory, handleExpertFilter }) => {
-  
-    return (
-      <div className={styles["filter-group"]}>
+];const ExpertCategoryOptions = ({ selectedCategory, handleCategoryFilter }) => {
+  return (
+    <div className={styles["filter-group"]}>
       <div className={styles["options-container"]}>
         {expertiseCategories.map((expertise) => (
           <button
             key={expertise.id}
-            onClick={() => handleExpertFilter(expertise.id)}
+            onClick={() => handleCategoryFilter(expertise.id)}
             style={{
               backgroundColor: expertise.id === selectedCategory ? "#4B4DF7" : "#EFEFEF",
               color: expertise.id === selectedCategory ? "black" : "gray",
@@ -47,9 +45,10 @@ const ExpertCategoryOptions = ({ selectedCategory, handleExpertFilter }) => {
             {expertise.title}
           </button>
         ))}
-        </div>
       </div>
-    );
-  };
-  
+    </div>
+  );
+};
+
 export default ExpertCategoryOptions;
+

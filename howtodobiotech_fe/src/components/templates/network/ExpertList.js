@@ -24,13 +24,17 @@ class ExpertList extends Component {
   filterExperts = () => {
     const { selectedCategory, experts } = this.state;
 
-    const filteredExperts = experts.filter((expert) =>
-      expert.expertises.some((expertise) => expertise.id === selectedCategory)
-    );
+    const filteredExperts = selectedCategory
+      ? experts.filter((expert) =>
+          expert.expertises.some(
+            (expertise) => expertise.id === selectedCategory
+          )
+        )
+      : experts;
 
     this.setState({ filteredExperts });
   };
-
+  
   handleCategoryFilter = (expertiseId) => {
     this.setState(
       { selectedCategory: expertiseId, currentPage: 1 },
@@ -42,10 +46,10 @@ class ExpertList extends Component {
     this.setState({ filteredExperts: this.state.experts, currentPage: 1 });
   };
 
-  handlePageClick = (page) => {
-    this.setState({ currentPage: page }, this.filterExperts);
+  handlePageClick = (event) => {
+    const page = Number(event.target.id);
+    this.setState({ currentPage: page });
   };
-  
   handlePrevPage = () => {
     this.setState(
       (prevState) => ({
@@ -116,10 +120,11 @@ class ExpertList extends Component {
             </button>
           </div>
           {isFilterOpen && (
-            <ExpertCategoryOptions
-              selectedCategory={this.state.selectedCategory}
-              handleExpertFilter={this.handleCategoryFilter}
-            />
+          <ExpertCategoryOptions
+          selectedCategory={this.state.selectedCategory}
+          handleCategoryFilter={this.handleCategoryFilter}
+        />
+          
           )}
         </div>
 
