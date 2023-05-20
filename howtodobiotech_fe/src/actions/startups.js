@@ -133,4 +133,18 @@ import {
       console.log(err);
     }
   };
+
+  export const getSupportOptsByAccountId = (accountId) => async (dispatch) => {
+    try {
+      const res = await StartupOptDataService.getStartupOptsByAccountId(accountId);
+  
+      dispatch({
+        type: RETRIEVE_STARTUP_OPTS,
+        payload: res.data,
+      });
+    } catch (err) {
+      console.log(err);
+    }
+  };
+  
   

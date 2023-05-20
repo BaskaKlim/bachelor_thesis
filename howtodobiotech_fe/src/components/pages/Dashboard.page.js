@@ -1,5 +1,7 @@
 import React, { Component } from "react";
-import SkillOptListByAccount from "../templates/skills/SkillOptsByAccount-list.component";
+import SkillOptListByAccount from "../templates/skills/SkillOptsByAccountList";
+import SupportOptListByAccount from "../templates/startups/StartupOptsByAccountList";
+
 import styles from "./DashboardPage.module.css";
 class DashboardPage extends Component {
   render() {
@@ -10,6 +12,7 @@ class DashboardPage extends Component {
         </div>
 
         <SkillOptListByAccount />
+        <SupportOptListByAccount />
       </div>
     );
   }

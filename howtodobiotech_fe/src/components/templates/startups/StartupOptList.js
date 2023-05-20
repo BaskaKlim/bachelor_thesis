@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { updateStartupOpt, deleteStartupOpt } from "../../../actions/startups";
 import StartupOptDataService from "../../../service/Startup.service";
 import Card from "../../organisms/startups/StartupCard";
-import styles from "./StartupOptsList.module.css";
+import styles from "./StartupOptList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 import Pagination from "../../molecules/Pagination";
 import SupportCategoryOptions from "../../molecules/SupportCategoryOptions";

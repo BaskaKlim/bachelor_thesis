@@ -54,15 +54,15 @@ class SkillOptDataService {
   }
 
   getAllCategories() {
-    return http.get("/categories");
+    return http.get("/skill-opportunities/categories");
   }
 
   getAllCountries() {
-    return http.get("/countries");
+    return http.get("/skill-opportunities/countries");
   }
 
   getAllSupportCategories() {
-    return http.get("/support-categories");
+    return http.get("/skill-opportunities/support-categories");
   }
 }
 

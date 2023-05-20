@@ -19,6 +19,7 @@ import AddSkillOpt from "./components/organisms/skills/AddSkillOpt";
 import InnovationUpdateForm from "./components/templates/network/Innovation-update.form";
 import AccountUpdateForm from"./components/templates/users/Account-update.form"
 import SkillOptUpdateForm from"./components/templates/skills/UpdateSkillOpt"
+import StartupOptUpdateForm from"./components/templates/startups/UpdateStartupOpt";
 
 import Innovation from "./components/organisms/network/Innovation.component";
 import StartupOpt from "./components/organisms/startups/StartupOpt";
@@ -128,6 +129,8 @@ class App extends Component {
              
               <Route path="/innovations/update/:id" component={InnovationUpdateForm}/>
               <Route path="/skill-opportunities/update/:id" component={SkillOptUpdateForm}/>
+              <Route path="/startup-opportunities/update/:id" component={StartupOptUpdateForm}/>
+
               <Route path="/accounts/update/:id" component={AccountUpdateForm} />
 
               <Route path="/innovations/:id" component={Innovation} />

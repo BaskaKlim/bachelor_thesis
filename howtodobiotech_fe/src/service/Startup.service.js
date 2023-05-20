@@ -50,16 +50,20 @@ class StartupOptDataService {
   }
 
    getAllCategories() {
-    return http.get("/categories");
+    return http.get("/startup-opportunities/categories");
   }
   getAllCountries() {
-    return http.get('/countries');
+    return http.get('/startup-opportunities/countries');
   }
 
   getAllSupportCategories(){
-    return http.get("/support-categories");
+    return http.get("/startup-opportunities/support-categories");
   }
 
+
+  getStartupOptsByAccountId(accountId) {
+    return http.get(`/startup-opportunities/by-account/${accountId}`);
+  }
 
 }
 
