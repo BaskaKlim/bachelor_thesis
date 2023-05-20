@@ -1,38 +1,31 @@
 import React, { Component } from "react";
-
 import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Footer from "./components/organisms/common/Footer.component";
-
 import NetworkPage from "./components/pages/Network.page";
 import StartupOptPage from "./components/pages/StartupPage";
 import SkillPage from "./components/pages/SkillPage";
-import DashboardPage from "./components/pages/Dashboard.page"
-
+import DashboardPage from "./components/pages/Dashboard.page";
 import RegistrationForm from "./components/templates/users/RegistrationForm";
 import LoginForm from "./components/templates/users/LoginForm";
-
 import AddStartupOpt from "./components/organisms/startups/AddStartupOpt";
 import AddSkillOpt from "./components/organisms/skills/AddSkillOpt";
-import SkillOptUpdateForm from"./components/templates/skills/UpdateSkillOpt"
-import StartupOptUpdateForm from"./components/templates/startups/UpdateStartupOpt";
-
-import AccountUpdateForm from"./components/templates/users/Account-update.form"
-
-
+import SkillOptUpdateForm from "./components/templates/skills/UpdateSkillOpt";
+import StartupOptUpdateForm from "./components/templates/startups/UpdateStartupOpt";
+import AccountUpdateForm from "./components/templates/users/Account-update.form";
 import Innovation from "./components/organisms/network/Innovation";
 import StartupOpt from "./components/organisms/startups/StartupOpt";
 import SkillOpt from "./components/organisms/skills/SkillOpt";
 import Expert from "./components/organisms/network/Expert.component";
-import Account from"./components/organisms/users/Account.component";
+import Account from "./components/organisms/users/Account.component";
 
-const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+const PrivateRoute = ({ render: RenderComponent, isAuthenticated, ...rest }) => (
   <Route
     {...rest}
     render={(props) =>
       isAuthenticated ? (
-        <Component {...props} />
+        <RenderComponent {...props} />
       ) : (
         <Redirect to="/login" />
       )
@@ -56,11 +49,10 @@ class App extends Component {
   }
 
   login() {
-  this.setState({ isAuthenticated: true }, () => {
-    window.location.reload();
-  });
-}
-
+    this.setState({ isAuthenticated: true }, () => {
+      window.location.reload();
+    });
+  }
 
   render() {
     const { isAuthenticated } = this.state;
@@ -105,10 +97,9 @@ class App extends Component {
                     <>
                       <li className="nav-item">
                         <Link to={"/dashboard"} className="nav-link">
-                         My Account
+                          My Account
                         </Link>
                       </li>
-                    
                       <li className="nav-item">
                         <Link to={"/"} className="nav-link" onClick={this.logout}>
                           Logout
@@ -119,7 +110,6 @@ class App extends Component {
                     <li className="nav-item">
                       <Link to={"/login"} className="nav-link" onClick={this.login}>
                         Login
-                     
                       </Link>
                     </li>
                   )}
@@ -137,37 +127,34 @@ class App extends Component {
               <Route path="/register" component={RegistrationForm} />
               <Route path="/login" component={LoginForm} />
 
-
-            
               <PrivateRoute
                 path="/startup-opportunities/add"
-                component={AddStartupOpt}
+                render={(props) => <AddStartupOpt {...props} />}
                 isAuthenticated={isAuthenticated}
               />
               <PrivateRoute
                 path="/skill-opportunities/add"
-                component={AddSkillOpt}
+                render={(props) => <AddSkillOpt {...props} />}
                 isAuthenticated={isAuthenticated}
               />
               <PrivateRoute
                 path="/startup-opportunities/update/:id"
-                component={StartupOptUpdateForm}
+                render={(props) => <StartupOptUpdateForm {...props} />}
                 isAuthenticated={isAuthenticated}
               />
               <PrivateRoute
                 path="/skill-opportunities/update/:id"
-                component={SkillOptUpdateForm}
+                render={(props) => <SkillOptUpdateForm {...props} />}
                 isAuthenticated={isAuthenticated}
               />
               <PrivateRoute
                 path="/dashboard"
-                component={DashboardPage}
+                render={(props) => <DashboardPage {...props} />}
                 isAuthenticated={isAuthenticated}
               />
 
-             
-              <Route path="/skill-opportunities/update/:id" component={SkillOptUpdateForm}/>
-              <Route path="/startup-opportunities/update/:id" component={StartupOptUpdateForm}/>
+              <Route path="/skill-opportunities/update/:id" component={SkillOptUpdateForm} />
+              <Route path="/startup-opportunities/update/:id" component={StartupOptUpdateForm} />
               <Route path="/accounts/update/:id" component={AccountUpdateForm} />
               <PrivateRoute path="/startup-opportunities/:id" component={StartupOpt} />
               <PrivateRoute path="/skill-opportunities/:id" component={SkillOpt} />
@@ -175,7 +162,6 @@ class App extends Component {
 
               <PrivateRoute path="/experts/:id" component={Expert} />
               <PrivateRoute path="/innovations/:id" component={Innovation} />
-
             </Switch>
           </div>
         </Router>
