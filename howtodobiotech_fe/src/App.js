@@ -10,8 +10,8 @@ import StartupOptPage from "./components/pages/StartupPage";
 import SkillPage from "./components/pages/SkillPage";
 import DashboardPage from "./components/pages/Dashboard.page"
 
-import RegistrationForm from "./components/templates/users/Registration.form";
-import LoginForm from "./components/templates/users/Login.form";
+import RegistrationForm from "./components/templates/users/RegistrationForm";
+import LoginForm from "./components/templates/users/LoginForm";
 
 import AddStartupOpt from "./components/organisms/startups/AddStartupOpt";
 import AddSkillOpt from "./components/organisms/skills/AddSkillOpt";

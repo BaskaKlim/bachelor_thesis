@@ -1,157 +1,156 @@
 /* RegistrationForm.module.css */
 
 .textBlack {
-    color: black;
-  }
-  
-  .registrationCard {
-    background-color: #ffffff;
-    border-radius: 25px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .introText {
-    align-items: center;
-    text-align: center;
-    padding-left: 15%;
-    padding-right: 15%;
-    padding-bottom: 20px;
-  }
-  
-  .registrationCardBody {
-    padding: 2rem;
-  }
-  
-  .registrationForm {
-    margin-bottom: 2rem;
-  }
-  
-  .registrationTitle {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-  }
-  
-  .registrationDescription {
-    font-size: 1.2rem;
-    margin-bottom: 1.5rem;
-  }
-  
-  .registrationIcon {
-    margin-right: 1rem;
-  }
-  
-  .registrationInputLabel {
-    font-weight: bold;
-  }
-  
-  .error {
-    font-size: 0.9rem;
-    color: #e5554d;
-  }
-  
-  .registrationSubmitBtn {
-    display: inline-block;
-    text-decoration: none;
-    border-radius: 4px;
-    background-color: #5271ff;
-    color: white;
-    transition: background-color 0.3s;
-    text-align: center;
-    border: none;
-    text-align: center;
-    cursor: pointer;
-    margin-top: auto;  
-    margin-bottom: 10px;  
-    padding: 0.5rem 1rem;
-    margin-right: 0.5rem;
-  }
-  
-  .registrationSubmitBtn:hover {
-    background-color: #484bf2;
-    color: white;
-    border-radius: 4px;
-  }
-  
-  .registrationImage {
-align-content: center;
-margin-bottom: 20px;
-    max-width: 800px;
+  color: black;
+}
 
-  }
-  
-  .flexRow {
-    display: flex;
-    flex-direction: row;
-  }
-  
-  .alignItemsCenter {
-    align-items: center;
-  }
-  
-  .mb4 {
-    margin-bottom: 1rem;
-  }
-  
-  .w100 {
-    width: 100%;
-  }
-  
-  .invalid {
-    border-color: #e5554d !important;
-  }
-  
-  .flexColumn {
-    display: flex;
-    flex-direction: column;
-    padding-left: 10%;
-  }
-  
-  .order2 {
-    order: 2;
-  }
-  
-  .orderLg1 {
-    order: 1;
-  }
-  
-  .order1 {
-    order: 1;
-    
-  }
-  
-  .orderLg2 {
+.registrationCard {
+  background-color: #ffffff;
+  border-radius: 25px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
 
-    order: 2;
-  }
-  
-  .mb4 {
-    margin-bottom: 1rem;
-  }
-  
-  .textCenter {
-    text-align: center;
-  }
-  
-  .h2 {
-    font-size: 1.5rem;
-  }
-  
-  .page-background {
-    background-color: #aca6a6;
-  }
-  
-  .title {
-    text-align: center;
-    font-size: 2rem;
-    font-weight: bold;
-    margin-bottom: 1.5rem;
-    padding-top: 20px;
-    color: #0b0161;
-  }
+.introText {
+  align-items: center;
+  text-align: center;
+  padding-left: 15%;
+  padding-right: 15%;
+  padding-bottom: 20px;
+}
+
+.registrationCardBody {
+  padding: 2rem;
+}
+
+.registrationForm {
+  margin-bottom: 2rem;
+}
+
+.registrationTitle {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.registrationDescription {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.registrationIcon {
+  margin-right: 1rem;
+}
+
+.registrationInputLabel {
+  font-weight: bold;
+}
+
+.error {
+  font-size: 0.9rem;
+  color: #e5554d;
+}
+
+.registrationSubmitBtn {
+  display: inline-block;
+  text-decoration: none;
+  border-radius: 4px;
+  background-color: #5271ff;
+  color: white;
+  transition: background-color 0.3s;
+  text-align: center;
+  border: none;
+  text-align: center;
+  cursor: pointer;
+  margin-top: auto;
+  margin-bottom: 10px;
+  padding: 0.5rem 1rem;
+  margin-right: 0.5rem;
+  margin-left: 1rem;
+}
+
+.registrationSubmitBtn:hover {
+  background-color: #484bf2;
+  color: white;
+  border-radius: 4px;
+}
+
+.registrationImage {
+  align-content: center;
+  margin-bottom: 20px;
+  max-width: 400px;
+}
+
+.flexRow {
+  display: flex;
+  flex-direction: row;
+}
+
+.alignItemsCenter {
+  align-items: center;
+}
+
+.mb6,
+.mb4 {
+  margin-bottom: 0.6rem;
+}
+.check{
+  padding-left: 1rem;
+}
+
+.w100 {
+  width: 100%;
+}
+
+.invalid {
+  border-color: #e5554d !important;
+}
+
+.flexColumn {
+  display: flex;
+  flex-direction: column;
+  padding-left: 10%;
+}
+
+.order2 {
+  order: 2;
+}
+
+.orderLg1 {
+  order: 1;
+}
+
+.order1 {
+  order: 1;
+}
+
+.orderLg2 {
+  order: 2;
+}
+
+.textCenter {
+  text-align: center;
+}
+
+.h2 {
+  font-size: 1.5rem;
+}
+
+.page-background {
+  background-color: #aca6a6;
+}
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  padding-top: 20px;
+  color: #0b0161;
+}
+
 .widerInput {
   max-height: 120px;
-  max-width:  400px;
+  max-width: 400px;
   resize: vertical;
-}  
+}

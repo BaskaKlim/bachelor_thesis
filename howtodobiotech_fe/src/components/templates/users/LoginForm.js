@@ -9,7 +9,6 @@ import {
   MDBCard,
   MDBCardBody,
   MDBInput,
-  MDBBtn,
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { toast, ToastContainer } from "react-toastify";
@@ -75,7 +74,9 @@ const Login = () => {
                     <h3 className={`${styles.title} text-center mb-4`}>
                       Log in to your account
                     </h3>
-
+                    <a href="/register" className={styles.noAccount}>
+                      Do not have an account ?Sign up
+                    </a>
                     <div
                       className={`form-outline mb-4 ${styles.loginFormOutline}`}
                     >
@@ -142,10 +143,6 @@ const Login = () => {
                         Forgot password?
                       </a>
                     </div>
-
-                    <a href="/register" className={styles.forgotPasswordLink}>
-                      Do not have an account ?Sign up
-                    </a>
                   </form>
                 </MDBCol>
 

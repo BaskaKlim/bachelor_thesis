@@ -38,7 +38,8 @@
   }
   
   .loginFormOutline {
-    margin-bottom: 1rem;
+    margin-bottom: 1rem;  
+    margin-top: 1rem;
   }
   
   .loginInput {
@@ -54,7 +55,11 @@
     justify-content: space-between;
     align-items: center;
   }
-  
+
+  .noAccount{
+    color: #5271ff;
+  }
+
   .loginButton {
     display: inline-block;
     text-decoration: none;

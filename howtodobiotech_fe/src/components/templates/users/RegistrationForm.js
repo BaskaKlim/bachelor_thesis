@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { connect } from 'react-redux';
-import { register } from '../../../actions/auth';
+import { connect } from "react-redux";
+import { register } from "../../../actions/auth";
 import { useHistory } from "react-router-dom";
 import {
   MDBContainer,
@@ -15,7 +15,7 @@ import {
   MDBIcon,
   MDBCheckbox,
   MDBCardTitle,
-} from "mdb-react-ui-kit"
+} from "mdb-react-ui-kit";
 import styles from "./RegistrationForm.module.css";
 import authService from "../../../service/Auth.servise";
 import { ToastContainer } from "react-toastify";
@@ -64,16 +64,15 @@ const RegistrationForm = () => {
 
         setRegistrationStatus("success");
         alert("Registration successful!");
-        history.push("/login");  
+        history.push("/login");
       } catch (error) {
-      
         setRegistrationStatus("error");
         alert("Registration error. Please try again.");
       }
     },
   });
   return (
-    <MDBContainer fluid ="true">
+    <MDBContainer fluid="true">
       <ToastContainer />
       <MDBCard className={`${styles.textBlack} ${styles.registrationCard}`}>
         <div className={styles.introText} fluid="true">
@@ -115,11 +114,6 @@ const RegistrationForm = () => {
                     {...formik.getFieldProps("username")}
                   />
                 </div>
-                {formik.touched.username && formik.errors.username && (
-                  <div className={`${styles.error} ${styles.mt2}`}>
-                    {formik.errors.username}
-                  </div>
-                )}
 
                 <div
                   className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
@@ -138,11 +132,6 @@ const RegistrationForm = () => {
                     {...formik.getFieldProps("email")}
                   />
                 </div>
-                {formik.touched.email && formik.errors.email && (
-                  <div className={`${styles.error} ${styles.mt2}`}>
-                    {formik.errors.email}
-                  </div>
-                )}
 
                 <div
                   className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
@@ -234,7 +223,7 @@ const RegistrationForm = () => {
                     {formik.errors.description}
                   </div>
                 )}
-                <div className={styles.mb4}>
+                <div className={`${styles.mb4} ${styles.check}`}>
                   <MDBCheckbox
                     name="newsletter"
                     value=""
