@@ -120,13 +120,13 @@ class SkillOptAddForm extends Component {
     SkillOptDataService.createSkillOpt(data)
       .then((response) => {
         console.log(response);
-        alert("SkillOpt created successfully!");
+        alert("New opportunity to gain skill was created successfully!");
         window.location.reload(); // Refresh the webpage
       })
       .catch((error) => {
         console.log(error);
         console.log(data);
-        alert("Failed to create SkillOpt. Please try again.");
+        alert("Failed to create skill opprotunity. Please try again.");
       });
   };
 

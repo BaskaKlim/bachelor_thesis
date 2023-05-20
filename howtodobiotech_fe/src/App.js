@@ -14,7 +14,7 @@ import RegistrationForm from "./components/templates/users/Registration.form";
 import LoginForm from "./components/templates/users/Login.form";
 
 import AddInnovation from "./components/organisms/network/Innovation-add.component";
-import AddStartupOpt from "./components/organisms/startups/StartupOpt-add.component";
+import AddStartupOpt from "./components/organisms/startups/AddStartupOpt";
 import AddSkillOpt from "./components/organisms/skills/AddSkillOpt";
 import InnovationUpdateForm from "./components/templates/network/Innovation-update.form";
 import AccountUpdateForm from"./components/templates/users/Account-update.form"
