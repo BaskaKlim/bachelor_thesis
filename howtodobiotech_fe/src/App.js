@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router, Switch, Route, Link, Redirect } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./App.css";
 import Footer from "./components/organisms/common/Footer.component";
@@ -13,13 +13,13 @@ import DashboardPage from "./components/pages/Dashboard.page"
 import RegistrationForm from "./components/templates/users/Registration.form";
 import LoginForm from "./components/templates/users/Login.form";
 
-import AddInnovation from "./components/organisms/network/Innovation-add.component";
 import AddStartupOpt from "./components/organisms/startups/AddStartupOpt";
 import AddSkillOpt from "./components/organisms/skills/AddSkillOpt";
-import InnovationUpdateForm from "./components/templates/network/Innovation-update.form";
-import AccountUpdateForm from"./components/templates/users/Account-update.form"
 import SkillOptUpdateForm from"./components/templates/skills/UpdateSkillOpt"
 import StartupOptUpdateForm from"./components/templates/startups/UpdateStartupOpt";
+
+import AccountUpdateForm from"./components/templates/users/Account-update.form"
+
 
 import Innovation from "./components/organisms/network/Innovation";
 import StartupOpt from "./components/organisms/startups/StartupOpt";
@@ -27,6 +27,18 @@ import SkillOpt from "./components/organisms/skills/SkillOpt";
 import Expert from "./components/organisms/network/Expert.component";
 import Account from"./components/organisms/users/Account.component";
 
+const PrivateRoute = ({ component: Component, isAuthenticated, ...rest }) => (
+  <Route
+    {...rest}
+    render={(props) =>
+      isAuthenticated ? (
+        <Component {...props} />
+      ) : (
+        <Redirect to="/login" />
+      )
+    }
+  />
+);
 
 class App extends Component {
   constructor(props) {
@@ -93,7 +105,7 @@ class App extends Component {
                     <>
                       <li className="nav-item">
                         <Link to={"/dashboard"} className="nav-link">
-                          Moje konto
+                         My Account
                         </Link>
                       </li>
                     
@@ -122,25 +134,48 @@ class App extends Component {
               <Route path="/startups" component={StartupOptPage} />
               <Route path="/skills" component={SkillPage} />
               <Route path="/dashboard" component={DashboardPage} />
-
-              <Route path="/innovations/add" component={AddInnovation} />
-              <Route path="/startup-opportunities/add"component={AddStartupOpt}/>
-              <Route path="/skill-opportunities/add" component={AddSkillOpt} />
-             
-              <Route path="/innovations/update/:id" component={InnovationUpdateForm}/>
-              <Route path="/skill-opportunities/update/:id" component={SkillOptUpdateForm}/>
-              <Route path="/startup-opportunities/update/:id" component={StartupOptUpdateForm}/>
-
-              <Route path="/accounts/update/:id" component={AccountUpdateForm} />
-
-              <Route path="/innovations/:id" component={Innovation} />
-              <Route path="/startup-opportunities/:id" component={StartupOpt} />
-              <Route path="/skill-opportunities/:id" component={SkillOpt} />
-              <Route path="/experts/:id" component={Expert} />
-              <Route path="/accounts/:id" component={Account} />
-
               <Route path="/register" component={RegistrationForm} />
               <Route path="/login" component={LoginForm} />
+
+
+            
+              <PrivateRoute
+                path="/startup-opportunities/add"
+                component={AddStartupOpt}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                path="/skill-opportunities/add"
+                component={AddSkillOpt}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                path="/startup-opportunities/update/:id"
+                component={StartupOptUpdateForm}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                path="/skill-opportunities/update/:id"
+                component={SkillOptUpdateForm}
+                isAuthenticated={isAuthenticated}
+              />
+              <PrivateRoute
+                path="/dashboard"
+                component={DashboardPage}
+                isAuthenticated={isAuthenticated}
+              />
+
+             
+              <Route path="/skill-opportunities/update/:id" component={SkillOptUpdateForm}/>
+              <Route path="/startup-opportunities/update/:id" component={StartupOptUpdateForm}/>
+              <Route path="/accounts/update/:id" component={AccountUpdateForm} />
+              <PrivateRoute path="/startup-opportunities/:id" component={StartupOpt} />
+              <PrivateRoute path="/skill-opportunities/:id" component={SkillOpt} />
+              <PrivateRoute path="/accounts/:id" component={Account} />
+
+              <PrivateRoute path="/experts/:id" component={Expert} />
+              <PrivateRoute path="/innovations/:id" component={Innovation} />
+
             </Switch>
           </div>
         </Router>
