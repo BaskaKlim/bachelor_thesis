@@ -28,17 +28,20 @@ public class SkillOpt {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @NotBlank
     private String title;
 
     private String organizer;
-
+    @NotBlank
     @Size(max = 1000)
     private String description;
 
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "START_DATE")
     private Date startDate;
 
+    @NotNull
     @Temporal(TemporalType.DATE)
     @Column(name = "END_DATE")
     private Date endDate;
@@ -48,17 +51,20 @@ public class SkillOpt {
     @NotNull
     private Integer accountId;
 
+    @NotNull
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "SkillOpt_Countries",
             joinColumns = @JoinColumn(name = "SkillOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "Country_Id"))
     private Set<Country> countries = new HashSet<>();
+    @NotNull
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "SkillOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "SkillOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))
     private Set<BiotechCategory> biotechCategories = new HashSet<>();
 
+    @NotNull
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "SkillOpt_SkillCategories",
             joinColumns = @JoinColumn(name = "SkillOpt_id"),
