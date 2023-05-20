@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 import { register } from '../../../actions/auth';
 import { useHistory } from "react-router-dom";
 import {
-  MDBBtn,
   MDBContainer,
   MDBRow,
   MDBCol,

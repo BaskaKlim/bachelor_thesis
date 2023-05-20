@@ -176,20 +176,15 @@ class SkillOptList extends Component {
 
     return (
       <div className={styles.container}>
-         <div className={styles.controlButtons}>
-            <button
-              className={styles.allButton}
-              onClick={this.showAllSkillOpts}
-            >
-              All opportunities
-            </button>
-            <button className={styles.filterButton} onClick={this.toggleFilter}>
-              Choose Filter
-            </button>
-          </div>
-        <div className={styles.filters}> 
-         
-
+        <div className={styles.controlButtons}>
+          <button className={styles.allButton} onClick={this.showAllSkillOpts}>
+            All opportunities
+          </button>
+          <button className={styles.filterButton} onClick={this.toggleFilter}>
+            Choose Filter
+          </button>
+        </div>
+        <div className={styles.filters}>
           {isFilterOpen && (
             <div className={styles.filters}>
               <SkillCategoryOptions

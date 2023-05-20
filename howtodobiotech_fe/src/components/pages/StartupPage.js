@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import StartupOptList from "../templates/startups/StartupOpts-list.component";
+import StartupOptList from "../templates/startups/StartupOptsList";
 import CenteredTextWithButton from "../organisms/common/CallToActionComponnetAccordingRole";
 import CarouselBanner from "../organisms/startups/StartupCarousel.banner";
 import styles from "./StartupPage.module.css";

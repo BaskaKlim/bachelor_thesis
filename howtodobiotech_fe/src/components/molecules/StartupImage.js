@@ -2,30 +2,28 @@ import React from "react";
 import { MDBCardImage } from "mdb-react-ui-kit";
 import styles from "./Image.module.css";
 
-const SkillImage = ({ skillCategory, className }) => {
+
+const StartupImage = ({ supportCategory, className }) => {
   let imageSrc = "";
 
-  switch (skillCategory) {
+  switch (supportCategory) {
     case 1:
-      imageSrc = "/assets/workshop.png";
+      imageSrc ="/assets/incubator.png";
       break;
     case 2:
-      imageSrc = "/assets/school.png";
+      imageSrc =  "/assets/accelerator.png";
       break;
     case 3:
-      imageSrc = "/assets/conference.png";
+      imageSrc = "/assets/investment.png";
       break;
     case 4:
-      imageSrc = "/assets/internship.png";
+      imageSrc = "/assets/mentoring.png";
       break;
     case 5:
-      imageSrc = "/assets/academy.png";
-      break;
-    case 6:
-      imageSrc = "/assets/hackathon.png";
+      imageSrc = "/assets/awards.png";
       break;
     default:
-      imageSrc = "/assets/school.jpg";
+      imageSrc = "/assets/incubator.png";
       break;
   }
 
@@ -34,7 +32,7 @@ const SkillImage = ({ skillCategory, className }) => {
       <div className={styles.imageOverlay}></div>
       <MDBCardImage
         src={imageSrc}
-        alt="Skill Image"
+        alt="Startup Image"
         position="top"
         className={styles.categoryImage}
       />
@@ -42,4 +40,4 @@ const SkillImage = ({ skillCategory, className }) => {
   );
 };
 
-export default SkillImage;
+export default StartupImage;

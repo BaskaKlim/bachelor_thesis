@@ -10,38 +10,43 @@ import {
 import WebsiteButton from "../../atoms/common/Web.button";
 import CategoryLabel from "../../atoms/common/Category.label";
 import CountryLabel from "../../atoms/common/Country.label";
-import SkillCategoryLabel from "../../atoms/common/SkillCategoryLabel";
-import SkillImage from "../../molecules/SkillImage";
-import styles from "./SkillCard.module.css";
+import StartupImage from "../../molecules/StartupImage";
 
-const SkillCard = ({ skillOpt }) => {
+import styles from "./StartupCard.module.css";
+
+const StartupCard = ({ startupOpt }) => {
   let imageSrc = "";
-  const biotechCategoryLabels = skillOpt.biotechCategories.map((category) => (
-    <CategoryLabel
-      key={category.id}
-      category={category}
-      className="labelStyle"
-    />
-  ));
-  const skillCategoryLabels = skillOpt.skillCategories.map((skillCategory) => (
-    <SkillCategoryLabel
-  key={skillCategory.id}
-  id={skillCategory.id}
-  className="customLabelStyle"
-/>
 
-  ));
-  
-  const countryLabels = skillOpt.countries.map((country) => (
+  const biotechCategoryLabels = (startupOpt?.biotechCategories || []).map(
+    (biotechCategory) => (
+      <CategoryLabel
+        key={biotechCategory.id}
+        category={biotechCategory}
+        className="labelStyle"
+      />
+    )
+  );
+
+  const supportCategoryLabels = (startupOpt?.supportCategories || []).map(
+    (supportCategory) => (
+      <CategoryLabel
+        key={supportCategory.id}
+        category={supportCategory}
+        className="labelStyle"
+      />
+    )
+  );
+
+  const countryLabels = (startupOpt?.countries || []).map((country) => (
     <CountryLabel key={country.id} country={country} className="labelStyle" />
   ));
 
   const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
 
-  if (skillOpt.skillCategories.length > 0) {
-    const skillCategory = skillOpt.skillCategories[0].id;
+  if (startupOpt?.supportCategories?.length > 0) {
+    const supportCategory = startupOpt.supportCategories[0].id;
 
-    switch (skillCategory) {
+    switch (supportCategory) {
       case 1:
         imageSrc = "/assets/energy.jpg";
         break;
@@ -70,32 +75,28 @@ const SkillCard = ({ skillOpt }) => {
   }
 
   return (
-    <MDBCard style={{ maxWidth: "22rem" }} className={styles.skillCard}>
-      <SkillImage skillCategory={skillOpt.skillCategories[0].id} />
-
+    <MDBCard style={{ maxWidth: "22rem" }} className={styles.startupCard}>
+      <StartupImage supportCategory={startupOpt?.supportCategories?.[0]?.id} />
       <MDBCardBody>
-        <MDBCardTitle className={styles.skillOptCardTitle}>
-          {skillOpt.title}
+        <MDBCardTitle className={styles.startupCardTitle}>
+          {startupOpt?.title}
         </MDBCardTitle>
-        <div className={styles.skillOptCardOrganizer}>
+        <div className={styles.startupCardProvider}>
           <MDBCardText>
             {" "}
-            by {skillOpt.organizer}
+            by {startupOpt?.provider}
             <div>
-              {"  "}
-              <WebsiteButton url={skillOpt.website} />
+              <WebsiteButton url={startupOpt?.website} />
             </div>
           </MDBCardText>
         </div>
-
-        <MDBCardText className={styles.skillOptCardDescription}>
-          {skillOpt.description}
+        <MDBCardText className={styles.startupCardDescription}>
+          {startupOpt?.description}
         </MDBCardText>
-
         <MDBCardText>
           <div style={{ display: "flex", flexWrap: "wrap" }}>
             {biotechCategoryLabels}
-            {skillCategoryLabels}
+            {supportCategoryLabels}
             {countryLabels}
           </div>
         </MDBCardText>
@@ -104,12 +105,12 @@ const SkillCard = ({ skillOpt }) => {
         <div>
           <MDBIcon fas icon="calendar-alt" style={{ marginRight: "10px" }} />
           <span className={styles.cskillOptCardDateContainer}>
-            {new Date(skillOpt.startDate).toLocaleDateString(
+            {startupOpt && new Date(startupOpt.startDate).toLocaleDateString(
               "de-DE",
               dateOptions
             )}{" "}
             -{" "}
-            {new Date(skillOpt.endDate).toLocaleDateString(
+            {startupOpt && new Date(startupOpt.endDate).toLocaleDateString(
               "de-DE",
               dateOptions
             )}
@@ -120,4 +121,4 @@ const SkillCard = ({ skillOpt }) => {
   );
 };
 
-export default SkillCard;
+export default StartupCard;

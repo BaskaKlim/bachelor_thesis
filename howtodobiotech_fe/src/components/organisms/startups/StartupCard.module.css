@@ -1,6 +1,7 @@
 .startupCard {
   max-width: 22rem;
   align-items: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .startupCardTitle {
@@ -18,17 +19,15 @@
 }
 
 .startupCardProvider {
-
   padding-bottom: 15px;
   text-align: center;
-  font-size: 15x;
+  font-size: 15px;
 }
 
 .startupCardDateContainer {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
-  
 }
 
 .startupCardDateIcon {
@@ -48,9 +47,7 @@
   text-align: center;
 }
 
-.cardText{
-align-content: center;
-align-items: center;
+.cardText {
+  align-content: center;
+  align-items: center;
 }
-
-  

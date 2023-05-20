@@ -1,8 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
-import SkillOptDataService from "../../../service/Skill.service";
-
+import { updateStartupOpt, deleteStartupOpt } from "../../../actions/startups";
+import StartupOptDataService from "../../../service/Startup.service";
 import { faGlobe } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
@@ -18,7 +17,7 @@ import {
 
 import CountryLabel from "../../atoms/common/Country.label";
 import CategoryLabel from "../../atoms/common/Category.label";
-import styles from "./SkillOpt.module.css"
+import styles from "./StartupOpt.module.css";
 
 const categoryOptions = [
   {
@@ -49,68 +48,66 @@ const categoryOptions = [
   },
   { id: 7, name: "MARINE", imageUrl: "/assets/marine.jpg", color: "#4B4DF7" },
 ];
-class SkillOpt extends Component {
+class StartupOpt extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      skillOpt: null,
+      startupOpt: null,
     };
   }
 
   componentDidMount() {
-    this.getSkillOptById(this.props.match.params.id);
+    this.getStartupOptById(this.props.match.params.id);
   }
-
-  getSkillOptById(id) {
-    SkillOptDataService.getSkillOptById(id)
+  getStartupOptById(id) {
+    StartupOptDataService.getStartupOptById(id)
       .then((response) => {
-        this.setState({ skillOpt: response.data });
+        this.setState({ startupOpt: response.data });
       })
       .catch((error) => {
         console.log(error);
       });
   }
-
-  updateSkillOpt = () => {
-    const { skillOpt } = this.state;
+  updateStartupOpt = () => {
+    const { startupOpt } = this.state;
     this.props
-      .updateSkillOpt(skillOpt.id, skillOpt)
+      .updateStartupOpt(startupOpt.id, startupOpt)
       .then(() => {
-        this.props.history.push("/skill-opportunities/update/" + skillOpt.id);
+        this.props.history.push("/startup-opportunities");
       })
       .catch((e) => {
         console.log(e);
       });
   };
-
-  deleteSkillOpt = () => {
-    const { skillOpt } = this.state;
+  deleteStartupOpt = () => {
+    const { startupOpt } = this.state;
     this.props
-      .deleteSkillOpt(skillOpt.id)
+      .deleteStartupOpt(startupOpt.id)
       .then(() => {
-        this.props.history.push("/skill-opportunities");
+        this.props.history.push("/startup-opportunities");
       })
       .catch((e) => {
         console.log(e);
       });
   };
-
   makeChanges = () => {
-    const { skillOpt } = this.state;
-    this.props.history.push(`/skill-opportunities/update/${skillOpt.id}`);
+    const { startupOpt } = this.state;
+    this.props.history.push(`/startup-opportunities/update/${startupOpt.id}`);
   };
 
   goBack = () => {
-    const { skillOpt } = this.state;
-    this.props.history.push(`/skill-opportunities/${skillOpt.id}`);
+    const { startupOpt } = this.state;
+    this.props.history.push(`/startup-opportunities/${startupOpt.id}`);
   };
 
   render() {
-    const { skillOpt } = this.state;
+    const { startupOpt } = this.state;
 
     const biotechCategory =
-      skillOpt && skillOpt.biotechCategories && skillOpt.biotechCategories[0];
+      startupOpt &&
+      startupOpt.biotechCategories &&
+      startupOpt.biotechCategories[0];
 
     const selectedCategoryOption = categoryOptions.find(
       (option) => biotechCategory && option.name === biotechCategory.name
@@ -128,22 +125,48 @@ class SkillOpt extends Component {
               Detail information
             </MDBCardTitle>
             <MDBCol className={styles.textCenter}>
-              See detail information about Skill Opportunity you provided. You
-              can easily keep updated your information or delete select
-              opportunity by clicking on update option.
+              See detail information about startup support you provided. You can
+              easily keep updated your information or delete select support by
+              clicking on update option.
             </MDBCol>
           </div>
 
           <MDBCardBody>
             <MDBRow>
               <MDBCol md="6" className={styles.card}>
-                {skillOpt && (
+                {startupOpt && (
                   <div>
                     <MDBRow>
                       <MDBCol md="6">
                         <div className={styles.inputWrapper}>
                           <label className={styles.label}>Title</label>
-                          <div className={styles.value}>{skillOpt.title}</div>
+                          <div className={styles.value}>{startupOpt.title}</div>
+                        </div>
+                      </MDBCol>
+                     
+                      <MDBCol md="6">
+                        <div className={styles.inputWrapper}>
+                          <label className={styles.label}>Provider</label>
+                          <div className={styles.provider}>
+                            {startupOpt.provider}
+                          </div>
+                        </div>
+                      </MDBCol>
+                     
+                      <MDBCol md="6">
+                        <div className={styles.inputWrapper}>
+                          <label className={styles.label}>Start Date</label>
+                          <div className={styles.dateValue}>
+                            {startupOpt.startDate}
+                          </div>
+                        </div>
+                      </MDBCol>
+                      <MDBCol md="6">
+                        <div className={styles.inputWrapper}>
+                          <label className={styles.label}>End Date</label>
+                          <div className={styles.dateValue}>
+                            {startupOpt.endDate}
+                          </div>
                         </div>
                       </MDBCol>
                       <MDBCol md="6">
@@ -154,26 +177,12 @@ class SkillOpt extends Component {
                           </div>
                         </div>
                       </MDBCol>
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>Start Date</label>
-                          <div className={styles.dateValue}>
-                            {skillOpt.startDate}
-                          </div>
-                        </div>
-                      </MDBCol>
-                      <MDBCol md="6">
-                        <div className={styles.inputWrapper}>
-                          <label className={styles.label}>End Date</label>
-                          <div className={styles.dateValue}>
-                            {skillOpt.endDate}
-                          </div>
-                        </div>
-                      </MDBCol>
                     </MDBRow>
                     <div className={styles.inputWrapper}>
                       <label className={styles.label}>Description</label>
-                      <div className={styles.value}>{skillOpt.description}</div>
+                      <div className={styles.value}>
+                        {startupOpt.description}
+                      </div>
                     </div>
 
                     <MDBRow>
@@ -181,7 +190,7 @@ class SkillOpt extends Component {
                         <div className={styles.inputWrapper}>
                           <label className={styles.label}>Countries</label>
                           <div className={styles.value}>
-                            {skillOpt.countries.map((country) => (
+                            {startupOpt.countries.map((country) => (
                               <CountryLabel
                                 key={country.id}
                                 country={country}
@@ -195,7 +204,7 @@ class SkillOpt extends Component {
                         <div className={styles.inputWrapper}>
                           <label className={styles.label}>Categories</label>
                           <div className={styles.value}>
-                            {skillOpt.biotechCategories.map((category) => (
+                            {startupOpt.biotechCategories.map((category) => (
                               <CategoryLabel
                                 key={category.id}
                                 category={category}
@@ -208,10 +217,10 @@ class SkillOpt extends Component {
                       <MDBCol md="6">
                         <div className={styles.inputWrapper}>
                           <label className={styles.label}>
-                            Type of opportunity
+                            Type of support
                           </label>
                           <div className={styles.value}>
-                            {skillOpt.skillCategories.map((category) => (
+                            {startupOpt.supportCategories.map((category) => (
                               <CategoryLabel
                                 key={category.id}
                                 category={category}
@@ -246,10 +255,11 @@ class SkillOpt extends Component {
     );
   }
 }
+
 const mapStateToProps = (state) => ({
-  skillOpts: state.skillOpts,
+  startupOpts: state.startupOpts,
 });
 
-export default connect(mapStateToProps, { updateSkillOpt, deleteSkillOpt })(
-  SkillOpt
+export default connect(mapStateToProps, { updateStartupOpt, deleteStartupOpt })(
+  StartupOpt
 );

@@ -1,3 +1,8 @@
+.container{
+
+  justify-content: center;
+}
+
 .card-container {
   margin: 20px auto;
 }
@@ -19,12 +24,35 @@
   max-width: 300px;
 }
 
-.support-category-image {
-  width: 300px;
+.category-image {
+  width: 290px;
   height: auto;
+  object-fit: cover;
   border-radius: 4px;
   margin-bottom: 15px;
 }
+.image-container {
+  position: relative;
+}
+
+.image-container:hover::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 252, 252, 0.233);
+}
+
+.image-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
 
 @media screen and (max-width: 1024px) {
   .list-item {
@@ -38,73 +66,56 @@
   }
 }
 
-.category-button,
-.support-option-button {
-  background-color: #f1f1f1;
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 14px;
-  margin: 4px 8px;
-  cursor: pointer;
-  border-radius: 20px;
-  padding: 8px 16px;
-  transition: background-color 0.3s;
-}
 
-.category-button:hover,
-.support-option-button:hover {
-  background-color: #ddd;
-  color: black;
-}
-
-.all-categories-button {
-  background-color: #888;
+.allButton , .filterButton{
   color: white;
   border: none;
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 14px;
+  font-size: 20px;
   margin: 4px 8px;
   cursor: pointer;
-  border-radius: 20px;
-  padding: 8px 16px;
+  border-radius: 8px;
+  padding: 10px 16px;
   transition: background-color 0.3s;
 }
-.paginationButtons {
-  display: flex;
+.filterButton{
+  background-color: #4B4DF7;
+}
+.allButton{
+  background-color: #FE7062;
+}
+
+.allButton:hover , .filterButton:hover {
+  background-color: #bdbdbd;
+}
+
+.filters{
   justify-content: center;
-  align-items: center;
-}
-
-.pageButton {
-  width: 2.5rem;
-  height: 2.5rem;
-  border-radius: 50%;
-  background-color: #f2f2f2;
-  color: #BDD0FB;
-  font-size: 1.2rem;
-  font-weight: bold;
-  margin: 0 0.5rem;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.3s ease;
   display: flex;
+  flex: 1.5;
+}
+
+.controlButtons{
+  display: flex;
+  flex: 1.5;
   justify-content: center;
+  padding-bottom: 5%;
+ 
+}
+
+.notFoundContainer{
+  text-align: center;
   align-items: center;
-  margin-bottom: 20px;
+  font-weight: 200;
+  font-size: 25px;
+  padding-left: 15%;
 }
 
-.pageButton:hover {
-  background-color: #d9d9d9;
+.notFoundImage{
+  max-height: 500px;
+  align-items: center;
+  padding-right: 15%;
+
 }
-
-.active {
-  background-color: #BDD0FB;
-  color: #fff;
-}
-
-

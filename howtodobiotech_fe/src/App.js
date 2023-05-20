@@ -6,8 +6,8 @@ import "./App.css";
 import Footer from "./components/organisms/common/Footer.component";
 
 import NetworkPage from "./components/pages/Network.page";
-import StartupOptPage from "./components/pages/Startup.page";
-import SkillPage from "./components/pages/Skill.page";
+import StartupOptPage from "./components/pages/StartupPage";
+import SkillPage from "./components/pages/SkillPage";
 import DashboardPage from "./components/pages/Dashboard.page"
 
 import RegistrationForm from "./components/templates/users/Registration.form";
@@ -21,7 +21,7 @@ import AccountUpdateForm from"./components/templates/users/Account-update.form"
 import SkillOptUpdateForm from"./components/templates/skills/UpdateSkillOpt"
 
 import Innovation from "./components/organisms/network/Innovation.component";
-import StartupOpt from "./components/organisms/startups/StartupOpt.component";
+import StartupOpt from "./components/organisms/startups/StartupOpt";
 import SkillOpt from "./components/organisms/skills/SkillOpt";
 import Expert from "./components/organisms/network/Expert.component";
 import Account from"./components/organisms/users/Account.component";
