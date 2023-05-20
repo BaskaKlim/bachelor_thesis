@@ -1,5 +1,6 @@
 package cz.utb.fai.howtodobiotech.repositories.content;
 
+import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
 import cz.utb.fai.howtodobiotech.utils.enums.ECountry;
@@ -18,7 +19,7 @@ import java.util.Optional;
 @Repository
 public interface StartupOptRepository extends JpaRepository<StartupOpt, Integer> {
 
-    @Query("SELECT s FROM StartupOpt s JOIN s.categories sc WHERE sc.name = :categoryName")
+    @Query("SELECT s FROM StartupOpt s JOIN s.biotechCategories sc WHERE sc.name = :categoryName")
     List<StartupOpt> findByCategoryName(@Param("categoryName") EBiotechCategory categoryName);
 
     @Query("SELECT s FROM StartupOpt s JOIN s.supportCategories sc WHERE sc.name = :supportCategoryName")
@@ -34,4 +35,6 @@ public interface StartupOptRepository extends JpaRepository<StartupOpt, Integer>
     Optional<StartupOpt> findByStartDate(Date startDate);
 
     Optional<StartupOpt> findByEndDate(Date endDate);
+
+    List<StartupOpt> findByAccountId(Integer accountId);
 }

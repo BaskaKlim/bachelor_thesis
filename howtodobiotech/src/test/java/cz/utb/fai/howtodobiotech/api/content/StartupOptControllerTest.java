@@ -60,7 +60,7 @@ public class StartupOptControllerTest {
         startupOpt.setStartDate(LocalDate.now().toDate());
         startupOpt.setEndDate(LocalDate.now().toDate());
         startupOpt.setCountries((Set<Country>) new Country(9, ECountry.SLOVAKIA));
-        startupOpt.setCategories(categorySet);
+        startupOpt.setBiotechCategories(categorySet);
         startupOpt.setSupportCategories(supportCategories);
         startupOptList = new ArrayList<>();
         startupOptList.add(startupOpt);
@@ -112,7 +112,7 @@ public class StartupOptControllerTest {
         assertEquals(startupOpt.getStartDate(), result.getStartDate());
         assertEquals(startupOpt.getEndDate(), result.getEndDate());
         assertEquals(startupOpt.getWebsite(), result.getWebsite());
-        assertEquals(startupOpt.getCategories(), result.getCategories());
+        assertEquals(startupOpt.getBiotechCategories(), result.getBiotechCategories());
         assertEquals(startupOpt.getSupportCategories(), result.getSupportCategories());
     }
 

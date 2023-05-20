@@ -1,5 +1,6 @@
 package cz.utb.fai.howtodobiotech.api.content;
 
+import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.services.content.StartupOptService;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
@@ -58,7 +59,7 @@ public class StartupOptController {
     public ResponseEntity<StartupOpt> createStartupOpt(@RequestBody StartupOpt startupOpt) {
         try {
             StartupOpt _startupOpt = startupOptService
-                    .insertStartupOpt(new StartupOpt(startupOpt.getTitle(), startupOpt.getProvider(), startupOpt.getDescription(), startupOpt.getStartDate(), startupOpt.getEndDate(), startupOpt.getWebsite(), startupOpt.getAccountId(), startupOpt.getCountries(), startupOpt.getCategories(), startupOpt.getSupportCategories()));
+                    .insertStartupOpt(new StartupOpt(startupOpt.getTitle(), startupOpt.getProvider(), startupOpt.getDescription(), startupOpt.getStartDate(), startupOpt.getEndDate(), startupOpt.getWebsite(), startupOpt.getAccountId(), startupOpt.getCountries(), startupOpt.getBiotechCategories(), startupOpt.getSupportCategories()));
             return new ResponseEntity<>(_startupOpt, HttpStatus.CREATED);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
@@ -159,4 +160,15 @@ public class StartupOptController {
         }
     }
 
+    @GetMapping("/by-account/{accountId}")
+    public ResponseEntity<List<StartupOpt>> getStartupOptsByAccountId(@PathVariable("accountId") Integer accountId) {
+        List<StartupOpt> startupOpts = startupOptService.selectStartupOptByAccountId(accountId);
+
+        if (startupOpts.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        } else {
+            return new ResponseEntity<>(startupOpts, HttpStatus.OK);
+
+        }
+    }
 }

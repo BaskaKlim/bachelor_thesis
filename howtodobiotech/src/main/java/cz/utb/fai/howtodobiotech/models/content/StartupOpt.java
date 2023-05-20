@@ -62,7 +62,7 @@ public class StartupOpt {
     @JoinTable(name = "StartupOpt_BiotechCategories",
             joinColumns = @JoinColumn(name = "StartupOpt_id"),
             inverseJoinColumns = @JoinColumn(name = "BiotechCategory_id"))
-    private Set<BiotechCategory> categories = new HashSet<>();
+    private Set<BiotechCategory> biotechCategories = new HashSet<>();
 
     @ManyToMany(fetch=FetchType.EAGER)
     @JoinTable(name = "StartupOpt_SupportCategories",
@@ -70,7 +70,7 @@ public class StartupOpt {
             inverseJoinColumns = @JoinColumn(name = "Category_id"))
     private Set<StartupSupportCategory> supportCategories = new HashSet<>();
 
-    public StartupOpt(String title, String provider, String description, Date startDate, Date endDate, String website, Integer accountId, Set<Country> countries, Set<BiotechCategory> categories, Set<StartupSupportCategory> supportCategories) {
+    public StartupOpt(String title, String provider, String description, Date startDate, Date endDate, String website, Integer accountId, Set<Country> countries, Set<BiotechCategory> biotechCategories, Set<StartupSupportCategory> supportCategories) {
         this.title = title;
         this.provider = provider;
         this.description = description;
@@ -79,7 +79,7 @@ public class StartupOpt {
         this.website = website;
         this.accountId = accountId;
         this.countries = countries;
-        this.categories = categories;
+        this.biotechCategories = biotechCategories;
         this.supportCategories = supportCategories;
     }
 }

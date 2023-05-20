@@ -3,6 +3,7 @@ package cz.utb.fai.howtodobiotech.services.content;
 import cz.utb.fai.howtodobiotech.models.categories.BiotechCategory;
 import cz.utb.fai.howtodobiotech.models.categories.Country;
 import cz.utb.fai.howtodobiotech.models.categories.StartupSupportCategory;
+import cz.utb.fai.howtodobiotech.models.content.SkillOpt;
 import cz.utb.fai.howtodobiotech.models.content.StartupOpt;
 import cz.utb.fai.howtodobiotech.repositories.content.StartupOptRepository;
 import cz.utb.fai.howtodobiotech.utils.enums.EBiotechCategory;
@@ -46,7 +47,7 @@ public class StartupOptService {
                 .orElseThrow(() -> new NotFoundException("Startup opportunity not found with id: " + id));
 
         Set<Country> countries = startupOptDto.getCountries();
-        Set<BiotechCategory> biotechCategories = startupOptDto.getCategories();
+        Set<BiotechCategory> biotechCategories = startupOptDto.getBiotechCategories();
         Set<StartupSupportCategory> supportCategories = startupOptDto.getSupportCategories();
 
         startupOpt.setTitle(startupOptDto.getTitle());
@@ -57,7 +58,7 @@ public class StartupOptService {
         startupOpt.setWebsite(startupOptDto.getWebsite());
         startupOpt.setAccountId(startupOptDto.getAccountId());
         startupOpt.setCountries(countries);
-        startupOpt.setCategories(biotechCategories);
+        startupOpt.setBiotechCategories(biotechCategories);
         startupOpt.setSupportCategories(supportCategories);
 
         startupOptRepository.save(startupOpt);
@@ -94,5 +95,9 @@ public class StartupOptService {
 
     public Optional<StartupOpt> selectStartupOptByEndDate(Date endDate) {
         return startupOptRepository.findByEndDate(endDate);
+    }
+
+    public  List<StartupOpt> selectStartupOptByAccountId(Integer accountId) {
+        return startupOptRepository.findByAccountId(accountId);
     }
 }
