@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateStartupOpt, deleteStartupOpt } from "../../../actions/startups";
 import StartupOptDataService from "../../../service/Startup.service";
 import Card from "../../organisms/startups/StartupCard";
-import styles from "./StartupOptList.module.css";
+import styles from "../common/OptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 import Pagination from "../../molecules/Pagination";
 import SupportCategoryOptions from "../../molecules/SupportCategoryOptions";
@@ -213,6 +212,8 @@ const mapStateToProps = (state) => ({
   startupOpts: state.startupOpts,
 });
 
-export default connect(mapStateToProps, { updateStartupOpt, deleteStartupOpt })(
+export default connect(mapStateToProps)(
   StartupOptList
 );
+
+

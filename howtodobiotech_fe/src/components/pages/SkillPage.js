@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import SkillOptList from "../templates/skills/SkillOptList";
 import CenteredTextWithButton from "../organisms/common/CallToActionComponnetAccordingRole";
 import CarouselBanner from "../organisms/skills/SkillCarousel.banner";
-import styles from "./SkillPage.module.css";
+import styles from "./Page.module.css";
 
 class SkillOptPage extends Component {
   render() {

@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import StartupOptList from "../templates/startups/StartupOptList";
 import CenteredTextWithButton from "../organisms/common/CallToActionComponnetAccordingRole";
 import CarouselBanner from "../organisms/startups/StartupCarousel.banner";
-import styles from "./StartupPage.module.css";
+import styles from "./Page.module.css";
 
 class StartupOptPage extends Component {
   render() {

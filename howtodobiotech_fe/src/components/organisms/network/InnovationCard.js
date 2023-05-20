@@ -37,7 +37,7 @@ const Card = ({ innovation }) => {
 
   return (
     <MDBCard style={{ maxWidth: "22rem" }} className={styles.card}>
-    <InnovationImage skillCategory={innovation.categories[0].id} />
+      <InnovationImage skillCategory={innovation.categories[0].id} />
 
       <MDBCardBody>
         <MDBCardTitle className={styles.cardTitle}>
@@ -75,11 +75,14 @@ const Card = ({ innovation }) => {
           )}
         </MDBCardText>
 
-        <MDBCardText className={styles.cardText}>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {categoryLabels}
-            {countryLabels}
-          </div>
+        <MDBCardText
+          className={`${styles.cardText} ${{
+            display: "flex",
+            flexWrap: "wrap",
+          }}`}
+        >
+          {categoryLabels}
+          {countryLabels}
         </MDBCardText>
       </MDBCardBody>
     </MDBCard>

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import InnovationsList from "../templates/network/Innovations-list.component";
-import ExpertList from "../templates/network/Experts-list.component";
+import InnovationsList from "../templates/network/InnovationsList";
+import ExpertList from "../templates/network/ExpertList";
 
 import ExpertDataService from "../../service/Expert.service";
 import InnovationDataService from "../../service/innovation.service";
 import CarouselBanner from "../organisms/network/InnovationCarousel.banner";
-import Newsletter from "../organisms/common/Newsletter.banner";
-import styles from "./NetworkPage.module.css";
+import styles from "./Page.module.css";
 
 class NetworkPage extends Component {
   constructor(props) {
@@ -73,12 +72,7 @@ class NetworkPage extends Component {
      
         <ExpertList filteredExperts={filteredExperts} />
 
-        <div>
-          <Newsletter
-            text="Stay informed, inspired, and connected with How To Do Biotech. Together, let's unlock the endless possibilities of the biotech world."
-            backgroundColor="#edebeb"
-          />
-        </div>
+
 
         <div className={styles["intro"]}>
           <p>

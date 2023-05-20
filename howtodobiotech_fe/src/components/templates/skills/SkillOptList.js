@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
 import SkillOptDataService from "../../../service/Skill.service";
 import Card from "../../organisms/skills/SkillCard";
-import styles from "./SkillOptsList.module.css";
+import styles from "../common/OptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
 import Pagination from "../../molecules/Pagination";
 import SkillCategoryOptions from "../../molecules/SkillCategoryOptions";
@@ -240,6 +239,4 @@ const mapStateToProps = (state) => ({
   skillOpts: state.skillOpts,
 });
 
-export default connect(mapStateToProps, { updateSkillOpt, deleteSkillOpt })(
-  SkillOptList
-);
+export default connect(mapStateToProps)(SkillOptList);

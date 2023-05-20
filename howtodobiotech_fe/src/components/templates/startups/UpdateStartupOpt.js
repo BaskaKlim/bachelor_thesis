@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./UpdateStartupOpt.module.css";
+import styles from "../common/UpdateOpt.module.css";
 import { connect } from "react-redux";
 import { updateStartupOpt, deleteStartupOpt } from "../../../actions/startups";
 

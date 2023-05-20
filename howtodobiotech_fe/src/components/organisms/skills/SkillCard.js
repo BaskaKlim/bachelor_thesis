@@ -25,20 +25,17 @@ const SkillCard = ({ skillOpt }) => {
   ));
   const skillCategoryLabels = skillOpt.skillCategories.map((skillCategory) => (
     <SkillCategoryLabel
-  key={skillCategory.id}
-  id={skillCategory.id}
-  className="customLabelStyle"
-/>
-
+      key={skillCategory.id}
+      id={skillCategory.id}
+      className="customLabelStyle"
+    />
   ));
-  
+
   const countryLabels = skillOpt.countries.map((country) => (
     <CountryLabel key={country.id} country={country} className="labelStyle" />
   ));
 
   const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
-
-
 
   return (
     <MDBCard style={{ maxWidth: "22rem" }} className={styles.skillCard}>
@@ -63,12 +60,15 @@ const SkillCard = ({ skillOpt }) => {
           {skillOpt.description}
         </MDBCardText>
 
-        <MDBCardText>
-          <div style={{ display: "flex", flexWrap: "wrap" }}>
-            {biotechCategoryLabels}
-            {skillCategoryLabels}
-            {countryLabels}
-          </div>
+        <MDBCardText
+          className={`${styles.cardText} ${{
+            display: "flex",
+            flexWrap: "wrap",
+          }}`}
+        >
+          {biotechCategoryLabels}
+          {skillCategoryLabels}
+          {countryLabels}
         </MDBCardText>
       </MDBCardBody>
       <MDBCardFooter>

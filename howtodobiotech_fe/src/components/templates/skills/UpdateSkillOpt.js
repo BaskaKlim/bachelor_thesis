@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import styles from "./UpdateSkillOpt.module.css";
+import styles from "../common/UpdateOpt.module.css";
 import { connect } from "react-redux";
 import { updateSkillOpt, deleteSkillOpt } from "../../../actions/skills";
 
