@@ -85,7 +85,7 @@ class App extends Component {
                   </li>
                   <li className="nav-item">
                     <Link to={"/startups"} className="nav-link">
-                      Startups
+                      Startup support
                     </Link>
                   </li>
                   <li className="nav-item">
