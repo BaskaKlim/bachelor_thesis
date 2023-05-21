@@ -18,9 +18,9 @@ import ButtonUpdate from "../../atoms/common/ButtonUpdate";
 import ButtonBack from "../../atoms/common/ButtonBack";
 import ButtonDelete from "../../atoms/common/ButtonDelete";
 import InputField from "../../atoms/common/InputField";
-import CountriesSelect from "../../molecules/CountriesSelect";
-import SupportCategoriesSelect from "../../molecules/SupportCategoriesSelect";
-import BiotechCategoriesSelect from "../../molecules/BiotechCategoriesSelect";
+import CountriesSelect from "../../molecules/common/CountriesSelect";
+import SupportCategoriesSelect from "../../molecules/startups/SupportCategoriesSelect";
+import BiotechCategoriesSelect from "../../molecules/common/BiotechCategoriesSelect";
 
 class StartupOptUpdateForm extends Component {
   constructor(props) {

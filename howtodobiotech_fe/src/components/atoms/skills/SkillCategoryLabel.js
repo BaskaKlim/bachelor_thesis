@@ -1,6 +1,6 @@
 import React from 'react';
 import { MDBBadge } from 'mdb-react-ui-kit';
-import styles from './Label.module.css';
+import styles from '../common/Label.module.css';
 
 const SkillCategoryLabel = ({ id, className }) => {
   const skillCategoryOption = [

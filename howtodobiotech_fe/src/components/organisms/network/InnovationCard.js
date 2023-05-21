@@ -10,7 +10,7 @@ import {
 import WebsiteButton from "../../atoms/common/Web.button";
 import CategoryLabel from "../../atoms/common/Category.label";
 import CountryLabel from "../../atoms/common/Country.label";
-import InnovationImage from "../../molecules/InnovationImage";
+import InnovationImage from "../../molecules/network/InnovationImage";
 
 import styles from "./InnovationCard.module.css";
 import { FaChevronUp, FaChevronDown } from "react-icons/fa";

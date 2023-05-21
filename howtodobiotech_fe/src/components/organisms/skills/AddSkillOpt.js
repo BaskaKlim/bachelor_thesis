@@ -16,9 +16,9 @@ import {
 import ButtonAdd from "../../atoms/common/ButtonAdd";
 import ButtonBack from "../../atoms/common/ButtonBack";
 import InputField from "../../atoms/common/InputField";
-import CountriesSelect from "../../molecules/CountriesSelect";
-import SkillCategoriesSelect from "../../molecules/SkillCategoriesSelect";
-import BiotechCategoriesSelect from "../../molecules/BiotechCategoriesSelect";
+import CountriesSelect from "../../molecules/common/CountriesSelect";
+import SkillCategoriesSelect from "../../molecules/skills/SkillCategoriesSelect";
+import BiotechCategoriesSelect from "../../molecules/common/BiotechCategoriesSelect";
 
 class SkillOptAddForm extends Component {
   constructor(props) {

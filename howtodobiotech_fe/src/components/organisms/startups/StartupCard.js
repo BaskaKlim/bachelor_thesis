@@ -10,7 +10,7 @@ import {
 import WebsiteButton from "../../atoms/common/Web.button";
 import CategoryLabel from "../../atoms/common/Category.label";
 import CountryLabel from "../../atoms/common/Country.label";
-import StartupImage from "../../molecules/StartupImage";
+import StartupImage from "../../molecules/startups/StartupImage";
 
 import styles from "./StartupCard.module.css";
 

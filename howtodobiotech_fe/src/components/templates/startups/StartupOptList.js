@@ -4,10 +4,10 @@ import StartupOptDataService from "../../../service/Startup.service";
 import Card from "../../organisms/startups/StartupCard";
 import styles from "../common/OptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
-import Pagination from "../../molecules/Pagination";
-import SupportCategoryOptions from "../../molecules/SupportCategoryOptions";
-import CountryOptions from "../../molecules/CountryOptions";
-import BiotechCategoryOptions from "../../molecules/BiotechCategoryOptions";
+import Pagination from "../../molecules/common/Pagination";
+import SupportCategoryOptions from "../../molecules/startups/SupportCategoryOptions";
+import CountryOptions from "../../molecules/common/CountryOptions";
+import BiotechCategoryOptions from "../../molecules/common/BiotechCategoryOptions";
 
 class StartupOptList extends Component {
   constructor(props) {
@@ -37,6 +37,7 @@ class StartupOptList extends Component {
       this.filterStartupOpts
     );
   };
+
   handleSupportOptionFilter = (supportOptionId) => {
     this.setState(
       { selectedSupportCategory: supportOptionId },
@@ -54,14 +55,16 @@ class StartupOptList extends Component {
   handleCountryFilter = (countryId) => {
     this.setState(
       { selectedCountry: countryId, currentPage: 1 },
-      this.filterSkillOpts
+      this.filterStartupOpts
     );
   };
+
   toggleFilter = () => {
     this.setState((prevState) => ({
       isFilterOpen: !prevState.isFilterOpen,
     }));
   };
+
 
   filterStartupOpts = () => {
     const {

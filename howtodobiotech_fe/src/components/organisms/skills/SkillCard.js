@@ -10,8 +10,8 @@ import {
 import WebsiteButton from "../../atoms/common/Web.button";
 import CategoryLabel from "../../atoms/common/Category.label";
 import CountryLabel from "../../atoms/common/Country.label";
-import SkillCategoryLabel from "../../atoms/common/SkillCategoryLabel";
-import SkillImage from "../../molecules/SkillImage";
+import SkillCategoryLabel from "../../atoms/skills/SkillCategoryLabel";
+import SkillImage from "../../molecules/skills/SkillImage";
 import styles from "./SkillCard.module.css";
 
 const SkillCard = ({ skillOpt }) => {

@@ -15,9 +15,9 @@ import {
 import ButtonAdd from "../../atoms/common/ButtonAdd";
 import ButtonBack from "../../atoms/common/ButtonBack";
 import InputField from "../../atoms/common/InputField";
-import CountriesSelect from "../../molecules/CountriesSelect";
-import BiotechCategoriesSelect from "../../molecules/BiotechCategoriesSelect";
-import SupportCategoriesSelect from "../../molecules/SupportCategoriesSelect";
+import CountriesSelect from "../../molecules/common/CountriesSelect";
+import BiotechCategoriesSelect from "../../molecules/common/BiotechCategoriesSelect";
+import SupportCategoriesSelect from "../../molecules/startups/SupportCategoriesSelect";
 import styles from "./AddStartupOpt.module.css";
 
 class AddStartupOpt extends Component {

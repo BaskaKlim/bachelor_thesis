@@ -1,5 +1,5 @@
 import React from "react";
-import styles from "./Options.module.css"
+import styles from "../common/Options.module.css"
 const expertiseCategories = [
   {
     id: 1,

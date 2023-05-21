@@ -4,8 +4,8 @@ import ExpertDataService from "../../../service/Expert.service";
 import ExpertCard from "../../organisms/network/ExpertCard";
 import styles from "../common/OptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
-import ExpertCategoryOptions from "../../molecules/ExpertCategoryOptions";
-import Pagination from "../../molecules/Pagination";
+import ExpertCategoryOptions from "../../molecules/network/ExpertCategoryOptions";
+import Pagination from "../../molecules/common/Pagination";
 
 class ExpertList extends Component {
   constructor(props) {

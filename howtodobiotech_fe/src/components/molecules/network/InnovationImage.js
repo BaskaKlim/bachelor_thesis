@@ -1,6 +1,6 @@
 import React from "react";
 import { MDBCardImage } from "mdb-react-ui-kit";
-import styles from "./Image.module.css";
+import styles from "../common/Image.module.css";
 
 const InnovationImage = ({ skillCategory, className }) => {
   let imageSrc = "";

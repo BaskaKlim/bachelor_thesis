@@ -1,6 +1,6 @@
 import React from "react";
 import Select from "react-select";
-import styles from "./Select.module.css"
+import styles from "../common/Select.module.css"
 
 const SkillCategoriesSelect = ({ value, onChange }) => {
   const skillCategoryOptions = [

@@ -4,8 +4,8 @@ import InnovationDataService from "../../../service/innovation.service";
 import Card from "../../organisms/network/InnovationCard";
 import styles from "../common/OptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
-import BiotechCategoryOptions from "../../molecules/BiotechCategoryOptions";
-import Pagination from "../../molecules/Pagination";
+import BiotechCategoryOptions from "../../molecules/common/BiotechCategoryOptions";
+import Pagination from "../../molecules/common/Pagination";
 
 class InnovationsList extends Component {
   constructor(props) {

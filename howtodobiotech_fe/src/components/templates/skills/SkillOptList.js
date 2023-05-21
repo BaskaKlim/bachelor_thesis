@@ -4,10 +4,10 @@ import SkillOptDataService from "../../../service/Skill.service";
 import Card from "../../organisms/skills/SkillCard";
 import styles from "../common/OptsList.module.css";
 import NotFoundPage from "../../organisms/common/NotFoundPage.component";
-import Pagination from "../../molecules/Pagination";
-import SkillCategoryOptions from "../../molecules/SkillCategoryOptions";
-import CountryOptions from "../../molecules/CountryOptions";
-import BiotechCategoryOptions from "../../molecules/BiotechCategoryOptions";
+import Pagination from "../../molecules/common/Pagination";
+import SkillCategoryOptions from "../../molecules/skills/SkillCategoryOptions";
+import CountryOptions from "../../molecules/common/CountryOptions";
+import BiotechCategoryOptions from "../../molecules/common/BiotechCategoryOptions";
 
 class SkillOptList extends Component {
   constructor(props) {
