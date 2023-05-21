@@ -37,22 +37,16 @@ import java.util.stream.Collectors;
 public class AuthController {
     @Autowired
     private AuthenticationManager authenticationManager;
-
     @Autowired
     private UserDetailsService userDetailsService;
-
     @Autowired
     private JwtUtils jwtUtils;
-
     @Autowired
     private PasswordEncoder passwordEncoder;
-
     @Autowired
     private AccountService accountService;
-
     @Autowired
     private RoleRepository roleRepository;
-
     @PostMapping("/authenticate")
     public ResponseEntity<AuthResponse> authenticate(@RequestBody LoginRequest loginRequest, HttpServletResponse response) {
         try {
@@ -83,7 +77,6 @@ public class AuthController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
-
     @PostMapping("/signup")
     public ResponseEntity<?> registerAccount(@Valid @RequestBody SignupRequest signUpRequest, HttpServletResponse response) {
         if (accountService.existsByUsername(signUpRequest.getUsername())) {

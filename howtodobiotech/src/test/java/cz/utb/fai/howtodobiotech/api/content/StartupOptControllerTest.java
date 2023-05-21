@@ -27,14 +27,11 @@ public class StartupOptControllerTest {
 
     @Mock
     StartupOptService startupOptService;
-
     @InjectMocks
     StartupOptController startupOptController;
 
-
     private StartupOpt startupOpt;
     private List<StartupOpt> startupOptList;
-
 
     @BeforeEach
     void setup() {

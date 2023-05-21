@@ -7,5 +7,4 @@ public enum ESkillCategory {
     INTERNSHIP,
     ACADEMY,
     HACKATHON
-
 }

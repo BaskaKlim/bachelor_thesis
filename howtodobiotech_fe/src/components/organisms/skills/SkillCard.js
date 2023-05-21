@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   MDBCard,
   MDBCardBody,
@@ -15,7 +15,6 @@ import SkillImage from "../../molecules/skills/SkillImage";
 import styles from "./SkillCard.module.css";
 
 const SkillCard = ({ skillOpt }) => {
-  let imageSrc = "";
   const biotechCategoryLabels = skillOpt.biotechCategories.map((category) => (
     <CategoryLabel
       key={category.id}
@@ -30,17 +29,14 @@ const SkillCard = ({ skillOpt }) => {
       className="customLabelStyle"
     />
   ));
-
   const countryLabels = skillOpt.countries.map((country) => (
     <CountryLabel key={country.id} country={country} className="labelStyle" />
   ));
-
   const dateOptions = { day: "2-digit", month: "2-digit", year: "numeric" };
 
   return (
     <MDBCard style={{ maxWidth: "22rem" }} className={styles.skillCard}>
       <SkillImage skillCategory={skillOpt.skillCategories[0].id} />
-
       <MDBCardBody>
         <MDBCardTitle className={styles.skillOptCardTitle}>
           {skillOpt.title}
@@ -55,11 +51,9 @@ const SkillCard = ({ skillOpt }) => {
             </div>
           </MDBCardText>
         </div>
-
         <MDBCardText className={styles.skillOptCardDescription}>
           {skillOpt.description}
         </MDBCardText>
-
         <MDBCardText
           className={`${styles.cardText} ${{
             display: "flex",

@@ -17,7 +17,6 @@ import { FaChevronUp, FaChevronDown } from "react-icons/fa";
 
 const Card = ({ innovation }) => {
   const [isExpanded, setIsExpanded] = useState(false);
-  let imageSrc = "";
 
   const categoryLabels = innovation.categories.map((category) => (
     <CategoryLabel

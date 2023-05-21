@@ -29,12 +29,9 @@ class BiotechExpertControllerTest {
 
     @Mock
     private BiotechExpertService biotechExpertService;
-
     @InjectMocks
     private BiotechExpertController biotechExpertController;
-
     private List<BiotechExpert> expertList;
-
     @BeforeEach
     void setUp() {
         expertList = new ArrayList<>();
@@ -49,10 +46,8 @@ class BiotechExpertControllerTest {
         int id = 1;
         BiotechExpert expert = expertList.get(0);
         when(biotechExpertService.selectBiotechExpertById(id)).thenReturn(Optional.of(expert));
-
         // Act
         ResponseEntity<BiotechExpert> response = biotechExpertController.getBiotechExpertById(id);
-
         // Assert
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals(expert, response.getBody());
