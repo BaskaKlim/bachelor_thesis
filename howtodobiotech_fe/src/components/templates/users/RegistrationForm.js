@@ -41,10 +41,8 @@ const RegistrationForm = () => {
       .required("Username is mandatory")
       .min(3, "Username should be at least 3 characters long")
       .max(14, "Username should not exceed 14 characters"),
-    password: Yup.string().min(
-      10,
-      "Password should be minimum 10 characters or numbers long"
-    ),
+    password: Yup.string()
+      .min(10, "Password should be minimum 10 characters or numbers long"),
   });
 
   const formik = useFormik({
@@ -71,11 +69,12 @@ const RegistrationForm = () => {
       }
     },
   });
+
   return (
-    <MDBContainer fluid="true">
+    <MDBContainer fluid>
       <ToastContainer />
       <MDBCard className={`${styles.textBlack} ${styles.registrationCard}`}>
-        <div className={styles.introText} fluid="true">
+        <div className={styles.introText}>
           <MDBCardTitle className={styles.title}>
             Sign up your organization
           </MDBCardTitle>
@@ -97,9 +96,7 @@ const RegistrationForm = () => {
                 className={styles.registrationForm}
                 onSubmit={formik.handleSubmit}
               >
-                <div
-                  className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb6}`}
-                >
+                <div className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb6}`}>
                   <MDBIcon fas icon="user me-3" size="lg" />
                   <MDBInput
                     label=""
@@ -113,11 +110,12 @@ const RegistrationForm = () => {
                     placeholder="Create username"
                     {...formik.getFieldProps("username")}
                   />
+                  {formik.touched.username && formik.errors.username && (
+                    <div className={styles.error}>{formik.errors.username}</div>
+                  )}
                 </div>
 
-                <div
-                  className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
-                >
+                <div className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}>
                   <MDBIcon fas icon="envelope me-3" size="lg" />
                   <MDBInput
                     label=""
@@ -131,11 +129,12 @@ const RegistrationForm = () => {
                     placeholder="Your Email"
                     {...formik.getFieldProps("email")}
                   />
+                  {formik.touched.email && formik.errors.email && (
+                    <div className={styles.error}>{formik.errors.email}</div>
+                  )}
                 </div>
 
-                <div
-                  className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
-                >
+                <div className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}>
                   <MDBIcon fas icon="lock me-3" size="lg" />
                   <MDBInput
                     label=""
@@ -149,16 +148,12 @@ const RegistrationForm = () => {
                     placeholder="Password"
                     {...formik.getFieldProps("password")}
                   />
+                  {formik.touched.password && formik.errors.password && (
+                    <div className={styles.error}>{formik.errors.password}</div>
+                  )}
                 </div>
-                {formik.touched.password && formik.errors.password && (
-                  <div className={`${styles.error} ${styles.mt2}`}>
-                    {formik.errors.password}
-                  </div>
-                )}
 
-                <div
-                  className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
-                >
+                <div className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}>
                   <MDBIcon fas icon="envelope me-3" size="lg" />
                   <MDBInput
                     label=""
@@ -172,16 +167,12 @@ const RegistrationForm = () => {
                     placeholder="Organization name"
                     {...formik.getFieldProps("name")}
                   />
+                  {formik.touched.name && formik.errors.name && (
+                    <div className={styles.error}>{formik.errors.name}</div>
+                  )}
                 </div>
-                {formik.touched.name && formik.errors.name && (
-                  <div className={`${styles.error} ${styles.mt2}`}>
-                    {formik.errors.name}
-                  </div>
-                )}
 
-                <div
-                  className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
-                >
+                <div className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}>
                   <MDBIcon fas icon="link me-3" size="lg" />
                   <MDBInput
                     label=""
@@ -195,15 +186,12 @@ const RegistrationForm = () => {
                     placeholder="Website"
                     {...formik.getFieldProps("url")}
                   />
+                  {formik.touched.url && formik.errors.url && (
+                    <div className={styles.error}>{formik.errors.url}</div>
+                  )}
                 </div>
-                {formik.touched.url && formik.errors.url && (
-                  <div className={`${styles.error} ${styles.mt2}`}>
-                    {formik.errors.url}
-                  </div>
-                )}
-                <div
-                  className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}
-                >
+
+                <div className={`${styles.flexRow} ${styles.alignItemsCenter} ${styles.mb4}`}>
                   <MDBIcon fas icon="align-left me-3" size="lg" />
                   <MDBInput
                     label=""
@@ -217,12 +205,11 @@ const RegistrationForm = () => {
                     placeholder="Introduce your organization. Up to 500 characters."
                     {...formik.getFieldProps("description")}
                   />
+                  {formik.touched.description && formik.errors.description && (
+                    <div className={styles.error}>{formik.errors.description}</div>
+                  )}
                 </div>
-                {formik.touched.description && formik.errors.description && (
-                  <div className={`${styles.error} ${styles.mt2}`}>
-                    {formik.errors.description}
-                  </div>
-                )}
+
                 <div className={`${styles.mb4} ${styles.check}`}>
                   <MDBCheckbox
                     name="newsletter"
@@ -243,6 +230,7 @@ const RegistrationForm = () => {
                     Registration error. Please try again.
                   </div>
                 )}
+
                 <button
                   className={`${styles.mb4} ${styles.registrationSubmitBtn}`}
                   size="lg"
@@ -259,7 +247,7 @@ const RegistrationForm = () => {
               className={`${styles.order1} ${styles.orderLg2} ${styles.alignItemsCenter}`}
             >
               <div className={styles.registrationImage}>
-                <MDBCardImage src="/assets/registration.jpg" fluid="true" />
+                <MDBCardImage src="/assets/registration.jpg" fluid />
               </div>
             </MDBCol>
           </MDBRow>
@@ -268,6 +256,7 @@ const RegistrationForm = () => {
     </MDBContainer>
   );
 };
+
 const mapDispatchToProps = {
   register,
 };

@@ -24,13 +24,17 @@ class SkillOptDataService {
   getSkillOptsByAccountId(accountId) {
     return http.get(`/skill-opportunities/by-account/${accountId}`);
   }
-  
+
   getSkillOptByBiotechCategory(biotechCategoryName) {
-    return http.get(`/skill-opportunities/by-biotech-category/${biotechCategoryName}`);
+    return http.get(
+      `/skill-opportunities/by-biotech-category/${biotechCategoryName}`
+    );
   }
 
   getSkillOptBySkillCategory(skillCategoryName) {
-    return http.get(`/skill-opportunities/by-skill-category/${skillCategoryName}`);
+    return http.get(
+      `/skill-opportunities/by-skill-category/${skillCategoryName}`
+    );
   }
 
   getSkillOptByCountry(countryName) {

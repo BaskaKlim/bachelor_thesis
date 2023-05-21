@@ -23,7 +23,11 @@ class SkillOptPage extends Component {
 
         <SkillOptList />
         <CenteredTextWithButton
-        textPublic="Are you an organizer of biotech skill development courses, workshops, or events?  Are you looking for interns and researchers? We invite you to sign up to our platform and create an account for your organization. Add your workshops, internships, or hackathons to our database and attract young talents in science through our platform. Join us today and be a part of the biotech skill development revolution!"
+        textPublic="Are you an organizer of biotech skill development courses, workshops, or events?  
+        Are you looking for interns and researchers? We invite you to sign up to our platform and create 
+        an account for your organization. Add your workshops, internships, or hackathons to our database
+         and attract young talents in science through our platform. Join us today and be a part of the biotech 
+         skill development revolution!"
         urlPublic="/register"
         buttonTextPublic="create account"
         textLoggedIn="Great! You are logged in your organization account. Now you can create new skills opprortunities for young talents from business & science indusrty."

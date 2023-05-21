@@ -30,7 +30,6 @@ class AccountUpdateForm extends Component {
     const { id, value } = event.target;
     this.setState({ [id]: value });
   };
-
   updateProfile = () => {
     const {
       updatedName,
@@ -42,7 +41,6 @@ class AccountUpdateForm extends Component {
     } = this.state;
   
     const userId = localStorage.getItem("userId");
-  
     const updatedUser = {
       id: userId,
       name: updatedName,
@@ -52,16 +50,14 @@ class AccountUpdateForm extends Component {
       email: updatedEmail,
       password: updatedPassword,
     };
-  
+
     this.props.updateAccount(updatedUser)
       .then((response) => {
         console.log("Update response:", response);
-        // Do any additional handling after successful update
       })
       .catch((error) => {
         console.log("Update error:", error);
         console.log("Update response:", updatedUser);
-        // Handle update error
       });
   };
   
