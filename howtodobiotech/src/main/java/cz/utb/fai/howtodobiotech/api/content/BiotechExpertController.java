@@ -53,7 +53,6 @@ public class BiotechExpertController {
 
 
     @PostMapping()
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<BiotechExpert> createBiotechExpert(@RequestBody BiotechExpert expert) {
         try {
             BiotechExpert _expert = biotechExpertService
@@ -65,7 +64,6 @@ public class BiotechExpertController {
     }
 
     @DeleteMapping(path = "/{id}")
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     public ResponseEntity<Boolean> deleteBiotechExpert(@PathVariable("id") Integer id) {
         try {
             biotechExpertService.deleteBiotechExpertById(id);
