@@ -24,10 +24,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
         prePostEnabled = true)
 public class WebSecurityConfig implements WebMvcConfigurer {
     @Autowired
+    public
     AccountDetailsServiceImpl accountDetailsService;
 
     @Autowired
-    private AuthEntryPointJwt unauthorizedHandler;
+    public AuthEntryPointJwt unauthorizedHandler;
 
     @Bean
     public AuthJwtRequestFilter authenticationJwtTokenFilter() {
